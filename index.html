@@ -1,81 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyber Fox</title>
 
 <style>
 
-body{
-background:#020c2b;
-color:white;
-font-family:sans-serif;
-text-align:center;
-padding-top:40px;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
+background:#000f3b;
+color:white;
+height:100vh;
 overflow:hidden;
-}
-
-.balance{
-font-size:40px;
-margin:20px;
-color:#38bdf8;
-font-weight:bold;
-}
-
-.level{
-font-size:24px;
-margin-bottom:25px;
-}
-
-.auto{
-font-size:18px;
-color:#94a3b8;
-margin-bottom:25px;
-}
-
-.fox{
-width:190px;
-height:190px;
-margin:auto;
-border-radius:50%;
-background:#2563eb;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:110px;
-box-shadow:0 0 45px #38bdf8;
-transition:0.08s;
-user-select:none;
-cursor:pointer;
 }
 
-.fox:active{
-transform:scale(0.92);
-box-shadow:0 0 70px #38bdf8;
-}
+/* Loading */
 
-button{
-margin-top:30px;
-padding:16px;
-font-size:20px;
-border:none;
-border-radius:15px;
-background:#2563eb;
-color:white;
-width:260px;
-font-weight:bold;
-}
-
-#effect{
-position:absolute;
+#loading{
+position:fixed;
 width:100%;
-top:360px;
-left:0;
-pointer-events:none;
-font-size:35px;
+height:100%;
+background:#07142e;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+}
+
+.loader{
+width:70px;
+height:70px;
+border-radius:50%;
+border:6px solid #1f3f80;
+border-top:6px solid #3aa7ff;
+animation:spin 1s linear infinite;
+box-shadow:0 0 30px #3aa7ff;
+}
+
+.loading-text{
+margin-top:20px;
+font-size:22px;
+color:#4db8ff;
 font-weight:bold;
-color:#38bdf8;
+letter-spacing:2px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+/* Main */
+
+#app{
+display:none;
+width:100%;
+text-align:center;
+padding:20px;
+}
+
+.title{
+font-size:55px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+#foxCount{
+font-size:60px;
+font-weight:bold;
+color:#2db7ff;
+margin-bottom:15px;
+text-shadow:0 0 20px #2db7ff;
+}
+
+#level{
+font-size:30px;
+margin-bottom:35px;
+}
+
+/* Fox Button */
+
+#tapBtn{
+width:290px;
+height:290px;
+border-radius:50%;
+background:linear-gradient(145deg,#2d66ff,#244dc7);
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+cursor:pointer;
+user-select:none;
+transition:0.1s;
+box-shadow:
+0 0 20px #2d66ff,
+0 0 50px #2d66ff,
+0 0 90px #2d66ff;
+animation:pulse 2s infinite;
+}
+
+#tapBtn img{
+width:190px;
+pointer-events:none;
+}
+
+#tapBtn:active{
+transform:scale(0.92);
+}
+
+@keyframes pulse{
+0%{
+box-shadow:0 0 20px #2d66ff;
+}
+50%{
+box-shadow:
+0 0 40px #2d66ff,
+0 0 90px #2d66ff;
+}
+100%{
+box-shadow:0 0 20px #2d66ff;
+}
+}
+
+/* Booster */
+
+#boosterBtn{
+margin-top:45px;
+padding:22px 40px;
+font-size:30px;
+border:none;
+border-radius:20px;
+background:#2d66ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 25px #2d66ff;
+}
+
+/* Floating + */
+
+.plusOne{
+position:absolute;
+font-size:55px;
+font-weight:bold;
+color:#29b6ff;
+animation:floatUp 0.8s linear forwards;
+pointer-events:none;
+text-shadow:0 0 15px #29b6ff;
+}
+
+@keyframes floatUp{
+0%{
+opacity:1;
+transform:translateY(0);
+}
+100%{
 opacity:0;
+transform:translateY(-120px);
+}
 }
 
 </style>
@@ -83,141 +177,112 @@ opacity:0;
 
 <body>
 
-<h1>🦊 Cyber Fox</h1>
+<!-- Loading -->
 
-<div class="balance" id="balance">
-0 FOX
+<div id="loading">
+<div class="loader"></div>
+<div class="loading-text">CYBER FOX</div>
 </div>
 
-<div class="level" id="level">
-Level 1
+<!-- App -->
+
+<div id="app">
+
+<div class="title">🦊 Cyber Fox</div>
+
+<div id="foxCount">0 FOX</div>
+
+<div id="level">Level 1</div>
+
+<div id="tapBtn">
+<img src="https://cdn-icons-png.flaticon.com/512/616/616554.png">
 </div>
 
-<div class="auto">
-⚡ Auto Mining Active
-</div>
-
-<div class="fox" onclick="mine()">
-🦊
-</div>
-
-<div id="effect"></div>
-
-<button onclick="boost()" id="boostBtn">
+<button id="boosterBtn">
 ⚡ Booster (50 FOX)
 </button>
 
+</div>
+
 <script>
 
-let balance = localStorage.getItem("balance") || 0;
-let level = localStorage.getItem("level") || 1;
-let power = localStorage.getItem("power") || 1;
-let boosterCost = localStorage.getItem("boosterCost") || 50;
+setTimeout(() => {
+document.getElementById("loading").style.display = "none";
+document.getElementById("app").style.display = "block";
+}, 2500);
 
-balance = parseInt(balance);
-level = parseInt(level);
-power = parseInt(power);
-boosterCost = parseInt(boosterCost);
+let fox = 0;
+let level = 1;
+let power = 1;
+let boosterCost = 50;
 
-updateUI();
+const foxCount = document.getElementById("foxCount");
+const levelText = document.getElementById("level");
+const tapBtn = document.getElementById("tapBtn");
+const boosterBtn = document.getElementById("boosterBtn");
 
 function updateUI(){
 
-document.getElementById("balance").innerHTML =
-balance + " FOX";
+foxCount.innerText = fox + " FOX";
 
-document.getElementById("level").innerHTML =
-"Level " + level;
+level = Math.floor(fox / 100) + 1;
 
-document.getElementById("boostBtn").innerHTML =
+levelText.innerText = "Level " + level;
+
+boosterBtn.innerText =
 "⚡ Booster (" + boosterCost + " FOX)";
-
 }
 
-function saveData(){
+tapBtn.addEventListener("click", () => {
 
-localStorage.setItem("balance", balance);
-localStorage.setItem("level", level);
-localStorage.setItem("power", power);
-localStorage.setItem("boosterCost", boosterCost);
-
-}
-
-function mine(){
-
-balance += power;
+fox += power;
 
 updateUI();
-saveData();
 
-showEffect("+" + power);
+const plus = document.createElement("div");
 
-}
+plus.innerText = "+" + power;
 
-function showEffect(text){
+plus.classList.add("plusOne");
 
-let effect = document.getElementById("effect");
+document.body.appendChild(plus);
 
-effect.style.opacity = "1";
+plus.style.left =
+(window.innerWidth / 2 - 40) + "px";
 
-effect.innerHTML = text;
-
-effect.animate(
-
-[
-{transform:"translateY(0px)",opacity:1},
-{transform:"translateY(-70px)",opacity:0}
-],
-
-{
-duration:600
-}
-
-);
+plus.style.top =
+(window.innerHeight / 2 + 40) + "px";
 
 setTimeout(() => {
+plus.remove();
+}, 800);
 
-effect.style.opacity = "0";
+});
 
-}, 600);
+boosterBtn.addEventListener("click", () => {
 
-}
+if(fox >= boosterCost){
 
-function boost(){
-
-if(balance >= boosterCost){
-
-balance -= boosterCost;
-
-level += 1;
+fox -= boosterCost;
 
 power += 1;
 
 boosterCost += 50;
 
 updateUI();
-saveData();
 
-alert("🚀 Booster Upgraded!");
+alert("⚡ Booster Upgraded!");
 
-}else{
+}
+else{
 
-alert("❌ Need " + boosterCost + " FOX");
+alert("Not enough FOX!");
 
 }
 
-}
-
-/* AUTO MINING */
-
-setInterval(() => {
-
-balance += level;
+});
 
 updateUI();
-saveData();
-
-}, 1000);
 
 </script>
 
