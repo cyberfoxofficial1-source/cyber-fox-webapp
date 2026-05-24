@@ -27,6 +27,12 @@ font-size:24px;
 margin-bottom:25px;
 }
 
+.auto{
+font-size:18px;
+color:#94a3b8;
+margin-bottom:25px;
+}
+
 .fox{
 width:190px;
 height:190px;
@@ -49,7 +55,7 @@ box-shadow:0 0 70px #38bdf8;
 }
 
 button{
-margin-top:40px;
+margin-top:30px;
 padding:16px;
 font-size:20px;
 border:none;
@@ -63,7 +69,7 @@ font-weight:bold;
 #effect{
 position:absolute;
 width:100%;
-top:330px;
+top:360px;
 left:0;
 pointer-events:none;
 font-size:35px;
@@ -85,6 +91,10 @@ opacity:0;
 
 <div class="level" id="level">
 Level 1
+</div>
+
+<div class="auto">
+⚡ Auto Mining Active
 </div>
 
 <div class="fox" onclick="mine()">
@@ -140,11 +150,17 @@ balance += power;
 updateUI();
 saveData();
 
+showEffect("+" + power);
+
+}
+
+function showEffect(text){
+
 let effect = document.getElementById("effect");
 
 effect.style.opacity = "1";
 
-effect.innerHTML = "+" + power;
+effect.innerHTML = text;
 
 effect.animate(
 
@@ -191,6 +207,17 @@ alert("❌ Need " + boosterCost + " FOX");
 }
 
 }
+
+/* AUTO MINING */
+
+setInterval(() => {
+
+balance += level;
+
+updateUI();
+saveData();
+
+}, 1000);
 
 </script>
 
