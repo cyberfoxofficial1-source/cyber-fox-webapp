@@ -12,6 +12,7 @@ font-family:sans-serif;
 text-align:center;
 padding-top:40px;
 margin:0;
+overflow:hidden;
 }
 
 .balance{
@@ -37,12 +38,14 @@ justify-content:center;
 align-items:center;
 font-size:110px;
 box-shadow:0 0 45px #38bdf8;
-transition:0.1s;
+transition:0.08s;
 user-select:none;
+cursor:pointer;
 }
 
 .fox:active{
 transform:scale(0.92);
+box-shadow:0 0 70px #38bdf8;
 }
 
 button{
@@ -54,6 +57,18 @@ border-radius:15px;
 background:#2563eb;
 color:white;
 width:260px;
+font-weight:bold;
+}
+
+#effect{
+position:absolute;
+width:100%;
+top:330px;
+left:0;
+pointer-events:none;
+font-size:35px;
+font-weight:bold;
+color:#38bdf8;
 }
 
 </style>
@@ -74,6 +89,8 @@ Level 1
 <div class="fox" onclick="mine()">
 🦊
 </div>
+
+<div id="effect"></div>
 
 <button onclick="boost()">
 ⚡ Booster (50 FOX)
@@ -115,6 +132,23 @@ balance += power;
 
 updateUI();
 saveData();
+
+let effect = document.getElementById("effect");
+
+effect.innerHTML = "+" + power;
+
+effect.animate(
+
+[
+{transform:"translateY(0px)",opacity:1},
+{transform:"translateY(-70px)",opacity:0}
+],
+
+{
+duration:600
+}
+
+);
 
 }
 
