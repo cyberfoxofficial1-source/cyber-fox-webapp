@@ -62,7 +62,7 @@ transform:rotate(360deg);
 }
 }
 
-/* Main */
+/* App */
 
 #app{
 display:none;
@@ -89,8 +89,6 @@ text-shadow:0 0 20px #2db7ff;
 font-size:30px;
 margin-bottom:35px;
 }
-
-/* Fox Circle */
 
 #tapBtn{
 width:290px;
@@ -130,8 +128,6 @@ box-shadow:0 0 20px #2d66ff;
 }
 }
 
-/* Booster */
-
 #boosterBtn{
 margin-top:45px;
 padding:22px 40px;
@@ -144,8 +140,6 @@ font-weight:bold;
 cursor:pointer;
 box-shadow:0 0 25px #2d66ff;
 }
-
-/* Floating + */
 
 .plusOne{
 position:absolute;
@@ -173,14 +167,10 @@ transform:translateY(-120px);
 
 <body>
 
-<!-- Loading -->
-
 <div id="loading">
 <div class="loader"></div>
 <div class="loading-text">CYBER FOX</div>
 </div>
-
-<!-- App -->
 
 <div id="app">
 
@@ -202,20 +192,53 @@ transform:translateY(-120px);
 
 <script>
 
+/* Loading */
+
 setTimeout(() => {
+
 document.getElementById("loading").style.display = "none";
+
 document.getElementById("app").style.display = "block";
+
 }, 2500);
 
-let fox = 0;
-let level = 1;
-let power = 1;
-let boosterCost = 50;
+/* Save System */
+
+let fox = localStorage.getItem("fox")
+? parseInt(localStorage.getItem("fox"))
+: 0;
+
+let level = localStorage.getItem("level")
+? parseInt(localStorage.getItem("level"))
+: 1;
+
+let power = localStorage.getItem("power")
+? parseInt(localStorage.getItem("power"))
+: 1;
+
+let boosterCost = localStorage.getItem("boosterCost")
+? parseInt(localStorage.getItem("boosterCost"))
+: 50;
 
 const foxCount = document.getElementById("foxCount");
+
 const levelText = document.getElementById("level");
+
 const tapBtn = document.getElementById("tapBtn");
+
 const boosterBtn = document.getElementById("boosterBtn");
+
+function saveData(){
+
+localStorage.setItem("fox", fox);
+
+localStorage.setItem("level", level);
+
+localStorage.setItem("power", power);
+
+localStorage.setItem("boosterCost", boosterCost);
+
+}
 
 function updateUI(){
 
@@ -227,6 +250,9 @@ levelText.innerText = "Level " + level;
 
 boosterBtn.innerText =
 "⚡ Booster (" + boosterCost + " FOX)";
+
+saveData();
+
 }
 
 tapBtn.addEventListener("click", () => {
@@ -250,7 +276,9 @@ plus.style.top =
 (window.innerHeight / 2 + 40) + "px";
 
 setTimeout(() => {
+
 plus.remove();
+
 }, 800);
 
 });
