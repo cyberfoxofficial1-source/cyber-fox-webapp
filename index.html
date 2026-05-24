@@ -69,6 +69,7 @@ pointer-events:none;
 font-size:35px;
 font-weight:bold;
 color:#38bdf8;
+opacity:0;
 }
 
 </style>
@@ -92,7 +93,7 @@ Level 1
 
 <div id="effect"></div>
 
-<button onclick="boost()">
+<button onclick="boost()" id="boostBtn">
 ⚡ Booster (50 FOX)
 </button>
 
@@ -101,10 +102,12 @@ Level 1
 let balance = localStorage.getItem("balance") || 0;
 let level = localStorage.getItem("level") || 1;
 let power = localStorage.getItem("power") || 1;
+let boosterCost = localStorage.getItem("boosterCost") || 50;
 
 balance = parseInt(balance);
 level = parseInt(level);
 power = parseInt(power);
+boosterCost = parseInt(boosterCost);
 
 updateUI();
 
@@ -116,6 +119,9 @@ balance + " FOX";
 document.getElementById("level").innerHTML =
 "Level " + level;
 
+document.getElementById("boostBtn").innerHTML =
+"⚡ Booster (" + boosterCost + " FOX)";
+
 }
 
 function saveData(){
@@ -123,6 +129,7 @@ function saveData(){
 localStorage.setItem("balance", balance);
 localStorage.setItem("level", level);
 localStorage.setItem("power", power);
+localStorage.setItem("boosterCost", boosterCost);
 
 }
 
@@ -134,6 +141,8 @@ updateUI();
 saveData();
 
 let effect = document.getElementById("effect");
+
+effect.style.opacity = "1";
 
 effect.innerHTML = "+" + power;
 
@@ -150,15 +159,25 @@ duration:600
 
 );
 
+setTimeout(() => {
+
+effect.style.opacity = "0";
+
+}, 600);
+
 }
 
 function boost(){
 
-if(balance >= 50){
+if(balance >= boosterCost){
 
-balance -= 50;
+balance -= boosterCost;
+
 level += 1;
+
 power += 1;
+
+boosterCost += 50;
 
 updateUI();
 saveData();
@@ -167,7 +186,7 @@ alert("🚀 Booster Upgraded!");
 
 }else{
 
-alert("❌ Need 50 FOX");
+alert("❌ Need " + boosterCost + " FOX");
 
 }
 
