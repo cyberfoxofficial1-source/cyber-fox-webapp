@@ -15,13 +15,10 @@ font-family:sans-serif;
 }
 
 body{
-background:#000f3b;
+background:#07142e;
 color:white;
-height:100vh;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
+overflow-x:hidden;
+padding-bottom:100px;
 }
 
 /* Loading */
@@ -35,25 +32,24 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-z-index:999;
+z-index:9999;
 }
 
 .loader{
-width:70px;
-height:70px;
+width:80px;
+height:80px;
 border-radius:50%;
-border:6px solid #1f3f80;
-border-top:6px solid #3aa7ff;
+border:8px solid #1f3f80;
+border-top:8px solid #38bdf8;
 animation:spin 1s linear infinite;
-box-shadow:0 0 30px #3aa7ff;
+box-shadow:0 0 30px #38bdf8;
 }
 
 .loading-text{
 margin-top:20px;
-font-size:22px;
-color:#4db8ff;
+font-size:25px;
 font-weight:bold;
-letter-spacing:2px;
+color:#38bdf8;
 }
 
 @keyframes spin{
@@ -66,89 +62,118 @@ transform:rotate(360deg);
 
 #app{
 display:none;
-width:100%;
-text-align:center;
 padding:20px;
+text-align:center;
 }
 
 .title{
-font-size:55px;
+font-size:45px;
 font-weight:bold;
-margin-bottom:15px;
+margin-top:10px;
 }
 
-#foxCount{
-font-size:60px;
+.balance{
+font-size:50px;
 font-weight:bold;
-color:#2db7ff;
-margin-bottom:15px;
-text-shadow:0 0 20px #2db7ff;
+color:#38bdf8;
+margin-top:20px;
+text-shadow:0 0 20px #38bdf8;
 }
 
-#level{
-font-size:30px;
-margin-bottom:35px;
+.level{
+margin-top:10px;
+font-size:25px;
 }
+
+/* Fox */
 
 #tapBtn{
-width:290px;
-height:290px;
+width:260px;
+height:260px;
 border-radius:50%;
-background:linear-gradient(145deg,#2d66ff,#244dc7);
+background:linear-gradient(145deg,#2563eb,#1d4ed8);
 display:flex;
 justify-content:center;
 align-items:center;
-margin:auto;
+margin:30px auto;
+font-size:130px;
+box-shadow:
+0 0 30px #38bdf8,
+0 0 70px #38bdf8;
+animation:pulse 2s infinite;
+transition:0.1s;
 cursor:pointer;
 user-select:none;
-transition:0.1s;
-box-shadow:
-0 0 20px #2d66ff,
-0 0 50px #2d66ff,
-0 0 90px #2d66ff;
-animation:pulse 2s infinite;
-font-size:150px;
 }
 
 #tapBtn:active{
-transform:scale(0.92);
+transform:scale(0.93);
 }
 
 @keyframes pulse{
 0%{
-box-shadow:0 0 20px #2d66ff;
+box-shadow:0 0 20px #38bdf8;
 }
 50%{
 box-shadow:
-0 0 40px #2d66ff,
-0 0 90px #2d66ff;
+0 0 40px #38bdf8,
+0 0 90px #38bdf8;
 }
 100%{
-box-shadow:0 0 20px #2d66ff;
+box-shadow:0 0 20px #38bdf8;
 }
 }
 
-#boosterBtn{
-margin-top:45px;
-padding:22px 40px;
-font-size:30px;
+/* Buttons */
+
+.btn{
+width:100%;
+padding:18px;
 border:none;
-border-radius:20px;
-background:#2d66ff;
-color:white;
+border-radius:18px;
+margin-top:15px;
+font-size:22px;
 font-weight:bold;
-cursor:pointer;
-box-shadow:0 0 25px #2d66ff;
+background:#2563eb;
+color:white;
+box-shadow:0 0 20px rgba(37,99,235,0.5);
 }
+
+/* Cards */
+
+.card{
+background:#0f172a;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+.card-title{
+font-size:28px;
+margin-bottom:15px;
+color:#38bdf8;
+}
+
+/* Task */
+
+.task{
+background:#1e293b;
+padding:15px;
+border-radius:15px;
+margin-top:10px;
+font-size:18px;
+}
+
+/* Floating + */
 
 .plusOne{
 position:absolute;
-font-size:55px;
+font-size:45px;
 font-weight:bold;
-color:#29b6ff;
+color:#38bdf8;
 animation:floatUp 0.8s linear forwards;
 pointer-events:none;
-text-shadow:0 0 15px #29b6ff;
 }
 
 @keyframes floatUp{
@@ -167,26 +192,135 @@ transform:translateY(-120px);
 
 <body>
 
+<!-- Loading -->
+
 <div id="loading">
+
 <div class="loader"></div>
-<div class="loading-text">CYBER FOX</div>
+
+<div class="loading-text">
+CYBER FOX
 </div>
+
+</div>
+
+<!-- App -->
 
 <div id="app">
 
-<div class="title">🦊 Cyber Fox</div>
+<div class="title">
+🦊 Cyber Fox
+</div>
 
-<div id="foxCount">0 FOX</div>
+<div class="balance" id="foxCount">
+0 FOX
+</div>
 
-<div id="level">Level 1</div>
+<div class="level" id="level">
+Level 1 / 50
+</div>
+
+<!-- Fox -->
 
 <div id="tapBtn">
 🦊
 </div>
 
-<button id="boosterBtn">
+<!-- Booster -->
+
+<button class="btn" id="boosterBtn">
 ⚡ Booster (50 FOX)
 </button>
+
+<!-- Wallet -->
+
+<div class="card">
+
+<div class="card-title">
+💳 Connect Wallet
+</div>
+
+<button class="btn">
+Connect TON Wallet
+</button>
+
+</div>
+
+<!-- Referral -->
+
+<div class="card">
+
+<div class="card-title">
+👥 Referral
+</div>
+
+<p>
+Invite Friends & Earn 500 FOX
+</p>
+
+<button class="btn">
+Copy Referral Link
+</button>
+
+</div>
+
+<!-- Spin -->
+
+<div class="card">
+
+<div class="card-title">
+🎰 Daily Spin
+</div>
+
+<button class="btn" onclick="spinReward()">
+Spin & Win
+</button>
+
+</div>
+
+<!-- Invest -->
+
+<div class="card">
+
+<div class="card-title">
+💰 Invest Card
+</div>
+
+<p>
+Invest FOX & Earn Every Second
+</p>
+
+<button class="btn" onclick="buyMiner()">
+Buy Miner (500 FOX)
+</button>
+
+<p style="margin-top:10px;" id="minerText">
+Profit: +0/sec
+</p>
+
+</div>
+
+<!-- Tasks -->
+
+<div class="card">
+
+<div class="card-title">
+📋 Tasks
+</div>
+
+<div class="task">
+🐦 Follow Twitter = +200 FOX
+</div>
+
+<div class="task">
+▶ Subscribe YouTube = +300 FOX
+</div>
+
+<div class="task">
+📢 Join Telegram Channel = +250 FOX
+</div>
+
+</div>
 
 </div>
 
@@ -196,115 +330,186 @@ transform:translateY(-120px);
 
 setTimeout(() => {
 
-document.getElementById("loading").style.display = "none";
+document.getElementById("loading").style.display="none";
 
-document.getElementById("app").style.display = "block";
+document.getElementById("app").style.display="block";
 
-}, 2500);
+},2500);
 
-/* Save System */
+/* Save */
 
 let fox = localStorage.getItem("fox")
 ? parseInt(localStorage.getItem("fox"))
 : 0;
 
-let level = localStorage.getItem("level")
-? parseInt(localStorage.getItem("level"))
-: 1;
-
 let power = localStorage.getItem("power")
 ? parseInt(localStorage.getItem("power"))
+: 1;
+
+let level = localStorage.getItem("level")
+? parseInt(localStorage.getItem("level"))
 : 1;
 
 let boosterCost = localStorage.getItem("boosterCost")
 ? parseInt(localStorage.getItem("boosterCost"))
 : 50;
 
-const foxCount = document.getElementById("foxCount");
+let miner = localStorage.getItem("miner")
+? parseInt(localStorage.getItem("miner"))
+: 0;
 
-const levelText = document.getElementById("level");
+const foxCount=document.getElementById("foxCount");
 
-const tapBtn = document.getElementById("tapBtn");
+const levelText=document.getElementById("level");
 
-const boosterBtn = document.getElementById("boosterBtn");
+const boosterBtn=document.getElementById("boosterBtn");
+
+const tapBtn=document.getElementById("tapBtn");
+
+const minerText=document.getElementById("minerText");
+
+/* Save Data */
 
 function saveData(){
 
-localStorage.setItem("fox", fox);
+localStorage.setItem("fox",fox);
 
-localStorage.setItem("level", level);
+localStorage.setItem("power",power);
 
-localStorage.setItem("power", power);
+localStorage.setItem("level",level);
 
-localStorage.setItem("boosterCost", boosterCost);
+localStorage.setItem("boosterCost",boosterCost);
+
+localStorage.setItem("miner",miner);
 
 }
 
+/* Update UI */
+
 function updateUI(){
 
-foxCount.innerText = fox + " FOX";
+if(level>50){
+level=50;
+}
 
-level = Math.floor(fox / 100) + 1;
+foxCount.innerHTML=fox+" FOX";
 
-levelText.innerText = "Level " + level;
+levelText.innerHTML=
+"Level "+level+" / 50";
 
-boosterBtn.innerText =
-"⚡ Booster (" + boosterCost + " FOX)";
+boosterBtn.innerHTML=
+"⚡ Booster ("+boosterCost+" FOX)";
+
+minerText.innerHTML=
+"Profit: +"+miner+"/sec";
 
 saveData();
 
 }
 
-tapBtn.addEventListener("click", () => {
+/* Tap */
+
+tapBtn.addEventListener("click",()=>{
 
 fox += power;
 
+if(level<50){
+level += 1;
+}
+
 updateUI();
 
-const plus = document.createElement("div");
+const plus=document.createElement("div");
 
-plus.innerText = "+" + power;
+plus.innerHTML="+"+power;
 
 plus.classList.add("plusOne");
 
 document.body.appendChild(plus);
 
-plus.style.left =
-(window.innerWidth / 2 - 40) + "px";
+plus.style.left=
+(window.innerWidth/2-30)+"px";
 
-plus.style.top =
-(window.innerHeight / 2 + 40) + "px";
+plus.style.top=
+(window.innerHeight/2)+"px";
 
-setTimeout(() => {
+setTimeout(()=>{
 
 plus.remove();
 
-}, 800);
+},800);
 
 });
 
-boosterBtn.addEventListener("click", () => {
+/* Booster */
 
-if(fox >= boosterCost){
+boosterBtn.addEventListener("click",()=>{
 
-fox -= boosterCost;
+if(fox>=boosterCost){
 
-power += 1;
+fox-=boosterCost;
 
-boosterCost += 50;
+power+=1;
+
+boosterCost+=50;
 
 updateUI();
 
-alert("⚡ Booster Upgraded!");
+alert("🚀 Booster Upgraded!");
 
-}
-else{
+}else{
 
-alert("Not enough FOX!");
+alert("Need More FOX");
 
 }
 
 });
+
+/* Spin */
+
+function spinReward(){
+
+let reward=Math.floor(Math.random()*500)+100;
+
+fox += reward;
+
+updateUI();
+
+alert("🎉 You Won "+reward+" FOX");
+
+}
+
+/* Miner */
+
+function buyMiner(){
+
+if(fox>=500){
+
+fox-=500;
+
+miner+=5;
+
+updateUI();
+
+alert("💰 Miner Activated!");
+
+}else{
+
+alert("Need 500 FOX");
+
+}
+
+}
+
+/* Auto Profit */
+
+setInterval(()=>{
+
+fox += miner;
+
+updateUI();
+
+},1000);
 
 updateUI();
 
