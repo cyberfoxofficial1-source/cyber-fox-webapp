@@ -5,185 +5,220 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyber Fox</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#07142e;
+background:#050816;
 color:white;
 overflow-x:hidden;
+}
+
+.app{
+max-width:500px;
+margin:auto;
+min-height:100vh;
 padding-bottom:100px;
+background:
+radial-gradient(circle at top left,#102040,#050816 45%),
+radial-gradient(circle at bottom right,#2d004d,#050816 40%);
 }
 
-/* Loading */
-
-#loading{
-position:fixed;
-width:100%;
-height:100%;
-background:#07142e;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:9999;
-}
-
-.loader{
-width:80px;
-height:80px;
-border-radius:50%;
-border:8px solid #1f3f80;
-border-top:8px solid #38bdf8;
-animation:spin 1s linear infinite;
-box-shadow:0 0 30px #38bdf8;
-}
-
-.loading-text{
-margin-top:20px;
-font-size:25px;
-font-weight:bold;
-color:#38bdf8;
-}
-
-@keyframes spin{
-100%{
-transform:rotate(360deg);
-}
-}
-
-/* App */
-
-#app{
+.page{
 display:none;
 padding:20px;
-text-align:center;
+animation:fade .3s ease;
 }
 
-.title{
-font-size:45px;
-font-weight:bold;
-margin-top:10px;
+.page.active{
+display:block;
 }
 
-.balance{
-font-size:50px;
-font-weight:bold;
-color:#38bdf8;
-margin-top:20px;
-text-shadow:0 0 20px #38bdf8;
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-.level{
-margin-top:10px;
-font-size:25px;
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
 }
 
-/* Fox */
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+}
 
-#tapBtn{
-width:260px;
-height:260px;
+.profile img{
+width:45px;
+height:45px;
 border-radius:50%;
-background:linear-gradient(145deg,#2563eb,#1d4ed8);
+}
+
+.level-box{
+margin-top:10px;
+}
+
+.level-bar{
+width:100%;
+height:10px;
+background:#222;
+border-radius:30px;
+overflow:hidden;
+margin-top:5px;
+}
+
+.level-fill{
+height:100%;
+width:35%;
+background:linear-gradient(90deg,#ff4df0,#8f5bff);
+}
+
+.pph{
+background:#161b2d;
+padding:12px 16px;
+border-radius:20px;
+font-size:14px;
+}
+
+.coin{
+text-align:center;
+margin-top:20px;
+}
+
+.coin h1{
+font-size:45px;
+margin-bottom:15px;
+}
+
+.fox{
+width:240px;
+height:240px;
+border-radius:50%;
+background:linear-gradient(135deg,#4f46e5,#2563eb);
 display:flex;
 justify-content:center;
 align-items:center;
-margin:30px auto;
-font-size:130px;
-box-shadow:
-0 0 30px #38bdf8,
-0 0 70px #38bdf8;
-animation:pulse 2s infinite;
-transition:0.1s;
+margin:auto;
+font-size:120px;
+box-shadow:0 0 50px #3b82f6;
+animation:float 3s infinite ease-in-out;
 cursor:pointer;
 user-select:none;
 }
 
-#tapBtn:active{
-transform:scale(0.93);
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
 }
 
-@keyframes pulse{
-0%{
-box-shadow:0 0 20px #38bdf8;
-}
-50%{
-box-shadow:
-0 0 40px #38bdf8,
-0 0 90px #38bdf8;
-}
-100%{
-box-shadow:0 0 20px #38bdf8;
-}
-}
-
-/* Buttons */
-
-.btn{
-width:100%;
-padding:18px;
-border:none;
-border-radius:18px;
+.tap-text{
+text-align:center;
 margin-top:15px;
-font-size:22px;
-font-weight:bold;
-background:#2563eb;
-color:white;
-box-shadow:0 0 20px rgba(37,99,235,0.5);
+font-size:18px;
+color:#aaa;
 }
-
-/* Cards */
 
 .card{
-background:#0f172a;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
+background:#12192d;
+border-radius:22px;
+padding:18px;
+margin-top:18px;
+box-shadow:0 0 20px rgba(0,0,0,.3);
 }
 
-.card-title{
-font-size:28px;
-margin-bottom:15px;
-color:#38bdf8;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:15px;
 }
 
-/* Task */
-
-.task{
-background:#1e293b;
-padding:15px;
-border-radius:15px;
-margin-top:10px;
-font-size:18px;
+.upgrade{
+background:#1a2239;
+padding:18px;
+border-radius:18px;
 }
 
-/* Floating + */
-
-.plusOne{
-position:absolute;
-font-size:45px;
-font-weight:bold;
-color:#38bdf8;
-animation:floatUp 0.8s linear forwards;
-pointer-events:none;
+.upgrade button{
+margin-top:12px;
+width:100%;
+padding:10px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#ff00c8,#7b61ff);
+color:white;
+font-weight:600;
 }
 
-@keyframes floatUp{
-0%{
-opacity:1;
-transform:translateY(0);
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+max-width:500px;
+margin:auto;
+background:#0d1324;
+display:flex;
+justify-content:space-around;
+padding:14px 5px;
+border-top:1px solid #222;
+z-index:999;
 }
-100%{
-opacity:0;
-transform:translateY(-120px);
+
+.nav-btn{
+text-align:center;
+font-size:13px;
+color:#999;
+cursor:pointer;
+}
+
+.nav-btn.active{
+color:#ff4df0;
+}
+
+.loading{
+position:fixed;
+inset:0;
+background:#050816;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+}
+
+.loader{
+width:90px;
+height:90px;
+border-radius:50%;
+border:8px solid #222;
+border-top:8px solid #7b61ff;
+animation:rotate 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes rotate{
+to{
+transform:rotate(360deg);
 }
 }
 
@@ -192,328 +227,100 @@ transform:translateY(-120px);
 
 <body>
 
-<!-- Loading -->
-
-<div id="loading">
+<div class="loading" id="loading">
 
 <div class="loader"></div>
 
-<div class="loading-text">
-CYBER FOX
+<h2>Loading Cyber Fox...</h2>
+
+</div>
+
+<div class="app">
+
+<!-- HOME PAGE -->
+
+<div class="page active" id="home">
+
+<div class="top">
+
+<div>
+
+<div class="profile">
+
+<img src="https://i.imgur.com/8Km9tLL.png">
+
+<h2>Cyber Fox</h2>
+
+</div>
+
+<div class="level-box">
+
+Level 12
+
+<div class="level-bar">
+
+<div class="level-fill"></div>
+
 </div>
 
 </div>
 
-<!-- App -->
-
-<div id="app">
-
-<div class="title">
-🦊 Cyber Fox
 </div>
 
-<div class="balance" id="foxCount">
-0 FOX
+<div class="pph">
+
+⚡ +85.6M PPH
+
 </div>
 
-<div class="level" id="level">
-Level 1 / 50
 </div>
 
-<!-- Fox -->
+<div class="coin">
 
-<div id="tapBtn">
+<h1 id="coins">1500</h1>
+
+<div class="fox" onclick="tapFox()">
+
 🦊
+
 </div>
 
-<!-- Booster -->
+<div class="tap-text">
 
-<button class="btn" id="boosterBtn">
-⚡ Booster (50 FOX)
-</button>
+Tap Fox To Earn
 
-<!-- Wallet -->
+</div>
+
+</div>
 
 <div class="card">
 
-<div class="card-title">
-💳 Connect Wallet
-</div>
+<h3>Daily Combo</h3>
 
-<button class="btn">
-Connect TON Wallet
-</button>
+<div class="grid">
 
-</div>
+<div class="upgrade">
 
-<!-- Referral -->
+<h4>Market Boost</h4>
 
-<div class="card">
+<p>+10M PPH</p>
 
-<div class="card-title">
-👥 Referral
-</div>
-
-<p>
-Invite Friends & Earn 500 FOX
-</p>
-
-<button class="btn">
-Copy Referral Link
-</button>
+<button>Upgrade</button>
 
 </div>
 
-<!-- Spin -->
+<div class="upgrade">
 
-<div class="card">
+<h4>Cyber Mining</h4>
 
-<div class="card-title">
-🎰 Daily Spin
-</div>
+<p>+25M PPH</p>
 
-<button class="btn" onclick="spinReward()">
-Spin & Win
-</button>
+<button>Upgrade</button>
 
-</div>
-
-<!-- Invest -->
-
-<div class="card">
-
-<div class="card-title">
-💰 Invest Card
-</div>
-
-<p>
-Invest FOX & Earn Every Second
-</p>
-
-<button class="btn" onclick="buyMiner()">
-Buy Miner (500 FOX)
-</button>
-
-<p style="margin-top:10px;" id="minerText">
-Profit: +0/sec
-</p>
-
-</div>
-
-<!-- Tasks -->
-
-<div class="card">
-
-<div class="card-title">
-📋 Tasks
-</div>
-
-<div class="task">
-🐦 Follow Twitter = +200 FOX
-</div>
-
-<div class="task">
-▶ Subscribe YouTube = +300 FOX
-</div>
-
-<div class="task">
-📢 Join Telegram Channel = +250 FOX
 </div>
 
 </div>
 
 </div>
 
-<script>
-
-/* Loading */
-
-setTimeout(() => {
-
-document.getElementById("loading").style.display="none";
-
-document.getElementById("app").style.display="block";
-
-},2500);
-
-/* Save */
-
-let fox = localStorage.getItem("fox")
-? parseInt(localStorage.getItem("fox"))
-: 0;
-
-let power = localStorage.getItem("power")
-? parseInt(localStorage.getItem("power"))
-: 1;
-
-let level = localStorage.getItem("level")
-? parseInt(localStorage.getItem("level"))
-: 1;
-
-let boosterCost = localStorage.getItem("boosterCost")
-? parseInt(localStorage.getItem("boosterCost"))
-: 50;
-
-let miner = localStorage.getItem("miner")
-? parseInt(localStorage.getItem("miner"))
-: 0;
-
-const foxCount=document.getElementById("foxCount");
-
-const levelText=document.getElementById("level");
-
-const boosterBtn=document.getElementById("boosterBtn");
-
-const tapBtn=document.getElementById("tapBtn");
-
-const minerText=document.getElementById("minerText");
-
-/* Save Data */
-
-function saveData(){
-
-localStorage.setItem("fox",fox);
-
-localStorage.setItem("power",power);
-
-localStorage.setItem("level",level);
-
-localStorage.setItem("boosterCost",boosterCost);
-
-localStorage.setItem("miner",miner);
-
-}
-
-/* Update UI */
-
-function updateUI(){
-
-if(level>50){
-level=50;
-}
-
-foxCount.innerHTML=fox+" FOX";
-
-levelText.innerHTML=
-"Level "+level+" / 50";
-
-boosterBtn.innerHTML=
-"⚡ Booster ("+boosterCost+" FOX)";
-
-minerText.innerHTML=
-"Profit: +"+miner+"/sec";
-
-saveData();
-
-}
-
-/* Tap */
-
-tapBtn.addEventListener("click",()=>{
-
-fox += power;
-
-if(level<50){
-level += 1;
-}
-
-updateUI();
-
-const plus=document.createElement("div");
-
-plus.innerHTML="+"+power;
-
-plus.classList.add("plusOne");
-
-document.body.appendChild(plus);
-
-plus.style.left=
-(window.innerWidth/2-30)+"px";
-
-plus.style.top=
-(window.innerHeight/2)+"px";
-
-setTimeout(()=>{
-
-plus.remove();
-
-},800);
-
-});
-
-/* Booster */
-
-boosterBtn.addEventListener("click",()=>{
-
-if(fox>=boosterCost){
-
-fox-=boosterCost;
-
-power+=1;
-
-boosterCost+=50;
-
-updateUI();
-
-alert("🚀 Booster Upgraded!");
-
-}else{
-
-alert("Need More FOX");
-
-}
-
-});
-
-/* Spin */
-
-function spinReward(){
-
-let reward=Math.floor(Math.random()*500)+100;
-
-fox += reward;
-
-updateUI();
-
-alert("🎉 You Won "+reward+" FOX");
-
-}
-
-/* Miner */
-
-function buyMiner(){
-
-if(fox>=500){
-
-fox-=500;
-
-miner+=5;
-
-updateUI();
-
-alert("💰 Miner Activated!");
-
-}else{
-
-alert("Need 500 FOX");
-
-}
-
-}
-
-/* Auto Profit */
-
-setInterval(()=>{
-
-fox += miner;
-
-updateUI();
-
-},1000);
-
-updateUI();
-
-</script>
-
-</body>
-</html>
+</div>
