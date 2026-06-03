@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Cyber Fox V2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -66,7 +67,7 @@
   <h2>Home</h2>
 
   <div class="coin-box">
-    💰 Coins: 0
+    💰 Coins: <span id="coin">0</span>
   </div>
 </div>
 
@@ -76,7 +77,9 @@
   <button>Tasks</button>
   <button>Wallet</button>
 </div>
-  <script type="module">
+
+<!-- 🔥 FIREBASE + LOGIC -->
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -93,7 +96,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  // 👤 User ID create
+  // 👤 user id
   let userId = localStorage.getItem("userId");
 
   if (!userId) {
@@ -101,23 +104,35 @@
     localStorage.setItem("userId", userId);
   }
 
-  // 💰 Save coins
-  window.saveCoins = function(coins) {
+  let coins = 0;
+
+  // 📥 load coins
+  function loadCoins() {
+    const dbRef = ref(db);
+
+    get(child(dbRef, "users/" + userId)).then((snapshot) => {
+      if (snapshot.exists()) {
+        coins = snapshot.val().coins || 0;
+        document.getElementById("coin").innerText = coins;
+      }
+    });
+  }
+
+  // 💾 save coins
+  function saveCoins() {
     set(ref(db, "users/" + userId), {
       coins: coins
     });
   }
 
-  // 📥 Load coins
-  window.loadCoins = function() {
-    const dbRef = ref(db);
-    get(child(dbRef, "users/" + userId)).then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log("Coins:", snapshot.val().coins);
-      }
-    });
+  // ➕ add coins
+  window.addCoins = function(amount) {
+    coins += amount;
+    document.getElementById("coin").innerText = coins;
+    saveCoins();
   }
 
+  loadCoins();
 </script>
 
 </body>
