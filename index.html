@@ -716,6 +716,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
+   let uid = localStorage.getItem("uid");
+
+if(!uid){
+  uid = "user_" + Date.now();
+  localStorage.setItem("uid", uid);
+}
+
+console.log("User ID:", uid);
 </script>
 </body>
 </html>
