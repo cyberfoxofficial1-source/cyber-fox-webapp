@@ -125,22 +125,7 @@ if (!userId) {
 let coins = 0;
 
 function loadCoins() {
-  get(child(ref(db), "users/" + userId))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        coins = snapshot.val().coins || 0;
-      }
-      document.getElementById("coin").innerText = coins;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-function saveCoins() {
-  set(ref(db, "users/" + userId), {
-    coins: coins
-  });
+  document.getElementById("coin").innerText = coins;
 }
 
 window.addCoins = function(amount) {
