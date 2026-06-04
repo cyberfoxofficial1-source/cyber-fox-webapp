@@ -132,7 +132,10 @@ function addCoins(amount){
   document.getElementById("coin").innerText = coins;
   localStorage.setItem("coins", coins);
 }
-
+function showHome(){
+  document.getElementById("home-page").style.display = "block";
+  document.getElementById("tasks-page").style.display = "none";
+}
 </script>
 
 </body>
