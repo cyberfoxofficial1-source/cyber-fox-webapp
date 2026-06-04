@@ -141,8 +141,10 @@ onclick="addCoins(1)">
 <script>
 
 let coins = Number(localStorage.getItem("coins")) || 0;
-document.getElementById("coin").innerText = coins;
-
+window.onload = function(){
+  document.getElementById("coin").innerText = coins;
+  updateCheckinText();
+}
 function addCoins(amount){
   coins += amount;
   document.getElementById("coin").innerText = coins;
