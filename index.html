@@ -57,8 +57,8 @@ header{
   margin-top:10px;
   padding:8px 15px;
   border:none;
-  border-radius:5px;
   cursor:pointer;
+  border-radius:5px;
 }
 
 .nav{
@@ -106,7 +106,7 @@ onclick="addCoins(1)">
 <h2>📋 Tasks</h2>
 
 <div class="task-box">
-  <p>🎁 Daily Check-in</p>
+  <h3>🎁 Daily Check-in</h3>
   <p id="checkin-text">Loading...</p>
   <button onclick="checkIn()">Claim</button>
 </div>
@@ -139,10 +139,10 @@ onclick="addCoins(1)">
 <script>
 
 let coins = Number(localStorage.getItem("coins")) || 0;
-document.getElementById("coin").innerText = coins;
-
 let lastCheckin = localStorage.getItem("lastCheckin");
 let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
+
+document.getElementById("coin").innerText = coins;
 
 function addCoins(amount){
   coins += amount;
@@ -165,12 +165,12 @@ function updateCheckinText(){
     "Day " + checkinDay + " Reward Ready";
 }
 
-updateCheckinText();
-
 function checkIn(){
   let today = new Date().toDateString();
 
-  if(lastCheckin === today){
+  let savedDate = localStorage.getItem("lastCheckin");
+
+  if(savedDate === today){
     alert("Already claimed today!");
     return;
   }
@@ -199,6 +199,11 @@ function checkIn(){
   updateCheckinText();
 
   alert("You got " + reward + " coins!");
+}
+
+window.onload = function(){
+  document.getElementById("coin").innerText = coins;
+  updateCheckinText();
 }
 
 </script>
