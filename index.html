@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox V2</title>
-
-<style>
+<title>Cyber Fox V2</title><style>
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -46,6 +43,18 @@ header{
   100%{transform:scale(1);}
 }
 
+.task-box{
+  background:#222;
+  margin:10px;
+  padding:15px;
+  border-radius:10px;
+}
+
+.task-box button{
+  margin-top:10px;
+  padding:8px 15px;
+}
+
 .nav{
   position:fixed;
   bottom:0;
@@ -61,82 +70,43 @@ header{
   border:none;
   color:white;
 }
-  .task-box{
-  background:#222;
-  margin:10px;
-  padding:15px;
-  border-radius:10px;
-  }
-</style>
-</head>
-
-<body>
-
-<header>
+</style></head><body><header>
 🦊 Cyber Fox V2
-</header>
-
-<div id="home-page" class="home">
-
-<h2>Home</h2>
-
-<div class="coin-box">
+</header><div id="home-page" class="home"><h2>Home</h2><div class="coin-box">
 💰 Coins: <span id="coin">0</span>
-</div>
-
-<img
+</div><img
 class="fox-logo"
 src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
 onclick="addCoins(1)"
->
 
-</div>
-  <div id="tasks-page" style="display:none;">
-<h2>📋 Tasks</h2>
+«»
 
-<div class="task-box">
+</div><div id="tasks-page" style="display:none;"><h2>📋 Tasks</h2><div class="task-box">
   <p>📢 Join Telegram Channel</p>
-
   <a href="https://t.me/CyberFoxOfficial" target="_blank">
     <button>Go</button>
   </a>
-</div>
-
-<div class="task-box">
-  <p>👥 Join Telegram Group</p>
-</div>
-
-<div class="task-box">
+</div><div class="task-box">
   <p>🐦 Follow Twitter/X</p>
-
   <a href="https://x.com/FoxCyber136" target="_blank">
     <button>Go</button>
   </a>
-</div>
-
-<div class="task-box">
+</div><div class="task-box">
   <p>📘 Follow Facebook Page</p>
-
   <a href="https://www.facebook.com/share/1Cw6CQRDma/" target="_blank">
     <button>Go</button>
   </a>
-</div>
-
-<div class="task-box">
+</div><div class="task-box">
   <p>▶️ Subscribe YouTube</p>
-
   <a href="https://youtube.com/@cyberfoxofficial" target="_blank">
     <button>Go</button>
   </a>
-</div>
-<div class="nav">
+</div></div><div class="nav">
 <button onclick="showHome()">Home</button>
 <button>Spin</button>
 <button onclick="showTasks()">Tasks</button>
 <button>Wallet</button>
-</div>
-
-<script>
+</div><script>
 
 let coins = Number(localStorage.getItem("coins")) || 0;
 
@@ -147,15 +117,16 @@ function addCoins(amount){
   document.getElementById("coin").innerText = coins;
   localStorage.setItem("coins", coins);
 }
+
 function showHome(){
   document.getElementById("home-page").style.display = "block";
   document.getElementById("tasks-page").style.display = "none";
 }
-  function showTasks(){
+
+function showTasks(){
   document.getElementById("home-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "block";
 }
-</script>
 
-</body>
+</script></body>
 </html>
