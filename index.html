@@ -6,6 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    .fox-logo{
+  width:280px;
+  border-radius:50%;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -74,9 +86,8 @@
   <br>
 
 <img
-src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
-width="220"
-style="border-radius:50%;cursor:pointer;"
+  class="fox-logo"
+src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" 
 onclick="addCoins(1)"
 >
   </button>
