@@ -187,12 +187,31 @@ onclick="addCoins(1)">
 <div class="nav">
 <button onclick="showHome()">Home</button>
 <button onclick="showTasks()">Tasks</button>
-<button>Spin</button>
+<button onclick="showSpin()">Spin</button>
 <button>Wallet</button>
 </div>
 
 <script>
+function showSpin(){
+  document.getElementById("home-page").style.display = "none";
+  document.getElementById("tasks-page").style.display = "none";
+  document.getElementById("spin-page").style.display = "block";
+}
 
+function spin(){
+  let rewards = [0, 10, 50, 100, 500, 1000];
+
+  let reward = rewards[Math.floor(Math.random() * rewards.length)];
+
+  coins += reward;
+
+  localStorage.setItem("coins", coins);
+
+  document.getElementById("coin").innerText = coins;
+
+  document.getElementById("spin-result").innerText =
+    "🎉 You got " + reward + " coins!";
+    }
 let coins = Number(localStorage.getItem("coins")) || 0;
 let lastCheckin = localStorage.getItem("lastCheckin");
 let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
