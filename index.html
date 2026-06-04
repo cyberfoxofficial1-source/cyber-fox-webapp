@@ -158,7 +158,49 @@ function showTasks(){
   document.getElementById("home-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "block";
 }
+let lastCheckin = localStorage.getItem("lastCheckin") || 0;
+let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
 
+function updateCheckinText(){
+  document.getElementById("checkin-text").innerText =
+    "Day " + checkinDay + " Reward Ready";
+}
+
+updateCheckinText();
+
+function checkIn(){
+  let today = new Date().toDateString();
+
+  if(lastCheckin === today){
+    alert("Already claimed today!");
+    return;
+  }
+
+  let reward = 0;
+
+  if(checkinDay == 1) reward = 1000;
+  else if(checkinDay == 2) reward = 3000;
+  else if(checkinDay == 3) reward = 5000;
+  else if(checkinDay == 4) reward = 10000;
+  else if(checkinDay == 5) reward = 15000;
+  else if(checkinDay == 6) reward = 30000;
+  else if(checkinDay == 7) reward = 50000;
+
+  coins += reward;
+  document.getElementById("coin").innerText = coins;
+  localStorage.setItem("coins", coins);
+
+  localStorage.setItem("lastCheckin", today);
+
+  checkinDay++;
+  if(checkinDay > 7) checkinDay = 1;
+
+  localStorage.setItem("checkinDay", checkinDay);
+
+  updateCheckinText();
+
+  alert("You got " + reward + " coins!");
+}
 </script>
 
 </body>
