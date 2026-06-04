@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
- <title>Cyber Fox TEST 999</title>
+  <title>Cyber Fox V2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: #0f0f0f;
       color: white;
     }
@@ -34,6 +34,13 @@
       font-size: 18px;
     }
 
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
     .nav {
       position: fixed;
       bottom: 0;
@@ -46,13 +53,7 @@
       flex: 1;
       padding: 15px;
       background: none;
-      border: none;
       color: white;
-      font-size: 14px;
-    }
-
-    .nav button:hover {
-      background: #333;
     }
   </style>
 </head>
@@ -71,7 +72,10 @@
   </div>
 
   <br>
-  <button onclick="addCoins(10)">➕ Earn 10 Coins</button>
+
+  <button onclick="addCoins(10)">
+    ➕ Earn 10 Coins
+  </button>
 </div>
 
 <div class="nav">
@@ -81,59 +85,60 @@
   <button>Wallet</button>
 </div>
 
-<!-- 🔥 FIREBASE -->
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA2aFc2uxZr0eOLQgyxHUL5bRtg8I1iYUs"
-    authDomain: "cyber-fox-7f9a4.firebaseapp.com",
-    databaseURL: "https://cyber-fox-7f9a4-default-rtdb.firebaseio.com",
-    projectId: "cyber-fox-7f9a4",
-    storageBucket: "cyber-fox-7f9a4.firebasestorage.app",
-    messagingSenderId: "612951080546",
-    appId: "1:612951080546:web:13026f07bbacd2c3ccdb3b"
-  };
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+const firebaseConfig = {
+  apiKey: "AIzaSyA2aFc2uxZr0eOLQgyxHUL5bRtg8I1iYUs",
+  authDomain: "cyber-fox-7f9a4.firebaseapp.com",
+  databaseURL: "https://cyber-fox-7f9a4-default-rtdb.firebaseio.com",
+  projectId: "cyber-fox-7f9a4",
+  storageBucket: "cyber-fox-7f9a4.firebasestorage.app",
+  messagingSenderId: "612951080546",
+  appId: "1:612951080546:web:13026f07bbacd2c3ccdb3b"
+};
 
-  // user id
-  let userId = localStorage.getItem("userId");
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-  if (!userId) {
-    userId = "user_" + Math.floor(Math.random() * 999999999);
-    localStorage.setItem("userId", userId);
-  }
+let userId = localStorage.getItem("userId");
 
-  let coins = 0;
+if (!userId) {
+  userId = "user_" + Math.floor(Math.random() * 999999999);
+  localStorage.setItem("userId", userId);
+}
 
-  // load coins
-  function loadCoins() {
-    get(child(ref(db), "users/" + userId)).then((snapshot) => {
+let coins = 0;
+
+function loadCoins() {
+  get(child(ref(db), "users/" + userId))
+    .then((snapshot) => {
       if (snapshot.exists()) {
         coins = snapshot.val().coins || 0;
-        document.getElementById("coin").innerText = coins;
       }
+      document.getElementById("coin").innerText = coins;
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  }
+}
 
-  // save coins
-  function saveCoins() {
-    set(ref(db, "users/" + userId), {
-      coins: coins
-    });
-  }
+function saveCoins() {
+  set(ref(db, "users/" + userId), {
+    coins: coins
+  });
+}
 
-  // add coins
-  window.addCoins = function(amount) {
-    coins += amount;
-    document.getElementById("coin").innerText = coins;
-    saveCoins();
-  }
-alert("JS OK");
-  loadCoins();
+window.addCoins = function(amount) {
+  coins += amount;
+  document.getElementById("coin").innerText = coins;
+  saveCoins();
+};
+
+loadCoins();
+
 </script>
 
 </body>
