@@ -158,7 +158,7 @@ function showTasks(){
   document.getElementById("home-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "block";
 }
-let lastCheckin = localStorage.getItem("lastCheckin") || 0;
+let lastCheckin = localStorage.getItem("lastCheckin");
 let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
 
 function updateCheckinText(){
