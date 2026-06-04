@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cyber Fox V2</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Fox V2</title>
 
-  <style>
-    .fox-logo{
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0f0f0f;
+  color:white;
+  text-align:center;
+}
+
+header{
+  padding:15px;
+  background:#1a1a1a;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.home{
+  padding:20px;
+}
+
+.coin-box{
+  margin:20px auto;
+  padding:20px;
+  background:#222;
+  border-radius:10px;
+  width:220px;
+}
+
+.fox-logo{
   width:280px;
   border-radius:50%;
   cursor:pointer;
@@ -18,123 +45,65 @@
   50%{transform:scale(1.08);}
   100%{transform:scale(1);}
 }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: white;
-    }
 
-    header {
-      padding: 15px;
-      text-align: center;
-      background: #1a1a1a;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  background:#1a1a1a;
+}
 
-    .home {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .coin-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: #222;
-      border-radius: 10px;
-      font-size: 18px;
-    }
-
-    button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      background: #1a1a1a;
-    }
-
-    .nav button {
-      flex: 1;
-      padding: 15px;
-      background: none;
-      color: white;
-    }
-  </style>
+.nav button{
+  flex:1;
+  padding:15px;
+  background:none;
+  border:none;
+  color:white;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  🦊 Cyber Fox V2
+🦊 Cyber Fox V2
 </header>
 
 <div class="home">
-  <h2>Home</h2>
 
-  <div class="coin-box">
-    💰 Coins: <span id="coin">0</span>
-  </div>
+<h2>Home</h2>
 
-  <br>
-
-<img
-  class="fox-logo"
-src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" 
-onclick="addCov>
-
-<div class="nav">
-  <button>Home</button>
-  <button>Spin</button>
-  <button>Tasks</button>
-  <button>Wallet</button>
+<div class="coin-box">
+💰 Coins: <span id="coin">0</span>
 </div>
 
-<script type="module">
+<img
+class="fox-logo"
+src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
+onclick="addCoins(1)"
+>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+</div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA2aFc2uxZr0eOLQgyxHUL5bRtg8I1iYUs",
-  authDomain: "cyber-fox-7f9a4.firebaseapp.com",
-  databaseURL: "https://cyber-fox-7f9a4-default-rtdb.firebaseio.com",
-  projectId: "cyber-fox-7f9a4",
-  storageBucket: "cyber-fox-7f9a4.firebasestorage.app",
-  messagingSenderId: "612951080546",
-  appId: "1:612951080546:web:13026f07bbacd2c3ccdb3b"
-};
+<div class="nav">
+<button>Home</button>
+<button>Spin</button>
+<button>Tasks</button>
+<button>Wallet</button>
+</div>
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+<script>
 
-let userId = localStorage.getItem("userId");
+let coins = Number(localStorage.getItem("coins")) || 0;
 
-if (!userId) {
-  userId = "user_" + Math.floor(Math.random() * 999999999);
-  localStorage.setItem("userId", userId);
-}
+document.getElementById("coin").innerText = coins;
 
-let coins = 0;
-
-function loadCoins() {
-  document.getElementById("coin").innerText = coins;
-}
-
-window.addCoins = function(amount) {
+function addCoins(amount){
   coins += amount;
   document.getElementById("coin").innerText = coins;
-  saveCoins();
-};
-
-loadCoins();
+  localStorage.setItem("coins", coins);
+}
 
 </script>
 
