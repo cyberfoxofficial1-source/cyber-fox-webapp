@@ -46,7 +46,6 @@ header{
   100%{transform:scale(1);}
 }
 
-/* CHECK-IN */
 .checkin-box{
   background:#222;
   margin:15px;
@@ -63,19 +62,6 @@ header{
   font-size:14px;
 }
 
-.checkin-box button{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#00c853;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* TASK */
 .task-box{
   background:#222;
   margin:10px;
@@ -83,25 +69,6 @@ header{
   border-radius:10px;
 }
 
-/* SPIN */
-.spin-box{
-  background:#222;
-  margin:15px;
-  padding:15px;
-  border-radius:12px;
-}
-
-.spin-box button{
-  padding:10px 20px;
-  border:none;
-  border-radius:8px;
-  background:#ff9800;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* NAV */
 .nav{
   position:fixed;
   bottom:0;
@@ -116,6 +83,13 @@ header{
   background:none;
   border:none;
   color:white;
+}
+
+/* SPIN WHEEL */
+.wheel{
+  font-size:80px;
+  margin:20px;
+  transition: transform 2s ease-out;
 }
 </style>
 </head>
@@ -180,15 +154,15 @@ onclick="addCoins(1)">
 <!-- SPIN -->
 <div id="spin-page" style="display:none;">
 
-<h2>🎡 Spin</h2>
+<h2>🎡 Spin Wheel</h2>
 
-<div class="spin-box">
+<div class="task-box">
 
-<p>Spin করে রিওয়ার্ড নাও</p>
+<div id="wheel" class="wheel">🎡</div>
 
 <button onclick="spin()">SPIN</button>
 
-<p id="spin-result"></p>
+<p id="spin-result">Spin করে রিওয়ার্ড নাও</p>
 
 </div>
 
@@ -219,7 +193,7 @@ function addCoins(amount){
   updateUI();
 }
 
-/* NAV */
+/* PAGE */
 function showHome(){
   document.getElementById("home-page").style.display = "block";
   document.getElementById("tasks-page").style.display = "none";
@@ -240,16 +214,22 @@ function showSpin(){
 
 /* SPIN */
 function spin(){
+  let wheel = document.getElementById("wheel");
+
   let rewards = [0, 10, 50, 100, 500, 1000];
   let reward = rewards[Math.floor(Math.random() * rewards.length)];
 
-  coins += reward;
-  localStorage.setItem("coins", coins);
+  let rotate = 720 + Math.floor(Math.random() * 360);
+  wheel.style.transform = "rotate(" + rotate + "deg)";
 
-  updateUI();
+  setTimeout(() => {
+    coins += reward;
+    localStorage.setItem("coins", coins);
+    updateUI();
 
-  document.getElementById("spin-result").innerText =
-    "🎉 You got " + reward + " coins!";
+    document.getElementById("spin-result").innerText =
+      "🎉 You got " + reward + " coins!";
+  }, 2000);
 }
 
 /* CHECK-IN */
