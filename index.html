@@ -54,8 +54,11 @@ header{
 }
 
 .task-box button{
-  padding:8px 15px;
   margin-top:10px;
+  padding:8px 15px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
 }
 
 .nav{
@@ -82,7 +85,7 @@ header{
 🦊 Cyber Fox V2
 </header>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div id="home-page" class="home">
 
 <h2>Home</h2>
@@ -97,35 +100,30 @@ onclick="addCoins(1)">
 
 </div>
 
-<!-- TASKS PAGE -->
+<!-- TASKS -->
 <div id="tasks-page" style="display:none;">
 
 <h2>📋 Tasks</h2>
-  
+
 <div class="task-box">
-  <h3>🎁 Daily Check-in</h3>
+  <p>🎁 Daily Check-in</p>
   <p id="checkin-text">Loading...</p>
   <button onclick="checkIn()">Claim</button>
 </div>
-  
+
 <div class="task-box">
-<p>📢 Join Telegram Channel</p>
-<a href="https://t.me/CyberFoxOfficial" target="_blank"><button>Go</button></a>
+  <p>🐦 Follow Twitter/X</p>
+  <a href="https://x.com/FoxCyber136" target="_blank"><button>Go</button></a>
 </div>
 
 <div class="task-box">
-<p>🐦 Follow Twitter/X</p>
-<a href="https://x.com/FoxCyber136" target="_blank"><button>Go</button></a>
+  <p>📘 Follow Facebook Page</p>
+  <a href="https://www.facebook.com/share/1Cw6CQRDma/" target="_blank"><button>Go</button></a>
 </div>
 
 <div class="task-box">
-<p>📘 Follow Facebook Page</p>
-<a href="https://www.facebook.com/share/1Cw6CQRDma/" target="_blank"><button>Go</button></a>
-</div>
-
-<div class="task-box">
-<p>▶️ Subscribe YouTube</p>
-<a href="https://youtube.com/@cyberfoxofficial" target="_blank"><button>Go</button></a>
+  <p>▶️ Subscribe YouTube</p>
+  <a href="https://youtube.com/@cyberfoxofficial" target="_blank"><button>Go</button></a>
 </div>
 
 </div>
@@ -141,10 +139,11 @@ onclick="addCoins(1)">
 <script>
 
 let coins = Number(localStorage.getItem("coins")) || 0;
-window.onload = function(){
-  document.getElementById("coin").innerText = coins;
-  updateCheckinText();
-}
+document.getElementById("coin").innerText = coins;
+
+let lastCheckin = localStorage.getItem("lastCheckin");
+let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
+
 function addCoins(amount){
   coins += amount;
   document.getElementById("coin").innerText = coins;
@@ -160,8 +159,6 @@ function showTasks(){
   document.getElementById("home-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "block";
 }
-let lastCheckin = localStorage.getItem("lastCheckin");
-let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
 
 function updateCheckinText(){
   document.getElementById("checkin-text").innerText =
@@ -203,6 +200,7 @@ function checkIn(){
 
   alert("You got " + reward + " coins!");
 }
+
 </script>
 
 </body>
