@@ -6,17 +6,6 @@
 <title>Cyber Fox V2</title>
 
 <style>
-  #wheel{
-  width:150px;
-  height:150px;
-  margin:20px auto;
-  border-radius:50%;
-  background:#333;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:60px;
-  }
 body{
   margin:0;
   font-family:Arial;
@@ -57,6 +46,7 @@ header{
   100%{transform:scale(1);}
 }
 
+/* CHECKIN */
 .checkin-box{
   background:#222;
   margin:15px;
@@ -73,6 +63,7 @@ header{
   font-size:14px;
 }
 
+/* TASK */
 .task-box{
   background:#222;
   margin:10px;
@@ -80,6 +71,21 @@ header{
   border-radius:10px;
 }
 
+/* SPIN WHEEL */
+#wheel{
+  width:150px;
+  height:150px;
+  margin:20px auto;
+  border-radius:50%;
+  background:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:60px;
+  transition: transform 2s ease-out;
+}
+
+/* NAV */
 .nav{
   position:fixed;
   bottom:0;
@@ -95,13 +101,6 @@ header{
   border:none;
   color:white;
 }
-
-/* SPIN WHEEL */
-.wheel{
-  font-size:80px;
-  margin:20px;
-  transition: transform 2s ease-out;
-}
 </style>
 </head>
 
@@ -111,17 +110,15 @@ header{
 
 <!-- HOME -->
 <div id="home-page" class="home">
+  <h2>Home</h2>
 
-<h2>Home</h2>
+  <div class="coin-box">
+    💰 Coins: <span id="coin">0</span>
+  </div>
 
-<div class="coin-box">
-💰 Coins: <span id="coin">0</span>
-</div>
-
-<img class="fox-logo"
-src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
-onclick="addCoins(1)">
-
+  <img class="fox-logo"
+  src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
+  onclick="addCoins(1)">
 </div>
 
 <!-- TASKS -->
@@ -130,7 +127,6 @@ onclick="addCoins(1)">
 <h2>📋 Tasks</h2>
 
 <div class="checkin-box">
-
 <h3>🎁 7 Days Check-in Rewards</h3>
 
 <div class="day">Day 1: 1K coin</div>
@@ -142,40 +138,19 @@ onclick="addCoins(1)">
 <div class="day">Day 7: 50K coin + Premium Key 🔑</div>
 
 <button onclick="checkIn()">Claim</button>
-
-</div>
-
-<div class="task-box">
-<p>🐦 Follow Twitter/X</p>
-<a href="https://x.com/FoxCyber136" target="_blank"><button>Go</button></a>
-</div>
-
-<div class="task-box">
-<p>📘 Follow Facebook Page</p>
-<a href="https://www.facebook.com/share/1Cw6CQRDma/" target="_blank"><button>Go</button></a>
-</div>
-
-<div class="task-box">
-<p>▶️ Subscribe YouTube</p>
-<a href="https://youtube.com/@cyberfoxofficial" target="_blank"><button>Go</button></a>
-</div>
-
 </div>
 
 <!-- SPIN -->
 <div id="spin-page" style="display:none;">
 
 <h2>🎡 Spin Wheel</h2>
-  
-  <div id="wheel">🎡</div>
+
+<div id="wheel">🎡</div>
 
 <div class="task-box">
-
-<div id="wheel" class="wheel">🎡</div>
-
 <button onclick="spin()">SPIN</button>
-
 <p id="spin-result">Spin করে রিওয়ার্ড নাও</p>
+</div>
 
 </div>
 
@@ -199,14 +174,14 @@ function updateUI(){
   document.getElementById("coin").innerText = coins;
 }
 
-/* COINS */
+/* ADD COINS */
 function addCoins(amount){
   coins += amount;
   localStorage.setItem("coins", coins);
   updateUI();
 }
 
-/* PAGE */
+/* PAGE CONTROL */
 function showHome(){
   document.getElementById("home-page").style.display = "block";
   document.getElementById("tasks-page").style.display = "none";
@@ -287,4 +262,4 @@ window.onload = function(){
 </script>
 
 </body>
-</html>
+  </html>
