@@ -6,37 +6,6 @@
 <title>Cyber Fox V2</title>
 
 <style>
-  .checkin-box{
-  background:#222;
-  margin:15px;
-  padding:15px;
-  border-radius:12px;
-  text-align:left;
-}
-
-.checkin-box h3{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.day{
-  background:#111;
-  padding:8px;
-  margin:6px 0;
-  border-radius:6px;
-  font-size:14px;
-}
-
-.checkin-box button{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#00c853;
-  color:white;
-  font-weight:bold;
-}
 body{
   margin:0;
   font-family:Arial;
@@ -77,6 +46,41 @@ header{
   100%{transform:scale(1);}
 }
 
+/* CHECKIN BOX */
+.checkin-box{
+  background:#222;
+  margin:15px;
+  padding:15px;
+  border-radius:12px;
+  text-align:left;
+}
+
+.checkin-box h3{
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.day{
+  background:#111;
+  padding:8px;
+  margin:6px 0;
+  border-radius:6px;
+  font-size:14px;
+}
+
+.checkin-box button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#00c853;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* TASK BOX */
 .task-box{
   background:#222;
   margin:10px;
@@ -92,6 +96,7 @@ header{
   border-radius:5px;
 }
 
+/* NAV */
 .nav{
   position:fixed;
   bottom:0;
@@ -112,9 +117,7 @@ header{
 
 <body>
 
-<header>
-🦊 Cyber Fox V2
-</header>
+<header>🦊 Cyber Fox V2</header>
 
 <!-- HOME -->
 <div id="home-page" class="home">
@@ -135,8 +138,9 @@ onclick="addCoins(1)">
 <div id="tasks-page" style="display:none;">
 
 <h2>📋 Tasks</h2>
-  
-  <div class="checkin-box">
+
+<!-- CHECK-IN (ONLY ONE SYSTEM) -->
+<div class="checkin-box">
 
   <h3>🎁 7 Days Check-in Rewards</h3>
 
@@ -148,16 +152,11 @@ onclick="addCoins(1)">
   <div class="day">Day 6: 30K coin</div>
   <div class="day">Day 7: 50K coin + Premium Key 🔑</div>
 
-  <button onclick="checkIn()">Claim</button>
+  <button onclick="checkIn()">Claim Today Reward</button>
 
 </div>
 
-<div class="task-box">
-  <h3>🎁 Daily Check-in</h3>
-  <p id="checkin-text">Loading...</p>
-  <button onclick="checkIn()">Claim</button>
-</div>
-
+<!-- TASKS -->
 <div class="task-box">
   <p>🐦 Follow Twitter/X</p>
   <a href="https://x.com/FoxCyber136" target="_blank"><button>Go</button></a>
@@ -189,12 +188,16 @@ let coins = Number(localStorage.getItem("coins")) || 0;
 let lastCheckin = localStorage.getItem("lastCheckin");
 let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
 
-document.getElementById("coin").innerText = coins;
+function updateUI(){
+  if(document.getElementById("coin")){
+    document.getElementById("coin").innerText = coins;
+  }
+}
 
 function addCoins(amount){
   coins += amount;
-  document.getElementById("coin").innerText = coins;
   localStorage.setItem("coins", coins);
+  updateUI();
 }
 
 function showHome(){
@@ -207,17 +210,10 @@ function showTasks(){
   document.getElementById("tasks-page").style.display = "block";
 }
 
-function updateCheckinText(){
-  document.getElementById("checkin-text").innerText =
-    "Day " + checkinDay + " Reward Ready";
-}
-
 function checkIn(){
   let today = new Date().toDateString();
 
-  let savedDate = localStorage.getItem("lastCheckin");
-
-  if(savedDate === today){
+  if(lastCheckin === today){
     alert("Already claimed today!");
     return;
   }
@@ -233,7 +229,6 @@ function checkIn(){
   else if(checkinDay == 7) reward = 50000;
 
   coins += reward;
-  document.getElementById("coin").innerText = coins;
   localStorage.setItem("coins", coins);
 
   localStorage.setItem("lastCheckin", today);
@@ -243,14 +238,13 @@ function checkIn(){
 
   localStorage.setItem("checkinDay", checkinDay);
 
-  updateCheckinText();
+  updateUI();
 
   alert("You got " + reward + " coins!");
 }
 
 window.onload = function(){
-  document.getElementById("coin").innerText = coins;
-  updateCheckinText();
+  updateUI();
 }
 
 </script>
