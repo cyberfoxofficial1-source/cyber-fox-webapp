@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V2 - Real Spin</title>
+    <title>Cyber Fox V2 - Full App</title>
     <style>
         :root {
             --bg-color: #0b0c10;
             --text-color: #ffffff;
             --accent-orange: #ff6b00;
             --sub-text: #858585;
+            --card-bg: #1a1b22;
         }
 
         * {
@@ -38,11 +39,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px;
+            padding: 20px 20px 85px 20px; /* Space for bottom nav */
             overflow: hidden;
         }
 
-        /* Top Header Area */
+        /* Header Area */
         .header {
             display: flex;
             justify-content: space-between;
@@ -68,7 +69,7 @@
             margin-top: 2px;
         }
 
-        /* Minimalist Wallet Button in Corner */
+        /* Minimal Wallet Button in Corner */
         .wallet-corner-btn {
             background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -84,26 +85,38 @@
         .wallet-icon-svg {
             width: 14px;
             height: 14px;
-            fill: #ff9800; /* Sleek Web3 Gold/Orange */
+            fill: #ff9800;
         }
 
         .wallet-text {
             font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
-        /* Hamster Style Clean Token Display over the Wheel */
-        .main-display {
+        /* Main View Container */
+        .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            margin-top: -20px;
+            width: 100%;
         }
 
+        .app-view {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .app-view.active {
+            display: flex;
+        }
+
+        /* Hamster Style Clean Token Display */
         .token-balance-container {
             text-align: center;
         }
@@ -119,20 +132,46 @@
             color: var(--sub-text);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -2px;
         }
 
-        /* Premium Spin Wheel Container */
+        /* --- HOME / TAP PAGE STYLE --- */
+        .main-logo-sphere {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff6b00 0%, #1f1e26 70%);
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .main-logo-sphere:active {
+            transform: scale(0.96);
+        }
+
+        /* CSS Premium Fox Icon (No Broken Image) */
+        .fox-avatar-css {
+            width: 70px;
+            height: 70px;
+            background: var(--text-color);
+            clip-path: polygon(50% 0%, 83% 40%, 100% 100%, 50% 80%, 0% 100%, 17% 40%);
+            background: linear-gradient(135deg, #ff8c00, #ff5000);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- SPIN WHEEL PAGE STYLE --- */
         .wheel-wrapper {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 270px;
+            height: 270px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Outer Glow/Border */
         .wheel-outer-ring {
             position: absolute;
             width: 100%;
@@ -143,7 +182,6 @@
             pointer-events: none;
         }
 
-        /* The Actual Turning Wheel */
         .spin-wheel {
             width: 92%;
             height: 92%;
@@ -157,54 +195,41 @@
             border: 6px solid #1a1921;
             position: relative;
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.3, 1);
-            overflow: hidden;
         }
 
-        /* Center Premium Logo Pin/Pointer */
         .wheel-center-pointer {
             position: absolute;
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background: radial-gradient(circle, #ff6b00 0%, #111 80%);
             border-radius: 50%;
             border: 3px solid #ff8c00;
-            box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
             z-index: 5;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
-        .wheel-center-pointer img {
-            width: 60%;
-            height: 60%;
-            object-fit: contain;
-        }
-
-        /* Lower Control Panel */
         .control-panel {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 12px;
         }
 
         .key-status {
             font-size: 0.9rem;
             color: #ffcc00;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
         }
 
         .action-btn {
             width: 100%;
             background: linear-gradient(90deg, #ff6b00 0%, #ff8c00 100%);
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 14px;
             color: white;
             font-size: 1.1rem;
@@ -213,14 +238,99 @@
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 5px 20px rgba(255, 107, 0, 0.35);
-            transition: transform 0.1s ease;
         }
 
-        .action-btn:active {
-            transform: scale(0.98);
+        /* --- SUB PAGES (TASKS, INVITE, PROFILE) --- */
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
 
-        /* Alert Popup */
+        .list-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .item-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .item-reward {
+            font-size: 0.8rem;
+            color: #ff9800;
+        }
+
+        .item-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- PREMIUM BOTTOM NAVIGATION BAR --- */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: #131419;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--sub-text);
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            flex: 1;
+            padding: 10px 0;
+        }
+
+        .nav-item.active {
+            color: var(--accent-orange);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        /* System Alert Popup */
         .custom-popup {
             position: absolute;
             top: 0;
@@ -277,8 +387,6 @@
                 <span class="project-title">Cyber Fox</span>
                 <span class="project-subtitle">Secure Matrix Node</span>
             </div>
-            
-            <!-- Clean Wallet Button Top Right Corner -->
             <div class="wallet-corner-btn" id="walletBtn">
                 <svg class="wallet-icon-svg" viewBox="0 0 24 24">
                     <path d="M19 13H5v-2h14v2z M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2 .9-2 2v2c0 1.1.89 2 2 2h9v4z"/>
@@ -287,40 +395,110 @@
             </div>
         </div>
 
-        <!-- Main Display (Hamster Kombat Style Header + Spin Wheel) -->
-        <div class="main-display">
-            
-            <!-- Clean Balance Display -->
-            <div class="token-balance-container">
-                <div class="token-amount" id="tokenDisplay">28,063</div>
-                <div class="token-label">$FOX Tokens</div>
+        <!-- Main Display Views Area -->
+        <div class="main-content">
+
+            <!-- 1. HOME / TAP VIEW -->
+            <div class="app-view active" id="view-home">
+                <div class="token-balance-container">
+                    <div class="token-amount class-token-render">30,563</div>
+                    <div class="token-label">$FOX Tokens</div>
+                </div>
+                <div class="main-logo-sphere" id="logoTap">
+                    <div class="fox-avatar-css"></div>
+                </div>
             </div>
 
-            <!-- Premium Spin Wheel Structure -->
-            <div class="wheel-wrapper">
-                <div class="wheel-outer-ring"></div>
-                <div class="wheel-center-pointer">
-                    <!-- High quality fallback crypto badge vector icon -->
-                    <img src="https://img.icons8.com/neon/96/fox.png" alt="Fox Pin">
+            <!-- 2. SPIN WHEEL VIEW -->
+            <div class="app-view" id="view-spin">
+                <div class="token-balance-container">
+                    <div class="token-amount class-token-render">30,563</div>
+                    <div class="token-label">$FOX Tokens</div>
                 </div>
-                <div class="spin-wheel" id="wheel">
-                    <!-- Visual Segments can be added or customized via CSS/Images later -->
+                <div class="wheel-wrapper">
+                    <div class="wheel-outer-ring"></div>
+                    <div class="wheel-center-pointer">
+                        <span style="color:#ff8c00;">FOX</span>
+                    </div>
+                    <div class="spin-wheel" id="wheel"></div>
+                </div>
+                <div class="control-panel">
+                    <div class="key-status">
+                        🔑 Available Keys: <span id="keyDisplay">1</span>
+                    </div>
+                    <button class="action-btn" id="spinBtn">Launch Premium Spin</button>
+                </div>
+            </div>
+
+            <!-- 3. TASKS VIEW -->
+            <div class="app-view" id="view-tasks">
+                <div class="page-title">Global Tasks</div>
+                <div class="list-container">
+                    <div class="list-item">
+                        <div class="item-detail">
+                            <span class="item-title">Follow on X (Twitter)</span>
+                            <span class="item-reward">+5,000 $FOX</span>
+                        </div>
+                        <button class="item-btn" onclick="completeTask(this, 5000)">Start</button>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-detail">
+                            <span class="item-title">Subscribe YouTube Channel</span>
+                            <span class="item-reward">+7,500 $FOX</span>
+                        </div>
+                        <button class="item-btn" onclick="completeTask(this, 7500)">Start</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. INVITE VIEW -->
+            <div class="app-view" id="view-invite">
+                <div class="page-title">Invite Friends</div>
+                <p style="color: var(--sub-text); text-align:center; font-size:0.9rem;">Earn 1 Key per verified active referral.</p>
+                <div class="list-container" style="margin-top:15px;">
+                    <div class="list-item">
+                        <div class="item-detail">
+                            <span class="item-title">Your Referral Link</span>
+                            <span class="item-reward" style="font-size:0.75rem; color:#4c94ff;">t.me/CyberFoxBot?start=r102</span>
+                        </div>
+                        <button class="item-btn" style="background:#ff6b00;" onclick="showPopup('Link Copied', 'Referral link copied to clipboard!')">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. PROFILE VIEW -->
+            <div class="app-view" id="view-profile">
+                <div class="page-title">User Account</div>
+                <div class="list-container" style="width:100%;">
+                    <div class="list-item"><span>Status</span><span style="color:#00ffcc;">Verified Node</span></div>
+                    <div class="list-item"><span>Total Keys Used</span><span>14 Keys</span></div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Lower Control Area -->
-        <div class="control-panel">
-            <div class="key-status">
-                🔑 Available Keys: <span id="keyDisplay">2</span>
+        <!-- Bottom Navigation Bar -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchView('home', this)">
+                <span class="nav-icon">🏠</span><span>Home</span>
             </div>
-            <button class="action-btn" id="spinBtn">Launch Premium Spin</button>
+            <div class="nav-item" onclick="switchView('spin', this)">
+                <span class="nav-icon">🎰</span><span>Spin</span>
+            </div>
+            <div class="nav-item" onclick="switchView('tasks', this)">
+                <span class="nav-icon">📋</span><span>Tasks</span>
+            </div>
+            <div class="nav-item" onclick="switchView('invite', this)">
+                <span class="nav-icon">👥</span><span>Invite</span>
+            </div>
+            <div class="nav-item" onclick="switchView('profile', this)">
+                <span class="nav-icon">👤</span><span>Profile</span>
+            </div>
         </div>
 
     </div>
 
-    <!-- Alert Popup System -->
+    <!-- Popup Window -->
     <div class="custom-popup" id="alertPopup">
         <div class="popup-content">
             <div class="popup-title" id="popupTitle">Notification</div>
@@ -330,16 +508,16 @@
     </div>
 
     <script>
-        // App Core State
+        // State
         let userState = {
-            tokens: 28063,
-            keys: 2
+            tokens: 30563, // Updated to match your latest screenshot!
+            keys: 1        // Matches your screenshot showing 1 key left
         };
 
-        const tokenDisplay = document.getElementById('tokenDisplay');
         const keyDisplay = document.getElementById('keyDisplay');
         const spinBtn = document.getElementById('spinBtn');
         const wheel = document.getElementById('wheel');
+        const logoTap = document.getElementById('logoTap');
         const alertPopup = document.getElementById('alertPopup');
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
@@ -348,8 +526,20 @@
         let isSpinning = false;
 
         function updateUI() {
-            tokenDisplay.innerText = userState.tokens.toLocaleString();
-            keyDisplay.innerText = userState.keys;
+            document.querySelectorAll('.class-token-render').forEach(el => {
+                el.innerText = userState.tokens.toLocaleString();
+            });
+            if(keyDisplay) keyDisplay.innerText = userState.keys;
+        }
+
+        // View Switcher System
+        function switchView(viewId, navElement) {
+            if (isSpinning) return; 
+            document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(`view-${viewId}`).classList.add('active');
+            navElement.classList.add('active');
         }
 
         function showPopup(title, message) {
@@ -362,7 +552,13 @@
             alertPopup.style.display = 'none';
         });
 
-        // Real Spin Logic: Just needs keys!
+        // Tap Logic (Home Page)
+        logoTap.addEventListener('click', () => {
+            userState.tokens += 1;
+            updateUI();
+        });
+
+        // Spin Logic: Only depends on keys!
         spinBtn.addEventListener('click', () => {
             if (isSpinning) return;
 
@@ -371,27 +567,37 @@
                 userState.keys -= 1;
                 updateUI();
 
-                // Generate random full rotations + final stop angle
-                const randomDeg = Math.floor(Math.random() * 360) + 1800; // 5 full spins minimum
+                const randomDeg = Math.floor(Math.random() * 360) + 1800; 
                 wheel.style.transform = `rotate(${randomDeg}deg)`;
 
-                // Wait for the css animation to end (4 seconds)
                 setTimeout(() => {
                     isSpinning = false;
-                    
-                    const wonTokens = [1000, 2500, 5000, 10000][Math.floor(Math.random() * 4)];
+                    const wonTokens = [1000, 2500, 5000][Math.floor(Math.random() * 3)];
                     userState.tokens += wonTokens;
-                    
                     updateUI();
-                    showPopup("🎰 Spin Reward", `Successfully spent 1 Key. You received +${wonTokens} $FOX!`);
+                    showPopup("🎰 Spin Winner!", `Successfully processed premium matrix node. Received +${wonTokens} $FOX!`);
                 }, 4000);
 
             } else {
-                showPopup("Insufficient Keys", "You don't have enough keys left to trigger the premium spin matrix.");
+                showPopup("Locked Node", "No available matrix keys remaining. Complete tasks or invite friends to earn more.");
             }
         });
+
+        // Task Completion Simulator
+        function completeTask(btn, reward) {
+            if (btn.innerText === "Claimed") return;
+            btn.innerText = "Checking...";
+            setTimeout(() => {
+                userState.tokens += reward;
+                updateUI();
+                btn.innerText = "Claimed";
+                btn.style.background = "#222";
+                btn.style.color = "#555";
+                showPopup("Success", `Task reward of +${reward} tokens credited.`);
+            }, 1500);
+        }
 
         updateUI();
     </script>
 </body>
-                                                                  </html>
+</html>
