@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox V2 - Full Premium</title>
+<title>Cyber Fox V2 - Optimized Zoom</title>
 
 <!-- Font Awesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,6 +28,8 @@ body {
   color: var(--text-color);
   user-select: none;
   overflow-x: hidden;
+  /* মোবাইলে যেকোনো জায়গায় ট্যাপ করলে চারকোণা বক্স আসা বন্ধ করবে */
+  -webkit-tap-highlight-color: transparent; 
 }
 
 /* Header Section */
@@ -60,6 +62,7 @@ header {
   color: white;
   font-size: 20px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sub-title {
@@ -149,13 +152,19 @@ header {
   transition: transform 0.05s ease;
   position: relative;
   box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.4), 0 0 20px rgba(255, 115, 0, 0.2);
+  
+  /* ক্লিক করলে চারকোণা দাগ আসা পুরোপুরি বন্ধ করার জন্য ম্যাজিক কোড */
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  -webkit-focus-ring-color: transparent;
 }
 
 .circle-inner img {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-  border-radius: 50%; /* গোল শেপ সুন্দর দেখানোর জন্য */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ইমেজটিকে সুন্দরভাবে গোল বৃত্তে ফিট করার জন্য */
+  transform: scale(1.4); /* শিয়ালের ফেসটিকে বড় এবং পারফেক্ট জুম করার জন্য */
+  border-radius: 50%;
   pointer-events: none;
 }
 
@@ -284,10 +293,11 @@ header {
   display: flex;
   align-items: center;
   gap: 5px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Task Detail Screen View */
-.back-btn { background: none; border: none; color: white; font-size: 20px; padding: 15px; cursor: pointer; }
+.back-btn { background: none; border: none; color: white; font-size: 20px; padding: 15px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .detail-container { text-align: center; padding: 15px 20px; }
 .detail-title { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
 .detail-desc { color: var(--text-gray); font-size: 14px; margin-bottom: 25px; }
@@ -295,12 +305,12 @@ header {
 .big-reward-box p { color: var(--text-gray); margin: 0 0 8px 0; font-size: 13px; }
 .reward-amount { font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .reward-amount i { color: var(--accent-gold); }
-.big-follow-btn { background-color: #fff; color: #000; width: 100%; padding: 15px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 35px; cursor: pointer; }
+.big-follow-btn { background-color: #fff; color: #000; width: 100%; padding: 15px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 35px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .steps-box { text-align: left; margin-bottom: 35px; }
 .steps-box h3 { font-size: 15px; margin-bottom: 8px; }
 .steps-box ul { padding-left: 20px; color: var(--text-gray); font-size: 13px; line-height: 1.6; }
 .steps-box li::marker { color: var(--primary-green); }
-.claim-btn-big { background-color: #252525; color: #555; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; cursor: not-allowed; }
+.claim-btn-big { background-color: #252525; color: #555; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; cursor: not-allowed; -webkit-tap-highlight-color: transparent; }
 .claim-btn-big.active { background-color: var(--primary-green); color: #000; cursor: pointer; }
 
 /* ================= BOTTOM NAVIGATION BAR ================= */
@@ -328,6 +338,7 @@ header {
   font-size: 11px;
   cursor: pointer;
   width: 20%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-item i { font-size: 18px; }
@@ -340,7 +351,6 @@ header {
 <div id="main-view">
   <header>
     <div class="header-title">
-      <!-- Header Logo Setup -->
       <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="🦊"> 
       Cyber Fox V2
     </div>
@@ -365,7 +375,7 @@ header {
     <div class="main-clicker-area">
       <div class="circle-outer">
         <div class="circle-inner" id="clicker-btn">
-          <!-- Main Avatar Logo -->
+          <!-- Main Avatar Logo (Super Zoomed & Round) -->
           <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="Cyber Fox">
         </div>
       </div>
@@ -386,7 +396,7 @@ header {
     </div>
   </div>
 
-  <!-- 2. TASKS PAGE SECTION (FIXED & RESTORED LIST) -->
+  <!-- 2. TASKS PAGE SECTION -->
   <div id="tasks-page" class="page" style="display:none;">
     <div class="task-list">
       
@@ -511,7 +521,6 @@ header {
 </div>
 
 <script>
-// Main Global Architecture Data Configuration
 let coins = Number(localStorage.getItem("coins")) || 1250;
 let maxTaps = 125;
 let currentTaps = Number(localStorage.getItem("current_taps")) || 125;
@@ -532,7 +541,6 @@ function updateUI() {
   powerDisplay.innerText = pct + "%";
 }
 
-// Click Trigger Event Logic Engine
 clickerBtn.addEventListener("click", function(e) {
   if (currentTaps <= 0) {
     alert("Out of Energy! Recharge cycle ongoing.");
@@ -546,7 +554,6 @@ clickerBtn.addEventListener("click", function(e) {
   localStorage.setItem("current_taps", currentTaps);
   updateUI();
 
-  // Screen Offset Vector Geometry Floating +1 Computation
   const x = e.clientX;
   const y = e.clientY;
 
@@ -560,7 +567,6 @@ clickerBtn.addEventListener("click", function(e) {
   setTimeout(() => { floatingText.remove(); }, 700);
 });
 
-// Automatic Recharge Worker Loop System
 setInterval(() => {
   if (currentTaps < maxTaps) {
     currentTaps += 1;
@@ -569,7 +575,6 @@ setInterval(() => {
   }
 }, 3000);
 
-// Unified Page Router Navigation Component Engine
 function switchPage(pageName) {
   document.getElementById("home-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "none";
@@ -589,7 +594,6 @@ function switchPage(pageName) {
   if(pageName === 'wallet') subEl.innerText = "Securely verify ecosystem network access 👛";
 }
 
-// Task Initialization Layer
 function openTask(title, reward, link, iconClass) {
   document.getElementById("main-view").style.display = "none";
   document.getElementById("detail-view").style.display = "block";
