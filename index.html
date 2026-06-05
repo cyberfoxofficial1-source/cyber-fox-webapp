@@ -1,1244 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox Hub - Global Web3 Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Fox V2 - Real Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --text-color: #ffffff;
+            --accent-orange: #ff6b00;
+            --sub-text: #858585;
+        }
 
-<!-- Font Awesome Pro Engine -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
 
-<style>
-:root {
-  --bg-color: #050505;
-  --card-bg: #0f0f12;
-  --card-border: rgba(255, 115, 0, 0.12);
-  --text-color: #ffffff;
-  --text-gray: #8e8e93;
-  --primary-green: #4caf50;
-  --accent-gold: #ffb300;
-  --theme-orange: #ff7300;
-  --glow-orange: rgba(255, 115, 0, 0.4);
-  --neon-cyan: #00f0ff;
-  --neon-blue: #007bff;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  user-select: none;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent; 
-}
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: radial-gradient(circle at top, #1f1e26 0%, #0b0c10 80%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            overflow: hidden;
+        }
 
-/* ================= COMPACT CORE HEADER ================= */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 15px 5px 15px;
-}
+        /* Top Header Area */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            z-index: 10;
+        }
 
-.header-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
+        .project-info {
+            display: flex;
+            flex-direction: column;
+        }
 
-.header-title img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1.5px solid var(--theme-orange);
-}
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
 
-.noti-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
+        .project-subtitle {
+            font-size: 0.75rem;
+            color: var(--sub-text);
+            margin-top: 2px;
+        }
 
-.sub-title {
-  color: var(--text-gray);
-  font-size: 13px;
-  padding: 0 15px;
-  margin-top: -2px;
-  margin-bottom: 20px;
-}
+        /* Minimalist Wallet Button in Corner */
+        .wallet-corner-btn {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.page {
-  padding: 0 15px 130px 15px;
-  animation: fadeIn 0.3s ease-in-out;
-}
+        .wallet-corner-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        .wallet-icon-svg {
+            width: 16px;
+            height: 16px;
+            fill: #4c94ff; /* Professional Web3 Blue */
+        }
 
-/* ================= GLOBAL TOP STATS (EXCEPT TASKS PAGE) ================= */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 0 15px;
-}
+        .wallet-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
 
-.stat-box {
-  background: linear-gradient(135deg, #121215 0%, #0a0a0c 100%);
-  padding: 12px 8px;
-  border-radius: 14px;
-  border: 1px solid var(--card-border);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-}
+        /* Main Hamster Kombat Style Dashboard */
+        .main-display {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
 
-.stat-label {
-  font-size: 11px;
-  color: var(--text-gray);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-weight: 600;
-}
+        /* Clean Token Display (No Boxes/Grids) */
+        .token-balance-container {
+            text-align: center;
+        }
 
-.stat-label i.fa-coins { color: var(--accent-gold); }
-.stat-label i.fa-bolt { color: #ffeb3b; }
-.stat-label i.fa-key { color: var(--neon-cyan); }
+        .token-amount {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
 
-.stat-value {
-  font-size: 16px;
-  font-weight: 800;
-}
+        .token-label {
+            font-size: 0.85rem;
+            color: var(--sub-text);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -5px;
+        }
 
-/* Web3 Connection Core Button Placement */
-.wallet-connector-wrapper {
-  padding: 0 15px;
-  margin-bottom: 20px;
-}
+        /* Central Project Logo Sphere */
+        .main-logo-sphere {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff6b00 0%, #1f1e26 70%);
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
 
-.web3-connect-btn {
-  width: 100%;
-  background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 15px rgba(67, 100, 247, 0.25);
-  transition: all 0.2s ease;
-}
+        .main-logo-sphere:active {
+            transform: scale(0.96);
+        }
 
-.web3-connect-btn.connected {
-  background: linear-gradient(135deg, #1d976c, #93f9b9);
-  color: #050505;
-}
+        .main-logo-sphere img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+        }
 
-/* ================= HOME PAGE (TAP MASTER) ================= */
-.main-clicker-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 30px 0;
-  position: relative;
-}
+        /* Control / Info Area */
+        .control-panel {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-.circle-outer {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,115,0,0.2) 0%, rgba(0,0,0,0) 70%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed rgba(255, 115, 0, 0.2);
-  box-shadow: 0 0 35px var(--glow-orange);
-}
+        .key-status {
+            font-size: 0.9rem;
+            color: #ffcc00;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.circle-inner {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background-color: #0c0c0e;
-  border: 4px solid var(--theme-orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.05s ease;
-  box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.35);
-}
+        .action-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #ff6b00 0%, #ff8c00 100%);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+        }
 
-.circle-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.4);
-  border-radius: 50%;
-  pointer-events: none;
-}
+        .action-btn:disabled {
+            background: #2a2a30;
+            color: #555;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
 
-.circle-inner:active { transform: scale(0.95); }
+        /* Real Alert Popup Styles */
+        .custom-popup {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
 
-.tap-instruction {
-  color: var(--text-gray);
-  font-size: 14px;
-  margin-top: 25px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
+        .popup-content {
+            background: #1a1b22;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 85%;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+        }
 
-.energy-badge {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 1px solid #1a1a1f;
-  font-size: 13px;
-  margin-top: 15px;
-  font-weight: 700;
-}
+        .popup-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.floating-text {
-  position: absolute;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 900;
-  pointer-events: none;
-  animation: floatUpUp 0.6s ease-out forwards;
-  text-shadow: 0 0 10px var(--theme-orange);
-  z-index: 999;
-}
+        .popup-text {
+            color: var(--sub-text);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
 
-@keyframes floatUpUp {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-120px) scale(1.1); }
-}
-
-/* ================= HIGH TECH SPIN INTERFACE ================= */
-.spin-mode-selector { 
-  display: flex; 
-  background: #0f0f12; 
-  border-radius: 14px; 
-  padding: 4px; 
-  margin-bottom: 20px; 
-  border: 1px solid #1c1c22; 
-}
-
-.mode-tab { 
-  flex: 1; 
-  background: none; 
-  border: none; 
-  color: var(--text-gray); 
-  padding: 12px; 
-  font-weight: 700; 
-  font-size: 13px; 
-  border-radius: 10px; 
-  cursor: pointer; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.mode-tab.active { background: #1c1c24; color: #fff; }
-.mode-tab.active.premium-active { 
-  background: linear-gradient(135deg, #241408 0%, #3d1f05 100%); 
-  color: #ff9100; 
-  border: 1px solid rgba(255, 115, 0, 0.25); 
-}
-
-/* Premium Mode Top-Right USD Tracker Display */
-.premium-usd-tracker {
-  background: linear-gradient(90deg, #111115, #1a1a24);
-  border: 1px solid rgba(0, 240, 255, 0.15);
-  border-radius: 12px;
-  padding: 8px 15px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 800;
-  color: #00f0ff;
-  margin-bottom: 15px;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.05);
-}
-
-.wheel-container { 
-  position: relative; 
-  width: 250px; 
-  height: 250px; 
-  margin: 10px auto 25px auto; 
-}
-
-.pointer-device { 
-  position: absolute; 
-  top: -10px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 0; 
-  height: 0; 
-  border-left: 12px solid transparent; 
-  border-right: 12px solid transparent; 
-  border-top: 22px solid #ff1744; 
-  z-index: 10; 
-}
-
-/* Premium Visual Design Wheel */
-.wheel-canvas-mock { 
-  width: 100%; 
-  height: 100%; 
-  border-radius: 50%; 
-  background: conic-gradient(
-    #131316 0deg 45deg, #1c1c22 45deg 90deg, 
-    #131316 90deg 135deg, #1c1c22 135deg 180deg, 
-    #131316 180deg 225deg, #1c1c22 225deg 270deg, 
-    #131316 270deg 315deg, #1c1c22 315deg 360deg
-  ); 
-  border: 8px solid #25252e; 
-  box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 20px rgba(255,255,255,0.02); 
-  transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  position: relative;
-}
-
-/* Embedded Core Matrix Matrix Rewards Layout Inside Wheel Design Context */
-.wheel-sector-label {
-  position: absolute;
-  font-size: 10px;
-  font-weight: 800;
-  color: #aaa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-.wsl-0 { transform: rotate(22.5deg) translateY(-90deg); }
-.wsl-1 { transform: rotate(67.5deg) translateY(-90deg); }
-.wsl-2 { transform: rotate(112.5deg) translateY(-90deg); }
-.wsl-3 { transform: rotate(157.5deg) translateY(-90deg); }
-.wsl-4 { transform: rotate(202.5deg) translateY(-90deg); }
-.wsl-5 { transform: rotate(247.5deg) translateY(-90deg); }
-.wsl-6 { transform: rotate(292.5deg) translateY(-90deg); }
-.wsl-7 { transform: rotate(337.5deg) translateY(-90deg); }
-
-.wheel-center-core { 
-  position: absolute; 
-  width: 46px; 
-  height: 46px; 
-  background: #ffffff; 
-  color: #000; 
-  border-radius: 50%; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  box-shadow: 0 0 15px rgba(255, 115, 0, 0.4); 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 16px;
-  z-index: 5;
-}
-
-.spin-trigger-btn { 
-  background: var(--theme-orange); 
-  color: #fff; 
-  border: none; 
-  width: 85%; 
-  padding: 15px; 
-  font-size: 16px; 
-  font-weight: 800; 
-  border-radius: 14px; 
-  cursor: pointer; 
-  margin-top: 10px; 
-  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.2);
-  letter-spacing: 0.5px;
-}
-.spin-trigger-btn:disabled { background: #222; color: #555; box-shadow: none; }
-.spin-count-status { margin-top: 12px; font-size: 13px; color: var(--text-gray); font-weight: 600; }
-
-/* ================= TASKS PAGE (CLEAN LIST & DAILY MODULE) ================= */
-.checkin-section {
-  background: linear-gradient(135deg, #0e0e11 0%, #070709 100%);
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 25px;
-  border: 1px solid rgba(255, 115, 0, 0.08);
-}
-
-.checkin-header {
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #fff;
-  letter-spacing: 0.2px;
-}
-
-.checkin-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.checkin-box {
-  background: #131317;
-  border: 1px solid #1f1f26;
-  border-radius: 12px;
-  padding: 10px 4px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 72px;
-  position: relative;
-}
-
-.checkin-box.day-7 {
-  grid-column: span 2;
-  background: linear-gradient(135deg, #221307 0%, #111115 100%);
-  border: 1px solid rgba(255, 115, 0, 0.2);
-}
-
-.checkin-day { font-size: 11px; color: var(--text-gray); font-weight: 700; }
-.checkin-reward-info { font-size: 11px; font-weight: 800; color: #fff; margin-top: 4px; }
-
-.checkin-box i { font-size: 15px; margin: 5px 0; }
-.checkin-box i.fa-coins { color: var(--accent-gold); }
-.checkin-box i.fa-gift { color: #ff5252; }
-.checkin-box i.fa-key { color: var(--neon-cyan); }
-
-.checkin-box.claimed {
-  border-color: var(--primary-green);
-  background: rgba(76, 175, 80, 0.06);
-}
-.checkin-box.claimed::after {
-  content: "✓";
-  position: absolute;
-  top: 2px;
-  right: 6px;
-  color: var(--primary-green);
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.checkin-btn {
-  grid-column: span 4;
-  background: linear-gradient(90deg, var(--theme-orange), #ff9100);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px;
-  font-weight: 800;
-  font-size: 14px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-.checkin-btn:disabled { background: #1c1c22; color: #444; cursor: not-allowed; }
-
-/* System Standard Tasks UI Matrix Container */
-.task-list { display: flex; flex-direction: column; gap: 12px; }
-.task-card { background-color: var(--card-bg); border-radius: 16px; padding: 15px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #1a1a22; }
-.task-left { display: flex; align-items: center; gap: 15px; }
-
-.task-icon-box { 
-  width: 44px; 
-  height: 44px; 
-  border-radius: 12px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  font-size: 20px; 
-  color: #fff;
-}
-.icon-tg { background: linear-gradient(135deg, #229ED9, #179cde); }
-.icon-x { background: #ffffff; color: #000000; border: 1px solid #e1e1e1; } /* FIXED WHITE PURE X LOGO STYLE */
-.icon-yt { background: #FF0000; }
-.icon-fb { background: #1877F2; }
-
-.task-info { text-align: left; }
-.task-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-.task-reward { font-size: 12px; color: var(--text-gray); display: flex; align-items: center; gap: 4px; font-weight: 600; }
-.task-reward i { color: var(--accent-gold); }
-.action-btn { background-color: #ffffff; color: #000; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; }
-.action-btn.claimed { background-color: #1c1c24; color: #555; cursor: not-allowed; }
-
-/* ================= INVIATION WINDOW PLATFORM ================= */
-.invite-container {
-  background: var(--card-bg);
-  border: 1px solid #1a1a22;
-  border-radius: 20px;
-  padding: 25px 20px;
-  text-align: center;
-}
-.invite-bonus-card {
-  background: linear-gradient(135deg, #161620 0%, #0b0b0f 100%);
-  padding: 15px;
-  border-radius: 14px;
-  border: 1px solid rgba(0, 240, 255, 0.08);
-  margin: 20px 0;
-  display: flex;
-  justify-content: space-around;
-}
-.invite-bonus-item h4 { margin: 0 0 5px 0; font-size: 18px; color: var(--theme-orange); }
-.invite-bonus-item p { margin: 0; font-size: 11px; color: var(--text-gray); font-weight: 600; }
-.share-link-box {
-  background: #070709;
-  border: 1px solid #22222a;
-  padding: 12px 15px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 13px;
-  color: var(--text-gray);
-}
-.copy-btn { background: none; border: none; color: var(--neon-cyan); font-weight: 700; cursor: pointer; }
-.invite-main-btn {
-  width: 100%;
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* ================= WEB3 GLOBAL USER PROFILE PROFILE ================= */
-.profile-card {
-  background: var(--card-bg);
-  border: 1px solid #1a1a22;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-}
-.profile-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 2px solid var(--theme-orange);
-  margin: 0 auto 12px auto;
-  background: #1c1c24;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-}
-.profile-rank {
-  background: rgba(255, 115, 0, 0.1);
-  color: var(--theme-orange);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 700;
-  display: inline-block;
-  margin-bottom: 20px;
-}
-.profile-data-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 5px;
-  border-bottom: 1px solid #14141a;
-  font-size: 13px;
-}
-.profile-data-row:last-child { border-bottom: none; }
-.profile-data-label { color: var(--text-gray); font-weight: 600; }
-.profile-data-val { font-weight: 700; color: #fff; }
-
-/* ================= 5-ITEMS DYNAMIC BOTTOM NAVIGATION BAR ================= */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #08080a;
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 0 26px 0;
-  border-top: 1px solid #141418;
-  z-index: 99;
-}
-
-.nav-item {
-  background: none;
-  border: none;
-  color: var(--text-gray);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  cursor: pointer;
-  width: 20%; /* PROPORTIONAL WEIGHT FOR 5 SEGMENTS */
-}
-
-.nav-item i { font-size: 18px; }
-.nav-item.active { color: var(--theme-orange); }
-
-/* ================= WEB3 POPUP MODAL ARCHITECTURE ================= */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.modal-window {
-  background: #0c0c0f;
-  border: 1px solid #22222a;
-  width: 85%;
-  max-width: 340px;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-}
-.modal-window h3 { margin-top: 0; font-size: 18px; color: #fff; }
-.modal-window p { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; }
-.wallet-option {
-  background: #14141a;
-  border: 1px solid #22222a;
-  border-radius: 12px;
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 14px;
-}
-.wallet-option img { width: 24px; height: 24px; border-radius: 6px; }
-.close-modal-btn {
-  background: none; border: none; color: #ff5252; font-weight: 700; margin-top: 15px; cursor: pointer; font-size: 13px;
-}
-</style>
+        .popup-close-btn {
+            background: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<div id="app-viewport">
-  
-  <!-- COMPACT TOP BAR HEADER ELEMENT -->
-  <header>
-    <div class="header-title">
-      <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="🦊"> 
-      Cyber Fox V2
-    </div>
-    <button class="noti-btn"><i class="fa-regular fa-bell"></i></button>
-  </header>
-  <div class="sub-title" id="page-subtitle">Welcome to Cyber Fox Hub 🦊</div>
-
-  <!-- WEB3 WALLET CONNECTOR BAR (MOVED TO TOP ACCORDING TO PLAN) -->
-  <div class="wallet-connector-wrapper" id="global-wallet-bar">
-    <button class="web3-connect-btn" id="wallet-trigger-btn" onclick="openWalletModal()">
-      <i class="fa-solid fa-plug"></i> <span id="wallet-btn-text">Connect Crypto Wallet</span>
-    </button>
-  </div>
-
-  <!-- MULTI-STATS HEADERS GRID SYSTEM (HIDDEN ON TASKS VIEW) -->
-  <div class="stats-container" id="global-stats-panel">
-    <div class="stat-box">
-      <div class="stat-label"><i class="fa-solid fa-coins"></i> Coins</div>
-      <div class="stat-value" id="global-coin">0</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label"><i class="fa-solid fa-bolt"></i> Power</div>
-      <div class="stat-value" id="power-percent">100%</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label"><i class="fa-solid fa-key"></i> Keys</div>
-      <div class="stat-value" id="global-keys">0</div>
-    </div>
-  </div>
-
-  <!-- ================= 1. HOME MAIN ENGINE PAGE ================= -->
-  <div id="home-page" class="page">
-    <div class="main-clicker-area">
-      <div class="circle-outer">
-        <div class="circle-inner" id="clicker-btn">
-          <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="Cyber Fox">
+    <div class="app-container">
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="project-info">
+                <span class="project-title">Cyber Fox</span>
+                <span class="project-subtitle">Secure Matrix Node</span>
+            </div>
+            
+            <!-- Minimalist Wallet Connector in Corner -->
+            <div class="wallet-corner-btn" id="walletBtn">
+                <svg class="wallet-icon-svg" viewBox="0 0 24 24">
+                    <path d="M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2 .9-2 2v2c0 1.1.89 2 2 2h9v4zm-9-6h10v2H12v-2zm7 1c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
+                </svg>
+                <span class="wallet-text" id="walletText">Connect</span>
+            </div>
         </div>
-      </div>
-      <div class="tap-instruction">Tap the fox and earn rewards globally 🦊</div>
-      <div class="energy-badge"><i class="fa-solid fa-hand-pointer"></i> <span id="taps-left">125</span> Taps Left</div>
-    </div>
-  </div>
 
-  <!-- ================= 2. ULTRAPREMIUM DYNAMIC SPIN WHEEL PAGE ================= -->
-  <div id="spin-page" class="page" style="display:none; text-align:center;">
-    <div class="spin-mode-selector">
-      <button class="mode-tab active" id="tab-normal" onclick="setSpinMode('normal')">
-        <i class="fa-solid fa-circle-dot"></i> Normal Wheel
-      </button>
-      <button class="mode-tab" id="tab-premium" onclick="setSpinMode('premium')">
-        <i class="fa-solid fa-key"></i> Premium Wheel
-      </button>
-    </div>
+        <!-- Main Display (Hamster Kombat Style) -->
+        <div class="main-display">
+            
+            <!-- Clean Token Balance over the logo -->
+            <div class="token-balance-container">
+                <div class="token-amount" id="tokenDisplay">28,063</div>
+                <div class="token-label">$FOX Tokens</div>
+            </div>
 
-    <!-- Isolated Core Live USD Target Balance Tracker Node -->
-    <div id="premium-usd-container" style="display:none;">
-      <div class="premium-usd-tracker">
-        <i class="fa-solid fa-wallet"></i> Balance: <span id="premium-usd-value">$0.00</span>
-      </div>
-    </div>
+            <!-- Central Token Sphere Logo -->
+            <div class="main-logo-sphere" id="logoTap">
+                <!-- Replace with your actual project logo image -->
+                <img src="https://i.postimg.com/pX48Z9g0/fox-logo.png" alt="Cyber Fox Logo">
+            </div>
 
-    <h3 id="wheel-display-title" style="margin-top:5px; color:#fff; font-size: 18px;">Standard Matrix</h3>
-    <p id="wheel-display-desc" style="color:var(--text-gray); font-size:12px; margin-bottom:20px;">Review potential matrix bounties directly embedded inside the grid sections.</p>
+        </div>
 
-    <div class="wheel-container">
-      <div class="pointer-device"></div>
-      <div class="wheel-canvas-mock" id="wheel-graphic">
-        <!-- Embedded Visual Sector Elements Mapping Rewards Data Inside Wheel Graphic Matrix -->
-        <div class="wheel-sector-label wsl-0" id="ws-0"><span>1K</span><i class="fa-solid fa-coins"></i></div>
-        <div class="wheel-sector-label wsl-1" id="ws-1"><span>🔑</span><i class="fa-solid fa-key"></i></div>
-        <div class="wheel-sector-label wsl-2" id="ws-2"><span>1.5K</span><i class="fa-solid fa-coins"></i></div>
-        <div class="wheel-sector-label wsl-3" id="ws-3"><span>🎁</span><i class="fa-solid fa-gift"></i></div>
-        <div class="wheel-sector-label wsl-4" id="ws-4"><span>2K</span><i class="fa-solid fa-coins"></i></div>
-        <div class="wheel-sector-label wsl-5" id="ws-5"><span>2.5K</span><i class="fa-solid fa-coins"></i></div>
-        <div class="wheel-sector-label wsl-6" id="ws-6"><span>500</span><i class="fa-solid fa-coins"></i></div>
-        <div class="wheel-sector-label wsl-7" id="ws-7"><span>🎁</span><i class="fa-solid fa-gift"></i></div>
-      </div>
-      <div class="wheel-center-core">🎯</div>
+        <!-- Lower Control Area -->
+        <div class="control-panel">
+            <div class="key-status">
+                🔑 Available Keys: <span id="keyDisplay">2</span>
+            </div>
+            <button class="action-btn" id="spinBtn">Launch Premium Spin</button>
+        </div>
+
     </div>
 
-    <button class="spin-trigger-btn" id="spin-action-button" onclick="executeWheelSpin()">LAUNCH SPIN</button>
-    <div class="spin-count-status" id="spin-balance-text">Available Spins: 0</div>
-    <div class="spin-count-status" id="prem-spin-balance-text" style="color:var(--theme-orange); display:none;">Premium Spins: 0</div>
-  </div>
-
-  <!-- ================= 3. SYSTEM TASKS PAGE (ZERO HEADERS MODE) ================= -->
-  <div id="tasks-page" class="page" style="display:none;">
-    
-    <!-- Daily Checkin Architecture Node Module Embedded Inside Tasks Top Scope Layout -->
-    <div class="checkin-section">
-      <div class="checkin-header">
-        <i class="fa-solid fa-gift" style="color:var(--theme-orange)"></i> 7 Days Active Rewards Checklist
-      </div>
-      <div class="checkin-grid">
-        <div class="checkin-box" id="cbox-1"><span class="checkin-day">Day 1</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">1K</span></div>
-        <div class="checkin-box" id="cbox-2"><span class="checkin-day">Day 2</span><i class="fa-solid fa-gift"></i><span class="checkin-reward-info">3K+5S</span></div>
-        <div class="checkin-box" id="cbox-3"><span class="checkin-day">Day 3</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">5K</span></div>
-        <div class="checkin-box" id="cbox-4"><span class="checkin-day">Day 4</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">10K</span></div>
-        <div class="checkin-box" id="cbox-5"><span class="checkin-day">Day 5</span><i class="fa-solid fa-gift"></i><span class="checkin-reward-info">15K+20S</span></div>
-        <div class="checkin-box" id="cbox-6"><span class="checkin-day">Day 6</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">30K</span></div>
-        <div class="checkin-box day-7" id="cbox-7">
-          <span class="checkin-day">Day 7</span>
-          <div><i class="fa-solid fa-coins"></i> <i class="fa-solid fa-key" style="margin-left:3px"></i></div>
-          <span class="checkin-reward-info">50K + 🔑</span>
+    <!-- Custom System Alert Popup (Replaces old block system) -->
+    <div class="custom-popup" id="alertPopup">
+        <div class="popup-content">
+            <div class="popup-title" id="popupTitle">Notification</div>
+            <div class="popup-text" id="popupMessage">Message text goes here.</div>
+            <button class="popup-close-btn" id="popupClose">OK</button>
         </div>
-        <button class="checkin-btn" id="checkin-action-btn" onclick="executeDailyCheckIn()">CLAIM REWARD</button>
-      </div>
     </div>
 
-    <!-- Complete Tasks Core Array Data Feed Container -->
-    <div class="task-list">
-      <div class="task-card" id="t-card-tg">
-        <div class="task-left">
-          <div class="task-icon-box icon-tg"><i class="fa-brands fa-telegram"></i></div>
-          <div class="task-info">
-            <div class="task-name">Join Telegram Channel</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> +1,000</div>
-          </div>
-        </div>
-        <button class="action-btn" id="t-btn-tg" onclick="triggerTaskAction('tg')">JOIN</button>
-      </div>
+    <script>
+        // Real Project State (Directly tie to backend/database later)
+        let userState = {
+            tokens: 28063,
+            keys: 2, // User currently has 2 keys as seen in screenshot
+        };
 
-      <div class="task-card" id="t-card-x">
-        <div class="task-left">
-          <div class="task-icon-box icon-x"><i class="fa-brands fa-x-twitter"></i></div>
-          <div class="task-info">
-            <div class="task-name">Follow Cyber Fox on X</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> +2,000</div>
-          </div>
-        </div>
-        <button class="action-btn" id="t-btn-x" onclick="triggerTaskAction('x')">FOLLOW</button>
-      </div>
+        // DOM Elements
+        const tokenDisplay = document.getElementById('tokenDisplay');
+        const keyDisplay = document.getElementById('keyDisplay');
+        const spinBtn = document.getElementById('spinBtn');
+        const logoTap = document.getElementById('logoTap');
+        const alertPopup = document.getElementById('alertPopup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupMessage = document.getElementById('popupMessage');
+        const popupClose = document.getElementById('popupClose');
 
-      <div class="task-card" id="t-card-yt">
-        <div class="task-left">
-          <div class="task-icon-box icon-yt"><i class="fa-brands fa-youtube"></i></div>
-          <div class="task-info">
-            <div class="task-name">Subscribe YouTube Channel</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> +3,000</div>
-          </div>
-        </div>
-        <button class="action-btn" id="t-btn-yt" onclick="triggerTaskAction('yt')">SUBSCRIBE</button>
-      </div>
+        // Render Values
+        function updateUI() {
+            tokenDisplay.innerText = userState.tokens.toLocaleString();
+            keyDisplay.innerText = userState.keys;
+        }
 
-      <div class="task-card" id="t-card-fb">
-        <div class="task-left">
-          <div class="task-icon-box icon-fb"><i class="fa-brands fa-facebook"></i></div>
-          <div class="task-info">
-            <div class="task-name">Follow Facebook Page</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> +1,500</div>
-          </div>
-        </div>
-        <button class="action-btn" id="t-btn-fb" onclick="triggerTaskAction('fb')">FOLLOW</button>
-      </div>
-    </div>
-  </div>
+        // Show Custom Popup
+        function showPopup(title, message) {
+            popupTitle.innerText = title;
+            popupMessage.innerText = message;
+            alertPopup.style.display = 'flex';
+        }
 
-  <!-- ================= 4. INVITATION ENGINE VIEW WINDOW ================= -->
-  <div id="invite-page" class="page" style="display:none;">
-    <div class="invite-container">
-      <i class="fa-solid fa-users" style="font-size:42px; color:var(--theme-orange); margin-bottom:12px;"></i>
-      <h3 style="margin:0; color:#fff;">Invite Friends</h3>
-      <p style="font-size:12px; color:var(--text-gray); margin:5px 0 20px 0;">Build your global mining squad network and receive crypto bounty commissions.</p>
-      
-      <div class="invite-bonus-card">
-        <div class="invite-bonus-item">
-          <h4>+5,000</h4>
-          <p>For Regular User</p>
-        </div>
-        <div class="invite-bonus-item">
-          <h4>+25,000</h4>
-          <p>For Premium Tier</p>
-        </div>
-      </div>
+        // Close Popup
+        popupClose.addEventListener('click', () => {
+            alertPopup.style.display = 'none';
+        });
 
-      <div class="share-link-box">
-        <span id="referral-link-string">https://t.me/CyberFoxBot?start=ref77128</span>
-        <button class="copy-btn" onclick="copyReferralLink()">COPY</button>
-      </div>
-      <button class="invite-main-btn" onclick="alert('Link copied! Share it anywhere globally.')">Invite A Friend</button>
-    </div>
-  </div>
+        // Real Premium Spin Logic: Only depends on Keys!
+        spinBtn.addEventListener('click', () => {
+            if (userState.keys > 0) {
+                // Deduct 1 key and spin
+                userState.keys -= 1;
+                updateUI();
+                
+                // Simulate Real Spin Rewards
+                const rewards = [500, 1000, 2500, 5000];
+                const won = rewards[Math.floor(Math.random() * rewards.length)];
+                
+                userState.tokens += won;
+                
+                showPopup("🎰 Spin Success!", `You used 1 Key and won ${won} $FOX Tokens!`);
+                setTimeout(updateUI, 500);
+            } else {
+                // If user has 0 keys
+                showPopup("No Keys Left", "You need at least 1 Key to run the Premium Spin wheel.");
+            }
+        });
 
-  <!-- ================= 5. GLOBAL ACCOUNT PROFILE WINDFALL ================= -->
-  <div id="profile-page" class="page" style="display:none;">
-    <div class="profile-card">
-      <div class="profile-avatar"><i class="fa-solid fa-user-ninja" style="color:var(--theme-orange)"></i></div>
-      <h3 style="margin:0 0 4px 0; color:#fff;">Cyber Miner Alpha</h3>
-      <div class="profile-rank">Tier 1 Global Node</div>
+        // Simple Tapper simulation for the logo
+        logoTap.addEventListener('click', () => {
+            userState.tokens += 1;
+            updateUI();
+        });
 
-      <div style="margin-top:15px; border-top:1px solid #1c1c24;">
-        <div class="profile-data-row">
-          <span class="profile-data-label">Total Extracted Coins</span>
-          <span class="profile-data-val" id="prof-coins">0</span>
-        </div>
-        <div class="profile-data-row">
-          <span class="profile-data-label">Total Verification Keys</span>
-          <span class="profile-data-val" id="prof-keys">0</span>
-        </div>
-        <div class="profile-data-row">
-          <span class="profile-data-label">Connected Network</span>
-          <span class="profile-data-val" id="prof-net" style="color:var(--neon-blue)">None</span>
-        </div>
-        <div class="profile-data-row">
-          <span class="profile-data-label">Global Account Security</span>
-          <span class="profile-data-val" style="color:var(--primary-green)">Verified</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<!-- GLOBAL CRYPTO WEB3 WALLET SELECTION MODAL POPUP LAYER -->
-<div class="modal-overlay" id="wallet-modal-overlay">
-  <div class="modal-window">
-    <h3>Connect Web3 Wallet</h3>
-    <p>Select your native ecosystem wallet software securely.</p>
-    
-    <div class="wallet-option" onclick="mockEstablishWalletConnection('TON Keep / Tonkeeper')">
-      <img src="https://assets.coingecko.com/coins/images/17980/standard/ton_token.png" alt="TON">
-      <span>Tonkeeper / TON Wallet</span>
-    </div>
-    <div class="wallet-option" onclick="mockEstablishWalletConnection('Trust Wallet')">
-      <img src="https://assets.coingecko.com/coins/images/13162/standard/trust_wallet.png" alt="TW">
-      <span>Trust Wallet</span>
-    </div>
-    <div class="wallet-option" onclick="mockEstablishWalletConnection('MetaMask Portal')">
-      <img src="https://assets.coingecko.com/coins/images/27006/standard/metamask.png" alt="MM">
-      <span>MetaMask Wallet</span>
-    </div>
-
-    <button class="close-modal-btn" onclick="closeWalletModal()">CANCEL</button>
-  </div>
-</div>
-
-<!-- FIVE MODULAR BOTTOM BAR NAVIGATION TABS SYSTEM -->
-<div class="bottom-nav">
-  <button class="nav-item active" id="nav-home" onclick="switchPage('home')">
-    <i class="fa-solid fa-house"></i><span>Home</span>
-  </button>
-  <button class="nav-item" id="nav-spin" onclick="switchPage('spin')">
-    <i class="fa-solid fa-circle-dot"></i><span>Spin</span>
-  </button>
-  <button class="nav-item" id="nav-tasks" onclick="switchPage('tasks')">
-    <i class="fa-solid fa-clipboard-list"></i><span>Tasks</span>
-  </button>
-  <button class="nav-item" id="nav-invite" onclick="switchPage('invite')">
-    <i class="fa-solid fa-users"></i><span>Invite</span>
-  </button>
-  <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
-    <i class="fa-solid fa-user"></i><span>Profile</span>
-  </button>
-</div>
-
-<script>
-// --- Global Logic Configurations Engine Mapping ---
-let coins = Number(localStorage.getItem("coins")) || 25495;
-let usdBalance = Number(localStorage.getItem("usd_balance")) || 0.00;
-let normalSpins = Number(localStorage.getItem("normal_spins")) || 43;
-let premiumSpins = Number(localStorage.getItem("premium_spins")) || 0;
-let keyTokens = Number(localStorage.getItem("key_tokens")) || 2;
-let connectedWalletName = localStorage.getItem("conn_wallet_name") || "";
-
-let currentTaps = 125;
-let maxTaps = 125;
-
-let checkInStreak = Number(localStorage.getItem("ci_streak")) || 0;
-let lastCheckInDate = localStorage.getItem("last_ci_date") || "";
-
-let spinMode = "normal"; 
-let totalSpinsLifetime = Number(localStorage.getItem("lifetime_spins")) || 0;
-let historicPremiumSpinCount = Number(localStorage.getItem("hist_prem_spins")) || 0;
-
-// Tasks Complete Tracking Database Mock
-let taskState = JSON.parse(localStorage.getItem("task_state_matrix")) || { tg: false, x: false, yt: false, fb: false };
-
-// --- DOM Object Elements Dynamic Registration ---
-const coinDisplay = document.getElementById("global-coin");
-const keysDisplay = document.getElementById("global-keys");
-const powerDisplay = document.getElementById("power-percent");
-const tapsDisplay = document.getElementById("taps-left");
-const wheelGraphic = document.getElementById("wheel-graphic");
-const walletBtnText = document.getElementById("wallet-btn-text");
-const walletTriggerBtn = document.getElementById("wallet-trigger-btn");
-
-function updateSystemUI() {
-  coinDisplay.innerText = coins.toLocaleString();
-  keysDisplay.innerText = keyTokens;
-  tapsDisplay.innerText = currentTaps;
-  powerDisplay.innerText = Math.floor((currentTaps / maxTaps) * 100) + "%";
-
-  // Spin Counter Controllers Status Update
-  document.getElementById("spin-balance-text").innerText = `Available Spins: ${normalSpins}`;
-  document.getElementById("prem-spin-balance-text").innerText = `Premium Spins: ${premiumSpins}`;
-  document.getElementById("premium-usd-value").innerText = "$" + usdBalance.toFixed(2);
-
-  // Profile View Screen Sync
-  document.getElementById("prof-coins").innerText = coins.toLocaleString();
-  document.getElementById("prof-keys").innerText = keyTokens;
-
-  if (connectedWalletName) {
-    walletBtnText.innerText = connectedWalletName + " Active";
-    walletTriggerBtn.classList.add("connected");
-    document.getElementById("prof-net").innerText = connectedWalletName;
-  } else {
-    walletBtnText.innerText = "Connect Crypto Wallet";
-    walletTriggerBtn.classList.remove("connected");
-    document.getElementById("prof-net").innerText = "None Connected";
-  }
-  
-  refreshCheckInBoxes();
-  refreshIndividualTasksView();
-}
-
-// --- Tap Click Processing Engine Logic ---
-document.getElementById("clicker-btn").addEventListener("click", function(e) {
-  if (currentTaps <= 0) return;
-  coins += 1; currentTaps -= 1;
-  localStorage.setItem("coins", coins);
-  updateSystemUI();
-
-  // Screen Tap Floating Coordinates Numeric Trigger Engine
-  const x = e.clientX; const y = e.clientY;
-  const ft = document.createElement("div");
-  ft.className = "floating-text"; ft.innerText = "+1";
-  ft.style.left = `${x - 12}px`; ft.style.top = `${y - 25}px`;
-  document.body.appendChild(ft);
-  setTimeout(() => ft.remove(), 600);
-});
-
-// Periodic Automatic Power Recovery Tick
-setInterval(() => {
-  if (currentTaps < maxTaps) { currentTaps += 1; updateSystemUI(); }
-}, 3000);
-
-// --- 7 Days Check-In Dynamic Core Routine Tracker ---
-function refreshCheckInBoxes() {
-  for (let i = 1; i <= 7; i++) {
-    const box = document.getElementById(`cbox-${i}`);
-    if (box) {
-      box.classList.remove("claimed");
-      if (i <= checkInStreak) box.classList.add("claimed");
-    }
-  }
-  
-  const todayStr = new Date().toDateString();
-  const btn = document.getElementById("checkin-action-btn");
-  if (lastCheckInDate === todayStr) {
-    btn.innerText = "CLAIMED FOR TODAY";
-    btn.disabled = true;
-  } else {
-    btn.innerText = `CLAIM DAY ${checkInStreak + 1} REWARD`;
-    btn.disabled = false;
-  }
-}
-
-function executeDailyCheckIn() {
-  const todayStr = new Date().toDateString();
-  if (lastCheckInDate === todayStr) return;
-
-  checkInStreak += 1;
-  if (checkInStreak > 7) checkInStreak = 1; 
-
-  if (checkInStreak === 1) { coins += 1000; alert("Day 1 Secured: +1,000 Coins!"); }
-  else if (checkInStreak === 2) { coins += 3000; normalSpins += 5; alert("Day 2 Secured: +3,000 Coins & +5 Free Spins!"); }
-  else if (checkInStreak === 3) { coins += 5000; alert("Day 3 Secured: +5,000 Coins!"); }
-  else if (checkInStreak === 4) { coins += 10000; alert("Day 4 Secured: +10,000 Coins!"); }
-  else if (checkInStreak === 5) { coins += 15000; normalSpins += 20; alert("Day 5 Secured: +15,000 Coins & +20 Free Spins!"); }
-  else if (checkInStreak === 6) { coins += 30000; alert("Day 6 Secured: +30,000 Coins!"); }
-  else if (checkInStreak === 7) { 
-    coins += 50000; keyTokens += 1; premiumSpins += 1; 
-    alert("Grand Day 7 Bounty Unlocked! +50,000 Coins, +1 Premium Spin, and 🔑 1 Key Node Token!");
-  }
-
-  lastCheckInDate = todayStr;
-  localStorage.setItem("ci_streak", checkInStreak);
-  localStorage.setItem("last_ci_date", lastCheckInDate);
-  localStorage.setItem("coins", coins);
-  localStorage.setItem("normal_spins", normalSpins);
-  localStorage.setItem("premium_spins", premiumSpins);
-  localStorage.setItem("key_tokens", keyTokens);
-
-  updateSystemUI();
-}
-
-// --- Standard Operational System Tasks Array Manager ---
-function refreshIndividualTasksView() {
-  const keys = ['tg', 'x', 'yt', 'fb'];
-  keys.forEach(k => {
-    const btn = document.getElementById(`t-btn-${k}`);
-    if(taskState[k] && btn) {
-      btn.innerText = "DONE";
-      btn.className = "action-btn claimed";
-      btn.onclick = null;
-    }
-  });
-}
-
-function triggerTaskAction(id) {
-  if (taskState[id]) return;
-  alert("Redirecting to verification protocol gateway destination link...");
-  
-  setTimeout(() => {
-    taskState[id] = true;
-    if (id === 'tg') coins += 1000;
-    if (id === 'x') coins += 2000;
-    if (id === 'yt') coins += 3000;
-    if (id === 'fb') coins += 1500;
-    
-    localStorage.setItem("task_state_matrix", JSON.stringify(taskState));
-    localStorage.setItem("coins", coins);
-    updateSystemUI();
-    alert("Task verified successfully! Extraction bounty credited.");
-  }, 2000);
-}
-
-// --- Advanced Wheel System Engine Operations ---
-function setSpinMode(mode) {
-  spinMode = mode;
-  document.getElementById("tab-normal").classList.remove("active", "premium-active");
-  document.getElementById("tab-premium").classList.remove("active", "premium-active");
-  
-  const title = document.getElementById("wheel-display-title");
-  const desc = document.getElementById("wheel-display-desc");
-  const usdBox = document.getElementById("premium-usd-container");
-  const normalText = document.getElementById("spin-balance-text");
-  const premText = document.getElementById("prem-spin-balance-text");
-
-  if (mode === "normal") {
-    document.getElementById("tab-normal").classList.add("active");
-    usdBox.style.display = "none";
-    normalText.style.display = "block";
-    premText.style.display = "none";
-    title.innerText = "Standard Matrix";
-    desc.innerText = "Review potential matrix bounties directly embedded inside the grid sections.";
-    
-    // Reset Premium Rewards Setup Visuals to Standard Layout 
-    setWheelLabels(["1K", "🔑", "1.5K", "🎁", "2K", "2.5K", "500", "🎁"]);
-    wheelGraphic.style.background = "conic-gradient(#131316 0deg 45deg, #1c1c22 45deg 90deg, #131316 90deg 135deg, #1c1c22 135deg 180deg, #131316 180deg 225deg, #1c1c22 225deg 270deg, #131316 270deg 315deg, #1c1c22 315deg 360deg)";
-  } else {
-    document.getElementById("tab-premium").classList.add("active", "premium-active");
-    usdBox.style.display = "inline-block";
-    normalText.style.display = "none";
-    premText.style.display = "block";
-    title.innerText = "Premium Dollar Grid";
-    desc.innerText = "High tier node rewards pool. Win guaranteed on-chain USD cash elements.";
-    
-    // Dynamic Re-mapping Labels View into USD Values For Premium Wheel Integration
-    setWheelLabels(["$0.10", "$0.50", "$0.20", "🔑 Key", "$0.10", "$1.00", "$0.15", "🔑 Key"]);
-    wheelGraphic.style.background = "conic-gradient(#201105 0deg 45deg, #2e1b0b 45deg 90deg, #201105 90deg 135deg, #2e1b0b 135deg 180deg, #201105 180deg 225deg, #2e1b0b 225deg 270deg, #201105 270deg 315deg, #2e1b0b 315deg 360deg)";
-  }
-}
-
-function setWheelLabels(labelArray) {
-  for(let i=0; i<8; i++) {
-    document.getElementById(`ws-${i}`).firstChild.innerText = labelArray[i];
-  }
-}
-
-function executeWheelSpin() {
-  if (spinMode === "normal") {
-    if (normalSpins <= 0) { alert("Insufficient standard matrices matrix energy spins left."); return; }
-    normalSpins -= 1; localStorage.setItem("normal_spins", normalSpins);
-    totalSpinsLifetime += 1; localStorage.setItem("lifetime_spins", totalSpinsLifetime);
-
-    // Dynamic Segment Rotational Offsets Mapping Layout
-    let segments = [
-      { name: "1K Coins", action: () => { coins += 1000; } },
-      { name: "Golden Key Node", action: () => { keyTokens += 1; } },
-      { name: "1.5K Coins", action: () => { coins += 1500; } },
-      { name: "Mystery Gift Box", action: () => { normalSpins += 10; alert("Found +10 Extra Free Spins inside!"); } },
-      { name: "2K Coins", action: () => { coins += 2000; } },
-      { name: "2.5K Coins", action: () => { coins += 2500; } },
-      { name: "500 Coins", action: () => { coins += 500; } },
-      { name: "Mystery Mega Box", action: () => { coins += 5000; alert("Found +5,000 Bonus Coins inside!"); } }
-    ];
-
-    let targetIdx = Math.floor(Math.random() * 8);
-    let targetReward = segments[targetIdx];
-    let degreesToRotate = (totalSpinsLifetime * 1440) + (360 - (targetIdx * 45) - 22);
-
-    wheelGraphic.style.transform = `rotate(${degreesToRotate}deg)`;
-    document.getElementById("spin-action-button").disabled = true;
-
-    setTimeout(() => {
-      document.getElementById("spin-action-button").disabled = false;
-      targetReward.action();
-      localStorage.setItem("coins", coins);
-      localStorage.setItem("normal_spins", normalSpins);
-      localStorage.setItem("key_tokens", keyTokens);
-      updateSystemUI();
-      alert(`Matrix Spin Settled: Won [ ${targetReward.name} ]`);
-    }, 3500);
-
-  } else {
-    if (premiumSpins <= 0) { alert("Premium matrix nodes locked. Secure Day 7 on check-in system to unlock."); return; }
-    premiumSpins -= 1; localStorage.setItem("premium_spins", premiumSpins);
-    historicPremiumSpinCount += 1; localStorage.setItem("hist_prem_spins", historicPremiumSpinCount);
-
-    let premSegments = [
-      { name: "$0.10 USD Cash", action: () => { usdBalance += 0.10; } },
-      { name: "$0.50 USD Cash", action: () => { usdBalance += 0.50; } },
-      { name: "$0.20 USD Cash", action: () => { usdBalance += 0.20; } },
-      { name: "1 Golden Key Node Token", action: () => { keyTokens += 1; } },
-      { name: "$0.10 USD Cash", action: () => { usdBalance += 0.10; } },
-      { name: "$1.00 Mega Payout USD", action: () => { usdBalance += 1.00; } },
-      { name: "$0.15 USD Cash", action: () => { usdBalance += 0.15; } },
-      { name: "1 Extra Backup Key Node Token", action: () => { keyTokens += 1; } }
-    ];
-
-    let targetIdx = Math.floor(Math.random() * 8);
-    let targetReward = premSegments[targetIdx];
-    let degreesToRotate = (historicPremiumSpinCount * 1800) + (360 - (targetIdx * 45) - 22);
-
-    wheelGraphic.style.transform = `rotate(${degreesToRotate}deg)`;
-    document.getElementById("spin-action-button").disabled = true;
-
-    setTimeout(() => {
-      document.getElementById("spin-action-button").disabled = false;
-      targetReward.action();
-      localStorage.setItem("usd_balance", usdBalance);
-      localStorage.setItem("key_tokens", keyTokens);
-      localStorage.setItem("premium_spins", premiumSpins);
-      updateSystemUI();
-      alert(`Premium Core Settled: Transacted [ ${targetReward.name} ]`);
-    }, 3500);
-  }
-}
-
-// --- Web3 Cryptographic Wallet Overlay Interaction Layer ---
-function openWalletModal() {
-  document.getElementById("wallet-modal-overlay").style.display = "flex";
-}
-function closeWalletModal() {
-  document.getElementById("wallet-modal-overlay").style.display = "none";
-}
-function mockEstablishWalletConnection(walletBrand) {
-  connectedWalletName = walletBrand;
-  localStorage.setItem("conn_wallet_name", walletBrand);
-  closeWalletModal();
-  updateSystemUI();
-  alert(`Web3 Secured Link Handshake Established With: ${walletBrand}`);
-}
-
-// --- Multi-View Navigation Flow Architecture Controller ---
-function switchPage(pageName) {
-  // Reset Display Elements Visibility Maps Arrays Loop
-  document.getElementById("home-page").style.display = "none";
-  document.getElementById("spin-page").style.display = "none";
-  document.getElementById("tasks-page").style.display = "none";
-  document.getElementById("invite-page").style.display = "none";
-  document.getElementById("profile-page").style.display = "none";
-
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-  document.getElementById(`${pageName}-page`).style.display = "block";
-  document.getElementById(`nav-${pageName}`).classList.add('active');
-
-  const subEl = document.getElementById("page-subtitle");
-  const statsPanel = document.getElementById("global-stats-panel");
-  const walletBar = document.getElementById("global-wallet-bar");
-
-  // Dynamic Header Adaptations Rendering Filter Mapping Rule
-  if (pageName === 'tasks') {
-    statsPanel.style.display = "none";
-    walletBar.style.display = "none"; 
-    subEl.innerText = "Complete assignments and maintain daily routine checklists.";
-  } else {
-    statsPanel.style.display = "grid";
-    walletBar.style.display = "block";
-    if (pageName === 'home') subEl.innerText = "Welcome to Cyber Fox Hub 🦊";
-    if (pageName === 'spin') subEl.innerText = "Activate matrix terminal systems to secure extraction rewards.";
-    if (pageName === 'invite') subEl.innerText = "Manage active referral distribution network clusters.";
-    if (pageName === 'profile') subEl.innerText = "Ecosystem identity validation status console terminal.";
-  }
-}
-
-function copyReferralLink() {
-  const text = document.getElementById("referral-link-string").innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    alert("Referral link copied to secure clipboard successfully!");
-  });
-}
-
-// Initialization Application Bootstrap Layer Trigger Execution
-window.onload = function() {
-  updateSystemUI();
-};
-</script>
-
+        // Initialize App
+        updateUI();
+    </script>
 </body>
-          </html>
+</html>
