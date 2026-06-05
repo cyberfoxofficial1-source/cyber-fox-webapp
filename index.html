@@ -240,6 +240,7 @@ function spin(){
 
  setTimeout(() => {
 
+   if(result === "BOX"){
  let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
 boxes.push("BOX");
 localStorage.setItem("boxes", JSON.stringify(boxes));
