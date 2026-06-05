@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V2 - Real Project</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <title>Cyber Fox V2 - Real Spin</title>
     <style>
         :root {
             --bg-color: #0b0c10;
@@ -73,7 +72,7 @@
         .wallet-corner-btn {
             background: rgba(255, 255, 255, 0.07);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -82,32 +81,29 @@
             transition: all 0.3s ease;
         }
 
-        .wallet-corner-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
         .wallet-icon-svg {
-            width: 16px;
-            height: 16px;
-            fill: #4c94ff; /* Professional Web3 Blue */
+            width: 14px;
+            height: 14px;
+            fill: #ff9800; /* Sleek Web3 Gold/Orange */
         }
 
         .wallet-text {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        /* Main Hamster Kombat Style Dashboard */
+        /* Hamster Style Clean Token Display over the Wheel */
         .main-display {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 30px;
+            margin-top: -20px;
         }
 
-        /* Clean Token Display (No Boxes/Grids) */
         .token-balance-container {
             text-align: center;
         }
@@ -116,49 +112,83 @@
             font-size: 2.8rem;
             font-weight: 800;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
         .token-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--sub-text);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: -5px;
+            margin-top: -2px;
         }
 
-        /* Central Project Logo Sphere */
-        .main-logo-sphere {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #ff6b00 0%, #1f1e26 70%);
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.3);
+        /* Premium Spin Wheel Container */
+        .wheel-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: transform 0.1s ease;
         }
 
-        .main-logo-sphere:active {
-            transform: scale(0.96);
+        /* Outer Glow/Border */
+        .wheel-outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 107, 0, 0.2);
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.25);
+            pointer-events: none;
         }
 
-        .main-logo-sphere img {
-            width: 75%;
-            height: 75%;
+        /* The Actual Turning Wheel */
+        .spin-wheel {
+            width: 92%;
+            height: 92%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #1c1b22 0deg 45deg, #25242c 45deg 90deg,
+                #1c1b22 90deg 135deg, #25242c 135deg 180deg,
+                #1c1b22 180deg 225deg, #25242c 225deg 270deg,
+                #1c1b22 270deg 315deg, #25242c 315deg 360deg
+            );
+            border: 6px solid #1a1921;
+            position: relative;
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.3, 1);
+            overflow: hidden;
+        }
+
+        /* Center Premium Logo Pin/Pointer */
+        .wheel-center-pointer {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle, #ff6b00 0%, #111 80%);
+            border-radius: 50%;
+            border: 3px solid #ff8c00;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wheel-center-pointer img {
+            width: 60%;
+            height: 60%;
             object-fit: contain;
         }
 
-        /* Control / Info Area */
+        /* Lower Control Panel */
         .control-panel {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .key-status {
@@ -166,7 +196,8 @@
             color: #ffcc00;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            font-weight: 500;
         }
 
         .action-btn {
@@ -174,32 +205,30 @@
             background: linear-gradient(90deg, #ff6b00 0%, #ff8c00 100%);
             border: none;
             padding: 16px;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
             font-size: 1.1rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.35);
+            transition: transform 0.1s ease;
         }
 
-        .action-btn:disabled {
-            background: #2a2a30;
-            color: #555;
-            box-shadow: none;
-            cursor: not-allowed;
+        .action-btn:active {
+            transform: scale(0.98);
         }
 
-        /* Real Alert Popup Styles */
+        /* Alert Popup */
         .custom-popup {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -209,23 +238,22 @@
         .popup-content {
             background: #1a1b22;
             border: 1px solid rgba(255,255,255,0.1);
-            width: 85%;
+            width: 80%;
             padding: 25px;
             border-radius: 16px;
             text-align: center;
         }
 
         .popup-title {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .popup-text {
             color: var(--sub-text);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 20px;
-            line-height: 1.4;
         }
 
         .popup-close-btn {
@@ -250,28 +278,34 @@
                 <span class="project-subtitle">Secure Matrix Node</span>
             </div>
             
-            <!-- Minimalist Wallet Connector in Corner -->
+            <!-- Clean Wallet Button Top Right Corner -->
             <div class="wallet-corner-btn" id="walletBtn">
                 <svg class="wallet-icon-svg" viewBox="0 0 24 24">
-                    <path d="M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2 .9-2 2v2c0 1.1.89 2 2 2h9v4zm-9-6h10v2H12v-2zm7 1c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
+                    <path d="M19 13H5v-2h14v2z M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2 .9-2 2v2c0 1.1.89 2 2 2h9v4z"/>
                 </svg>
-                <span class="wallet-text" id="walletText">Connect</span>
+                <span class="wallet-text">Connect</span>
             </div>
         </div>
 
-        <!-- Main Display (Hamster Kombat Style) -->
+        <!-- Main Display (Hamster Kombat Style Header + Spin Wheel) -->
         <div class="main-display">
             
-            <!-- Clean Token Balance over the logo -->
+            <!-- Clean Balance Display -->
             <div class="token-balance-container">
                 <div class="token-amount" id="tokenDisplay">28,063</div>
                 <div class="token-label">$FOX Tokens</div>
             </div>
 
-            <!-- Central Token Sphere Logo -->
-            <div class="main-logo-sphere" id="logoTap">
-                <!-- Replace with your actual project logo image -->
-                <img src="https://i.postimg.com/pX48Z9g0/fox-logo.png" alt="Cyber Fox Logo">
+            <!-- Premium Spin Wheel Structure -->
+            <div class="wheel-wrapper">
+                <div class="wheel-outer-ring"></div>
+                <div class="wheel-center-pointer">
+                    <!-- High quality fallback crypto badge vector icon -->
+                    <img src="https://img.icons8.com/neon/96/fox.png" alt="Fox Pin">
+                </div>
+                <div class="spin-wheel" id="wheel">
+                    <!-- Visual Segments can be added or customized via CSS/Images later -->
+                </div>
             </div>
 
         </div>
@@ -286,79 +320,78 @@
 
     </div>
 
-    <!-- Custom System Alert Popup (Replaces old block system) -->
+    <!-- Alert Popup System -->
     <div class="custom-popup" id="alertPopup">
         <div class="popup-content">
             <div class="popup-title" id="popupTitle">Notification</div>
-            <div class="popup-text" id="popupMessage">Message text goes here.</div>
+            <div class="popup-text" id="popupMessage">Message info.</div>
             <button class="popup-close-btn" id="popupClose">OK</button>
         </div>
     </div>
 
     <script>
-        // Real Project State (Directly tie to backend/database later)
+        // App Core State
         let userState = {
             tokens: 28063,
-            keys: 2, // User currently has 2 keys as seen in screenshot
+            keys: 2
         };
 
-        // DOM Elements
         const tokenDisplay = document.getElementById('tokenDisplay');
         const keyDisplay = document.getElementById('keyDisplay');
         const spinBtn = document.getElementById('spinBtn');
-        const logoTap = document.getElementById('logoTap');
+        const wheel = document.getElementById('wheel');
         const alertPopup = document.getElementById('alertPopup');
         const popupTitle = document.getElementById('popupTitle');
         const popupMessage = document.getElementById('popupMessage');
         const popupClose = document.getElementById('popupClose');
 
-        // Render Values
+        let isSpinning = false;
+
         function updateUI() {
             tokenDisplay.innerText = userState.tokens.toLocaleString();
             keyDisplay.innerText = userState.keys;
         }
 
-        // Show Custom Popup
         function showPopup(title, message) {
             popupTitle.innerText = title;
             popupMessage.innerText = message;
             alertPopup.style.display = 'flex';
         }
 
-        // Close Popup
         popupClose.addEventListener('click', () => {
             alertPopup.style.display = 'none';
         });
 
-        // Real Premium Spin Logic: Only depends on Keys!
+        // Real Spin Logic: Just needs keys!
         spinBtn.addEventListener('click', () => {
+            if (isSpinning) return;
+
             if (userState.keys > 0) {
-                // Deduct 1 key and spin
+                isSpinning = true;
                 userState.keys -= 1;
                 updateUI();
-                
-                // Simulate Real Spin Rewards
-                const rewards = [500, 1000, 2500, 5000];
-                const won = rewards[Math.floor(Math.random() * rewards.length)];
-                
-                userState.tokens += won;
-                
-                showPopup("🎰 Spin Success!", `You used 1 Key and won ${won} $FOX Tokens!`);
-                setTimeout(updateUI, 500);
+
+                // Generate random full rotations + final stop angle
+                const randomDeg = Math.floor(Math.random() * 360) + 1800; // 5 full spins minimum
+                wheel.style.transform = `rotate(${randomDeg}deg)`;
+
+                // Wait for the css animation to end (4 seconds)
+                setTimeout(() => {
+                    isSpinning = false;
+                    
+                    const wonTokens = [1000, 2500, 5000, 10000][Math.floor(Math.random() * 4)];
+                    userState.tokens += wonTokens;
+                    
+                    updateUI();
+                    showPopup("🎰 Spin Reward", `Successfully spent 1 Key. You received +${wonTokens} $FOX!`);
+                }, 4000);
+
             } else {
-                // If user has 0 keys
-                showPopup("No Keys Left", "You need at least 1 Key to run the Premium Spin wheel.");
+                showPopup("Insufficient Keys", "You don't have enough keys left to trigger the premium spin matrix.");
             }
         });
 
-        // Simple Tapper simulation for the logo
-        logoTap.addEventListener('click', () => {
-            userState.tokens += 1;
-            updateUI();
-        });
-
-        // Initialize App
         updateUI();
     </script>
 </body>
-</html>
+                                                                  </html>
