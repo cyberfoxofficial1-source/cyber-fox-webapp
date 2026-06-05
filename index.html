@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V2 - Full App</title>
+    <title>Cyber Fox V2 - Official Production Bot</title>
     <style>
         :root {
             --bg-color: #0b0c10;
             --text-color: #ffffff;
             --accent-orange: #ff6b00;
             --sub-text: #858585;
-            --card-bg: #1a1b22;
+            --card-bg: #14151b;
         }
 
         * {
@@ -19,6 +19,7 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             user-select: none;
+            -webkit-user-select: none;
         }
 
         body {
@@ -34,16 +35,16 @@
             width: 100%;
             max-width: 450px;
             height: 100vh;
-            background: radial-gradient(circle at top, #1f1e26 0%, #0b0c10 80%);
+            background: radial-gradient(circle at top, #1c1b22 0%, #0b0c10 100%);
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px 20px 85px 20px; /* Space for bottom nav */
+            padding: 25px 20px 90px 20px;
             overflow: hidden;
         }
 
-        /* Header Area */
+        /* Top Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -58,28 +59,31 @@
         }
 
         .project-title {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 700;
             letter-spacing: 0.5px;
         }
 
         .project-subtitle {
             font-size: 0.75rem;
             color: var(--sub-text);
-            margin-top: 2px;
         }
 
-        /* Minimal Wallet Button in Corner */
+        /* Clean Minimal Corner Wallet Button */
         .wallet-corner-btn {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 12px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+        }
+
+        .wallet-corner-btn:active {
+            transform: scale(0.95);
         }
 
         .wallet-icon-svg {
@@ -93,7 +97,7 @@
             font-weight: 600;
         }
 
-        /* Main View Container */
+        /* Main Screen Manager */
         .main-content {
             flex-grow: 1;
             display: flex;
@@ -110,63 +114,79 @@
             align-items: center;
             justify-content: center;
             gap: 25px;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         .app-view.active {
             display: flex;
         }
 
-        /* Hamster Style Clean Token Display */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Clean Token Display (Hamster Kombat Style) */
         .token-balance-container {
             text-align: center;
+            margin-bottom: 5px;
         }
 
         .token-amount {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 800;
             letter-spacing: 1px;
+            color: #ffffff;
         }
 
         .token-label {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--sub-text);
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: 600;
+            margin-top: -5px;
         }
 
-        /* --- HOME / TAP PAGE STYLE --- */
+        /* --- 1. HOME VIEW (Your Beautiful Original Fox Logo) --- */
         .main-logo-sphere {
-            width: 220px;
-            height: 220px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
-            background: radial-gradient(circle, #ff6b00 0%, #1f1e26 70%);
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.3);
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.25) 0%, rgba(31, 30, 38, 0) 70%);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            position: relative;
             transition: transform 0.1s ease;
+        }
+
+        .main-logo-sphere::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 35px rgba(255, 107, 0, 0.15);
+            pointer-events: none;
         }
 
         .main-logo-sphere:active {
             transform: scale(0.96);
         }
 
-        /* CSS Premium Fox Icon (No Broken Image) */
-        .fox-avatar-css {
-            width: 70px;
-            height: 70px;
-            background: var(--text-color);
-            clip-path: polygon(50% 0%, 83% 40%, 100% 100%, 50% 80%, 0% 100%, 17% 40%);
-            background: linear-gradient(135deg, #ff8c00, #ff5000);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .official-fox-img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
         }
 
-        /* --- SPIN WHEEL PAGE STYLE --- */
+        /* --- 2. SPIN WHEEL VIEW --- */
         .wheel-wrapper {
             position: relative;
-            width: 270px;
-            height: 270px;
+            width: 280px;
+            height: 280px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -178,7 +198,7 @@
             height: 100%;
             border-radius: 50%;
             border: 4px solid rgba(255, 107, 0, 0.2);
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.25);
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
             pointer-events: none;
         }
 
@@ -187,29 +207,34 @@
             height: 92%;
             border-radius: 50%;
             background: conic-gradient(
-                #1c1b22 0deg 45deg, #25242c 45deg 90deg,
-                #1c1b22 90deg 135deg, #25242c 135deg 180deg,
-                #1c1b22 180deg 225deg, #25242c 225deg 270deg,
-                #1c1b22 270deg 315deg, #25242c 315deg 360deg
+                #17181c 0deg 45deg, #202126 45deg 90deg,
+                #17181c 90deg 135deg, #202126 135deg 180deg,
+                #17181c 180deg 225deg, #202126 225deg 270deg,
+                #17181c 270deg 315deg, #202126 315deg 360deg
             );
-            border: 6px solid #1a1921;
+            border: 5px solid #141519;
             position: relative;
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.3, 1);
         }
 
         .wheel-center-pointer {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #ff6b00 0%, #111 80%);
+            width: 55px;
+            height: 55px;
+            background: #1a1b22;
             border-radius: 50%;
-            border: 3px solid #ff8c00;
+            border: 3px solid var(--accent-orange);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
             z-index: 5;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.7rem;
-            font-weight: bold;
+        }
+
+        .wheel-center-pointer img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
         }
 
         .control-panel {
@@ -221,29 +246,34 @@
         }
 
         .key-status {
-            font-size: 0.9rem;
-            color: #ffcc00;
+            font-size: 0.95rem;
+            color: #ffb300;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .action-btn {
             width: 100%;
-            background: linear-gradient(90deg, #ff6b00 0%, #ff8c00 100%);
+            background: linear-gradient(90deg, #ff5100 0%, #ff8c00 100%);
             border: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 14px;
             color: white;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.35);
+            box-shadow: 0 5px 20px rgba(255, 81, 0, 0.35);
         }
 
-        /* --- SUB PAGES (TASKS, INVITE, PROFILE) --- */
+        /* --- 3. CLEAN TASKS VIEW (Only 2 Tasks, No Grid Header) --- */
         .page-title {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.6rem;
+            font-weight: 700;
+            align-self: flex-start;
             margin-bottom: 5px;
         }
 
@@ -252,56 +282,89 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-height: 320px;
-            overflow-y: auto;
         }
 
         .list-item {
             background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .item-detail {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .item-title {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
         }
 
         .item-reward {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #ff9800;
+            font-weight: 500;
         }
 
         .item-btn {
-            background: rgba(255,255,255,0.1);
+            background: #ff6b00;
             border: none;
-            padding: 6px 14px;
+            padding: 8px 18px;
             border-radius: 20px;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        /* --- PREMIUM BOTTOM NAVIGATION BAR --- */
+        .item-btn.done {
+            background: #202127;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        /* --- 4. INVITE VIEW --- */
+        .invite-desc {
+            color: var(--sub-text);
+            font-size: 0.95rem;
+            text-align: left;
+            width: 100%;
+            line-height: 1.4;
+        }
+
+        /* --- 5. PROFILE VIEW --- */
+        .profile-card {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
+        }
+
+        /* --- BOTTOM NAVIGATION BAR --- */
         .bottom-nav {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 70px;
-            background: #131419;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            height: 75px;
+            background: #0d0e12;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -312,14 +375,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             color: var(--sub-text);
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            transition: color 0.3s ease;
             flex: 1;
-            padding: 10px 0;
+            padding: 12px 0;
+            transition: color 0.2s ease;
         }
 
         .nav-item.active {
@@ -327,10 +390,11 @@
         }
 
         .nav-icon {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            margin-bottom: 1px;
         }
 
-        /* System Alert Popup */
+        /* Native-looking System Popup */
         .custom-popup {
             position: absolute;
             top: 0;
@@ -346,34 +410,37 @@
         }
 
         .popup-content {
-            background: #1a1b22;
-            border: 1px solid rgba(255,255,255,0.1);
-            width: 80%;
+            background: #16171d;
+            border: 1px solid rgba(255,255,255,0.08);
+            width: 82%;
             padding: 25px;
             border-radius: 16px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .popup-title {
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 8px;
         }
 
         .popup-text {
             color: var(--sub-text);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         .popup-close-btn {
-            background: var(--text-color);
-            color: var(--bg-color);
+            background: #ffffff;
+            color: #000000;
             border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 10px 26px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
@@ -381,7 +448,6 @@
 
     <div class="app-container">
         
-        <!-- Header Section -->
         <div class="header">
             <div class="project-info">
                 <span class="project-title">Cyber Fox</span>
@@ -395,30 +461,27 @@
             </div>
         </div>
 
-        <!-- Main Display Views Area -->
         <div class="main-content">
 
-            <!-- 1. HOME / TAP VIEW -->
             <div class="app-view active" id="view-home">
                 <div class="token-balance-container">
-                    <div class="token-amount class-token-render">30,563</div>
+                    <div class="token-amount live-token-render">30,582</div>
                     <div class="token-label">$FOX Tokens</div>
                 </div>
                 <div class="main-logo-sphere" id="logoTap">
-                    <div class="fox-avatar-css"></div>
+                    <img src="https://i.postimg.com/D04Y40p7/cyber-fox-logo.png" class="official-fox-img" alt="Cyber Fox Logo">
                 </div>
             </div>
 
-            <!-- 2. SPIN WHEEL VIEW -->
             <div class="app-view" id="view-spin">
                 <div class="token-balance-container">
-                    <div class="token-amount class-token-render">30,563</div>
+                    <div class="token-amount live-token-render">30,582</div>
                     <div class="token-label">$FOX Tokens</div>
                 </div>
                 <div class="wheel-wrapper">
                     <div class="wheel-outer-ring"></div>
                     <div class="wheel-center-pointer">
-                        <span style="color:#ff8c00;">FOX</span>
+                        <img src="https://i.postimg.com/D04Y40p7/cyber-fox-logo.png" alt="Fox Pivot">
                     </div>
                     <div class="spin-wheel" id="wheel"></div>
                 </div>
@@ -430,88 +493,85 @@
                 </div>
             </div>
 
-            <!-- 3. TASKS VIEW -->
             <div class="app-view" id="view-tasks">
-                <div class="page-title">Global Tasks</div>
+                <span class="page-title">Global Tasks</span>
+                <p style="color:var(--sub-text); font-size:0.9rem; align-self:flex-start; margin-top:-15px; margin-bottom:10px;">Complete core system tasks to secure extraction node.</p>
                 <div class="list-container">
                     <div class="list-item">
                         <div class="item-detail">
-                            <span class="item-title">Follow on X (Twitter)</span>
-                            <span class="item-reward">+5,000 $FOX</span>
+                            <span class="item-title">Join Telegram Channel</span>
+                            <span class="item-reward">+1,000 $FOX</span>
                         </div>
-                        <button class="item-btn" onclick="completeTask(this, 5000)">Start</button>
+                        <button class="item-btn" onclick="executeTask(this, 1000)">Join</button>
                     </div>
                     <div class="list-item">
                         <div class="item-detail">
-                            <span class="item-title">Subscribe YouTube Channel</span>
-                            <span class="item-reward">+7,500 $FOX</span>
+                            <span class="item-title">Follow Cyber Fox on X</span>
+                            <span class="item-reward">+2,000 $FOX</span>
                         </div>
-                        <button class="item-btn" onclick="completeTask(this, 7500)">Start</button>
+                        <button class="item-btn" onclick="executeTask(this, 2000)">Follow</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. INVITE VIEW -->
             <div class="app-view" id="view-invite">
-                <div class="page-title">Invite Friends</div>
-                <p style="color: var(--sub-text); text-align:center; font-size:0.9rem;">Earn 1 Key per verified active referral.</p>
-                <div class="list-container" style="margin-top:15px;">
+                <span class="page-title">Invite Friends</span>
+                <p class="invite-desc">Get +5,000 $FOX tokens and 1 Premium Key Node instantly for every friend who activates the Cyber Fox matrix hub.</p>
+                <div class="list-container" style="margin-top:10px;">
                     <div class="list-item">
                         <div class="item-detail">
-                            <span class="item-title">Your Referral Link</span>
-                            <span class="item-reward" style="font-size:0.75rem; color:#4c94ff;">t.me/CyberFoxBot?start=r102</span>
+                            <span class="item-title">Your Web3 Node Invite Link</span>
+                            <span class="item-reward" style="font-size:0.8rem; color:#4c94ff;">t.me/CyberFoxBot?start=ref782</span>
                         </div>
-                        <button class="item-btn" style="background:#ff6b00;" onclick="showPopup('Link Copied', 'Referral link copied to clipboard!')">Copy</button>
+                        <button class="item-btn" onclick="showPopup('Link Secured', 'Referral invitation link copied to system clipboard!')">Copy</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 5. PROFILE VIEW -->
             <div class="app-view" id="view-profile">
-                <div class="page-title">User Account</div>
-                <div class="list-container" style="width:100%;">
-                    <div class="list-item"><span>Status</span><span style="color:#00ffcc;">Verified Node</span></div>
-                    <div class="list-item"><span>Total Keys Used</span><span>14 Keys</span></div>
+                <span class="page-title">System Profile</span>
+                <div class="profile-card">
+                    <div class="profile-row"><span>Node Security Level</span><span style="color:#ff9800; font-weight:700;">Tier 1 Active</span></div>
+                    <div class="profile-row"><span>Mining Energy Rate</span><span style="color:#00ffcc;">100% Core</span></div>
+                    <div class="profile-row"><span>Total Extractions</span><span>48 Times</span></div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Bottom Navigation Bar -->
         <div class="bottom-nav">
-            <div class="nav-item active" onclick="switchView('home', this)">
+            <div class="nav-item active" onclick="switchTab('home', this)">
                 <span class="nav-icon">🏠</span><span>Home</span>
             </div>
-            <div class="nav-item" onclick="switchView('spin', this)">
+            <div class="nav-item" onclick="switchTab('spin', this)">
                 <span class="nav-icon">🎰</span><span>Spin</span>
             </div>
-            <div class="nav-item" onclick="switchView('tasks', this)">
+            <div class="nav-item" onclick="switchTab('tasks', this)">
                 <span class="nav-icon">📋</span><span>Tasks</span>
             </div>
-            <div class="nav-item" onclick="switchView('invite', this)">
+            <div class="nav-item" onclick="switchTab('invite', this)">
                 <span class="nav-icon">👥</span><span>Invite</span>
             </div>
-            <div class="nav-item" onclick="switchView('profile', this)">
+            <div class="nav-item" onclick="switchTab('profile', this)">
                 <span class="nav-icon">👤</span><span>Profile</span>
             </div>
         </div>
 
     </div>
 
-    <!-- Popup Window -->
     <div class="custom-popup" id="alertPopup">
         <div class="popup-content">
             <div class="popup-title" id="popupTitle">Notification</div>
-            <div class="popup-text" id="popupMessage">Message info.</div>
-            <button class="popup-close-btn" id="popupClose">OK</button>
+            <div class="popup-text" id="popupMessage">System output information.</div>
+            <button class="popup-close-btn" id="popupClose">Confirm</button>
         </div>
     </div>
 
     <script>
-        // State
-        let userState = {
-            tokens: 30563, // Updated to match your latest screenshot!
-            keys: 1        // Matches your screenshot showing 1 key left
+        // Production App Sync State (Matches your exact 30,582 UI state)
+        let state = {
+            tokens: 30582, 
+            keys: 1        
         };
 
         const keyDisplay = document.getElementById('keyDisplay');
@@ -525,26 +585,26 @@
 
         let isSpinning = false;
 
-        function updateUI() {
-            document.querySelectorAll('.class-token-render').forEach(el => {
-                el.innerText = userState.tokens.toLocaleString();
+        function refreshRenders() {
+            document.querySelectorAll('.live-token-render').forEach(container => {
+                container.innerText = state.tokens.toLocaleString();
             });
-            if(keyDisplay) keyDisplay.innerText = userState.keys;
+            if(keyDisplay) keyDisplay.innerText = state.keys;
         }
 
-        // View Switcher System
-        function switchView(viewId, navElement) {
+        // Tab View Navigation Manager
+        function switchTab(targetView, element) {
             if (isSpinning) return; 
-            document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             
-            document.getElementById(`view-${viewId}`).classList.add('active');
-            navElement.classList.add('active');
+            document.getElementById(`view-${targetView}`).classList.add('active');
+            element.classList.add('active');
         }
 
-        function showPopup(title, message) {
+        function showPopup(title, msg) {
             popupTitle.innerText = title;
-            popupMessage.innerText = message;
+            popupMessage.innerText = msg;
             alertPopup.style.display = 'flex';
         }
 
@@ -552,52 +612,56 @@
             alertPopup.style.display = 'none';
         });
 
-        // Tap Logic (Home Page)
+        // Core Tap Logic
         logoTap.addEventListener('click', () => {
-            userState.tokens += 1;
-            updateUI();
+            state.tokens += 1;
+            refreshRenders();
         });
 
-        // Spin Logic: Only depends on keys!
+        // Safe Spin execution logic - Requires 1 key node
         spinBtn.addEventListener('click', () => {
             if (isSpinning) return;
 
-            if (userState.keys > 0) {
+            if (state.keys > 0) {
                 isSpinning = true;
-                userState.keys -= 1;
-                updateUI();
+                state.keys -= 1;
+                refreshRenders();
 
-                const randomDeg = Math.floor(Math.random() * 360) + 1800; 
-                wheel.style.transform = `rotate(${randomDeg}deg)`;
+                // Compute real transition math mechanics
+                const targetRotation = Math.floor(Math.random() * 360) + 2160; 
+                wheel.style.transform = `rotate(${targetRotation}deg)`;
 
                 setTimeout(() => {
                     isSpinning = false;
-                    const wonTokens = [1000, 2500, 5000][Math.floor(Math.random() * 3)];
-                    userState.tokens += wonTokens;
-                    updateUI();
-                    showPopup("🎰 Spin Winner!", `Successfully processed premium matrix node. Received +${wonTokens} $FOX!`);
+                    const rewardsList = [2000, 4000, 6000, 10000];
+                    const selectedReward = rewardsList[Math.floor(Math.random() * rewardsList.length)];
+                    
+                    state.tokens += selectedReward;
+                    refreshRenders();
+                    showPopup("🎰 Extraction Won!", `Premium network node verified. Your account balance credited with +${selectedReward.toLocaleString()} $FOX tokens!`);
                 }, 4000);
 
             } else {
-                showPopup("Locked Node", "No available matrix keys remaining. Complete tasks or invite friends to earn more.");
+                showPopup("Node Lockout", "Insufficient Key Nodes available to unlock premium reward algorithms. Earn keys via referrals.");
             }
         });
 
-        // Task Completion Simulator
-        function completeTask(btn, reward) {
-            if (btn.innerText === "Claimed") return;
-            btn.innerText = "Checking...";
+        // Task Execution Processor
+        function executeTask(button, amount) {
+            if (button.classList.contains('done')) return;
+            button.innerText = "Processing...";
+            
             setTimeout(() => {
-                userState.tokens += reward;
-                updateUI();
-                btn.innerText = "Claimed";
-                btn.style.background = "#222";
-                btn.style.color = "#555";
-                showPopup("Success", `Task reward of +${reward} tokens credited.`);
-            }, 1500);
+                state.tokens += amount;
+                refreshRenders();
+                button.innerText = "Claimed";
+                button.classList.add('done');
+                showPopup("Task Completed", `System successfully validated actions. Reward of +${amount} $FOX claimed.`);
+            }, 1800);
         }
 
-        updateUI();
+        // Init
+        refreshRenders();
     </script>
 </body>
 </html>
