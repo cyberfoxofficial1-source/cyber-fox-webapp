@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox V2 - Premium Core</title>
+<title>Cyber Fox Hub - Global Web3 Platform</title>
 
+<!-- Font Awesome Pro Engine -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
-  --bg-color: #080808;
-  --card-bg: #141414;
+  --bg-color: #050505;
+  --card-bg: #0f0f12;
+  --card-border: rgba(255, 115, 0, 0.12);
   --text-color: #ffffff;
   --text-gray: #8e8e93;
-  --primary-green: #5cc83b;
+  --primary-green: #4caf50;
   --accent-gold: #ffb300;
   --theme-orange: #ff7300;
-  --glow-orange: rgba(255, 115, 0, 0.35);
+  --glow-orange: rgba(255, 115, 0, 0.4);
   --neon-cyan: #00f0ff;
+  --neon-blue: #007bff;
 }
 
 body {
@@ -31,6 +34,7 @@ body {
   -webkit-tap-highlight-color: transparent; 
 }
 
+/* ================= COMPACT CORE HEADER ================= */
 header {
   display: flex;
   justify-content: space-between;
@@ -48,10 +52,10 @@ header {
 }
 
 .header-title img {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid var(--theme-orange);
+  border: 1.5px solid var(--theme-orange);
 }
 
 .noti-btn {
@@ -71,25 +75,33 @@ header {
 }
 
 .page {
-  padding: 0 15px 120px 15px;
+  padding: 0 15px 130px 15px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Updated Custom Top Stats Multi-row Display */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= GLOBAL TOP STATS (EXCEPT TASKS PAGE) ================= */
 .stats-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   margin-bottom: 20px;
+  padding: 0 15px;
 }
 
 .stat-box {
-  background: linear-gradient(135deg, #161616 0%, #111111 100%);
-  padding: 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 115, 0, 0.12);
+  background: linear-gradient(135deg, #121215 0%, #0a0a0c 100%);
+  padding: 12px 8px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
   display: flex;
   flex-direction: column;
   gap: 4px;
+  text-align: center;
 }
 
 .stat-label {
@@ -97,33 +109,64 @@ header {
   color: var(--text-gray);
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 4px;
   font-weight: 600;
 }
 
 .stat-label i.fa-coins { color: var(--accent-gold); }
 .stat-label i.fa-bolt { color: #ffeb3b; }
-.stat-label i.fa-dollar-sign { color: #4caf50; }
 .stat-label i.fa-key { color: var(--neon-cyan); }
 
 .stat-value {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
 }
 
-/* ================= HOME PAGE ================= */
+/* Web3 Connection Core Button Placement */
+.wallet-connector-wrapper {
+  padding: 0 15px;
+  margin-bottom: 20px;
+}
+
+.web3-connect-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(67, 100, 247, 0.25);
+  transition: all 0.2s ease;
+}
+
+.web3-connect-btn.connected {
+  background: linear-gradient(135deg, #1d976c, #93f9b9);
+  color: #050505;
+}
+
+/* ================= HOME PAGE (TAP MASTER) ================= */
 .main-clicker-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  justify-content: center;
+  margin: 30px 0;
+  position: relative;
 }
 
 .circle-outer {
-  width: 250px;
-  height: 250px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,115,0,0.18) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(255,115,0,0.2) 0%, rgba(0,0,0,0) 70%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,10 +175,10 @@ header {
 }
 
 .circle-inner {
-  width: 215px;
-  height: 215px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  background-color: #121212;
+  background-color: #0c0c0e;
   border: 4px solid var(--theme-orange);
   display: flex;
   align-items: center;
@@ -143,8 +186,7 @@ header {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.05s ease;
-  box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.4);
-  outline: none;
+  box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.35);
 }
 
 .circle-inner img {
@@ -156,58 +198,204 @@ header {
   pointer-events: none;
 }
 
-.circle-inner:active { transform: scale(0.96); }
+.circle-inner:active { transform: scale(0.95); }
 
 .tap-instruction {
   color: var(--text-gray);
-  font-size: 13px;
-  margin-top: 15px;
+  font-size: 14px;
+  margin-top: 25px;
   font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .energy-badge {
   background: rgba(255, 255, 255, 0.03);
-  padding: 6px 16px;
+  padding: 8px 20px;
   border-radius: 20px;
-  border: 1px solid #1f1f1f;
+  border: 1px solid #1a1a1f;
   font-size: 13px;
-  margin-top: 12px;
+  margin-top: 15px;
   font-weight: 700;
 }
 
 .floating-text {
   position: absolute;
-  color: #ffca28;
-  font-size: 28px;
+  color: #fff;
+  font-size: 32px;
   font-weight: 900;
   pointer-events: none;
   animation: floatUpUp 0.6s ease-out forwards;
-  text-shadow: 0 0 8px rgba(255, 115, 0, 0.8);
+  text-shadow: 0 0 10px var(--theme-orange);
   z-index: 999;
 }
 
 @keyframes floatUpUp {
   0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-110px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(1.1); }
 }
 
-/* ================= 7-DAYS CHECK-IN STYLING (UNIQUE DESIGN) ================= */
+/* ================= HIGH TECH SPIN INTERFACE ================= */
+.spin-mode-selector { 
+  display: flex; 
+  background: #0f0f12; 
+  border-radius: 14px; 
+  padding: 4px; 
+  margin-bottom: 20px; 
+  border: 1px solid #1c1c22; 
+}
+
+.mode-tab { 
+  flex: 1; 
+  background: none; 
+  border: none; 
+  color: var(--text-gray); 
+  padding: 12px; 
+  font-weight: 700; 
+  font-size: 13px; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.mode-tab.active { background: #1c1c24; color: #fff; }
+.mode-tab.active.premium-active { 
+  background: linear-gradient(135deg, #241408 0%, #3d1f05 100%); 
+  color: #ff9100; 
+  border: 1px solid rgba(255, 115, 0, 0.25); 
+}
+
+/* Premium Mode Top-Right USD Tracker Display */
+.premium-usd-tracker {
+  background: linear-gradient(90deg, #111115, #1a1a24);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 12px;
+  padding: 8px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #00f0ff;
+  margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.05);
+}
+
+.wheel-container { 
+  position: relative; 
+  width: 250px; 
+  height: 250px; 
+  margin: 10px auto 25px auto; 
+}
+
+.pointer-device { 
+  position: absolute; 
+  top: -10px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 0; 
+  height: 0; 
+  border-left: 12px solid transparent; 
+  border-right: 12px solid transparent; 
+  border-top: 22px solid #ff1744; 
+  z-index: 10; 
+}
+
+/* Premium Visual Design Wheel */
+.wheel-canvas-mock { 
+  width: 100%; 
+  height: 100%; 
+  border-radius: 50%; 
+  background: conic-gradient(
+    #131316 0deg 45deg, #1c1c22 45deg 90deg, 
+    #131316 90deg 135deg, #1c1c22 135deg 180deg, 
+    #131316 180deg 225deg, #1c1c22 225deg 270deg, 
+    #131316 270deg 315deg, #1c1c22 315deg 360deg
+  ); 
+  border: 8px solid #25252e; 
+  box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 20px rgba(255,255,255,0.02); 
+  transition: transform 3.5s cubic-bezier(0.1, 0.8, 0.1, 1); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: relative;
+}
+
+/* Embedded Core Matrix Matrix Rewards Layout Inside Wheel Design Context */
+.wheel-sector-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 800;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.wsl-0 { transform: rotate(22.5deg) translateY(-90deg); }
+.wsl-1 { transform: rotate(67.5deg) translateY(-90deg); }
+.wsl-2 { transform: rotate(112.5deg) translateY(-90deg); }
+.wsl-3 { transform: rotate(157.5deg) translateY(-90deg); }
+.wsl-4 { transform: rotate(202.5deg) translateY(-90deg); }
+.wsl-5 { transform: rotate(247.5deg) translateY(-90deg); }
+.wsl-6 { transform: rotate(292.5deg) translateY(-90deg); }
+.wsl-7 { transform: rotate(337.5deg) translateY(-90deg); }
+
+.wheel-center-core { 
+  position: absolute; 
+  width: 46px; 
+  height: 46px; 
+  background: #ffffff; 
+  color: #000; 
+  border-radius: 50%; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  box-shadow: 0 0 15px rgba(255, 115, 0, 0.4); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 16px;
+  z-index: 5;
+}
+
+.spin-trigger-btn { 
+  background: var(--theme-orange); 
+  color: #fff; 
+  border: none; 
+  width: 85%; 
+  padding: 15px; 
+  font-size: 16px; 
+  font-weight: 800; 
+  border-radius: 14px; 
+  cursor: pointer; 
+  margin-top: 10px; 
+  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+.spin-trigger-btn:disabled { background: #222; color: #555; box-shadow: none; }
+.spin-count-status { margin-top: 12px; font-size: 13px; color: var(--text-gray); font-weight: 600; }
+
+/* ================= TASKS PAGE (CLEAN LIST & DAILY MODULE) ================= */
 .checkin-section {
-  background: #0f0f12;
+  background: linear-gradient(135deg, #0e0e11 0%, #070709 100%);
   border-radius: 20px;
   padding: 16px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(255, 115, 0, 0.1);
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 115, 0, 0.08);
 }
 
 .checkin-header {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   margin-bottom: 15px;
   display: flex;
   align-items: center;
   gap: 8px;
   color: #fff;
+  letter-spacing: 0.2px;
 }
 
 .checkin-grid {
@@ -217,8 +405,8 @@ header {
 }
 
 .checkin-box {
-  background: #16161a;
-  border: 1px solid #222;
+  background: #131317;
+  border: 1px solid #1f1f26;
   border-radius: 12px;
   padding: 10px 4px;
   text-align: center;
@@ -232,34 +420,21 @@ header {
 
 .checkin-box.day-7 {
   grid-column: span 2;
-  background: linear-gradient(135deg, #1c130c 0%, #141414 100%);
-  border: 1px solid rgba(255, 115, 0, 0.3);
+  background: linear-gradient(135deg, #221307 0%, #111115 100%);
+  border: 1px solid rgba(255, 115, 0, 0.2);
 }
 
-.checkin-day {
-  font-size: 11px;
-  color: var(--text-gray);
-  font-weight: 700;
-}
+.checkin-day { font-size: 11px; color: var(--text-gray); font-weight: 700; }
+.checkin-reward-info { font-size: 11px; font-weight: 800; color: #fff; margin-top: 4px; }
 
-.checkin-reward-info {
-  font-size: 11px;
-  font-weight: 800;
-  color: #fff;
-  margin-top: 4px;
-}
-
-.checkin-box i {
-  font-size: 16px;
-  margin: 5px 0;
-}
+.checkin-box i { font-size: 15px; margin: 5px 0; }
 .checkin-box i.fa-coins { color: var(--accent-gold); }
 .checkin-box i.fa-gift { color: #ff5252; }
 .checkin-box i.fa-key { color: var(--neon-cyan); }
 
 .checkin-box.claimed {
   border-color: var(--primary-green);
-  background: rgba(92, 200, 59, 0.05);
+  background: rgba(76, 175, 80, 0.06);
 }
 .checkin-box.claimed::after {
   content: "✓";
@@ -267,7 +442,7 @@ header {
   top: 2px;
   right: 6px;
   color: var(--primary-green);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
 }
 
@@ -282,191 +457,133 @@ header {
   font-size: 14px;
   margin-top: 10px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.2);
 }
-.checkin-btn:disabled {
-  background: #222;
-  color: #555;
-  box-shadow: none;
-  cursor: not-allowed;
-}
+.checkin-btn:disabled { background: #1c1c22; color: #444; cursor: not-allowed; }
 
-/* ================= SPIN ARCHITECTURE WHEEL PAGE ================= */
-.spin-mode-selector {
-  display: flex;
-  background: #111;
-  border-radius: 12px;
-  padding: 4px;
-  margin-bottom: 25px;
-  border: 1px solid #222;
-}
+/* System Standard Tasks UI Matrix Container */
+.task-list { display: flex; flex-direction: column; gap: 12px; }
+.task-card { background-color: var(--card-bg); border-radius: 16px; padding: 15px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #1a1a22; }
+.task-left { display: flex; align-items: center; gap: 15px; }
 
-.mode-tab {
-  flex: 1;
-  background: none;
-  border: none;
-  color: var(--text-gray);
-  padding: 10px;
-  font-weight: 700;
-  font-size: 13px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.mode-tab.active {
-  background: #222;
+.task-icon-box { 
+  width: 44px; 
+  height: 44px; 
+  border-radius: 12px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 20px; 
   color: #fff;
 }
-.mode-tab.active.premium-active {
-  background: linear-gradient(135deg, #2e1c0c 0%, #422300 100%);
-  color: #ff9100;
-  border: 1px solid rgba(255, 115, 0, 0.3);
-}
-
-.wheel-container {
-  position: relative;
-  width: 240px;
-  height: 240px;
-  margin: 0 auto 25px auto;
-}
-
-.pointer-device {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 20px solid #ff1744;
-  z-index: 10;
-}
-
-.wheel-canvas-mock {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: conic-gradient(
-    #181818 0deg 60deg, #252525 60deg 120deg,
-    #181818 120deg 180deg, #252525 180deg 240deg,
-    #181818 240deg 300deg, #252525 300deg 360deg
-  );
-  border: 6px solid #2c2c2c;
-  box-shadow: 0 0 25px rgba(0,0,0,0.8);
-  transition: transform 3s cubic-bezier(0.1, 0.8, 0.1, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 14px;
-}
-
-.wheel-center-core {
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  background: #fff;
-  color: #000;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.spin-trigger-btn {
-  background: var(--primary-green);
-  color: #000;
-  border: none;
-  width: 80%;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 800;
-  border-radius: 14px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-.spin-trigger-btn:disabled {
-  background: #252525;
-  color: #666;
-}
-
-.spin-count-status {
-  margin-top: 12px;
-  font-size: 13px;
-  color: var(--text-gray);
-  font-weight: 600;
-}
-
-/* ================= TASKS PAGE ================= */
-.task-list { display: flex; flex-direction: column; gap: 12px; }
-.task-card { background-color: var(--card-bg); border-radius: 16px; padding: 15px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #1f1f1f; }
-.task-left { display: flex; align-items: center; gap: 15px; }
-.task-icon-box { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 .icon-tg { background: linear-gradient(135deg, #229ED9, #179cde); }
-.icon-x { background: #000; border: 1px solid #333; }
+.icon-x { background: #ffffff; color: #000000; border: 1px solid #e1e1e1; } /* FIXED WHITE PURE X LOGO STYLE */
 .icon-yt { background: #FF0000; }
 .icon-fb { background: #1877F2; }
+
 .task-info { text-align: left; }
 .task-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
 .task-reward { font-size: 12px; color: var(--text-gray); display: flex; align-items: center; gap: 4px; font-weight: 600; }
 .task-reward i { color: var(--accent-gold); }
-.action-btn { background-color: var(--primary-green); color: #000; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; }
+.action-btn { background-color: #ffffff; color: #000; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; }
+.action-btn.claimed { background-color: #1c1c24; color: #555; cursor: not-allowed; }
 
-/* ================= WALLET WINDOW ================= */
-.wallet-box-ui {
+/* ================= INVIATION WINDOW PLATFORM ================= */
+.invite-container {
   background: var(--card-bg);
-  border: 1px solid #222;
+  border: 1px solid #1a1a22;
   border-radius: 20px;
   padding: 25px 20px;
-  margin-top: 20px;
+  text-align: center;
 }
-.withdrawal-form {
-  margin-top: 20px;
-  text-align: left;
+.invite-bonus-card {
+  background: linear-gradient(135deg, #161620 0%, #0b0b0f 100%);
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 240, 255, 0.08);
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-around;
 }
-.withdrawal-form label {
-  font-size: 12px;
-  color: var(--text-gray);
-  font-weight: 700;
-}
-.withdrawal-form input {
-  width: 100%;
-  background: #0b0b0d;
-  border: 1px solid #25252b;
-  padding: 12px;
+.invite-bonus-item h4 { margin: 0 0 5px 0; font-size: 18px; color: var(--theme-orange); }
+.invite-bonus-item p { margin: 0; font-size: 11px; color: var(--text-gray); font-weight: 600; }
+.share-link-box {
+  background: #070709;
+  border: 1px solid #22222a;
+  padding: 12px 15px;
   border-radius: 10px;
-  color: white;
-  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 15px;
-  box-sizing: border-box;
+  font-size: 13px;
+  color: var(--text-gray);
 }
-.withdraw-submit-btn {
+.copy-btn { background: none; border: none; color: var(--neon-cyan); font-weight: 700; cursor: pointer; }
+.invite-main-btn {
   width: 100%;
-  background: var(--theme-orange);
-  color: white;
+  background: #fff;
+  color: #000;
   border: none;
   padding: 14px;
   border-radius: 12px;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
 }
 
-/* ================= BOTTOM NAVIGATION BAR ================= */
+/* ================= WEB3 GLOBAL USER PROFILE PROFILE ================= */
+.profile-card {
+  background: var(--card-bg);
+  border: 1px solid #1a1a22;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid var(--theme-orange);
+  margin: 0 auto 12px auto;
+  background: #1c1c24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+.profile-rank {
+  background: rgba(255, 115, 0, 0.1);
+  color: var(--theme-orange);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.profile-data-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 5px;
+  border-bottom: 1px solid #14141a;
+  font-size: 13px;
+}
+.profile-data-row:last-child { border-bottom: none; }
+.profile-data-label { color: var(--text-gray); font-weight: 600; }
+.profile-data-val { font-weight: 700; color: #fff; }
+
+/* ================= 5-ITEMS DYNAMIC BOTTOM NAVIGATION BAR ================= */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #0f0f0f;
+  background-color: #08080a;
   display: flex;
   justify-content: space-around;
   padding: 12px 0 26px 0;
-  border-top: 1px solid #1a1a1f;
+  border-top: 1px solid #141418;
   z-index: 99;
 }
 
@@ -478,18 +595,59 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 10px;
   cursor: pointer;
-  width: 25%;
+  width: 20%; /* PROPORTIONAL WEIGHT FOR 5 SEGMENTS */
 }
 
 .nav-item i { font-size: 18px; }
 .nav-item.active { color: var(--theme-orange); }
+
+/* ================= WEB3 POPUP MODAL ARCHITECTURE ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-window {
+  background: #0c0c0f;
+  border: 1px solid #22222a;
+  width: 85%;
+  max-width: 340px;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.modal-window h3 { margin-top: 0; font-size: 18px; color: #fff; }
+.modal-window p { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; }
+.wallet-option {
+  background: #14141a;
+  border: 1px solid #22222a;
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+}
+.wallet-option img { width: 24px; height: 24px; border-radius: 6px; }
+.close-modal-btn {
+  background: none; border: none; color: #ff5252; font-weight: 700; margin-top: 15px; cursor: pointer; font-size: 13px;
+}
 </style>
 </head>
 <body>
 
-<div id="main-view">
+<div id="app-viewport">
+  
+  <!-- COMPACT TOP BAR HEADER ELEMENT -->
   <header>
     <div class="header-title">
       <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="🦊"> 
@@ -499,7 +657,15 @@ header {
   </header>
   <div class="sub-title" id="page-subtitle">Welcome to Cyber Fox Hub 🦊</div>
 
-  <div class="stats-container">
+  <!-- WEB3 WALLET CONNECTOR BAR (MOVED TO TOP ACCORDING TO PLAN) -->
+  <div class="wallet-connector-wrapper" id="global-wallet-bar">
+    <button class="web3-connect-btn" id="wallet-trigger-btn" onclick="openWalletModal()">
+      <i class="fa-solid fa-plug"></i> <span id="wallet-btn-text">Connect Crypto Wallet</span>
+    </button>
+  </div>
+
+  <!-- MULTI-STATS HEADERS GRID SYSTEM (HIDDEN ON TASKS VIEW) -->
+  <div class="stats-container" id="global-stats-panel">
     <div class="stat-box">
       <div class="stat-label"><i class="fa-solid fa-coins"></i> Coins</div>
       <div class="stat-value" id="global-coin">0</div>
@@ -509,17 +675,70 @@ header {
       <div class="stat-value" id="power-percent">100%</div>
     </div>
     <div class="stat-box">
-      <div class="stat-label"><i class="fa-solid fa-dollar-sign"></i> Balance</div>
-      <div class="stat-value" id="global-usd">$0.00</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-label"><i class="fa-solid fa-key"></i> Key Node</div>
+      <div class="stat-label"><i class="fa-solid fa-key"></i> Keys</div>
       <div class="stat-value" id="global-keys">0</div>
     </div>
   </div>
 
+  <!-- ================= 1. HOME MAIN ENGINE PAGE ================= -->
   <div id="home-page" class="page">
+    <div class="main-clicker-area">
+      <div class="circle-outer">
+        <div class="circle-inner" id="clicker-btn">
+          <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="Cyber Fox">
+        </div>
+      </div>
+      <div class="tap-instruction">Tap the fox and earn rewards globally 🦊</div>
+      <div class="energy-badge"><i class="fa-solid fa-hand-pointer"></i> <span id="taps-left">125</span> Taps Left</div>
+    </div>
+  </div>
+
+  <!-- ================= 2. ULTRAPREMIUM DYNAMIC SPIN WHEEL PAGE ================= -->
+  <div id="spin-page" class="page" style="display:none; text-align:center;">
+    <div class="spin-mode-selector">
+      <button class="mode-tab active" id="tab-normal" onclick="setSpinMode('normal')">
+        <i class="fa-solid fa-circle-dot"></i> Normal Wheel
+      </button>
+      <button class="mode-tab" id="tab-premium" onclick="setSpinMode('premium')">
+        <i class="fa-solid fa-key"></i> Premium Wheel
+      </button>
+    </div>
+
+    <!-- Isolated Core Live USD Target Balance Tracker Node -->
+    <div id="premium-usd-container" style="display:none;">
+      <div class="premium-usd-tracker">
+        <i class="fa-solid fa-wallet"></i> Balance: <span id="premium-usd-value">$0.00</span>
+      </div>
+    </div>
+
+    <h3 id="wheel-display-title" style="margin-top:5px; color:#fff; font-size: 18px;">Standard Matrix</h3>
+    <p id="wheel-display-desc" style="color:var(--text-gray); font-size:12px; margin-bottom:20px;">Review potential matrix bounties directly embedded inside the grid sections.</p>
+
+    <div class="wheel-container">
+      <div class="pointer-device"></div>
+      <div class="wheel-canvas-mock" id="wheel-graphic">
+        <!-- Embedded Visual Sector Elements Mapping Rewards Data Inside Wheel Graphic Matrix -->
+        <div class="wheel-sector-label wsl-0" id="ws-0"><span>1K</span><i class="fa-solid fa-coins"></i></div>
+        <div class="wheel-sector-label wsl-1" id="ws-1"><span>🔑</span><i class="fa-solid fa-key"></i></div>
+        <div class="wheel-sector-label wsl-2" id="ws-2"><span>1.5K</span><i class="fa-solid fa-coins"></i></div>
+        <div class="wheel-sector-label wsl-3" id="ws-3"><span>🎁</span><i class="fa-solid fa-gift"></i></div>
+        <div class="wheel-sector-label wsl-4" id="ws-4"><span>2K</span><i class="fa-solid fa-coins"></i></div>
+        <div class="wheel-sector-label wsl-5" id="ws-5"><span>2.5K</span><i class="fa-solid fa-coins"></i></div>
+        <div class="wheel-sector-label wsl-6" id="ws-6"><span>500</span><i class="fa-solid fa-coins"></i></div>
+        <div class="wheel-sector-label wsl-7" id="ws-7"><span>🎁</span><i class="fa-solid fa-gift"></i></div>
+      </div>
+      <div class="wheel-center-core">🎯</div>
+    </div>
+
+    <button class="spin-trigger-btn" id="spin-action-button" onclick="executeWheelSpin()">LAUNCH SPIN</button>
+    <div class="spin-count-status" id="spin-balance-text">Available Spins: 0</div>
+    <div class="spin-count-status" id="prem-spin-balance-text" style="color:var(--theme-orange); display:none;">Premium Spins: 0</div>
+  </div>
+
+  <!-- ================= 3. SYSTEM TASKS PAGE (ZERO HEADERS MODE) ================= -->
+  <div id="tasks-page" class="page" style="display:none;">
     
+    <!-- Daily Checkin Architecture Node Module Embedded Inside Tasks Top Scope Layout -->
     <div class="checkin-section">
       <div class="checkin-header">
         <i class="fa-solid fa-gift" style="color:var(--theme-orange)"></i> 7 Days Active Rewards Checklist
@@ -532,93 +751,142 @@ header {
         <div class="checkin-box" id="cbox-5"><span class="checkin-day">Day 5</span><i class="fa-solid fa-gift"></i><span class="checkin-reward-info">15K+20S</span></div>
         <div class="checkin-box" id="cbox-6"><span class="checkin-day">Day 6</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">30K</span></div>
         <div class="checkin-box day-7" id="cbox-7">
-          <span class="checkin-day">Day 7 (Grand)</span>
-          <div><i class="fa-solid fa-coins"></i> <i class="fa-solid fa-key" style="margin-left:5px"></i></div>
-          <span class="checkin-reward-info">50K + 🔑 Key + Prem Spin</span>
+          <span class="checkin-day">Day 7</span>
+          <div><i class="fa-solid fa-coins"></i> <i class="fa-solid fa-key" style="margin-left:3px"></i></div>
+          <span class="checkin-reward-info">50K + 🔑</span>
         </div>
-        <button class="checkin-btn" id="checkin-action-btn" onclick="executeDailyCheckIn()">CLAIM TODAY'S BOUNTY</button>
+        <button class="checkin-btn" id="checkin-action-btn" onclick="executeDailyCheckIn()">CLAIM REWARD</button>
       </div>
     </div>
 
-    <div class="main-clicker-area">
-      <div class="circle-outer">
-        <div class="circle-inner" id="clicker-btn">
-          <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="Cyber Fox">
-        </div>
-      </div>
-      <div class="tap-instruction">Tap the fox and earn coins 🦊</div>
-      <div class="energy-badge"><i class="fa-solid fa-hand-pointer"></i> <span id="taps-left">125</span> Taps Left</div>
-    </div>
-  </div>
-
-  <div id="spin-page" class="page" style="display:none; text-align:center;">
-    <div class="spin-mode-selector">
-      <button class="mode-tab active" id="tab-normal" onclick="setSpinMode('normal')">Normal Wheel</button>
-      <button class="mode-tab" id="tab-premium" onclick="setSpinMode('premium')">💎 Premium Wheel</button>
-    </div>
-
-    <h3 id="wheel-display-title" style="margin-top:0; color:#fff;">Standard Coin Matrix</h3>
-    <p id="wheel-display-desc" style="color:var(--text-gray); font-size:12px; margin-bottom:20px;">Win up to 2,500 coins or find a Mystery Box inside.</p>
-
-    <div class="wheel-container">
-      <div class="pointer-device"></div>
-      <div class="wheel-canvas-mock" id="wheel-graphic">
-        <div id="wheel-text-node">FOX SPIN</div>
-      </div>
-      <div class="wheel-center-core">🎯</div>
-    </div>
-
-    <button class="spin-trigger-btn" id="spin-action-button" onclick="executeWheelSpin()">LAUNCH SPIN</button>
-    
-    <div class="spin-count-status" id="spin-balance-text">Available Spins: 0</div>
-    <div class="spin-count-status" id="prem-spin-balance-text" style="color:var(--theme-orange)">Premium Active Spins: 0</div>
-  </div>
-
-  <div id="tasks-page" class="page" style="display:none;">
+    <!-- Complete Tasks Core Array Data Feed Container -->
     <div class="task-list">
-      <div class="task-card">
+      <div class="task-card" id="t-card-tg">
         <div class="task-left">
           <div class="task-icon-box icon-tg"><i class="fa-brands fa-telegram"></i></div>
           <div class="task-info">
-            <div class="task-name">Join our TG Channel</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> 1,000</div>
+            <div class="task-name">Join Telegram Channel</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> +1,000</div>
           </div>
         </div>
-        <button class="action-btn" onclick="alert('Redirecting to Telegram...')">JOIN</button>
+        <button class="action-btn" id="t-btn-tg" onclick="triggerTaskAction('tg')">JOIN</button>
       </div>
-      <div class="task-card">
+
+      <div class="task-card" id="t-card-x">
         <div class="task-left">
           <div class="task-icon-box icon-x"><i class="fa-brands fa-x-twitter"></i></div>
           <div class="task-info">
             <div class="task-name">Follow Cyber Fox on X</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> 2,000</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> +2,000</div>
           </div>
         </div>
-        <button class="action-btn" onclick="alert('Redirecting to X...')">FOLLOW</button>
+        <button class="action-btn" id="t-btn-x" onclick="triggerTaskAction('x')">FOLLOW</button>
+      </div>
+
+      <div class="task-card" id="t-card-yt">
+        <div class="task-left">
+          <div class="task-icon-box icon-yt"><i class="fa-brands fa-youtube"></i></div>
+          <div class="task-info">
+            <div class="task-name">Subscribe YouTube Channel</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> +3,000</div>
+          </div>
+        </div>
+        <button class="action-btn" id="t-btn-yt" onclick="triggerTaskAction('yt')">SUBSCRIBE</button>
+      </div>
+
+      <div class="task-card" id="t-card-fb">
+        <div class="task-left">
+          <div class="task-icon-box icon-fb"><i class="fa-brands fa-facebook"></i></div>
+          <div class="task-info">
+            <div class="task-name">Follow Facebook Page</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> +1,500</div>
+          </div>
+        </div>
+        <button class="action-btn" id="t-btn-fb" onclick="triggerTaskAction('fb')">FOLLOW</button>
       </div>
     </div>
   </div>
 
-  <div id="wallet-page" class="page" style="display:none; text-align:center;">
-    <div class="wallet-box-ui">
-      <i class="fa-solid fa-wallet" style="font-size:40px; color:var(--theme-orange); margin-bottom:15px;"></i>
-      <h3>Withdrawal Control Portal</h3>
-      <p style="color:var(--text-gray); font-size:13px;">Minimum Threshold: <span style="color:#4caf50; font-weight:bold;">$10.00 USD</span></p>
+  <!-- ================= 4. INVITATION ENGINE VIEW WINDOW ================= -->
+  <div id="invite-page" class="page" style="display:none;">
+    <div class="invite-container">
+      <i class="fa-solid fa-users" style="font-size:42px; color:var(--theme-orange); margin-bottom:12px;"></i>
+      <h3 style="margin:0; color:#fff;">Invite Friends</h3>
+      <p style="font-size:12px; color:var(--text-gray); margin:5px 0 20px 0;">Build your global mining squad network and receive crypto bounty commissions.</p>
       
-      <div class="withdrawal-form">
-        <label>Select Chain Protocol</label>
-        <input type="text" value="TON Network / RedotPay Card Address" readonly>
-        
-        <label>Destination Wallet Address</label>
-        <input type="text" placeholder="Enter your valid cryptographic address">
-        
-        <button class="withdraw-submit-btn" onclick="processWithdrawRequest()">REQUEST PAYOUT</button>
+      <div class="invite-bonus-card">
+        <div class="invite-bonus-item">
+          <h4>+5,000</h4>
+          <p>For Regular User</p>
+        </div>
+        <div class="invite-bonus-item">
+          <h4>+25,000</h4>
+          <p>For Premium Tier</p>
+        </div>
+      </div>
+
+      <div class="share-link-box">
+        <span id="referral-link-string">https://t.me/CyberFoxBot?start=ref77128</span>
+        <button class="copy-btn" onclick="copyReferralLink()">COPY</button>
+      </div>
+      <button class="invite-main-btn" onclick="alert('Link copied! Share it anywhere globally.')">Invite A Friend</button>
+    </div>
+  </div>
+
+  <!-- ================= 5. GLOBAL ACCOUNT PROFILE WINDFALL ================= -->
+  <div id="profile-page" class="page" style="display:none;">
+    <div class="profile-card">
+      <div class="profile-avatar"><i class="fa-solid fa-user-ninja" style="color:var(--theme-orange)"></i></div>
+      <h3 style="margin:0 0 4px 0; color:#fff;">Cyber Miner Alpha</h3>
+      <div class="profile-rank">Tier 1 Global Node</div>
+
+      <div style="margin-top:15px; border-top:1px solid #1c1c24;">
+        <div class="profile-data-row">
+          <span class="profile-data-label">Total Extracted Coins</span>
+          <span class="profile-data-val" id="prof-coins">0</span>
+        </div>
+        <div class="profile-data-row">
+          <span class="profile-data-label">Total Verification Keys</span>
+          <span class="profile-data-val" id="prof-keys">0</span>
+        </div>
+        <div class="profile-data-row">
+          <span class="profile-data-label">Connected Network</span>
+          <span class="profile-data-val" id="prof-net" style="color:var(--neon-blue)">None</span>
+        </div>
+        <div class="profile-data-row">
+          <span class="profile-data-label">Global Account Security</span>
+          <span class="profile-data-val" style="color:var(--primary-green)">Verified</span>
+        </div>
       </div>
     </div>
   </div>
 
 </div>
 
+<!-- GLOBAL CRYPTO WEB3 WALLET SELECTION MODAL POPUP LAYER -->
+<div class="modal-overlay" id="wallet-modal-overlay">
+  <div class="modal-window">
+    <h3>Connect Web3 Wallet</h3>
+    <p>Select your native ecosystem wallet software securely.</p>
+    
+    <div class="wallet-option" onclick="mockEstablishWalletConnection('TON Keep / Tonkeeper')">
+      <img src="https://assets.coingecko.com/coins/images/17980/standard/ton_token.png" alt="TON">
+      <span>Tonkeeper / TON Wallet</span>
+    </div>
+    <div class="wallet-option" onclick="mockEstablishWalletConnection('Trust Wallet')">
+      <img src="https://assets.coingecko.com/coins/images/13162/standard/trust_wallet.png" alt="TW">
+      <span>Trust Wallet</span>
+    </div>
+    <div class="wallet-option" onclick="mockEstablishWalletConnection('MetaMask Portal')">
+      <img src="https://assets.coingecko.com/coins/images/27006/standard/metamask.png" alt="MM">
+      <span>MetaMask Wallet</span>
+    </div>
+
+    <button class="close-modal-btn" onclick="closeWalletModal()">CANCEL</button>
+  </div>
+</div>
+
+<!-- FIVE MODULAR BOTTOM BAR NAVIGATION TABS SYSTEM -->
 <div class="bottom-nav">
   <button class="nav-item active" id="nav-home" onclick="switchPage('home')">
     <i class="fa-solid fa-house"></i><span>Home</span>
@@ -629,18 +897,22 @@ header {
   <button class="nav-item" id="nav-tasks" onclick="switchPage('tasks')">
     <i class="fa-solid fa-clipboard-list"></i><span>Tasks</span>
   </button>
-  <button class="nav-item" id="nav-wallet" onclick="switchPage('wallet')">
-    <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+  <button class="nav-item" id="nav-invite" onclick="switchPage('invite')">
+    <i class="fa-solid fa-users"></i><span>Invite</span>
+  </button>
+  <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+    <i class="fa-solid fa-user"></i><span>Profile</span>
   </button>
 </div>
 
 <script>
-// --- Global Logic Configurations Variable Mapping ---
-let coins = Number(localStorage.getItem("coins")) || 1250;
+// --- Global Logic Configurations Engine Mapping ---
+let coins = Number(localStorage.getItem("coins")) || 25495;
 let usdBalance = Number(localStorage.getItem("usd_balance")) || 0.00;
-let normalSpins = Number(localStorage.getItem("normal_spins")) || 5;
+let normalSpins = Number(localStorage.getItem("normal_spins")) || 43;
 let premiumSpins = Number(localStorage.getItem("premium_spins")) || 0;
-let keyTokens = Number(localStorage.getItem("key_tokens")) || 0;
+let keyTokens = Number(localStorage.getItem("key_tokens")) || 2;
+let connectedWalletName = localStorage.getItem("conn_wallet_name") || "";
 
 let currentTaps = 125;
 let maxTaps = 125;
@@ -648,64 +920,82 @@ let maxTaps = 125;
 let checkInStreak = Number(localStorage.getItem("ci_streak")) || 0;
 let lastCheckInDate = localStorage.getItem("last_ci_date") || "";
 
-let spinMode = "normal"; // normal or premium
+let spinMode = "normal"; 
 let totalSpinsLifetime = Number(localStorage.getItem("lifetime_spins")) || 0;
 let historicPremiumSpinCount = Number(localStorage.getItem("hist_prem_spins")) || 0;
 
-// --- DOM References ---
+// Tasks Complete Tracking Database Mock
+let taskState = JSON.parse(localStorage.getItem("task_state_matrix")) || { tg: false, x: false, yt: false, fb: false };
+
+// --- DOM Object Elements Dynamic Registration ---
 const coinDisplay = document.getElementById("global-coin");
-const usdDisplay = document.getElementById("global-usd");
 const keysDisplay = document.getElementById("global-keys");
 const powerDisplay = document.getElementById("power-percent");
 const tapsDisplay = document.getElementById("taps-left");
 const wheelGraphic = document.getElementById("wheel-graphic");
-const wheelTextNode = document.getElementById("wheel-text-node");
+const walletBtnText = document.getElementById("wallet-btn-text");
+const walletTriggerBtn = document.getElementById("wallet-trigger-btn");
 
 function updateSystemUI() {
   coinDisplay.innerText = coins.toLocaleString();
-  usdDisplay.innerText = "$" + usdBalance.toFixed(2);
   keysDisplay.innerText = keyTokens;
   tapsDisplay.innerText = currentTaps;
   powerDisplay.innerText = Math.floor((currentTaps / maxTaps) * 100) + "%";
 
+  // Spin Counter Controllers Status Update
   document.getElementById("spin-balance-text").innerText = `Available Spins: ${normalSpins}`;
-  document.getElementById("prem-spin-balance-text").innerText = `Premium Active Spins: ${premiumSpins}`;
+  document.getElementById("prem-spin-balance-text").innerText = `Premium Spins: ${premiumSpins}`;
+  document.getElementById("premium-usd-value").innerText = "$" + usdBalance.toFixed(2);
+
+  // Profile View Screen Sync
+  document.getElementById("prof-coins").innerText = coins.toLocaleString();
+  document.getElementById("prof-keys").innerText = keyTokens;
+
+  if (connectedWalletName) {
+    walletBtnText.innerText = connectedWalletName + " Active";
+    walletTriggerBtn.classList.add("connected");
+    document.getElementById("prof-net").innerText = connectedWalletName;
+  } else {
+    walletBtnText.innerText = "Connect Crypto Wallet";
+    walletTriggerBtn.classList.remove("connected");
+    document.getElementById("prof-net").innerText = "None Connected";
+  }
   
   refreshCheckInBoxes();
+  refreshIndividualTasksView();
 }
 
-// --- Tap Machine Engine ---
+// --- Tap Click Processing Engine Logic ---
 document.getElementById("clicker-btn").addEventListener("click", function(e) {
   if (currentTaps <= 0) return;
   coins += 1; currentTaps -= 1;
   localStorage.setItem("coins", coins);
   updateSystemUI();
 
+  // Screen Tap Floating Coordinates Numeric Trigger Engine
   const x = e.clientX; const y = e.clientY;
   const ft = document.createElement("div");
   ft.className = "floating-text"; ft.innerText = "+1";
-  ft.style.left = `${x - 12}px`; ft.style.top = `${y - 22}px`;
+  ft.style.left = `${x - 12}px`; ft.style.top = `${y - 25}px`;
   document.body.appendChild(ft);
   setTimeout(() => ft.remove(), 600);
 });
 
+// Periodic Automatic Power Recovery Tick
 setInterval(() => {
   if (currentTaps < maxTaps) { currentTaps += 1; updateSystemUI(); }
 }, 3000);
 
-// --- 7 Days Logic Structure (Non-cloned Unique Render) ---
+// --- 7 Days Check-In Dynamic Core Routine Tracker ---
 function refreshCheckInBoxes() {
   for (let i = 1; i <= 7; i++) {
     const box = document.getElementById(`cbox-${i}`);
     if (box) {
       box.classList.remove("claimed");
-      if (i <= checkInStreak) {
-        box.classList.add("claimed");
-      }
+      if (i <= checkInStreak) box.classList.add("claimed");
     }
   }
   
-  // চেক-ইন বাটন এনাবেল/ডিজেবল করার লজিক (২৪ ঘণ্টার রিয়েল কন্ডিশন)
   const todayStr = new Date().toDateString();
   const btn = document.getElementById("checkin-action-btn");
   if (lastCheckInDate === todayStr) {
@@ -722,20 +1012,17 @@ function executeDailyCheckIn() {
   if (lastCheckInDate === todayStr) return;
 
   checkInStreak += 1;
-  if (checkInStreak > 7) checkInStreak = 1; // লুপ ব্যাক ১ দিনে
+  if (checkInStreak > 7) checkInStreak = 1; 
 
-  // পুরস্কারের রিয়েল চার্ট ম্যাট্রিক্স লজিক
-  if (checkInStreak === 1) { coins += 1000; alert("Day 1 Claimed: +1,000 Coins!"); }
-  else if (checkInStreak === 2) { coins += 3000; normalSpins += 5; alert("Day 2 Claimed: +3,000 Coins & +5 Lucky Spins!"); }
-  else if (checkInStreak === 3) { coins += 5000; alert("Day 3 Claimed: +5,000 Coins!"); }
-  else if (checkInStreak === 4) { coins += 10000; alert("Day 4 Claimed: +10,000 Coins!"); }
-  else if (checkInStreak === 5) { coins += 15000; normalSpins += 20; alert("Day 5 Claimed: +15,000 Coins & +20 Lucky Spins!"); }
-  else if (checkInStreak === 6) { coins += 30000; alert("Day 6 Claimed: +30,000 Coins!"); }
+  if (checkInStreak === 1) { coins += 1000; alert("Day 1 Secured: +1,000 Coins!"); }
+  else if (checkInStreak === 2) { coins += 3000; normalSpins += 5; alert("Day 2 Secured: +3,000 Coins & +5 Free Spins!"); }
+  else if (checkInStreak === 3) { coins += 5000; alert("Day 3 Secured: +5,000 Coins!"); }
+  else if (checkInStreak === 4) { coins += 10000; alert("Day 4 Secured: +10,000 Coins!"); }
+  else if (checkInStreak === 5) { coins += 15000; normalSpins += 20; alert("Day 5 Secured: +15,000 Coins & +20 Free Spins!"); }
+  else if (checkInStreak === 6) { coins += 30000; alert("Day 6 Secured: +30,000 Coins!"); }
   else if (checkInStreak === 7) { 
-    coins += 50000; 
-    keyTokens += 1; 
-    premiumSpins += 1; // ৭ম দিনে ১টি প্রিমিয়াম ডলার স্পিন আনলক
-    alert("🔥 Grand Day 7 Claimed! +50,000 Coins, +1 Premium Spin & 🔑 1 Withdrawal Key Added!");
+    coins += 50000; keyTokens += 1; premiumSpins += 1; 
+    alert("Grand Day 7 Bounty Unlocked! +50,000 Coins, +1 Premium Spin, and 🔑 1 Key Node Token!");
   }
 
   lastCheckInDate = todayStr;
@@ -749,7 +1036,38 @@ function executeDailyCheckIn() {
   updateSystemUI();
 }
 
-// --- Algorithmic Dual-Mode Spin Engine Core ---
+// --- Standard Operational System Tasks Array Manager ---
+function refreshIndividualTasksView() {
+  const keys = ['tg', 'x', 'yt', 'fb'];
+  keys.forEach(k => {
+    const btn = document.getElementById(`t-btn-${k}`);
+    if(taskState[k] && btn) {
+      btn.innerText = "DONE";
+      btn.className = "action-btn claimed";
+      btn.onclick = null;
+    }
+  });
+}
+
+function triggerTaskAction(id) {
+  if (taskState[id]) return;
+  alert("Redirecting to verification protocol gateway destination link...");
+  
+  setTimeout(() => {
+    taskState[id] = true;
+    if (id === 'tg') coins += 1000;
+    if (id === 'x') coins += 2000;
+    if (id === 'yt') coins += 3000;
+    if (id === 'fb') coins += 1500;
+    
+    localStorage.setItem("task_state_matrix", JSON.stringify(taskState));
+    localStorage.setItem("coins", coins);
+    updateSystemUI();
+    alert("Task verified successfully! Extraction bounty credited.");
+  }, 2000);
+}
+
+// --- Advanced Wheel System Engine Operations ---
 function setSpinMode(mode) {
   spinMode = mode;
   document.getElementById("tab-normal").classList.remove("active", "premium-active");
@@ -757,155 +1075,170 @@ function setSpinMode(mode) {
   
   const title = document.getElementById("wheel-display-title");
   const desc = document.getElementById("wheel-display-desc");
+  const usdBox = document.getElementById("premium-usd-container");
+  const normalText = document.getElementById("spin-balance-text");
+  const premText = document.getElementById("prem-spin-balance-text");
 
   if (mode === "normal") {
     document.getElementById("tab-normal").classList.add("active");
-    title.innerText = "Standard Coin Matrix";
-    desc.innerText = "Win up to 2,500 coins or find a Mystery Box inside.";
-    wheelGraphic.style.background = "conic-gradient(#181818 0deg 60deg, #252525 60deg 120deg, #181818 120deg 180deg, #252525 180deg 240deg, #181818 240deg 300deg, #252525 300deg 360deg)";
-    wheelTextNode.innerText = "COIN WHEEL";
-    wheelTextNode.style.color = "#fff";
+    usdBox.style.display = "none";
+    normalText.style.display = "block";
+    premText.style.display = "none";
+    title.innerText = "Standard Matrix";
+    desc.innerText = "Review potential matrix bounties directly embedded inside the grid sections.";
+    
+    // Reset Premium Rewards Setup Visuals to Standard Layout 
+    setWheelLabels(["1K", "🔑", "1.5K", "🎁", "2K", "2.5K", "500", "🎁"]);
+    wheelGraphic.style.background = "conic-gradient(#131316 0deg 45deg, #1c1c22 45deg 90deg, #131316 90deg 135deg, #1c1c22 135deg 180deg, #131316 180deg 225deg, #1c1c22 225deg 270deg, #131316 270deg 315deg, #1c1c22 315deg 360deg)";
   } else {
     document.getElementById("tab-premium").classList.add("active", "premium-active");
-    title.innerText = "💎 Premium Dollar Portal";
-    desc.innerText = "Weekly Active Check-in exclusive wheel. Earn real cash pool assets.";
-    wheelGraphic.style.background = "conic-gradient(#26180a 0deg 72deg, #1a1107 72deg 144deg, #26180a 144deg 216deg, #1a1107 216deg 288deg, #2e1b07 288deg 360deg)";
-    wheelTextNode.innerText = "USD WHEEL";
-    wheelTextNode.style.color = "var(--theme-orange)";
+    usdBox.style.display = "inline-block";
+    normalText.style.display = "none";
+    premText.style.display = "block";
+    title.innerText = "Premium Dollar Grid";
+    desc.innerText = "High tier node rewards pool. Win guaranteed on-chain USD cash elements.";
+    
+    // Dynamic Re-mapping Labels View into USD Values For Premium Wheel Integration
+    setWheelLabels(["$0.10", "$0.50", "$0.20", "🔑 Key", "$0.10", "$1.00", "$0.15", "🔑 Key"]);
+    wheelGraphic.style.background = "conic-gradient(#201105 0deg 45deg, #2e1b0b 45deg 90deg, #201105 90deg 135deg, #2e1b0b 135deg 180deg, #201105 180deg 225deg, #2e1b0b 225deg 270deg, #201105 270deg 315deg, #2e1b0b 315deg 360deg)";
+  }
+}
+
+function setWheelLabels(labelArray) {
+  for(let i=0; i<8; i++) {
+    document.getElementById(`ws-${i}`).firstChild.innerText = labelArray[i];
   }
 }
 
 function executeWheelSpin() {
   if (spinMode === "normal") {
-    if (normalSpins <= 0) { alert("No spins left! Daily check-in complete করে স্পিন কালেক্ট করো।"); return; }
-    normalSpins -= 1;
-    localStorage.setItem("normal_spins", normalSpins);
-    
-    totalSpinsLifetime += 1;
-    localStorage.setItem("lifetime_spins", totalSpinsLifetime);
+    if (normalSpins <= 0) { alert("Insufficient standard matrices matrix energy spins left."); return; }
+    normalSpins -= 1; localStorage.setItem("normal_spins", normalSpins);
+    totalSpinsLifetime += 1; localStorage.setItem("lifetime_spins", totalSpinsLifetime);
 
-    // ১. সাধারণ স্পিন লজিক ডিটারমিনেশন
-    let rewardType = ""; 
-    // চাবির অ্যালগরিদম হুক: প্রথম ৩ বা ৪ স্পিনের ভেতর নিশ্চিত চাবি পাবে, এরপর ৫০০-৬০০ স্পিন পর পর ১টি চাবি।
-    if (totalSpinsLifetime === 3 || totalSpinsLifetime === 4 || (totalSpinsLifetime > 5 && totalSpinsLifetime % 550 === 0)) {
-      rewardType = "KEY";
-    } else {
-      let rand = Math.random();
-      if (rand < 0.18) rewardType = "500";
-      else if (rand < 0.36) rewardType = "1000";
-      else if (rand < 0.54) rewardType = "1500";
-      else if (rand < 0.72) rewardType = "2000";
-      else if (rand < 0.88) rewardType = "2500";
-      else rewardType = "MYSTERY"; // ১২% চান্স মিস্ট্রি বক্সের
-    }
+    // Dynamic Segment Rotational Offsets Mapping Layout
+    let segments = [
+      { name: "1K Coins", action: () => { coins += 1000; } },
+      { name: "Golden Key Node", action: () => { keyTokens += 1; } },
+      { name: "1.5K Coins", action: () => { coins += 1500; } },
+      { name: "Mystery Gift Box", action: () => { normalSpins += 10; alert("Found +10 Extra Free Spins inside!"); } },
+      { name: "2K Coins", action: () => { coins += 2000; } },
+      { name: "2.5K Coins", action: () => { coins += 2500; } },
+      { name: "500 Coins", action: () => { coins += 500; } },
+      { name: "Mystery Mega Box", action: () => { coins += 5000; alert("Found +5,000 Bonus Coins inside!"); } }
+    ];
 
-    // চাকা ঘোরার অ্যানিমেশন এফেক্ট
-    let currentRotation = (totalSpinsLifetime * 1440) + Math.floor(Math.random() * 360);
-    wheelGraphic.style.transform = `rotate(${currentRotation}deg)`;
+    let targetIdx = Math.floor(Math.random() * 8);
+    let targetReward = segments[targetIdx];
+    let degreesToRotate = (totalSpinsLifetime * 1440) + (360 - (targetIdx * 45) - 22);
+
+    wheelGraphic.style.transform = `rotate(${degreesToRotate}deg)`;
     document.getElementById("spin-action-button").disabled = true;
 
     setTimeout(() => {
       document.getElementById("spin-action-button").disabled = false;
-      
-      if (rewardType === "KEY") {
-        keyTokens += 1;
-        localStorage.setItem("key_tokens", keyTokens);
-        alert("🔑 MAGICAL LUCK! You unlocked a Golden Key from the Matrix!");
-      } else if (rewardType === "MYSTERY") {
-        // মিস্ট্রি বক্স সাব-লজিক রানার
-        let subRand = Math.random();
-        if (subRand < 0.2) { normalSpins += 15; alert("🎁 Mystery Box Opened: Found 15 Extra Free Spins!"); }
-        else if (subRand < 0.4) { normalSpins += 25; alert("🎁 Mystery Box Opened: Found 25 Extra Free Spins!"); }
-        else if (subRand < 0.6) { normalSpins += 30; alert("🎁 Mystery Box Opened: Found 30 Extra Free Spins!"); }
-        else if (subRand < 0.8) { coins += 2500; alert("🎁 Mystery Box Opened: Found +2,500 Bonus Coins!"); }
-        else { coins += 5000; alert("🎁 Mystery Box Opened: Found +5,000 Mega Bonus Coins!"); }
-        localStorage.setItem("normal_spins", normalSpins);
-        localStorage.setItem("coins", coins);
-      } else {
-        let value = Number(rewardType);
-        coins += value;
-        localStorage.setItem("coins", coins);
-        alert(`🎯 Target Lock! You won +${value} Coins.`);
-      }
+      targetReward.action();
+      localStorage.setItem("coins", coins);
+      localStorage.setItem("normal_spins", normalSpins);
+      localStorage.setItem("key_tokens", keyTokens);
       updateSystemUI();
-    }, 3000);
+      alert(`Matrix Spin Settled: Won [ ${targetReward.name} ]`);
+    }, 3500);
 
   } else {
-    // ২. প্রিমিয়াম ডলার স্পিন অ্যালগরিদম হুক
-    if (premiumSpins <= 0) { alert("Premium wheel locked! টানা ৭ দিন চেক-ইন সম্পন্ন করলে এই চাকা ১বার ঘুরানো যাবে।"); return; }
-    premiumSpins -= 1;
-    localStorage.setItem("premium_spins", premiumSpins);
-    
-    historicPremiumSpinCount += 1;
-    localStorage.setItem("hist_prem_spins", historicPremiumSpinCount);
+    if (premiumSpins <= 0) { alert("Premium matrix nodes locked. Secure Day 7 on check-in system to unlock."); return; }
+    premiumSpins -= 1; localStorage.setItem("premium_spins", premiumSpins);
+    historicPremiumSpinCount += 1; localStorage.setItem("hist_prem_spins", historicPremiumSpinCount);
 
-    let usdReward = 0.10;
-    // সাইকোলজিক্যাল হুক লজিক: ১ম অথবা ২য় বার বড় রিওয়ার্ড দিবে ($0.50 বা $1.00), কিন্তু কখনোই সরাসরি $10.00 মিলবে না।
-    if (historicPremiumSpinCount === 1) {
-      usdReward = 1.00;
-    } else if (historicPremiumSpinCount === 2) {
-      usdReward = 0.50;
-    } else {
-      // ২ বারের পর থেকে সে সবসময় আকর্ষণীয় কিন্তু ছোট ভ্যালু $0.10 পাবে, যাতে উইথড্র থ্রেশহোল্ডের কাছে পৌঁছাতে সময় লাগে।
-      usdReward = 0.10;
-    }
+    let premSegments = [
+      { name: "$0.10 USD Cash", action: () => { usdBalance += 0.10; } },
+      { name: "$0.50 USD Cash", action: () => { usdBalance += 0.50; } },
+      { name: "$0.20 USD Cash", action: () => { usdBalance += 0.20; } },
+      { name: "1 Golden Key Node Token", action: () => { keyTokens += 1; } },
+      { name: "$0.10 USD Cash", action: () => { usdBalance += 0.10; } },
+      { name: "$1.00 Mega Payout USD", action: () => { usdBalance += 1.00; } },
+      { name: "$0.15 USD Cash", action: () => { usdBalance += 0.15; } },
+      { name: "1 Extra Backup Key Node Token", action: () => { keyTokens += 1; } }
+    ];
 
-    let currentRotation = (historicPremiumSpinCount * 1800) + Math.floor(Math.random() * 360);
-    wheelGraphic.style.transform = `rotate(${currentRotation}deg)`;
+    let targetIdx = Math.floor(Math.random() * 8);
+    let targetReward = premSegments[targetIdx];
+    let degreesToRotate = (historicPremiumSpinCount * 1800) + (360 - (targetIdx * 45) - 22);
+
+    wheelGraphic.style.transform = `rotate(${degreesToRotate}deg)`;
     document.getElementById("spin-action-button").disabled = true;
 
     setTimeout(() => {
       document.getElementById("spin-action-button").disabled = false;
-      usdBalance += usdReward;
+      targetReward.action();
       localStorage.setItem("usd_balance", usdBalance);
-      alert(`💎 PREMIUM WINNER! You extracted +$${usdReward.toFixed(2)} USD cash directly into your wallet.`);
+      localStorage.setItem("key_tokens", keyTokens);
+      localStorage.setItem("premium_spins", premiumSpins);
       updateSystemUI();
-    }, 3000);
+      alert(`Premium Core Settled: Transacted [ ${targetReward.name} ]`);
+    }, 3500);
   }
 }
 
-// --- Withdrawal Processing Logic Check ---
-function processWithdrawRequest() {
-  if (usdBalance < 10.00) {
-    alert("❌ Withdrawal Denied! Your balance must be at least $10.00 USD.");
-    return;
-  }
-  if (keyTokens <= 0) {
-    alert("🔑 Lockout active! You cannot withdraw without a Golden Key. Spin the normal wheel or complete Day 7 check-in to fetch one!");
-    return;
-  }
-  
-  // কন্ডিশন ফুলফিল হলে চাবি ও ব্যালেন্স মাইনাস হবে
-  usdBalance -= 10.00;
-  keyTokens -= 1;
-  localStorage.setItem("usd_balance", usdBalance);
-  localStorage.setItem("key_tokens", keyTokens);
-  alert("🎉 Success! Your payout order of $10.00 USD has been safely generated on-chain. Processing within 24 hours.");
+// --- Web3 Cryptographic Wallet Overlay Interaction Layer ---
+function openWalletModal() {
+  document.getElementById("wallet-modal-overlay").style.display = "flex";
+}
+function closeWalletModal() {
+  document.getElementById("wallet-modal-overlay").style.display = "none";
+}
+function mockEstablishWalletConnection(walletBrand) {
+  connectedWalletName = walletBrand;
+  localStorage.setItem("conn_wallet_name", walletBrand);
+  closeWalletModal();
   updateSystemUI();
+  alert(`Web3 Secured Link Handshake Established With: ${walletBrand}`);
 }
 
-// --- Navigation Layout Router Engine ---
+// --- Multi-View Navigation Flow Architecture Controller ---
 function switchPage(pageName) {
+  // Reset Display Elements Visibility Maps Arrays Loop
   document.getElementById("home-page").style.display = "none";
   document.getElementById("spin-page").style.display = "none";
   document.getElementById("tasks-page").style.display = "none";
-  document.getElementById("wallet-page").style.display = "none";
+  document.getElementById("invite-page").style.display = "none";
+  document.getElementById("profile-page").style.display = "none";
 
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById(`${pageName}-page`).style.display = "block";
   document.getElementById(`nav-${pageName}`).classList.add('active');
 
   const subEl = document.getElementById("page-subtitle");
-  if(pageName === 'home') subEl.innerText = "Welcome to Cyber Fox Hub 🦊";
-  if(pageName === 'spin') subEl.innerText = "Launch the matrix gears to secure assets 🎯";
-  if(pageName === 'tasks') subEl.innerText = "Complete daily system procedures 📋";
-  if(pageName === 'wallet') subEl.innerText = "Ecosystem secure asset ledger window 👛";
+  const statsPanel = document.getElementById("global-stats-panel");
+  const walletBar = document.getElementById("global-wallet-bar");
+
+  // Dynamic Header Adaptations Rendering Filter Mapping Rule
+  if (pageName === 'tasks') {
+    statsPanel.style.display = "none";
+    walletBar.style.display = "none"; 
+    subEl.innerText = "Complete assignments and maintain daily routine checklists.";
+  } else {
+    statsPanel.style.display = "grid";
+    walletBar.style.display = "block";
+    if (pageName === 'home') subEl.innerText = "Welcome to Cyber Fox Hub 🦊";
+    if (pageName === 'spin') subEl.innerText = "Activate matrix terminal systems to secure extraction rewards.";
+    if (pageName === 'invite') subEl.innerText = "Manage active referral distribution network clusters.";
+    if (pageName === 'profile') subEl.innerText = "Ecosystem identity validation status console terminal.";
+  }
 }
 
+function copyReferralLink() {
+  const text = document.getElementById("referral-link-string").innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Referral link copied to secure clipboard successfully!");
+  });
+}
+
+// Initialization Application Bootstrap Layer Trigger Execution
 window.onload = function() {
   updateSystemUI();
 };
 </script>
 
 </body>
-</html>
+          </html>
