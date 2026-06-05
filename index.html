@@ -21,9 +21,7 @@ header{
   font-weight:bold;
 }
 
-.home{
-  padding:20px;
-}
+.home{ padding:20px; }
 
 .coin-box{
   margin:20px auto;
@@ -33,48 +31,6 @@ header{
   width:220px;
 }
 
-.fox-logo{
-  width:280px;
-  border-radius:50%;
-  cursor:pointer;
-  animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
-}
-
-/* CHECKIN */
-.checkin-box{
-  background:#222;
-  margin:15px;
-  padding:15px;
-  border-radius:12px;
-  text-align:left;
-}
-
-.day{
-  background:#111;
-  padding:8px;
-  margin:6px 0;
-  border-radius:6px;
-  font-size:14px;
-}
-
-.checkin-box button{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#00c853;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* TASK */
 .task-box{
   background:#222;
   margin:10px;
@@ -82,21 +38,14 @@ header{
   border-radius:10px;
 }
 
-/* SPIN */
-#wheel{
-  width:150px;
-  height:150px;
-  margin:20px auto;
-  border-radius:50%;
-  background:#333;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:60px;
-  transition: transform 2s ease-out;
+button{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-/* NAV */
 .nav{
   position:fixed;
   bottom:0;
@@ -107,9 +56,27 @@ header{
 
 .nav button{
   flex:1;
-  padding:15px;
   background:none;
-  border:none;
+  color:white;
+}
+
+/* detail page */
+#detail-page{
+  display:none;
+  padding:20px;
+}
+
+.follow-btn{
+  background:white;
+  color:black;
+  width:90%;
+  margin:10px;
+}
+
+.claim-btn{
+  width:90%;
+  margin:10px;
+  background:gray;
   color:white;
 }
 </style>
@@ -120,170 +87,123 @@ header{
 <header>🦊 Cyber Fox V2</header>
 
 <!-- HOME -->
-<div id="home-page" class="home">
-  <h2>Home</h2>
-
+<div id="home-page">
   <div class="coin-box">
     💰 Coins: <span id="coin">0</span>
   </div>
-
-  <img class="fox-logo"
-  src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png"
-  onclick="addCoins(1)">
 </div>
 
-<!-- TASKS -->
+<!-- TASK LIST -->
 <div id="tasks-page" style="display:none;">
+
 <h2>📋 Tasks</h2>
 
-<div class="checkin-box">
-<h3>🎁 7 Days Check-in Rewards</h3>
-
-<div class="day">Day 1: 1K coin</div>
-<div class="day">Day 2: 3K coin + 5 Spins</div>
-<div class="day">Day 3: 5K coin</div>
-<div class="day">Day 4: 10K coin</div>
-<div class="day">Day 5: 15K coin + 20 Spins</div>
-<div class="day">Day 6: 30K coin</div>
-<div class="day">Day 7: 50K coin + Premium Key 🔑</div>
-
-<button onclick="checkIn()">Claim</button>
+<div class="task-box">
+  <p>🐦 Follow X</p>
+  <button onclick="openTask('Follow X Account',2000,'https://x.com/FoxCyber136')">Go</button>
 </div>
 
 <div class="task-box">
-<p>🐦 Follow Twitter/X</p>
-<a href="https://x.com/FoxCyber136" target="_blank"><button>Go</button></a>
+  <p>📘 Facebook</p>
+  <button onclick="openTask('Follow Facebook',3000,'https://facebook.com/share/1Cw6CQRDma/')">Go</button>
 </div>
 
 <div class="task-box">
-<p>📘 Follow Facebook Page</p>
-<a href="https://www.facebook.com/share/1Cw6CQRDma/" target="_blank"><button>Go</button></a>
+  <p>▶️ YouTube</p>
+  <button onclick="openTask('Subscribe YouTube',5000,'https://youtube.com/@cyberfoxofficial')">Go</button>
 </div>
+
+</div>
+
+<!-- DETAIL PAGE -->
+<div id="detail-page">
+
+<h2 id="task-title">Task</h2>
 
 <div class="task-box">
-<p>▶️ Subscribe YouTube</p>
-<a href="https://youtube.com/@cyberfoxofficial" target="_blank"><button>Go</button></a>
+  💰 Reward: <span id="task-reward">0</span> Coins
 </div>
 
-</div>
+<a id="task-link" target="_blank">
+  <button class="follow-btn" onclick="markFollowed()">FOLLOW</button>
+</a>
 
-<!-- SPIN PAGE -->
-<div id="spin-page" style="display:none;">
-<h2>🎡 Spin Wheel</h2>
+<button id="claim-btn" class="claim-btn" onclick="claimTask()" disabled>
+  CLAIM REWARD
+</button>
 
-<div id="wheel">🎡</div>
-
-<div class="task-box">
-<button onclick="spin()">SPIN</button>
-<p id="spin-result">Spin করে রিওয়ার্ড নাও</p>
-</div>
 </div>
 
 <!-- NAV -->
 <div class="nav">
 <button onclick="showHome()">Home</button>
 <button onclick="showTasks()">Tasks</button>
-<button onclick="showSpin()">Spin</button>
 </div>
 
 <script>
 
 let coins = Number(localStorage.getItem("coins")) || 0;
-let lastCheckin = localStorage.getItem("lastCheckin");
-let checkinDay = Number(localStorage.getItem("checkinDay")) || 1;
+let currentReward = 0;
+let taskFollowed = false;
 
 function updateUI(){
   document.getElementById("coin").innerText = coins;
 }
 
-function addCoins(amount){
-  coins += amount;
-  localStorage.setItem("coins", coins);
-  updateUI();
-}
-
 /* NAV */
 function showHome(){
-  document.getElementById("home-page").style.display = "block";
-  document.getElementById("tasks-page").style.display = "none";
-  document.getElementById("spin-page").style.display = "none";
+  document.getElementById("home-page").style.display="block";
+  document.getElementById("tasks-page").style.display="none";
+  document.getElementById("detail-page").style.display="none";
 }
 
 function showTasks(){
-  document.getElementById("home-page").style.display = "none";
-  document.getElementById("tasks-page").style.display = "block";
-  document.getElementById("spin-page").style.display = "none";
+  document.getElementById("home-page").style.display="none";
+  document.getElementById("tasks-page").style.display="block";
+  document.getElementById("detail-page").style.display="none";
 }
 
-function showSpin(){
-  document.getElementById("home-page").style.display = "none";
-  document.getElementById("tasks-page").style.display = "none";
-  document.getElementById("spin-page").style.display = "block";
+/* OPEN TASK */
+function openTask(title, reward, link){
+  document.getElementById("home-page").style.display="none";
+  document.getElementById("tasks-page").style.display="none";
+  document.getElementById("detail-page").style.display="block";
+
+  document.getElementById("task-title").innerText = title;
+  document.getElementById("task-reward").innerText = reward;
+  document.getElementById("task-link").href = link;
+
+  currentReward = reward;
+  taskFollowed = false;
+
+  document.getElementById("claim-btn").disabled = true;
+  document.getElementById("claim-btn").style.background="gray";
 }
 
-/* SPIN */
-function spin(){
-  let wheel = document.getElementById("wheel");
-
-  let rewards = [500,1000,1500,2000,2500,"BOX"];
-  let result = rewards[Math.floor(Math.random()*rewards.length)];
-
-  let rotate = 720 + Math.floor(Math.random()*360);
-  wheel.style.transform = "rotate(" + rotate + "deg)";
-
-  setTimeout(() => {
-
-    if(result === "BOX"){
-      let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
-      boxes.push("BOX");
-      localStorage.setItem("boxes", JSON.stringify(boxes));
-      document.getElementById("spin-result").innerText = "You got BOX!";
-    } else {
-      coins += result;
-      localStorage.setItem("coins", coins);
-      updateUI();
-      document.getElementById("spin-result").innerText =
-        "You got " + result + " coins!";
-    }
-
-  }, 2000);
+/* FOLLOW CLICK */
+function markFollowed(){
+  taskFollowed = true;
+  document.getElementById("claim-btn").disabled = false;
+  document.getElementById("claim-btn").style.background="linear-gradient(90deg,#00c853,#00e676)";
 }
 
-/* CHECK-IN */
-function checkIn(){
-  let today = new Date().toDateString();
-
-  if(lastCheckin === today){
-    alert("Already claimed today!");
+/* CLAIM */
+function claimTask(){
+  if(!taskFollowed){
+    alert("Please follow first!");
     return;
   }
 
-  let reward = 0;
-
-  if(checkinDay == 1) reward = 1000;
-  else if(checkinDay == 2) reward = 3000;
-  else if(checkinDay == 3) reward = 5000;
-  else if(checkinDay == 4) reward = 10000;
-  else if(checkinDay == 5) reward = 15000;
-  else if(checkinDay == 6) reward = 30000;
-  else if(checkinDay == 7) reward = 50000;
-
-  coins += reward;
-
+  coins += currentReward;
   localStorage.setItem("coins", coins);
-  localStorage.setItem("lastCheckin", today);
-
-  checkinDay++;
-  if(checkinDay > 7) checkinDay = 1;
-
-  localStorage.setItem("checkinDay", checkinDay);
-
   updateUI();
 
-  alert("You got " + reward + " coins!");
+  alert("Reward Claimed +"+currentReward);
+
+  showTasks();
 }
 
-/* LOAD */
+/* INIT */
 window.onload = function(){
   updateUI();
 };
