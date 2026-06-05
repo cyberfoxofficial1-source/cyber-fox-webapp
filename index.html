@@ -238,14 +238,22 @@ function spin(){
   let rotate = 720 + Math.floor(Math.random() * 360);
   wheel.style.transform = "rotate(" + rotate + "deg)";
 
-  setTimeout(() => {
-    coins += reward;
+ setTimeout(() => {
+
+  if(result === "BOX"){
+    document.getElementById("spin-result").innerText =
+      "You got a BOX!";
+  } 
+  else {
+    coins += result;
     localStorage.setItem("coins", coins);
     updateUI();
 
     document.getElementById("spin-result").innerText =
-      "🎉 You got " + reward + " coins!";
-  }, 2000);
+      "You got " + result + " coins!";
+  }
+
+}, 2000);
 }
 
 /* CHECK-IN */
