@@ -240,9 +240,12 @@ function spin(){
 
  setTimeout(() => {
 
-  if(result === "BOX"){
-    document.getElementById("spin-result").innerText =
-      "You got a BOX!";
+ let boxes = JSON.parse(localStorage.getItem("boxes")) || [];
+boxes.push("BOX");
+localStorage.setItem("boxes", JSON.stringify(boxes));
+
+document.getElementById("spin-result").innerText =
+  "You got a BOX!";
   } 
   else {
     coins += result;
