@@ -3,211 +3,553 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox V2</title>
+<title>Cyber Fox V2 - Premium</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#0f0f0f;
-  color:white;
-  text-align:center;
+:root {
+  --bg-color: #0d0d0d;
+  --card-bg: #151515;
+  --text-color: #ffffff;
+  --text-gray: #8e8e93;
+  --primary-green: #5cc83b;
+  --accent-gold: #ffc107;
 }
 
-header{
-  padding:15px;
-  background:#1a1a1a;
-  font-size:22px;
-  font-weight:bold;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  user-select: none;
 }
 
-.home{ padding:20px; }
-
-.coin-box{
-  margin:20px auto;
-  padding:20px;
-  background:#222;
-  border-radius:10px;
-  width:220px;
+/* Header & Coin Display */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px 10px 15px;
 }
 
-.task-box{
-  background:#222;
-  margin:10px;
-  padding:15px;
-  border-radius:10px;
+.header-title {
+  font-size: 24px;
+  font-weight: 700;
 }
 
-button{
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
+.coin-counter {
+  background: var(--card-bg);
+  padding: 6px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid #222;
 }
 
-.nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  display:flex;
-  background:#1a1a1a;
+.coin-counter i {
+  color: var(--accent-gold);
 }
 
-.nav button{
-  flex:1;
-  background:none;
-  color:white;
+.sub-title {
+  color: var(--text-gray);
+  font-size: 13px;
+  padding: 0 15px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-/* detail page */
-#detail-page{
-  display:none;
-  padding:20px;
+/* Pages Layout */
+.page {
+  padding: 0 15px 100px 15px;
 }
 
-.follow-btn{
-  background:white;
-  color:black;
-  width:90%;
-  margin:10px;
+/* Task Cards */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.claim-btn{
-  width:90%;
-  margin:10px;
-  background:gray;
-  color:white;
+.task-card {
+  background-color: var(--card-bg);
+  border-radius: 14px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #1e1e1e;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.task-icon-box {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+/* Custom Icon Colors */
+.icon-tg { background: linear-gradient(135deg, #229ED9, #179cde); }
+.icon-x { background: #000000; border: 1px solid #333; }
+.icon-yt { background: #FF0000; }
+.icon-fb { background: #1877F2; }
+.icon-daily { background: linear-gradient(135deg, #8a3ab9, #bc2a8d); }
+
+.task-info {
+  text-align: left;
+}
+
+.task-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.task-reward {
+  font-size: 12px;
+  color: var(--text-gray);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-reward i {
+  color: var(--accent-gold);
+}
+
+.action-btn {
+  background-color: var(--primary-green);
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.1s ease;
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+/* Detail Page Custom Style */
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 15px;
+  display: block;
+  text-align: left;
+}
+
+.detail-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.detail-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.detail-desc {
+  color: var(--text-gray);
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.big-reward-box {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 40px;
+  border: 1px solid #1e1e1e;
+}
+
+.big-reward-box p {
+  color: var(--text-gray);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.reward-amount {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.reward-amount i {
+  color: var(--accent-gold);
+}
+
+.big-follow-btn {
+  background-color: #ffffff;
+  color: #000000;
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.steps-box {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.steps-box h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.steps-box ul {
+  padding-left: 20px;
+  color: var(--text-gray);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.steps-box li::marker {
+  color: var(--primary-green);
+}
+
+.claim-btn-big {
+  background-color: #333;
+  color: #666;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: not-allowed;
+}
+
+.claim-btn-big.active {
+  background-color: var(--primary-green);
+  color: #000000;
+  cursor: pointer;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111111;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 25px 0;
+  border-top: 1px solid #1c1c1e;
+  z-index: 100;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  color: var(--text-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  width: 20%;
+}
+
+.nav-item i {
+  font-size: 18px;
+}
+
+.nav-item.active {
+  color: var(--primary-green);
+}
+
+/* Dummy Text for other pages */
+.dummy-content {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-gray);
 }
 </style>
 </head>
-
 <body>
 
-<header>🦊 Cyber Fox V2</header>
+<div id="main-view">
+  <header>
+    <div class="header-title" id="page-title">Tasks</div>
+    <div class="coin-counter">
+      <i class="fa-solid fa-circle-dollar-to-slot"></i>
+      <span id="global-coin">0</span>
+    </div>
+  </header>
+  <div class="sub-title" id="page-subtitle">Complete tasks and earn coins</div>
 
-<!-- HOME -->
-<div id="home-page">
-  <div class="coin-box">
-    💰 Coins: <span id="coin">0</span>
+  <div id="home-page" class="page" style="display:none;">
+    <div class="dummy-content">
+      <h2>🦊 Cyber Fox Home</h2>
+      <p>Welcome to the Mining Hub. Tap-to-Earn coming soon!</p>
+    </div>
+  </div>
+
+  <div id="tasks-page" class="page">
+    <div class="task-list">
+      
+      <div class="task-card">
+        <div class="task-left">
+          <div class="task-icon-box icon-tg"><i class="fa-brands fa-telegram"></i></div>
+          <div class="task-info">
+            <div class="task-name">Join our TG Channel</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> 1,000</div>
+          </div>
+        </div>
+        <button class="action-btn" onclick="openTask('Join our TG Channel', 1000, 'https://t.me/your_channel', 'fa-brands fa-telegram')">JOIN <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-left">
+          <div class="task-icon-box icon-x"><i class="fa-brands fa-x-twitter"></i></div>
+          <div class="task-info">
+            <div class="task-name">Follow Cyber Fox on X</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> 2,000</div>
+          </div>
+        </div>
+        <button class="action-btn" onclick="openTask('Follow Cyber Fox on X', 2000, 'https://x.com/FoxCyber136', 'fa-brands fa-x-twitter')">FOLLOW <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-left">
+          <div class="task-icon-box icon-yt"><i class="fa-brands fa-youtube"></i></div>
+          <div class="task-info">
+            <div class="task-name">Subscribe YouTube</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> 3,000</div>
+          </div>
+        </div>
+        <button class="action-btn" onclick="openTask('Subscribe YouTube', 3000, 'https://youtube.com/@cyberfoxofficial', 'fa-brands fa-youtube')">SUBSCRIBE <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-left">
+          <div class="task-icon-box icon-fb"><i class="fa-brands fa-facebook"></i></div>
+          <div class="task-info">
+            <div class="task-name">Follow Facebook Page</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> 1,500</div>
+          </div>
+        </div>
+        <button class="action-btn" onclick="openTask('Follow Facebook Page', 1500, 'https://facebook.com/share/1Cw6CQRDma/', 'fa-brands fa-facebook')">FOLLOW <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="task-card">
+        <div class="task-left">
+          <div class="task-icon-box icon-daily"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="task-info">
+            <div class="task-name">Daily Check-in</div>
+            <div class="task-reward"><i class="fa-solid fa-coins"></i> 500</div>
+          </div>
+        </div>
+        <button class="action-btn" onclick="openTask('Daily Check-in', 500, '#', 'fa-solid fa-calendar-check')">CHECK-IN <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="spin-page" class="page" style="display:none;"><div class="dummy-content"><h2>🎯 Lucky Spin</h2><p>Spin the wheel and win rewards!</p></div></div>
+  <div id="wallet-page" class="page" style="display:none;"><div class="dummy-content"><h2>👛 Web3 Wallet</h2><p>Connect your TON wallet here.</p></div></div>
+  <div id="profile-page" class="page" style="display:none;"><div class="dummy-content"><h2>👤 User Profile</h2><p>Your stats and referral link.</p></div></div>
+
+</div>
+
+<div id="detail-view" style="display:none;">
+  <button class="back-btn" onclick="closeDetail()"><i class="fa-solid fa-arrow-left"></i></button>
+  
+  <div class="detail-container">
+    <div class="detail-title" id="det-title">Follow Cyber Fox on X</div>
+    <div class="detail-desc" id="det-desc">Follow our account and get the reward.</div>
+
+    <div class="big-reward-box">
+      <p>Reward</p>
+      <div class="reward-amount">
+        <i class="fa-solid fa-coins"></i> <span id="det-reward">2,000</span>
+      </div>
+    </div>
+
+    <button class="big-follow-btn" id="det-action-btn" onclick="handleFollowClick()">
+      <i id="det-icon" class="fa-brands fa-x-twitter"></i> <span id="det-btn-text">FOLLOW</span>
+    </button>
+
+    <div class="steps-box">
+      <h3>Steps to complete</h3>
+      <ul>
+        <li>Click on the button above to complete the task.</li>
+        <li>Come back and press the Claim button to receive your coins.</li>
+      </ul>
+    </div>
+
+    <button id="claim-btn" class="claim-btn-big" onclick="claimReward()" disabled>CLAIM REWARD</button>
   </div>
 </div>
 
-<!-- TASK LIST -->
-<div id="tasks-page" style="display:none;">
-
-<h2>📋 Tasks</h2>
-
-<div class="task-box">
-  <p>🐦 Follow X</p>
-  <button onclick="openTask('Follow X Account',2000,'https://x.com/FoxCyber136')">Go</button>
-</div>
-
-<div class="task-box">
-  <p>📘 Facebook</p>
-  <button onclick="openTask('Follow Facebook',3000,'https://facebook.com/share/1Cw6CQRDma/')">Go</button>
-</div>
-
-<div class="task-box">
-  <p>▶️ YouTube</p>
-  <button onclick="openTask('Subscribe YouTube',5000,'https://youtube.com/@cyberfoxofficial')">Go</button>
-</div>
-
-</div>
-
-<!-- DETAIL PAGE -->
-<div id="detail-page">
-
-<h2 id="task-title">Task</h2>
-
-<div class="task-box">
-  💰 Reward: <span id="task-reward">0</span> Coins
-</div>
-
-<a id="task-link" target="_blank">
-  <button class="follow-btn" onclick="markFollowed()">FOLLOW</button>
-</a>
-
-<button id="claim-btn" class="claim-btn" onclick="claimTask()" disabled>
-  CLAIM REWARD
-</button>
-
-</div>
-
-<!-- NAV -->
-<div class="nav">
-<button onclick="showHome()">Home</button>
-<button onclick="showTasks()">Tasks</button>
+<div class="bottom-nav">
+  <button class="nav-item" id="nav-home" onclick="switchPage('home')">
+    <i class="fa-solid fa-house"></i><span>Home</span>
+  </button>
+  <button class="nav-item active" id="nav-tasks" onclick="switchPage('tasks')">
+    <i class="fa-solid fa-clipboard-list"></i><span>Tasks</span>
+  </button>
+  <button class="nav-item" id="nav-spin" onclick="switchPage('spin')">
+    <i class="fa-solid fa-circle-dot"></i><span>Spin</span>
+  </button>
+  <button class="nav-item" id="nav-wallet" onclick="switchPage('wallet')">
+    <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+  </button>
+  <button class="nav-item" id="nav-profile" onclick="switchPage('profile')">
+    <i class="fa-solid fa-user"></i><span>Profile</span>
+  </button>
 </div>
 
 <script>
-
 let coins = Number(localStorage.getItem("coins")) || 0;
-let currentReward = 0;
-let taskFollowed = false;
+let currentTaskReward = 0;
+let isTaskFollowed = false;
+let currentTaskLink = "";
 
-function updateUI(){
-  document.getElementById("coin").innerText = coins;
+// Initialize app UI
+function updateGlobalCoins() {
+  document.getElementById("global-coin").innerText = coins.toLocaleString();
 }
 
-/* NAV */
-function showHome(){
-  document.getElementById("home-page").style.display="block";
-  document.getElementById("tasks-page").style.display="none";
-  document.getElementById("detail-page").style.display="none";
-}
+// Navigation Handling
+function switchPage(pageName) {
+  // Hide all main pages
+  document.getElementById("home-page").style.display = "none";
+  document.getElementById("tasks-page").style.display = "none";
+  document.getElementById("spin-page").style.display = "none";
+  document.getElementById("wallet-page").style.display = "none";
+  document.getElementById("profile-page").style.display = "none";
+  document.getElementById("detail-view").style.display = "none";
+  document.getElementById("main-view").style.display = "block";
 
-function showTasks(){
-  document.getElementById("home-page").style.display="none";
-  document.getElementById("tasks-page").style.display="block";
-  document.getElementById("detail-page").style.display="none";
-}
+  // Remove active classes from nav items
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
-/* OPEN TASK */
-function openTask(title, reward, link){
-  document.getElementById("home-page").style.display="none";
-  document.getElementById("tasks-page").style.display="none";
-  document.getElementById("detail-page").style.display="block";
+  // Show selected page & header update
+  document.getElementById(`${pageName}-page`).style.display = "block";
+  document.getElementById(`nav-${pageName}`).classList.add('active');
 
-  document.getElementById("task-title").innerText = title;
-  document.getElementById("task-reward").innerText = reward;
-  document.getElementById("task-link").href = link;
+  const titleEl = document.getElementById("page-title");
+  const subEl = document.getElementById("page-subtitle");
 
-  currentReward = reward;
-  taskFollowed = false;
-
-  document.getElementById("claim-btn").disabled = true;
-  document.getElementById("claim-btn").style.background="gray";
-}
-
-/* FOLLOW CLICK */
-function markFollowed(){
-  taskFollowed = true;
-  document.getElementById("claim-btn").disabled = false;
-  document.getElementById("claim-btn").style.background="linear-gradient(90deg,#00c853,#00e676)";
-}
-
-/* CLAIM */
-function claimTask(){
-  if(!taskFollowed){
-    alert("Please follow first!");
-    return;
+  if(pageName === 'tasks') {
+    titleEl.innerText = "Tasks";
+    subEl.innerText = "Complete tasks and earn coins";
+  } else {
+    titleEl.innerText = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+    subEl.innerText = `Manage your ${pageName} section`;
   }
-
-  coins += currentReward;
-  localStorage.setItem("coins", coins);
-  updateUI();
-
-  alert("Reward Claimed +"+currentReward);
-
-  showTasks();
 }
 
-/* INIT */
-window.onload = function(){
-  updateUI();
-};
+// Open Task Details View
+function openTask(title, reward, link, iconClass) {
+  document.getElementById("main-view").style.display = "none";
+  document.getElementById("detail-view").style.display = "block";
 
+  document.getElementById("det-title").innerText = title;
+  document.getElementById("det-reward").innerText = reward.toLocaleString();
+  
+  // Set Icon and dynamic button text
+  const iconEl = document.getElementById("det-icon");
+  iconEl.className = iconClass;
+  
+  let actionText = "GO";
+  if(title.includes("X") || title.includes("Facebook")) actionText = "FOLLOW";
+  if(title.includes("YouTube")) actionText = "SUBSCRIBE";
+  if(title.includes("TG") || title.includes("Channel")) actionText = "JOIN";
+  if(title.includes("Check-in")) actionText = "CHECK-IN";
+  
+  document.getElementById("det-btn-text").innerText = actionText;
+  
+  // Set context description
+  document.getElementById("det-desc").innerText = `Complete this ${title.toLowerCase()} step to get rewarded instantly.`;
+
+  currentTaskReward = reward;
+  currentTaskLink = link;
+  isTaskFollowed = false;
+
+  // Reset Claim Button
+  const claimBtn = document.getElementById("claim-btn");
+  claimBtn.disabled = true;
+  claimBtn.classList.remove("active");
+}
+
+function closeDetail() {
+  document.getElementById("detail-view").style.display = "none";
+  document.getElementById("main-view").style.display = "block";
+}
+
+// Handle Task Link Clicks
+function handleFollowClick() {
+  if(currentTaskLink !== "#") {
+    window.open(currentTaskLink, '_blank');
+  }
+  
+  isTaskFollowed = true;
+  
+  // Activate Claim Button
+  const claimBtn = document.getElementById("claim-btn");
+  claimBtn.disabled = false;
+  claimBtn.classList.add("active");
+}
+
+// Claim Reward
+function claimReward() {
+  if(!isTaskFollowed) return;
+
+  coins += currentTaskReward;
+  localStorage.setItem("coins", coins);
+  updateGlobalCoins();
+
+  alert(`🎉 Reward Claimed! +${currentTaskReward} Coins`);
+  closeDetail();
+  switchPage('tasks');
+}
+
+// Run on load
+window.onload = function() {
+  updateGlobalCoins();
+};
 </script>
 
 </body>
