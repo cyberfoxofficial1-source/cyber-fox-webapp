@@ -248,7 +248,9 @@ document.getElementById("spin-result").innerText =
   "You got a BOX!";
   } 
   else {
-    coins += result;
+   if(typeof result === "number"){
+  coins += result;
+}
     localStorage.setItem("coins", coins);
     updateUI();
 
