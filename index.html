@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Fox V2 - Optimized Zoom</title>
+<title>Cyber Fox V2 - Premium Core</title>
 
-<!-- Font Awesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -18,6 +17,7 @@
   --accent-gold: #ffb300;
   --theme-orange: #ff7300;
   --glow-orange: rgba(255, 115, 0, 0.35);
+  --neon-cyan: #00f0ff;
 }
 
 body {
@@ -28,11 +28,9 @@ body {
   color: var(--text-color);
   user-select: none;
   overflow-x: hidden;
-  /* মোবাইলে যেকোনো জায়গায় ট্যাপ করলে চারকোণা বক্স আসা বন্ধ করবে */
   -webkit-tap-highlight-color: transparent; 
 }
 
-/* Header Section */
 header {
   display: flex;
   justify-content: space-between;
@@ -62,7 +60,6 @@ header {
   color: white;
   font-size: 20px;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .sub-title {
@@ -71,76 +68,72 @@ header {
   padding: 0 15px;
   margin-top: -2px;
   margin-bottom: 20px;
-  text-align: left;
 }
 
-/* Common Layout Settings */
 .page {
   padding: 0 15px 120px 15px;
 }
 
-/* Stats Row Dashboard */
+/* Updated Custom Top Stats Multi-row Display */
 .stats-container {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .stat-box {
-  flex: 1;
   background: linear-gradient(135deg, #161616 0%, #111111 100%);
-  padding: 14px;
+  padding: 12px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 115, 0, 0.15);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255, 115, 0, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-gray);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-weight: 600;
 }
 
 .stat-label i.fa-coins { color: var(--accent-gold); }
 .stat-label i.fa-bolt { color: #ffeb3b; }
+.stat-label i.fa-dollar-sign { color: #4caf50; }
+.stat-label i.fa-key { color: var(--neon-cyan); }
 
 .stat-value {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
 }
 
-/* ================= HOME PAGE (TAP DESIGN) ================= */
+/* ================= HOME PAGE ================= */
 .main-clicker-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 25px 0;
-  position: relative;
+  margin: 20px 0;
 }
 
 .circle-outer {
-  width: 260px;
-  height: 260px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,115,0,0.2) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(255,115,0,0.18) 0%, rgba(0,0,0,0) 70%);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  border: 2px dashed rgba(255, 115, 0, 0.25);
+  border: 2px dashed rgba(255, 115, 0, 0.2);
   box-shadow: 0 0 35px var(--glow-orange);
 }
 
 .circle-inner {
-  width: 225px;
-  height: 225px;
+  width: 215px;
+  height: 215px;
   border-radius: 50%;
   background-color: #121212;
   border: 4px solid var(--theme-orange);
@@ -150,168 +143,318 @@ header {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.05s ease;
-  position: relative;
-  box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.4), 0 0 20px rgba(255, 115, 0, 0.2);
-  
-  /* ক্লিক করলে চারকোণা দাগ আসা পুরোপুরি বন্ধ করার জন্য ম্যাজিক কোড */
-  -webkit-tap-highlight-color: transparent;
+  box-shadow: inset 0 0 25px rgba(255, 115, 0, 0.4);
   outline: none;
-  -webkit-focus-ring-color: transparent;
 }
 
 .circle-inner img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* ইমেজটিকে সুন্দরভাবে গোল বৃত্তে ফিট করার জন্য */
-  transform: scale(1.4); /* শিয়ালের ফেসটিকে বড় এবং পারফেক্ট জুম করার জন্য */
+  object-fit: cover;
+  transform: scale(1.4);
   border-radius: 50%;
   pointer-events: none;
 }
 
-.circle-inner:active {
-  transform: scale(0.96);
-}
+.circle-inner:active { transform: scale(0.96); }
 
 .tap-instruction {
   color: var(--text-gray);
   font-size: 13px;
-  margin-top: 18px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  margin-top: 15px;
   font-weight: 500;
 }
 
 .energy-badge {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 16px;
   border-radius: 20px;
-  border: 1px solid #222;
+  border: 1px solid #1f1f1f;
   font-size: 13px;
-  margin-top: 15px;
+  margin-top: 12px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-/* Floating +1 Text Animation */
 .floating-text {
   position: absolute;
   color: #ffca28;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 900;
   pointer-events: none;
-  animation: floatUpUp 0.7s ease-out forwards;
-  text-shadow: 0 0 10px rgba(255, 115, 0, 0.8);
+  animation: floatUpUp 0.6s ease-out forwards;
+  text-shadow: 0 0 8px rgba(255, 115, 0, 0.8);
   z-index: 999;
 }
 
 @keyframes floatUpUp {
   0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-130px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-110px) scale(1.1); }
 }
 
-/* Features Info Grid Bottom */
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 15px;
+/* ================= 7-DAYS CHECK-IN STYLING (UNIQUE DESIGN) ================= */
+.checkin-section {
+  background: #0f0f12;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 115, 0, 0.1);
 }
 
-.info-card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 12px 15px;
-  border: 1px solid #1a1a1a;
+.checkin-header {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  font-weight: 600;
+  gap: 8px;
+  color: #fff;
 }
 
-.info-card i {
-  font-size: 16px;
-  color: var(--primary-green);
+.checkin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
-/* ================= TASKS PAGE DESIGN ================= */
-.task-list {
+.checkin-box {
+  background: #16161a;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 10px 4px;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.task-card {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 15px;
-  display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #1f1f1f;
+  min-height: 72px;
+  position: relative;
 }
 
-.task-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.checkin-box.day-7 {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #1c130c 0%, #141414 100%);
+  border: 1px solid rgba(255, 115, 0, 0.3);
 }
 
-.task-icon-box {
-  width: 45px;
-  height: 45px;
+.checkin-day {
+  font-size: 11px;
+  color: var(--text-gray);
+  font-weight: 700;
+}
+
+.checkin-reward-info {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 4px;
+}
+
+.checkin-box i {
+  font-size: 16px;
+  margin: 5px 0;
+}
+.checkin-box i.fa-coins { color: var(--accent-gold); }
+.checkin-box i.fa-gift { color: #ff5252; }
+.checkin-box i.fa-key { color: var(--neon-cyan); }
+
+.checkin-box.claimed {
+  border-color: var(--primary-green);
+  background: rgba(92, 200, 59, 0.05);
+}
+.checkin-box.claimed::after {
+  content: "✓";
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  color: var(--primary-green);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.checkin-btn {
+  grid-column: span 4;
+  background: linear-gradient(90deg, var(--theme-orange), #ff9100);
+  color: white;
+  border: none;
   border-radius: 12px;
+  padding: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.2);
+}
+.checkin-btn:disabled {
+  background: #222;
+  color: #555;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ================= SPIN ARCHITECTURE WHEEL PAGE ================= */
+.spin-mode-selector {
+  display: flex;
+  background: #111;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 25px;
+  border: 1px solid #222;
+}
+
+.mode-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-gray);
+  padding: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.mode-tab.active {
+  background: #222;
+  color: #fff;
+}
+.mode-tab.active.premium-active {
+  background: linear-gradient(135deg, #2e1c0c 0%, #422300 100%);
+  color: #ff9100;
+  border: 1px solid rgba(255, 115, 0, 0.3);
+}
+
+.wheel-container {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto 25px auto;
+}
+
+.pointer-device {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 20px solid #ff1744;
+  z-index: 10;
+}
+
+.wheel-canvas-mock {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #181818 0deg 60deg, #252525 60deg 120deg,
+    #181818 120deg 180deg, #252525 180deg 240deg,
+    #181818 240deg 300deg, #252525 300deg 360deg
+  );
+  border: 6px solid #2c2c2c;
+  box-shadow: 0 0 25px rgba(0,0,0,0.8);
+  transition: transform 3s cubic-bezier(0.1, 0.8, 0.1, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-weight: 900;
+  font-size: 14px;
 }
 
+.wheel-center-core {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spin-trigger-btn {
+  background: var(--primary-green);
+  color: #000;
+  border: none;
+  width: 80%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.spin-trigger-btn:disabled {
+  background: #252525;
+  color: #666;
+}
+
+.spin-count-status {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-gray);
+  font-weight: 600;
+}
+
+/* ================= TASKS PAGE ================= */
+.task-list { display: flex; flex-direction: column; gap: 12px; }
+.task-card { background-color: var(--card-bg); border-radius: 16px; padding: 15px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #1f1f1f; }
+.task-left { display: flex; align-items: center; gap: 15px; }
+.task-icon-box { width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 .icon-tg { background: linear-gradient(135deg, #229ED9, #179cde); }
 .icon-x { background: #000; border: 1px solid #333; }
 .icon-yt { background: #FF0000; }
 .icon-fb { background: #1877F2; }
-.icon-daily { background: linear-gradient(135deg, #ff5722, #ff9800); }
-
 .task-info { text-align: left; }
 .task-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
 .task-reward { font-size: 12px; color: var(--text-gray); display: flex; align-items: center; gap: 4px; font-weight: 600; }
 .task-reward i { color: var(--accent-gold); }
+.action-btn { background-color: var(--primary-green); color: #000; border: none; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
-.action-btn {
-  background-color: var(--primary-green);
-  color: #000;
-  border: none;
-  padding: 8px 16px;
+/* ================= WALLET WINDOW ================= */
+.wallet-box-ui {
+  background: var(--card-bg);
+  border: 1px solid #222;
   border-radius: 20px;
-  font-weight: 700;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  -webkit-tap-highlight-color: transparent;
+  padding: 25px 20px;
+  margin-top: 20px;
 }
-
-/* Task Detail Screen View */
-.back-btn { background: none; border: none; color: white; font-size: 20px; padding: 15px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.detail-container { text-align: center; padding: 15px 20px; }
-.detail-title { font-size: 24px; font-weight: 800; margin-bottom: 10px; }
-.detail-desc { color: var(--text-gray); font-size: 14px; margin-bottom: 25px; }
-.big-reward-box { background-color: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 30px; border: 1px solid #222; }
-.big-reward-box p { color: var(--text-gray); margin: 0 0 8px 0; font-size: 13px; }
-.reward-amount { font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.reward-amount i { color: var(--accent-gold); }
-.big-follow-btn { background-color: #fff; color: #000; width: 100%; padding: 15px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 35px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.steps-box { text-align: left; margin-bottom: 35px; }
-.steps-box h3 { font-size: 15px; margin-bottom: 8px; }
-.steps-box ul { padding-left: 20px; color: var(--text-gray); font-size: 13px; line-height: 1.6; }
-.steps-box li::marker { color: var(--primary-green); }
-.claim-btn-big { background-color: #252525; color: #555; width: 100%; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; border: none; cursor: not-allowed; -webkit-tap-highlight-color: transparent; }
-.claim-btn-big.active { background-color: var(--primary-green); color: #000; cursor: pointer; }
+.withdrawal-form {
+  margin-top: 20px;
+  text-align: left;
+}
+.withdrawal-form label {
+  font-size: 12px;
+  color: var(--text-gray);
+  font-weight: 700;
+}
+.withdrawal-form input {
+  width: 100%;
+  background: #0b0b0d;
+  border: 1px solid #25252b;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+.withdraw-submit-btn {
+  width: 100%;
+  background: var(--theme-orange);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+}
 
 /* ================= BOTTOM NAVIGATION BAR ================= */
 .bottom-nav {
@@ -337,8 +480,7 @@ header {
   gap: 5px;
   font-size: 11px;
   cursor: pointer;
-  width: 20%;
-  -webkit-tap-highlight-color: transparent;
+  width: 25%;
 }
 
 .nav-item i { font-size: 18px; }
@@ -347,7 +489,6 @@ header {
 </head>
 <body>
 
-<!-- MAIN INTERFACE DISPLAY -->
 <div id="main-view">
   <header>
     <div class="header-title">
@@ -358,48 +499,83 @@ header {
   </header>
   <div class="sub-title" id="page-subtitle">Welcome to Cyber Fox Hub 🦊</div>
 
-  <!-- STATS DASHBOARD DISPLAY -->
   <div class="stats-container">
     <div class="stat-box">
       <div class="stat-label"><i class="fa-solid fa-coins"></i> Coins</div>
-      <div class="stat-value" id="global-coin">1,250</div>
+      <div class="stat-value" id="global-coin">0</div>
     </div>
     <div class="stat-box">
       <div class="stat-label"><i class="fa-solid fa-bolt"></i> Power</div>
       <div class="stat-value" id="power-percent">100%</div>
     </div>
+    <div class="stat-box">
+      <div class="stat-label"><i class="fa-solid fa-dollar-sign"></i> Balance</div>
+      <div class="stat-value" id="global-usd">$0.00</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label"><i class="fa-solid fa-key"></i> Key Node</div>
+      <div class="stat-value" id="global-keys">0</div>
+    </div>
   </div>
 
-  <!-- 1. HOME PAGE SECTION (TAP MACHINE) -->
   <div id="home-page" class="page">
+    
+    <div class="checkin-section">
+      <div class="checkin-header">
+        <i class="fa-solid fa-gift" style="color:var(--theme-orange)"></i> 7 Days Active Rewards Checklist
+      </div>
+      <div class="checkin-grid">
+        <div class="checkin-box" id="cbox-1"><span class="checkin-day">Day 1</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">1K</span></div>
+        <div class="checkin-box" id="cbox-2"><span class="checkin-day">Day 2</span><i class="fa-solid fa-gift"></i><span class="checkin-reward-info">3K+5S</span></div>
+        <div class="checkin-box" id="cbox-3"><span class="checkin-day">Day 3</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">5K</span></div>
+        <div class="checkin-box" id="cbox-4"><span class="checkin-day">Day 4</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">10K</span></div>
+        <div class="checkin-box" id="cbox-5"><span class="checkin-day">Day 5</span><i class="fa-solid fa-gift"></i><span class="checkin-reward-info">15K+20S</span></div>
+        <div class="checkin-box" id="cbox-6"><span class="checkin-day">Day 6</span><i class="fa-solid fa-coins"></i><span class="checkin-reward-info">30K</span></div>
+        <div class="checkin-box day-7" id="cbox-7">
+          <span class="checkin-day">Day 7 (Grand)</span>
+          <div><i class="fa-solid fa-coins"></i> <i class="fa-solid fa-key" style="margin-left:5px"></i></div>
+          <span class="checkin-reward-info">50K + 🔑 Key + Prem Spin</span>
+        </div>
+        <button class="checkin-btn" id="checkin-action-btn" onclick="executeDailyCheckIn()">CLAIM TODAY'S BOUNTY</button>
+      </div>
+    </div>
+
     <div class="main-clicker-area">
       <div class="circle-outer">
         <div class="circle-inner" id="clicker-btn">
-          <!-- Main Avatar Logo (Super Zoomed & Round) -->
           <img src="https://raw.githubusercontent.com/cyberfoxofficial1-source/cyber-fox-webapp/main/Orange%20Abstract%20Illustrative%20Esports%20Fox%20Gaming%20Logo_20260604_102333_0000.png" alt="Cyber Fox">
         </div>
       </div>
-      
-      <div class="tap-instruction">
-        Tap the fox and earn coins <i class="fa-solid fa-circle-nodes" style="color:var(--theme-orange)"></i>
-      </div>
-
-      <div class="energy-badge">
-        <i class="fa-solid fa-hand-pointer"></i> <span id="taps-left">125</span> Taps Left
-      </div>
-    </div>
-
-    <!-- Quick Cards underneath home -->
-    <div class="info-grid">
-      <div class="info-card"><i class="fa-solid fa-shield-halved"></i><span>Secure & Safe</span></div>
-      <div class="info-card"><i class="fa-solid fa-bolt-lightning"></i><span>Fast & Smooth</span></div>
+      <div class="tap-instruction">Tap the fox and earn coins 🦊</div>
+      <div class="energy-badge"><i class="fa-solid fa-hand-pointer"></i> <span id="taps-left">125</span> Taps Left</div>
     </div>
   </div>
 
-  <!-- 2. TASKS PAGE SECTION -->
+  <div id="spin-page" class="page" style="display:none; text-align:center;">
+    <div class="spin-mode-selector">
+      <button class="mode-tab active" id="tab-normal" onclick="setSpinMode('normal')">Normal Wheel</button>
+      <button class="mode-tab" id="tab-premium" onclick="setSpinMode('premium')">💎 Premium Wheel</button>
+    </div>
+
+    <h3 id="wheel-display-title" style="margin-top:0; color:#fff;">Standard Coin Matrix</h3>
+    <p id="wheel-display-desc" style="color:var(--text-gray); font-size:12px; margin-bottom:20px;">Win up to 2,500 coins or find a Mystery Box inside.</p>
+
+    <div class="wheel-container">
+      <div class="pointer-device"></div>
+      <div class="wheel-canvas-mock" id="wheel-graphic">
+        <div id="wheel-text-node">FOX SPIN</div>
+      </div>
+      <div class="wheel-center-core">🎯</div>
+    </div>
+
+    <button class="spin-trigger-btn" id="spin-action-button" onclick="executeWheelSpin()">LAUNCH SPIN</button>
+    
+    <div class="spin-count-status" id="spin-balance-text">Available Spins: 0</div>
+    <div class="spin-count-status" id="prem-spin-balance-text" style="color:var(--theme-orange)">Premium Active Spins: 0</div>
+  </div>
+
   <div id="tasks-page" class="page" style="display:none;">
     <div class="task-list">
-      
       <div class="task-card">
         <div class="task-left">
           <div class="task-icon-box icon-tg"><i class="fa-brands fa-telegram"></i></div>
@@ -408,9 +584,8 @@ header {
             <div class="task-reward"><i class="fa-solid fa-coins"></i> 1,000</div>
           </div>
         </div>
-        <button class="action-btn" onclick="openTask('Join our TG Channel', 1000, 'https://t.me/your_channel', 'fa-brands fa-telegram')">JOIN <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="action-btn" onclick="alert('Redirecting to Telegram...')">JOIN</button>
       </div>
-
       <div class="task-card">
         <div class="task-left">
           <div class="task-icon-box icon-x"><i class="fa-brands fa-x-twitter"></i></div>
@@ -419,101 +594,40 @@ header {
             <div class="task-reward"><i class="fa-solid fa-coins"></i> 2,000</div>
           </div>
         </div>
-        <button class="action-btn" onclick="openTask('Follow Cyber Fox on X', 2000, 'https://x.com/FoxCyber136', 'fa-brands fa-x-twitter')">FOLLOW <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="action-btn" onclick="alert('Redirecting to X...')">FOLLOW</button>
       </div>
-
-      <div class="task-card">
-        <div class="task-left">
-          <div class="task-icon-box icon-yt"><i class="fa-brands fa-youtube"></i></div>
-          <div class="task-info">
-            <div class="task-name">Subscribe YouTube</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> 3,000</div>
-          </div>
-        </div>
-        <button class="action-btn" onclick="openTask('Subscribe YouTube', 3000, 'https://youtube.com/@cyberfoxofficial', 'fa-brands fa-youtube')">SUBSCRIBE <i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-
-      <div class="task-card">
-        <div class="task-left">
-          <div class="task-icon-box icon-fb"><i class="fa-brands fa-facebook"></i></div>
-          <div class="task-info">
-            <div class="task-name">Follow Facebook Page</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> 1,500</div>
-          </div>
-        </div>
-        <button class="action-btn" onclick="openTask('Follow Facebook Page', 1500, 'https://facebook.com/share/1Cw6CQRDma/', 'fa-brands fa-facebook')">FOLLOW <i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-
-      <div class="task-card">
-        <div class="task-left">
-          <div class="task-icon-box icon-daily"><i class="fa-solid fa-calendar-check"></i></div>
-          <div class="task-info">
-            <div class="task-name">Daily Check-in</div>
-            <div class="task-reward"><i class="fa-solid fa-coins"></i> 500</div>
-          </div>
-        </div>
-        <button class="action-btn" onclick="openTask('Daily Check-in', 500, '#', 'fa-solid fa-calendar-check')">CHECK-IN <i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-
     </div>
   </div>
 
-  <!-- 3. SPIN PAGE SECTION -->
-  <div id="spin-page" class="page" style="display:none;">
-    <div style="padding: 50px 20px; text-align: center; color: var(--text-gray);">
-      <h2>🎯 Lucky Fortune Spin</h2>
-      <p>Spin system integration coming in next update!</p>
-    </div>
-  </div>
-
-  <!-- 4. WALLET PAGE SECTION -->
-  <div id="wallet-page" class="page" style="display:none;">
-    <div style="padding: 50px 20px; text-align: center; color: var(--text-gray);">
-      <h2>👛 TON Connect Wallet</h2>
-      <p>Web3 WebApp SDK connecting engine ready.</p>
+  <div id="wallet-page" class="page" style="display:none; text-align:center;">
+    <div class="wallet-box-ui">
+      <i class="fa-solid fa-wallet" style="font-size:40px; color:var(--theme-orange); margin-bottom:15px;"></i>
+      <h3>Withdrawal Control Portal</h3>
+      <p style="color:var(--text-gray); font-size:13px;">Minimum Threshold: <span style="color:#4caf50; font-weight:bold;">$10.00 USD</span></p>
+      
+      <div class="withdrawal-form">
+        <label>Select Chain Protocol</label>
+        <input type="text" value="TON Network / RedotPay Card Address" readonly>
+        
+        <label>Destination Wallet Address</label>
+        <input type="text" placeholder="Enter your valid cryptographic address">
+        
+        <button class="withdraw-submit-btn" onclick="processWithdrawRequest()">REQUEST PAYOUT</button>
+      </div>
     </div>
   </div>
 
 </div>
 
-<!-- TASK EXTRA DYNAMIC INDIVIDUAL SCREEN VIEW -->
-<div id="detail-view" style="display:none;">
-  <button class="back-btn" onclick="closeDetail()"><i class="fa-solid fa-arrow-left"></i> Back</button>
-  <div class="detail-container">
-    <div class="detail-title" id="det-title">Task Title</div>
-    <div class="detail-desc" id="det-desc">Perform specified task routine step below.</div>
-
-    <div class="big-reward-box">
-      <p>Total Reward Pool</p>
-      <div class="reward-amount"><i class="fa-solid fa-coins"></i> <span id="det-reward">0</span></div>
-    </div>
-
-    <button class="big-follow-btn" id="det-action-btn" onclick="handleFollowClick()">
-      <i id="det-icon" class="fa-brands fa-x-twitter"></i> <span id="det-btn-text">ACTION</span>
-    </button>
-
-    <div class="steps-box">
-      <h3>Steps to Complete</h3>
-      <ul>
-        <li>Click action module above to verify system portal redirection.</li>
-        <li>Return back post processing window completion to activate claim button instantly.</li>
-      </ul>
-    </div>
-
-    <button id="claim-btn" class="claim-btn-big" onclick="claimReward()" disabled>CLAIM REWARD</button>
-  </div>
-</div>
-
-<!-- PERMANENT FOOTER BOTTOM NAVIGATION ELEMENT -->
 <div class="bottom-nav">
   <button class="nav-item active" id="nav-home" onclick="switchPage('home')">
     <i class="fa-solid fa-house"></i><span>Home</span>
   </button>
-  <button class="nav-item" id="nav-tasks" onclick="switchPage('tasks')">
-    <i class="fa-solid fa-clipboard-list"></i><span>Tasks</span>
-  </button>
   <button class="nav-item" id="nav-spin" onclick="switchPage('spin')">
     <i class="fa-solid fa-circle-dot"></i><span>Spin</span>
+  </button>
+  <button class="nav-item" id="nav-tasks" onclick="switchPage('tasks')">
+    <i class="fa-solid fa-clipboard-list"></i><span>Tasks</span>
   </button>
   <button class="nav-item" id="nav-wallet" onclick="switchPage('wallet')">
     <i class="fa-solid fa-wallet"></i><span>Wallet</span>
@@ -521,67 +635,261 @@ header {
 </div>
 
 <script>
+// --- Global Logic Configurations Variable Mapping ---
 let coins = Number(localStorage.getItem("coins")) || 1250;
+let usdBalance = Number(localStorage.getItem("usd_balance")) || 0.00;
+let normalSpins = Number(localStorage.getItem("normal_spins")) || 5;
+let premiumSpins = Number(localStorage.getItem("premium_spins")) || 0;
+let keyTokens = Number(localStorage.getItem("key_tokens")) || 0;
+
+let currentTaps = 125;
 let maxTaps = 125;
-let currentTaps = Number(localStorage.getItem("current_taps")) || 125;
 
-let currentTaskReward = 0;
-let isTaskFollowed = false;
-let currentTaskLink = "";
+let checkInStreak = Number(localStorage.getItem("ci_streak")) || 0;
+let lastCheckInDate = localStorage.getItem("last_ci_date") || "";
 
-const clickerBtn = document.getElementById("clicker-btn");
+let spinMode = "normal"; // normal or premium
+let totalSpinsLifetime = Number(localStorage.getItem("lifetime_spins")) || 0;
+let historicPremiumSpinCount = Number(localStorage.getItem("hist_prem_spins")) || 0;
+
+// --- DOM References ---
 const coinDisplay = document.getElementById("global-coin");
+const usdDisplay = document.getElementById("global-usd");
+const keysDisplay = document.getElementById("global-keys");
 const powerDisplay = document.getElementById("power-percent");
 const tapsDisplay = document.getElementById("taps-left");
+const wheelGraphic = document.getElementById("wheel-graphic");
+const wheelTextNode = document.getElementById("wheel-text-node");
 
-function updateUI() {
+function updateSystemUI() {
   coinDisplay.innerText = coins.toLocaleString();
+  usdDisplay.innerText = "$" + usdBalance.toFixed(2);
+  keysDisplay.innerText = keyTokens;
   tapsDisplay.innerText = currentTaps;
-  let pct = Math.floor((currentTaps / maxTaps) * 100);
-  powerDisplay.innerText = pct + "%";
+  powerDisplay.innerText = Math.floor((currentTaps / maxTaps) * 100) + "%";
+
+  document.getElementById("spin-balance-text").innerText = `Available Spins: ${normalSpins}`;
+  document.getElementById("prem-spin-balance-text").innerText = `Premium Active Spins: ${premiumSpins}`;
+  
+  refreshCheckInBoxes();
 }
 
-clickerBtn.addEventListener("click", function(e) {
-  if (currentTaps <= 0) {
-    alert("Out of Energy! Recharge cycle ongoing.");
-    return;
-  }
-
-  coins += 1;
-  currentTaps -= 1;
-  
+// --- Tap Machine Engine ---
+document.getElementById("clicker-btn").addEventListener("click", function(e) {
+  if (currentTaps <= 0) return;
+  coins += 1; currentTaps -= 1;
   localStorage.setItem("coins", coins);
-  localStorage.setItem("current_taps", currentTaps);
-  updateUI();
+  updateSystemUI();
 
-  const x = e.clientX;
-  const y = e.clientY;
-
-  const floatingText = document.createElement("div");
-  floatingText.className = "floating-text";
-  floatingText.innerText = "+1";
-  floatingText.style.left = `${x - 12}px`;
-  floatingText.style.top = `${y - 22}px`;
-
-  document.body.appendChild(floatingText);
-  setTimeout(() => { floatingText.remove(); }, 700);
+  const x = e.clientX; const y = e.clientY;
+  const ft = document.createElement("div");
+  ft.className = "floating-text"; ft.innerText = "+1";
+  ft.style.left = `${x - 12}px`; ft.style.top = `${y - 22}px`;
+  document.body.appendChild(ft);
+  setTimeout(() => ft.remove(), 600);
 });
 
 setInterval(() => {
-  if (currentTaps < maxTaps) {
-    currentTaps += 1;
-    localStorage.setItem("current_taps", currentTaps);
-    updateUI();
-  }
+  if (currentTaps < maxTaps) { currentTaps += 1; updateSystemUI(); }
 }, 3000);
 
+// --- 7 Days Logic Structure (Non-cloned Unique Render) ---
+function refreshCheckInBoxes() {
+  for (let i = 1; i <= 7; i++) {
+    const box = document.getElementById(`cbox-${i}`);
+    if (box) {
+      box.classList.remove("claimed");
+      if (i <= checkInStreak) {
+        box.classList.add("claimed");
+      }
+    }
+  }
+  
+  // চেক-ইন বাটন এনাবেল/ডিজেবল করার লজিক (২৪ ঘণ্টার রিয়েল কন্ডিশন)
+  const todayStr = new Date().toDateString();
+  const btn = document.getElementById("checkin-action-btn");
+  if (lastCheckInDate === todayStr) {
+    btn.innerText = "CLAIMED FOR TODAY";
+    btn.disabled = true;
+  } else {
+    btn.innerText = `CLAIM DAY ${checkInStreak + 1} REWARD`;
+    btn.disabled = false;
+  }
+}
+
+function executeDailyCheckIn() {
+  const todayStr = new Date().toDateString();
+  if (lastCheckInDate === todayStr) return;
+
+  checkInStreak += 1;
+  if (checkInStreak > 7) checkInStreak = 1; // লুপ ব্যাক ১ দিনে
+
+  // পুরস্কারের রিয়েল চার্ট ম্যাট্রিক্স লজিক
+  if (checkInStreak === 1) { coins += 1000; alert("Day 1 Claimed: +1,000 Coins!"); }
+  else if (checkInStreak === 2) { coins += 3000; normalSpins += 5; alert("Day 2 Claimed: +3,000 Coins & +5 Lucky Spins!"); }
+  else if (checkInStreak === 3) { coins += 5000; alert("Day 3 Claimed: +5,000 Coins!"); }
+  else if (checkInStreak === 4) { coins += 10000; alert("Day 4 Claimed: +10,000 Coins!"); }
+  else if (checkInStreak === 5) { coins += 15000; normalSpins += 20; alert("Day 5 Claimed: +15,000 Coins & +20 Lucky Spins!"); }
+  else if (checkInStreak === 6) { coins += 30000; alert("Day 6 Claimed: +30,000 Coins!"); }
+  else if (checkInStreak === 7) { 
+    coins += 50000; 
+    keyTokens += 1; 
+    premiumSpins += 1; // ৭ম দিনে ১টি প্রিমিয়াম ডলার স্পিন আনলক
+    alert("🔥 Grand Day 7 Claimed! +50,000 Coins, +1 Premium Spin & 🔑 1 Withdrawal Key Added!");
+  }
+
+  lastCheckInDate = todayStr;
+  localStorage.setItem("ci_streak", checkInStreak);
+  localStorage.setItem("last_ci_date", lastCheckInDate);
+  localStorage.setItem("coins", coins);
+  localStorage.setItem("normal_spins", normalSpins);
+  localStorage.setItem("premium_spins", premiumSpins);
+  localStorage.setItem("key_tokens", keyTokens);
+
+  updateSystemUI();
+}
+
+// --- Algorithmic Dual-Mode Spin Engine Core ---
+function setSpinMode(mode) {
+  spinMode = mode;
+  document.getElementById("tab-normal").classList.remove("active", "premium-active");
+  document.getElementById("tab-premium").classList.remove("active", "premium-active");
+  
+  const title = document.getElementById("wheel-display-title");
+  const desc = document.getElementById("wheel-display-desc");
+
+  if (mode === "normal") {
+    document.getElementById("tab-normal").classList.add("active");
+    title.innerText = "Standard Coin Matrix";
+    desc.innerText = "Win up to 2,500 coins or find a Mystery Box inside.";
+    wheelGraphic.style.background = "conic-gradient(#181818 0deg 60deg, #252525 60deg 120deg, #181818 120deg 180deg, #252525 180deg 240deg, #181818 240deg 300deg, #252525 300deg 360deg)";
+    wheelTextNode.innerText = "COIN WHEEL";
+    wheelTextNode.style.color = "#fff";
+  } else {
+    document.getElementById("tab-premium").classList.add("active", "premium-active");
+    title.innerText = "💎 Premium Dollar Portal";
+    desc.innerText = "Weekly Active Check-in exclusive wheel. Earn real cash pool assets.";
+    wheelGraphic.style.background = "conic-gradient(#26180a 0deg 72deg, #1a1107 72deg 144deg, #26180a 144deg 216deg, #1a1107 216deg 288deg, #2e1b07 288deg 360deg)";
+    wheelTextNode.innerText = "USD WHEEL";
+    wheelTextNode.style.color = "var(--theme-orange)";
+  }
+}
+
+function executeWheelSpin() {
+  if (spinMode === "normal") {
+    if (normalSpins <= 0) { alert("No spins left! Daily check-in complete করে স্পিন কালেক্ট করো।"); return; }
+    normalSpins -= 1;
+    localStorage.setItem("normal_spins", normalSpins);
+    
+    totalSpinsLifetime += 1;
+    localStorage.setItem("lifetime_spins", totalSpinsLifetime);
+
+    // ১. সাধারণ স্পিন লজিক ডিটারমিনেশন
+    let rewardType = ""; 
+    // চাবির অ্যালগরিদম হুক: প্রথম ৩ বা ৪ স্পিনের ভেতর নিশ্চিত চাবি পাবে, এরপর ৫০০-৬০০ স্পিন পর পর ১টি চাবি।
+    if (totalSpinsLifetime === 3 || totalSpinsLifetime === 4 || (totalSpinsLifetime > 5 && totalSpinsLifetime % 550 === 0)) {
+      rewardType = "KEY";
+    } else {
+      let rand = Math.random();
+      if (rand < 0.18) rewardType = "500";
+      else if (rand < 0.36) rewardType = "1000";
+      else if (rand < 0.54) rewardType = "1500";
+      else if (rand < 0.72) rewardType = "2000";
+      else if (rand < 0.88) rewardType = "2500";
+      else rewardType = "MYSTERY"; // ১২% চান্স মিস্ট্রি বক্সের
+    }
+
+    // চাকা ঘোরার অ্যানিমেশন এফেক্ট
+    let currentRotation = (totalSpinsLifetime * 1440) + Math.floor(Math.random() * 360);
+    wheelGraphic.style.transform = `rotate(${currentRotation}deg)`;
+    document.getElementById("spin-action-button").disabled = true;
+
+    setTimeout(() => {
+      document.getElementById("spin-action-button").disabled = false;
+      
+      if (rewardType === "KEY") {
+        keyTokens += 1;
+        localStorage.setItem("key_tokens", keyTokens);
+        alert("🔑 MAGICAL LUCK! You unlocked a Golden Key from the Matrix!");
+      } else if (rewardType === "MYSTERY") {
+        // মিস্ট্রি বক্স সাব-লজিক রানার
+        let subRand = Math.random();
+        if (subRand < 0.2) { normalSpins += 15; alert("🎁 Mystery Box Opened: Found 15 Extra Free Spins!"); }
+        else if (subRand < 0.4) { normalSpins += 25; alert("🎁 Mystery Box Opened: Found 25 Extra Free Spins!"); }
+        else if (subRand < 0.6) { normalSpins += 30; alert("🎁 Mystery Box Opened: Found 30 Extra Free Spins!"); }
+        else if (subRand < 0.8) { coins += 2500; alert("🎁 Mystery Box Opened: Found +2,500 Bonus Coins!"); }
+        else { coins += 5000; alert("🎁 Mystery Box Opened: Found +5,000 Mega Bonus Coins!"); }
+        localStorage.setItem("normal_spins", normalSpins);
+        localStorage.setItem("coins", coins);
+      } else {
+        let value = Number(rewardType);
+        coins += value;
+        localStorage.setItem("coins", coins);
+        alert(`🎯 Target Lock! You won +${value} Coins.`);
+      }
+      updateSystemUI();
+    }, 3000);
+
+  } else {
+    // ২. প্রিমিয়াম ডলার স্পিন অ্যালগরিদম হুক
+    if (premiumSpins <= 0) { alert("Premium wheel locked! টানা ৭ দিন চেক-ইন সম্পন্ন করলে এই চাকা ১বার ঘুরানো যাবে।"); return; }
+    premiumSpins -= 1;
+    localStorage.setItem("premium_spins", premiumSpins);
+    
+    historicPremiumSpinCount += 1;
+    localStorage.setItem("hist_prem_spins", historicPremiumSpinCount);
+
+    let usdReward = 0.10;
+    // সাইকোলজিক্যাল হুক লজিক: ১ম অথবা ২য় বার বড় রিওয়ার্ড দিবে ($0.50 বা $1.00), কিন্তু কখনোই সরাসরি $10.00 মিলবে না।
+    if (historicPremiumSpinCount === 1) {
+      usdReward = 1.00;
+    } else if (historicPremiumSpinCount === 2) {
+      usdReward = 0.50;
+    } else {
+      // ২ বারের পর থেকে সে সবসময় আকর্ষণীয় কিন্তু ছোট ভ্যালু $0.10 পাবে, যাতে উইথড্র থ্রেশহোল্ডের কাছে পৌঁছাতে সময় লাগে।
+      usdReward = 0.10;
+    }
+
+    let currentRotation = (historicPremiumSpinCount * 1800) + Math.floor(Math.random() * 360);
+    wheelGraphic.style.transform = `rotate(${currentRotation}deg)`;
+    document.getElementById("spin-action-button").disabled = true;
+
+    setTimeout(() => {
+      document.getElementById("spin-action-button").disabled = false;
+      usdBalance += usdReward;
+      localStorage.setItem("usd_balance", usdBalance);
+      alert(`💎 PREMIUM WINNER! You extracted +$${usdReward.toFixed(2)} USD cash directly into your wallet.`);
+      updateSystemUI();
+    }, 3000);
+  }
+}
+
+// --- Withdrawal Processing Logic Check ---
+function processWithdrawRequest() {
+  if (usdBalance < 10.00) {
+    alert("❌ Withdrawal Denied! Your balance must be at least $10.00 USD.");
+    return;
+  }
+  if (keyTokens <= 0) {
+    alert("🔑 Lockout active! You cannot withdraw without a Golden Key. Spin the normal wheel or complete Day 7 check-in to fetch one!");
+    return;
+  }
+  
+  // কন্ডিশন ফুলফিল হলে চাবি ও ব্যালেন্স মাইনাস হবে
+  usdBalance -= 10.00;
+  keyTokens -= 1;
+  localStorage.setItem("usd_balance", usdBalance);
+  localStorage.setItem("key_tokens", keyTokens);
+  alert("🎉 Success! Your payout order of $10.00 USD has been safely generated on-chain. Processing within 24 hours.");
+  updateSystemUI();
+}
+
+// --- Navigation Layout Router Engine ---
 function switchPage(pageName) {
   document.getElementById("home-page").style.display = "none";
-  document.getElementById("tasks-page").style.display = "none";
   document.getElementById("spin-page").style.display = "none";
+  document.getElementById("tasks-page").style.display = "none";
   document.getElementById("wallet-page").style.display = "none";
-  document.getElementById("detail-view").style.display = "none";
-  document.getElementById("main-view").style.display = "block";
 
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById(`${pageName}-page`).style.display = "block";
@@ -589,62 +897,13 @@ function switchPage(pageName) {
 
   const subEl = document.getElementById("page-subtitle");
   if(pageName === 'home') subEl.innerText = "Welcome to Cyber Fox Hub 🦊";
-  if(pageName === 'tasks') subEl.innerText = "Complete tasks and earn coins 📋";
-  if(pageName === 'spin') subEl.innerText = "Try your luck with spinning engine 🎯";
-  if(pageName === 'wallet') subEl.innerText = "Securely verify ecosystem network access 👛";
-}
-
-function openTask(title, reward, link, iconClass) {
-  document.getElementById("main-view").style.display = "none";
-  document.getElementById("detail-view").style.display = "block";
-
-  document.getElementById("det-title").innerText = title;
-  document.getElementById("det-reward").innerText = reward.toLocaleString();
-  document.getElementById("det-icon").className = iconClass;
-  
-  let text = "GO";
-  if(title.includes("X") || title.includes("Facebook")) text = "FOLLOW";
-  if(title.includes("YouTube")) text = "SUBSCRIBE";
-  if(title.includes("TG")) text = "JOIN";
-  if(title.includes("Check-in")) text = "CHECK-IN";
-  
-  document.getElementById("det-btn-text").innerText = text;
-  document.getElementById("det-desc").innerText = `Complete this ${title.toLowerCase()} pipeline criteria to unlock native assets.`;
-
-  currentTaskReward = reward;
-  currentTaskLink = link;
-  isTaskFollowed = false;
-
-  const claimBtn = document.getElementById("claim-btn");
-  claimBtn.disabled = true;
-  claimBtn.classList.remove("active");
-}
-
-function closeDetail() {
-  document.getElementById("detail-view").style.display = "none";
-  document.getElementById("main-view").style.display = "block";
-}
-
-function handleFollowClick() {
-  if(currentTaskLink !== "#") window.open(currentTaskLink, '_blank');
-  isTaskFollowed = true;
-  const claimBtn = document.getElementById("claim-btn");
-  claimBtn.disabled = false;
-  claimBtn.classList.add("active");
-}
-
-function claimReward() {
-  if(!isTaskFollowed) return;
-  coins += currentTaskReward;
-  localStorage.setItem("coins", coins);
-  updateUI();
-  alert(`🎉 Reward Claimed! +${currentTaskReward} Coins`);
-  closeDetail();
-  switchPage('tasks');
+  if(pageName === 'spin') subEl.innerText = "Launch the matrix gears to secure assets 🎯";
+  if(pageName === 'tasks') subEl.innerText = "Complete daily system procedures 📋";
+  if(pageName === 'wallet') subEl.innerText = "Ecosystem secure asset ledger window 👛";
 }
 
 window.onload = function() {
-  updateUI();
+  updateSystemUI();
 };
 </script>
 
