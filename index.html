@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -247,10 +247,9 @@
 
         /* The Premium Double Glowing Circle & Tap Engine */
         .mining-click-shell {
-            width: 320px;
-            height: 320px;
+            width: 340px;
+            height: 340px;
             border-radius: 50%;
-            overflow: hidden;
             background: radial-gradient(circle, rgba(225, 140, 0, 0.28) 0%, rgba(0,0,0,0) 65%);
             display: flex;
             justify-content: center;
@@ -281,54 +280,59 @@
         }
 
         @keyframes pulseGlow {
-    0%{
-        transform:scale(1);
-        box-shadow:0 0 20px rgba(255,106,0,.4);
-    }
+            0%{
+                transform:scale(1);
+                box-shadow:0 0 20px rgba(255,106,0,.4);
+            }
+            50%{
+                transform:scale(1.04);
+                box-shadow:0 0 50px rgba(255,106,0,.8);
+            }
+            100%{
+                transform:scale(1);
+                box-shadow:0 0 20px rgba(255,106,0,.4);
+            }
+        }
 
-    50%{
-        transform:scale(1.04);
-        box-shadow:0 0 50px rgba(255,106,0,.8);
-    }
-
-    100%{
-        transform:scale(1);
-        box-shadow:0 0 20px rgba(255,106,0,.4);
-    }
+        @keyframes foxFloat {
+            0% { transform: translateY(0px) scale(1.1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+            100% { transform: translateY(0px) scale(1.1); }
         }
 
         /* The Realistic Premium Fox Render Asset Image Container */
         .premium-fox-avatar-asset {
-            width: 290px;
-            height: 290px;
-            object-fit: contain;
-            transform: scale(1.38);
-         animation: foxFloat 3s ease-in-out infinite;
-            z-index: 10;
-            pointer-events: none;
-            transition: transform 0.2s ease;
-            filter: drop-shadow(0px 10px 35px rgba(0,0,0,0.75));
+    width: 88%;
+    height: 88%;
+    object-fit: cover;
+    border-radius: 50%;
+    animation: foxFloat 3s ease-in-out infinite;
+    z-index: 10;
+    pointer-events: none;
+    transition: transform .1s ease;
+    filter: drop-shadow(0 10px 35px rgba(0,0,0,.75));
         }
 
+        /* ট্যাপ করার সময় ছবি সামান্য ছোট হবে এবং রিয়েল এনিমেশন আসবে */
         .mining-click-shell:active .premium-fox-avatar-asset {
-            transform: scale(0.30);
+            transform: scale(0.98);
         }
 
         /* Floating +1 Indicator System */
         .floating-click-node {
             position: absolute;
             color: #ff8c00;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 900;
             pointer-events: none;
             z-index: 500;
-            animation: floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            animation: floatUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.7);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(0.8); }
+            100% { opacity: 0; transform: translateY(-120px) scale(0.8); }
         }
 
         .click-action-descriptor {
@@ -961,7 +965,7 @@
     <script>
         // Internal State Core Variables Memory Ledger
         let appState = {
-            coins: 25495,
+            coins: 1250,
             power: 100,
             balance: 0.00,
             keys: 2,
@@ -1057,7 +1061,7 @@
                 floatText.style.top = `${clickY}px`;
                 
                 clickMiningZone.appendChild(floatText);
-                setTimeout(() => floatText.remove(), 800);
+                setTimeout(() => floatText.remove(), 600);
             } else {
                 triggerSystemModal("Energy Exhausted", "Node battery cells empty. Allow operational buffer timeline capacity to regenerate system power status.");
             }
@@ -1135,4 +1139,4 @@
         runDomStateSynchronization();
     </script>
 </body>
-                    </html>
+</html>
