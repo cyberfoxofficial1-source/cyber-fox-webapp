@@ -281,8 +281,20 @@
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(0.98); box-shadow: 0 0 25px rgba(255, 106, 0, 0.25); }
-            100% { transform: scale(1.02); box-shadow: 0 0 45px rgba(255, 106, 0, 0.55); }
+    0%{
+        transform:scale(1);
+        box-shadow:0 0 20px rgba(255,106,0,.4);
+    }
+
+    50%{
+        transform:scale(1.04);
+        box-shadow:0 0 50px rgba(255,106,0,.8);
+    }
+
+    100%{
+        transform:scale(1);
+        box-shadow:0 0 20px rgba(255,106,0,.4);
+    }
         }
 
         /* The Realistic Premium Fox Render Asset Image Container */
