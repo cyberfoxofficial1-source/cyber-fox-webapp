@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V2 - Full Premium Web3 Platform</title>
+    <title>Cyber Fox V2 - Bulletproof Enterprise Architecture</title>
     <style>
-        /* CSS Variable Root Setup */
         :root {
             --bg-main: #0a0b0e;
             --bg-card: #15161c;
             --accent-orange: #ff6a00;
-            --accent-glow: rgba(255, 106, 0, 0.45);
+            --accent-glow: rgba(255, 106, 0, 0.25);
             --text-pure: #ffffff;
             --text-muted: #8e929a;
             --text-gold: #ffb700;
@@ -38,7 +37,6 @@
             overflow: hidden;
         }
 
-        /* Responsive Mobile Container */
         .app-container {
             width: 100%;
             max-width: 460px;
@@ -139,7 +137,7 @@
 
         @keyframes walletPulse {
             0% { transform: scale(1); filter: drop-shadow(0 0 1px var(--success-green)); }
-            50% { transform: scale(1.12); filter: drop-shadow(0 0 5px var(--success-green)); }
+            50% { transform: scale(1.12); filter: drop-shadow(0 0 3px var(--success-green)); }
             100% { transform: scale(1); filter: drop-shadow(0 0 1px var(--success-green)); }
         }
 
@@ -263,7 +261,7 @@
             width: 340px;
             height: 340px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(225, 140, 0, 0.28) 0%, rgba(0,0,0,0) 65%);
+            background: radial-gradient(circle, rgba(225, 140, 0, 0.22) 0%, rgba(0,0,0,0) 65%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -279,8 +277,8 @@
             width: 88%;
             height: 88%;
             border-radius: 50%;
-            border: 2px solid rgba(255, 106, 0, 0.3);
-            box-shadow: 0 0 35px var(--accent-glow);
+            border: 2px solid rgba(255, 106, 0, 0.25);
+            box-shadow: 0 0 20px var(--accent-glow);
             animation: pulseGlow 3s infinite alternate;
         }
 
@@ -310,7 +308,7 @@
             object-fit: cover;
             border-radius: 50%;
             transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: drop-shadow(0 10px 35px rgba(0,0,0,.75));
+            filter: drop-shadow(0 6px 15px rgba(0,0,0,.6));
         }
 
         .mining-click-shell:active .premium-fox-avatar-asset {
@@ -319,17 +317,16 @@
 
         @keyframes foxIdleBreathing {
             0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-8px) scale(1.02); }
+            50% { transform: translateY(-6px) scale(1.01); }
             100% { transform: translateY(0px) scale(1); }
         }
 
         @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255,106,0,.4); }
-            50% { transform: scale(1.02); box-shadow: 0 0 45px rgba(255,106,0,.7); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,106,0,.4); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,106,0,.2); }
+            50% { transform: scale(1.01); box-shadow: 0 0 30px rgba(255,106,0,.4); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,106,0,.2); }
         }
 
-        /* 👍 OPTIMIZATION 7: added will-change to prepare hardware layers for buttery smooth performance */
         .floating-click-node {
             position: absolute;
             color: #ff8c00;
@@ -339,7 +336,7 @@
             z-index: 500;
             will-change: transform, opacity;
             animation: floatUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.7);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
         }
 
         @keyframes floatUp {
@@ -420,7 +417,7 @@
             height: 100%;
             border-radius: 50%;
             border: 6px solid #1c1d24;
-            box-shadow: 0 0 35px rgba(255,106,0,0.12);
+            box-shadow: 0 0 20px rgba(255,106,0,0.1);
             z-index: 1;
         }
 
@@ -433,7 +430,7 @@
             border-right: 14px solid transparent;
             border-top: 22px solid #ef4444;
             z-index: 40;
-            filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.4));
+            filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.4));
         }
 
         .wheel-core-canvas {
@@ -453,6 +450,7 @@
             border: 4px solid var(--bg-card);
             position: relative;
             z-index: 10;
+            will-change: transform;
         }
 
         .wheel-center-hub-cap {
@@ -462,7 +460,7 @@
             background: #15161c;
             border-radius: 50%;
             border: 3px solid var(--accent-orange);
-            box-shadow: 0 0 15px var(--accent-glow);
+            box-shadow: 0 0 10px var(--accent-glow);
             z-index: 30;
             display: flex;
             justify-content: center;
@@ -495,7 +493,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
-            box-shadow: 0 6px 22px rgba(255, 85, 0, 0.32);
+            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.25);
             transition: all 0.15s ease;
         }
 
@@ -596,16 +594,10 @@
             cursor: pointer;
         }
 
-        .task-execution-action-btn:disabled {
-            background: #22242c;
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
-
         .task-execution-action-btn.claimed {
-            background: #22242b;
-            color: rgba(255,255,255,0.2);
-            cursor: not-allowed;
+            background: #22242b !important;
+            color: rgba(255,255,255,0.2) !important;
+            cursor: not-allowed !important;
         }
 
         /* --- VIEW 4: WALLET --- */
@@ -751,7 +743,7 @@
             padding: 26px;
             border-radius: 18px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             animation: modalPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -794,7 +786,7 @@
         <div class="app-header">
             <div class="identity-block">
                 <div class="mini-avatar-shell">
-                    <img src="fox.png" id="headerAvatarNode" alt="Node Avatar">
+                    <img src="fox.png" id="headerAvatarNode" alt="Node Avatar" onerror="handleImageError(this)">
                 </div>
                 <div class="title-meta">
                     <span class="meta-main">Cyber Fox V2</span>
@@ -841,7 +833,7 @@
 
                 <div class="mining-click-shell" id="foxMiningCoreTarget">
                     <div class="fox-layer-wrapper">
-                        <img src="fox.png" class="premium-fox-avatar-asset" alt="Cyber Fox Core Asset">
+                        <img src="fox.png" class="premium-fox-avatar-asset" alt="Cyber Fox Core Asset" onerror="handleImageError(this)">
                     </div>
                 </div>
 
@@ -863,7 +855,7 @@
                     <div class="wheel-outer-rim-glow"></div>
                     <div class="wheel-top-pointer-pin"></div>
                     <div class="wheel-center-hub-cap">
-                        <img src="fox.png" class="mini-hub-fox-img" alt="Hub Vector">
+                        <img src="fox.png" class="mini-hub-fox-img" alt="Hub Vector" onerror="handleImageError(this)">
                     </div>
                     <div class="wheel-core-canvas" id="mechanicalWheelCanvas"></div>
                 </div>
@@ -967,7 +959,7 @@
     </div>
 
     <script>
-        // Strict Zero-State Registry Pattern 
+        // Central Production State Matrix
         let appState = {
             coins: 0,
             power: 100,
@@ -978,7 +970,7 @@
             walletConnected: false
         };
 
-        // DOM Elements Caching
+        // DOM Cache Registry
         const clickMiningZone = document.getElementById('foxMiningCoreTarget');
         const wheelCanvas = document.getElementById('mechanicalWheelCanvas');
         const wheelBtn = document.getElementById('executeWheelSpinTrigger');
@@ -995,38 +987,50 @@
         const walletBtn = document.getElementById('walletTrigger');
         const walletText = document.getElementById('walletPillText');
 
+        // Engine Control Variables
         let runtimeWheelSpinningState = false;
+        let isProcessingWheelPayout = false; 
+        let selectedPayoutOutcome = 0; 
         let systemModalQueue = [];
         let isSystemModalActive = false;
+        let powerRegenIntervalId = null;
+        let wheelTimeoutFallbackId = null; // Guard against lagging transitionend events
 
-        // Cryptographic Timestamp Anti-Cheat System
+        // Anti-Cheat Frame Boundary
         let lastLoggedTapTimestamp = 0;
-        const CRYPTO_TAP_COOLDOWN_MS = 200; 
+        const CRYPTO_TAP_COOLDOWN_MS = 120; 
 
-        // Live Mathematical Sync & Rounded Formulation System
+        // State Tracking Mutators (👍 OPTIMIZATION 8: textContent architecture deployed globally)
         function syncCoinRewardsState(amountToAdd) {
             appState.coins += amountToAdd;
             appState.balance = appState.coins / 10000;
             runDomStateSynchronization();
         }
 
-        // DOM Synchronization Interface Matrix
         function runDomStateSynchronization() {
             document.querySelectorAll('.live-render-coins').forEach(node => {
-                node.innerText = Math.floor(appState.coins).toLocaleString();
+                if (node) node.textContent = Math.floor(appState.coins).toLocaleString();
             });
-            if(textKeysNode) textKeysNode.innerText = appState.keys;
-            if(textPowerNode) textPowerNode.innerText = Math.floor(appState.power) + "%";
-            if(textBalanceNode) textBalanceNode.innerText = "$" + appState.balance.toFixed(2);
-            if(textSpinsLeft) textSpinsLeft.innerText = appState.availableSpins;
+            if (textKeysNode) textKeysNode.textContent = appState.keys;
+            if (textPowerNode) textPowerNode.textContent = Math.floor(appState.power) + "%";
+            if (textBalanceNode) textBalanceNode.textContent = "$" + appState.balance.toFixed(2);
+            if (textSpinsLeft) textSpinsLeft.textContent = appState.availableSpins;
         }
 
-        // Centralized Performance Optimization Image Fallback Engine
+        // Image Handling Monitor Fallback 
+        function handleImageError(imgElement) {
+            if (!imgElement) return;
+            imgElement.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23ff6a00'><circle cx='50' cy='50' r='45' fill='%231c1d24' stroke='%23ff6a00' stroke-width='2'/><path d='M50 25 L75 55 L25 55 Z'/><circle cx='40' cy='48' r='3' fill='white'/><circle cx='60' cy='48' r='3' fill='white'/></svg>";
+        }
+
         function initGlobalImageFallbackMonitor() {
             document.querySelectorAll('img').forEach(img => {
+                if (img.naturalWidth === 0 && img.src !== "") {
+                    handleImageError(img);
+                }
                 img.addEventListener('error', function handleMissingAsset() {
                     this.removeEventListener('error', handleMissingAsset);
-                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23ff6a00'><circle cx='50' cy='50' r='45' fill='%231c1d24' stroke='%23ff6a00' stroke-width='2'/><path d='M50 25 L75 55 L25 55 Z'/><circle cx='40' cy='48' r='3' fill='white'/><circle cx='60' cy='48' r='3' fill='white'/></svg>";
+                    handleImageError(this);
                 });
             });
         }
@@ -1035,14 +1039,19 @@
         function activateTargetTab(targetStageID, navigationElement) {
             if (runtimeWheelSpinningState) return; 
             
-            document.querySelectorAll('.viewport-stage').forEach(stage => stage.classList.remove('active'));
-            document.querySelectorAll('.dock-action-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.viewport-stage').forEach(stage => {
+                if (stage) stage.classList.remove('active');
+            });
+            document.querySelectorAll('.dock-action-item').forEach(item => {
+                if (item) item.classList.remove('active');
+            });
             
-            document.getElementById(`stage-${targetStageID}`).classList.add('active');
-            navigationElement.classList.add('active');
+            const activeStage = document.getElementById(`stage-${targetStageID}`);
+            if (activeStage) activeStage.classList.add('active');
+            if (navigationElement) navigationElement.classList.add('active');
         }
 
-        // Central Queue Overlay Manager Interface 
+        // Central Queue Overlay Core Pipeline
         function triggerSystemModal(headline, message) {
             systemModalQueue.push({ headline, message });
             processNextModalInQueue();
@@ -1054,198 +1063,251 @@
             isSystemModalActive = true;
             const currentModal = systemModalQueue.shift();
             
-            modalTitle.innerText = currentModal.headline;
-            modalMsg.innerText = currentModal.message;
-            modalOverlay.style.display = 'flex';
+            if (modalTitle) modalTitle.textContent = currentModal.headline;
+            if (modalMsg) modalMsg.textContent = currentModal.message;
+            if (modalOverlay) modalOverlay.style.display = 'flex';
         }
 
-        // Atomic Overlay State Synchronization Lock
-        modalDismiss.addEventListener('click', () => {
-            modalOverlay.style.display = 'none';
+        // 👍 OPTIMIZATION 3: Isolated Centralized Close Modal Logic Pipeline
+        function closeModal() {
+            if (modalOverlay) modalOverlay.style.display = 'none';
             setTimeout(() => {
                 isSystemModalActive = false;
                 processNextModalInQueue();
-            }, 200); 
-        });
+            }, 200);
+        }
 
-        // 👍 OPTIMIZATION 3: Backdrop click support preventing structural queue freeze/stuck risk
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modalDismiss.click();
-            }
-        });
+        if (modalDismiss) {
+            modalDismiss.addEventListener('click', closeModal);
+        }
 
-        // Web3 Status Handlers
-        walletBtn.addEventListener('click', () => {
-            appState.walletConnected = !appState.walletConnected;
-            walletBtn.classList.toggle('connected', appState.walletConnected);
-            
-            // 👍 OPTIMIZATION 2: Implemented ternary operator for rock-solid UI consistency
-            walletText.innerText = appState.walletConnected ? "0x7F...3B" : "Connect";
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+        }
 
-            if(appState.walletConnected) {
-                triggerSystemModal("Wallet Connection Established", "Secure link mapped to active Web3 terminal gateway successfully.");
-            } else {
-                triggerSystemModal("Wallet Disconnected", "Secure link unmapped safely from the core ledger database framework.");
-            }
-        });
+        // Web3 Identity Binding Control System
+        if (walletBtn) {
+            walletBtn.addEventListener('click', () => {
+                appState.walletConnected = !appState.walletConnected;
+                walletBtn.classList.toggle('connected', appState.walletConnected);
+                if (walletText) walletText.textContent = appState.walletConnected ? "Connected" : "Connect";
 
-        // Core Multi-Input Extraction Handler Engine
+                if (appState.walletConnected) {
+                    triggerSystemModal("Wallet Linked", "Secure gateway integration protocol deployed successfully to account state node ledger.");
+                } else {
+                    triggerSystemModal("Wallet Severed", "Web3 token interface unmapped securely from the host matrix framework.");
+                }
+            });
+        }
+
+        // Reactive Core Power Regen Loop
+        function startPowerRegenEngine() {
+            // 👍 POINT 4: Multiple interval setup protection guard
+            if (powerRegenIntervalId !== null) return;
+
+            powerRegenIntervalId = setInterval(() => {
+                if (document.hidden) return;
+
+                if (appState.power < 100) {
+                    let computedNextPower = appState.power + 1;
+                    appState.power = parseFloat(Math.min(100, computedNextPower).toFixed(1));
+                    runDomStateSynchronization();
+                } else {
+                    clearInterval(powerRegenIntervalId);
+                    powerRegenIntervalId = null;
+                }
+            }, 5000);
+        }
+
+        // Tap Core Process Logic
         function processActiveTapMiningEvent(event) {
-            // Support both mobile touches and desktop pointer coordinates dynamically
-            const targetCoordinatesSource = event.touches ? event.touches[0] : event;
+            if (!clickMiningZone) return;
             const boundingBoxMetrics = clickMiningZone.getBoundingClientRect();
-            const calculatedOffsetX = targetCoordinatesSource.clientX - boundingBoxMetrics.left;
-            const calculatedOffsetY = targetCoordinatesSource.clientY - boundingBoxMetrics.top;
+            const calculatedOffsetX = event.clientX - boundingBoxMetrics.left;
+            const calculatedOffsetY = event.clientY - boundingBoxMetrics.top;
 
             const currentTimestampTicks = Date.now();
+            if (currentTimestampTicks - lastLoggedTapTimestamp < CRYPTO_TAP_COOLDOWN_MS) return;
 
-            if (currentTimestampTicks - lastLoggedTapTimestamp < CRYPTO_TAP_COOLDOWN_MS) {
-                return; 
-            }
-
-            if(appState.power >= 0.2) {
+            if (appState.power >= 0.2) {
                 lastLoggedTapTimestamp = currentTimestampTicks; 
 
                 syncCoinRewardsState(1);
-                appState.power = Math.max(0, appState.power - 0.2);
+                let rawNextPower = appState.power - 0.2;
+                appState.power = parseFloat(Math.max(0, rawNextPower).toFixed(1));
                 runDomStateSynchronization();
+
+                startPowerRegenEngine();
 
                 const floatText = document.createElement('div');
                 floatText.className = 'floating-click-node';
-                floatText.innerText = '+1';
+                floatText.textContent = '+1';
                 floatText.style.left = `${calculatedOffsetX}px`;
                 floatText.style.top = `${calculatedOffsetY}px`;
                 
                 clickMiningZone.appendChild(floatText);
 
-                if (clickMiningZone.childElementCount > 15) {
-                    const activeFloaterNodes = clickMiningZone.getElementsByClassName('floating-click-node');
-                    if(activeFloaterNodes.length > 0) activeFloaterNodes[0].remove();
+                // 👍 OPTIMIZATION 7: Reduced active nodes limit threshold to 5 for rapid garbage cleaning on low-end units
+                const activeFloaterNodes = clickMiningZone.querySelectorAll('.floating-click-node');
+                if (activeFloaterNodes.length > 5) {
+                    activeFloaterNodes[0].remove();
                 }
 
                 setTimeout(() => floatText.remove(), 600);
             } else {
-                triggerSystemModal("Energy Exhausted", "Node battery cells empty. Allow operational buffer timeline capacity to regenerate system power status.");
+                triggerSystemModal("Power Level Critical", "Core energy cell exhaustion state detected. Recharge protocol processing online.");
             }
         }
 
-        // 👍 OPTIMIZATION 5: Combined hybrid click + touch listener mesh with multi-fire prevention overrides
-        clickMiningZone.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevents ghost clicks on mobile devices
-            processActiveTapMiningEvent(e);
-        }, { passive: false });
+        if (clickMiningZone) {
+            clickMiningZone.addEventListener('pointerdown', (e) => {
+                processActiveTapMiningEvent(e);
+            });
+        }
 
-        clickMiningZone.addEventListener('click', (e) => {
-            // Ignore mouse triggers if natively driven by touch emission flows
-            if (e.pointerType === 'touch') return;
-            processActiveTapMiningEvent(e);
-        });
+        // Wheel Context Toggles
+        const toggleNormalWheel = document.getElementById('toggleNormalWheel');
+        const togglePremiumWheel = document.getElementById('togglePremiumWheel');
+        const wheelMatrixTitle = document.getElementById('wheelMatrixTitle');
+        const wheelMatrixSubtitle = document.getElementById('wheelMatrixSubtitle');
 
-        // 👍 OPTIMIZATION 6: Clean comment match for long-term economy stability parameters
-        // Regenerates exactly 1% every 5 seconds
-        setInterval(() => {
-            if (document.hidden) return; 
-            
-            if(appState.power < 100) {
-                appState.power = Math.min(100, appState.power + 1);
-                runDomStateSynchronization();
-            }
-        }, 5000); 
-
-        // Spin Tab Switches
-        document.getElementById('toggleNormalWheel').addEventListener('click', function() {
-            if (runtimeWheelSpinningState) return;
-            appState.isPremiumMode = false;
-            this.classList.add('active');
-            document.getElementById('togglePremiumWheel').classList.remove('active');
-            document.getElementById('wheelMatrixTitle').innerText = "Standard Coin Matrix";
-            document.getElementById('wheelMatrixSubtitle').innerText = "Win up to 2,500 coins or find a Mystery Box inside.";
-        });
-
-        document.getElementById('togglePremiumWheel').addEventListener('click', function() {
-            if (runtimeWheelSpinningState) return;
-            appState.isPremiumMode = true;
-            this.classList.add('active');
-            document.getElementById('toggleNormalWheel').classList.remove('active');
-            document.getElementById('wheelMatrixTitle').innerText = "💎 Premium Diamond Matrix";
-            document.getElementById('wheelMatrixSubtitle').innerText = "Exclusive higher token allocations enabled for core validation nodes.";
-            triggerSystemModal("Cyber Fox Security Lock", "Premium matrix nodes locked. Secure Day 7 on check-in system to unlock.");
-        });
-
-        // Fortune Wheel Physics Engine
-        wheelBtn.addEventListener('click', () => {
-            if (runtimeWheelSpinningState) return;
-
-            if (appState.availableSpins > 0) {
-                runtimeWheelSpinningState = true;
-                wheelBtn.disabled = true; 
-                appState.availableSpins -= 1;
-                runDomStateSynchronization();
-
-                // 👍 OPTIMIZATION 4: Reset layout transform constraints by forcing browser DOM reflow execution instantly
-                wheelCanvas.style.transition = "";
-                wheelCanvas.style.transform = "rotate(0deg)";
-                wheelCanvas.offsetHeight; // Core structural layout engine pipeline update trigger
-
-                // Instantly apply final calculation trajectory without arbitrary timeout intervals
-                wheelCanvas.style.transition = "transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)";
+        if (toggleNormalWheel) {
+            toggleNormalWheel.addEventListener('click', function() {
+                if (runtimeWheelSpinningState) return;
+                appState.isPremiumMode = false;
                 
-                const sectorRewardsLedger = [150, 1200, 800, 300, 50, 2500, 1000, 500];
-                const randomSlicesResultIndex = Math.floor(Math.random() * 8); 
-                const standardTargetBaseDegrees = randomSlicesResultIndex * 45;
-                const totalInertialSpinsRotationsDegrees = 2880; 
-                const totalFinalCalculatedDegrees = totalInertialSpinsRotationsDegrees + standardTargetBaseDegrees;
+                // 👍 OPTIMIZATION 6: Clean Node Loop Class reset logic to stop any mismatched UI toggle bugs
+                document.querySelectorAll('.selection-toggle-pill').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (wheelMatrixTitle) wheelMatrixTitle.textContent = "Standard Coin Matrix";
+                if (wheelMatrixSubtitle) wheelMatrixSubtitle.textContent = "Win up to 2,500 coins or find a Mystery Box inside.";
+            });
+        }
 
-                wheelCanvas.style.transform = `rotate(${totalFinalCalculatedDegrees}deg)`;
+        if (togglePremiumWheel) {
+            togglePremiumWheel.addEventListener('click', function() {
+                if (runtimeWheelSpinningState) return;
+                appState.isPremiumMode = true;
 
-                setTimeout(() => {
-                    runtimeWheelSpinningState = false;
-                    wheelBtn.disabled = false;
+                // 👍 OPTIMIZATION 6: Clean Node Loop Class reset logic to stop any mismatched UI toggle bugs
+                document.querySelectorAll('.selection-toggle-pill').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (wheelMatrixTitle) wheelMatrixTitle.textContent = "💎 Premium Diamond Matrix";
+                if (wheelMatrixSubtitle) wheelMatrixSubtitle.textContent = "Exclusive higher token allocations enabled for core validation nodes.";
+                triggerSystemModal("Ecosystem Lockout", "Premium validation access lines require Day 7 streak check-in parameters verified.");
+            });
+        }
 
-                    const selectedPayoutOutcome = sectorRewardsLedger[randomSlicesResultIndex];
-                    syncCoinRewardsState(selectedPayoutOutcome);
+        // Fortune Wheel Trigger Thread
+        if (wheelBtn) {
+            wheelBtn.addEventListener('click', () => {
+                if (runtimeWheelSpinningState || !wheelCanvas) return;
+
+                if (appState.availableSpins > 0) {
+                    runtimeWheelSpinningState = true;
+                    isProcessingWheelPayout = false; 
+                    wheelBtn.disabled = true; 
+                    appState.availableSpins -= 1;
+                    runDomStateSynchronization();
+
+                    wheelCanvas.style.transition = "";
+                    wheelCanvas.style.transform = "rotate(0deg)";
+                    wheelCanvas.offsetHeight; // Forces system reflow execution
+
+                    wheelCanvas.style.transition = "transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)";
                     
-                    triggerSystemModal("🎰 Allocation Secured", `Verification successfully completed. Account credited with +${selectedPayoutOutcome.toLocaleString()} $FOX tokens!`);
-                }, 5000);
+                    const sectorRewardsLedger = [150, 1200, 800, 300, 50, 2500, 1000, 500];
+                    const randomSlicesResultIndex = Math.floor(Math.random() * 8); 
+                    const standardTargetBaseDegrees = randomSlicesResultIndex * 45;
+                    const totalInertialSpinsRotationsDegrees = 2880; 
+                    const totalFinalCalculatedDegrees = totalInertialSpinsRotationsDegrees + standardTargetBaseDegrees;
 
-            } else {
-                triggerSystemModal("Spins Depleted", "No execution authorization configurations available remaining on node ledger.");
-            }
-        });
+                    selectedPayoutOutcome = sectorRewardsLedger[randomSlicesResultIndex];
+                    wheelCanvas.style.transform = `rotate(${totalFinalCalculatedDegrees}deg)`;
 
-        // Task Rewards Engine Event Wireframes
+                    // 👍 OPTIMIZATION 2: Safe fallback mechanism if transitionend fails to fire via mobile browser context switching
+                    if (wheelTimeoutFallbackId) clearTimeout(wheelTimeoutFallbackId);
+                    wheelTimeoutFallbackId = setTimeout(() => {
+                        if (runtimeWheelSpinningState) {
+                            console.warn("Safety net fallback triggered. Transitionend was dropped.");
+                            runtimeWheelSpinningState = false;
+                            isProcessingWheelPayout = true;
+                            if (wheelBtn) wheelBtn.disabled = false;
+                            syncCoinRewardsState(selectedPayoutOutcome);
+                            triggerSystemModal("🎰 Allocation Locked", `Validation sequence completed via backup engine. Distributed +${selectedPayoutOutcome.toLocaleString()} $FOX tokens.`);
+                        }
+                    }, 6000);
+
+                } else {
+                    triggerSystemModal("Execution Rejected", "No functional lottery spin balance permits remaining on current validation node sequence.");
+                }
+            });
+        }
+
+        if (wheelCanvas) {
+            wheelCanvas.addEventListener('transitionend', (e) => {
+                // 👍 OPTIMIZATION 5: Explicit event target verification check to eliminate Safari double trigger anomaly
+                if (e.target !== wheelCanvas) return;
+                if (e.propertyName !== "transform") return; 
+                if (!runtimeWheelSpinningState || isProcessingWheelPayout) return; 
+                
+                if (wheelTimeoutFallbackId) clearTimeout(wheelTimeoutFallbackId); // Cancel fallback timer
+
+                isProcessingWheelPayout = true; 
+                runtimeWheelSpinningState = false;
+                if (wheelBtn) wheelBtn.disabled = false;
+
+                syncCoinRewardsState(selectedPayoutOutcome);
+                triggerSystemModal("🎰 Allocation Locked", `Validation sequence completed. Distributed +${selectedPayoutOutcome.toLocaleString()} $FOX tokens onto your node identity balance.`);
+            });
+        }
+
+        // Task Execution Handlers
         document.querySelectorAll('.task-execution-action-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (this.classList.contains('claimed') || this.disabled) return;
                 
                 const bountyValue = parseInt(this.getAttribute('data-bounty'), 10);
                 this.disabled = true;
-                this.innerText = "VERIFYING...";
-                this.style.background = "#22242c";
+                this.textContent = "VERIFYING...";
                 
                 setTimeout(() => {
                     syncCoinRewardsState(bountyValue);
-                    this.innerText = "CLAIMED";
-                    this.className = "task-execution-action-btn claimed";
-                    triggerSystemModal("Validation Success", `Ledger authorized. Reward allocation of +${bountyValue.toLocaleString()} $FOX added.`);
+                    this.textContent = "CLAIMED";
+                    this.classList.add('claimed'); 
+                    triggerSystemModal("Validation Success", `Social graph procedure fully checked. Ledger allocated +${bountyValue.toLocaleString()} $FOX successfully.`);
                 }, 2500);
             });
         });
 
-        // App Static Triggers Wiring
-        document.getElementById('notificationBellTrigger').addEventListener('click', () => {
-            triggerSystemModal('Ecosystem Alerts', 'All secure core mining pools are operational at 100% efficiency rate.');
-        });
+        // Secondary Global Click Registries
+        const notifBell = document.getElementById('notificationBellTrigger');
+        if (notifBell) {
+            notifBell.addEventListener('click', () => {
+                triggerSystemModal('Ecosystem Metrics', 'Cluster diagnostics returning green. Grid mining loops optimal at 100% processing efficiency rates.');
+            });
+        }
 
-        document.getElementById('requestPayoutTriggerBtn').addEventListener('click', () => {
-            triggerSystemModal('Portal Update', 'Withdrawal request registered. Internal data audit will initiate upon satisfying minimum asset thresholds.');
-        });
+        const payoutBtn = document.getElementById('requestPayoutTriggerBtn');
+        if (payoutBtn) {
+            payoutBtn.addEventListener('click', () => {
+                triggerSystemModal('Withdrawal Queue Status', 'Identity balance validation routing active. Process pipelines require satisfying stated floor asset threshold caps.');
+            });
+        }
 
-        // --- GLOBAL INITIALIZATION ENGINE BOOT SEQUENCE ---
+        // Central Initializer Pipeline
         window.addEventListener('DOMContentLoaded', () => {
+            appState.coins = 25495;
+            appState.balance = appState.coins / 10000;
+            
+            runDomStateSynchronization();
             initGlobalImageFallbackMonitor(); 
-            syncCoinRewardsState(25495);      
         });
     </script>
 </body>
