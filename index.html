@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V3 - Bulletproof Production Architecture</title>
+    <title>Cyber Fox V3 - Tactical Premium Upgrade</title>
     <style>
         :root {
             --bg-main: #0a0b0e;
             --bg-card: #15161c;
             --accent-orange: #ff6a00;
-            --accent-glow: rgba(255, 106, 0, 0.25);
+            --accent-glow: rgba(255, 106, 0, 0.35);
             --text-pure: #ffffff;
             --text-muted: #8e929a;
             --text-gold: #ffb700;
@@ -49,7 +49,7 @@
             border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        /* --- GLOBAL HEADER SYSTEM --- */
+        /* --- GLOBAL HEADER --- */
         .app-header {
             padding: 20px 20px 10px 20px;
             display: flex;
@@ -96,7 +96,6 @@
         .meta-sub {
             font-size: 0.72rem;
             color: var(--text-muted);
-            letter-spacing: 0.5px;
         }
 
         .header-actions {
@@ -114,7 +113,6 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .wallet-connect-pill.connected {
@@ -122,51 +120,16 @@
             background: linear-gradient(135deg, rgba(34,197,94,0.12) 0%, rgba(34,197,94,0.02) 100%);
         }
 
-        .wallet-connect-pill:active {
-            transform: scale(0.95);
-        }
-
-        .wallet-pill-icon {
-            width: 14px;
-            height: 14px;
-            fill: var(--accent-orange);
-            transition: fill 0.2s ease;
-        }
-
-        .wallet-connect-pill.connected .wallet-pill-icon {
-            fill: var(--success-green);
-            animation: walletPulse 2s infinite ease-in-out;
-        }
-
-        @keyframes walletPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 1px var(--success-green)); }
-            50% { transform: scale(1.12); filter: drop-shadow(0 0 3px var(--success-green)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 1px var(--success-green)); }
-        }
-
         .wallet-pill-text {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text-pure);
         }
 
-        .notification-bell {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border-line);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        /* --- STATS HUD DASHBOARD --- */
+        /* --- HUD DASHBOARD (DOLLAR REMOVED) --- */
         .stats-dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
             padding: 10px 20px;
             z-index: 90;
         }
@@ -174,40 +137,24 @@
         .stat-card-node {
             background: var(--bg-card);
             border: 1px solid var(--border-line);
-            border-radius: 14px;
-            padding: 12px 14px;
+            border-radius: 12px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card-node::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255,106,0,0.2), transparent);
         }
 
         .stat-node-label {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             color: var(--text-muted);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .stat-node-value {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 800;
-            color: var(--text-pure);
         }
 
         /* --- VIEWPORT ENGINE --- */
@@ -224,7 +171,7 @@
             width: 100%;
             flex-direction: column;
             align-items: center;
-            animation: stageEnter 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: stageEnter 0.25s ease-out forwards;
         }
 
         .viewport-stage.active {
@@ -232,121 +179,131 @@
         }
 
         @keyframes stageEnter {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- VIEW 1: HOME STAGE (FOX TAP) --- */
+        /* --- VIEW 1: HOME STAGE (4 GLOW RINGS & ZOOM FIX) --- */
         .balance-hero-panel {
             text-align: center;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
         .hero-crypto-amount {
-            font-size: 3.4rem;
+            font-size: 3.2rem;
             font-weight: 900;
-            letter-spacing: 0.5px;
             background: linear-gradient(180deg, #ffffff 0%, #e2e5ec 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-crypto-label {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             letter-spacing: 2px;
             font-weight: 700;
-            text-transform: uppercase;
-            margin-top: -2px;
         }
 
+        /* PREMIUM GLOW RINGS WRAPPER */
         .mining-click-shell {
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(225, 140, 0, 0.22) 0%, rgba(0,0,0,0) 65%);
+            width: 320px;
+            height: 320px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            margin: 15px 0 30px 0;
+            margin: 35px 0 45px 0;
             cursor: pointer;
             touch-action: manipulation;
         }
 
-        .mining-click-shell::before {
-            content: '';
+        .ring {
             position: absolute;
-            width: 88%;
-            height: 88%;
             border-radius: 50%;
-            border: 2px solid rgba(255, 106, 0, 0.25);
-            box-shadow: 0 0 20px var(--accent-glow);
-            animation: pulseGlow 3s infinite alternate;
+            border: 2px solid var(--accent-orange);
+            box-shadow: 0 0 15px var(--accent-glow);
+            pointer-events: none;
         }
 
-        .mining-click-shell::after {
-            content: '';
-            position: absolute;
-            width: 94%;
-            height: 94%;
-            border-radius: 50%;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+        .ring1 {
+            width: 100%;
+            height: 100%;
+            animation: ring1 4s linear infinite;
         }
 
+        .ring2 {
+            width: 108%;
+            height: 108%;
+            border-style: dashed;
+            border-color: rgba(255, 106, 0, 0.6);
+            animation: ring2 6s linear infinite reverse;
+        }
+
+        .ring3 {
+            width: 116%;
+            height: 116%;
+            opacity: .5;
+            animation: ring1 8s linear infinite;
+        }
+
+        .ring4 {
+            width: 124%;
+            height: 124%;
+            opacity: .25;
+            border-style: double;
+            animation: ring2 10s linear infinite reverse;
+        }
+
+        @keyframes ring1 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes ring2 {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* ZOOMED & BOUNDED AVATAR LAYER */
         .fox-layer-wrapper {
-            width: 80%;
-            height: 80%;
+            width: 78%;
+            height: 78%;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
             pointer-events: none;
-            animation: foxIdleBreathing 3.5s ease-in-out infinite;
             background: #111217;
             border-radius: 50%;
             overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.05);
         }
 
         .premium-fox-avatar-asset {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
-            transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: drop-shadow(0 6px 15px rgba(0,0,0,.6));
+            width: 115%;
+            height: 115%;
+            object-fit: cover;
+            transition: transform 0.05s ease;
         }
 
         .mining-click-shell:active .premium-fox-avatar-asset {
-            transform: scale(0.92);
-        }
-
-        @keyframes foxIdleBreathing {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-6px) scale(1.01); }
-            100% { transform: translateY(0px) scale(1); }
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,106,0,.2); }
-            50% { transform: scale(1.01); box-shadow: 0 0 30px rgba(255,106,0,.4); }
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,106,0,.2); }
+            transform: scale(0.94);
         }
 
         .floating-click-node {
             position: absolute;
             color: #ff8c00;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 900;
             pointer-events: none;
             z-index: 500;
-            will-change: transform, opacity;
-            animation: floatUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+            animation: floatUp 0.5s ease-out forwards;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.7);
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1.1); }
-            100% { opacity: 0; transform: translateY(-130px) scale(0.8); }
+            100% { opacity: 0; transform: translateY(-110px) scale(0.8); }
         }
 
         .click-action-descriptor {
@@ -354,12 +311,8 @@
             border: 1px solid var(--border-line);
             padding: 8px 18px;
             border-radius: 20px;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: #f1f2f4;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         /* --- VIEW 2: SPIN WHEEL CORE --- */
@@ -368,41 +321,51 @@
             background: var(--bg-card);
             border: 1px solid var(--border-line);
             border-radius: 14px;
-            padding: 6px;
+            padding: 5px;
             display: flex;
             gap: 4px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+            position: relative;
         }
 
         .selection-toggle-pill {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             text-align: center;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 700;
             border-radius: 10px;
             cursor: pointer;
             color: var(--text-muted);
-            transition: all 0.2s ease;
         }
 
         .selection-toggle-pill.active {
             background: #22242c;
             color: var(--text-pure);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* TOP CORNER PREMIUM BALANCE */
+        .premium-balance-badge {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #00ffcc;
+            text-align: right;
+            width: 100%;
+            margin-bottom: 12px;
+            padding-right: 5px;
+            display: none;
         }
 
         .matrix-title-banner {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 800;
             margin-bottom: 4px;
-            text-align: center;
         }
 
         .matrix-subtitle-banner {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
         }
 
@@ -413,7 +376,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .wheel-outer-rim-glow {
@@ -422,22 +385,22 @@
             height: 100%;
             border-radius: 50%;
             border: 6px solid #1c1d24;
-            box-shadow: 0 0 20px rgba(255,106,0,0.1);
+            box-shadow: 0 0 20px rgba(255,106,0,0.15);
             z-index: 1;
         }
 
         .wheel-top-pointer-pin {
             position: absolute;
-            top: -12px;
+            top: -10px;
             width: 0;
             height: 0;
-            border-left: 14px solid transparent;
-            border-right: 14px solid transparent;
-            border-top: 22px solid #ef4444;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 20px solid #ef4444;
             z-index: 40;
-            filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.4));
         }
 
+        /* ADVANCED TEXT SEGMENTED CANVAS */
         .wheel-core-canvas {
             width: 94%;
             height: 94%;
@@ -456,21 +419,48 @@
             position: relative;
             z-index: 10;
             will-change: transform;
+            overflow: hidden;
         }
+
+        /* WHEEL LABELS PLACEMENT ENGINE */
+        .wheel-label {
+            position: absolute;
+            width: 50%;
+            height: 30px;
+            top: calc(50% - 15px);
+            left: 50%;
+            transform-origin: left center;
+            padding-left: 60px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            z-index: 20;
+        }
+
+        /* Slices rotational alignments (Rotated by index * 45deg + 22.5deg offset center) */
+        .r1 { transform: rotate(22.5deg); }
+        .r2 { transform: rotate(67.5deg); }
+        .r3 { transform: rotate(112.5deg); }
+        .r4 { transform: rotate(157.5deg); }
+        .r5 { transform: rotate(202.5deg); }
+        .r6 { transform: rotate(247.5deg); }
+        .r7 { transform: rotate(292.5deg); }
+        .r8 { transform: rotate(337.5deg); }
 
         .wheel-center-hub-cap {
             position: absolute;
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background: #15161c;
             border-radius: 50%;
             border: 3px solid var(--accent-orange);
-            box-shadow: 0 0 10px var(--accent-glow);
             z-index: 30;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
         .mini-hub-fox-img {
@@ -490,44 +480,22 @@
             width: 100%;
             background: linear-gradient(135deg, #ff5500 0%, #ff8c00 100%);
             border: none;
-            padding: 16px;
+            padding: 15px;
             border-radius: 14px;
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.25);
-            transition: all 0.15s ease;
         }
 
         .macro-launch-btn:disabled {
             background: #22242c;
             color: var(--text-muted);
-            box-shadow: none;
             cursor: not-allowed;
         }
 
         /* --- VIEW 3: TASKS --- */
-        .section-header-wrap {
-            width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .section-primary-headline {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .section-secondary-subline {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
         .tasks-vertical-stack {
             width: 100%;
             display: flex;
@@ -543,58 +511,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
         .task-left-meta {
             display: flex;
             align-items: center;
-            gap: 14px;
-        }
-
-        .task-social-icon-frame {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--border-line);
-        }
-
-        .task-social-icon-frame svg {
-            width: 20px;
-            height: 20px;
+            gap: 12px;
         }
 
         .task-text-details {
             display: flex;
             flex-direction: column;
-            gap: 3px;
-        }
-
-        .task-core-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-pure);
         }
 
         .task-bounty-payout {
             font-size: 0.82rem;
             color: var(--text-gold);
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .task-execution-action-btn {
             background: linear-gradient(135deg, #ff6a00 0%, #ff8500 100%);
             border: none;
-            padding: 9px 20px;
-            border-radius: 22px;
+            padding: 8px 18px;
+            border-radius: 20px;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
         }
@@ -602,112 +545,34 @@
         .task-execution-action-btn.claimed {
             background: #22242b !important;
             color: rgba(255,255,255,0.2) !important;
-            cursor: not-allowed !important;
+            cursor: not-allowed;
         }
 
-        /* --- VIEW 4: WALLET --- */
-        .wallet-portal-card {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-line);
-            border-radius: 18px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .wallet-large-icon-banner {
-            width: 64px;
-            height: 64px;
-            background: rgba(255,106,0,0.08);
-            border-radius: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid rgba(255,106,0,0.2);
-        }
-
-        .wallet-large-icon-banner svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--accent-orange);
-        }
-
-        .portal-main-headline {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-top: -5px;
-        }
-
-        .portal-threshold-alert {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: -15px;
-        }
-
-        .portal-threshold-alert span {
-            color: var(--success-green);
-            font-weight: 700;
-        }
-
-        .portal-input-field-group {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-align: left;
-        }
-
-        .portal-input-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .portal-dropdown-selector, .portal-text-input-node {
-            width: 100%;
-            background: #1c1d24;
-            border: 1px solid var(--border-line);
-            padding: 14px;
-            border-radius: 12px;
-            color: white;
-            font-size: 0.92rem;
-            font-weight: 600;
-            outline: none;
-        }
-
-        /* --- GLOBAL DOCK FOOTER NAV --- */
+        /* --- GLOBAL NAVIGATION --- */
         .global-dock-nav {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 78px;
+            height: 74px;
             background: #0b0c10;
             border-top: 1px solid var(--border-line);
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 500;
-            padding-bottom: 8px;
         }
 
         .dock-action-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             color: var(--text-muted);
             cursor: pointer;
             font-size: 0.72rem;
             font-weight: 600;
             flex: 1;
-            padding: 10px 0;
-            transition: color 0.2s ease;
         }
 
         .dock-action-item.active {
@@ -718,23 +583,17 @@
             width: 22px;
             height: 22px;
             fill: currentColor;
-            transition: transform 0.2s ease;
         }
 
-        .dock-action-item.active .dock-vector-icon-shell {
-            transform: translateY(-2px);
-        }
-
-        /* --- OVERLAY POPUP SYSTEM --- */
+        /* --- MODAL DIALOGS --- */
         .modal-blur-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -744,43 +603,22 @@
         .modal-dialog-box {
             background: #181920;
             border: 1px solid rgba(255,255,255,0.08);
-            width: 84%;
-            padding: 26px;
-            border-radius: 18px;
+            width: 82%;
+            padding: 24px;
+            border-radius: 16px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            animation: modalPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes modalPop {
-            from { transform: scale(0.85); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-dialog-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text-pure);
-        }
-
-        .modal-dialog-body {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.45;
-            margin-bottom: 22px;
         }
 
         .modal-confirm-trigger-btn {
             background: #ffffff;
             color: #000000;
             border: none;
-            padding: 12px 26px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
             width: 100%;
+            cursor: pointer;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -791,36 +629,28 @@
         <div class="app-header">
             <div class="identity-block">
                 <div class="mini-avatar-shell">
-                    <img src="fox.png" id="headerAvatarNode" alt="Node Avatar" onerror="handleImageError(this)">
+                    <img src="fox.png" id="headerAvatarNode" alt="Avatar" onerror="handleImageError(this)">
                 </div>
                 <div class="title-meta">
                     <span class="meta-main">Cyber Fox V3</span>
-                    <span class="meta-sub">System Secure</span>
+                    <span class="meta-sub">Firewall Secure</span>
                 </div>
             </div>
             <div class="header-actions">
                 <div class="wallet-connect-pill" id="walletTrigger">
-                    <svg class="wallet-pill-icon" viewBox="0 0 24 24">
-                        <path d="M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2 2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2-.9-2 2v2c0 1.1.89 2 2 2h9v4z"/>
-                    </svg>
                     <span class="wallet-pill-text" id="walletPillText">Connect</span>
                 </div>
-                <div class="notification-bell" id="notificationBellTrigger">🔔</div>
             </div>
         </div>
 
         <div class="stats-dashboard-grid">
             <div class="stat-card-node">
-                <span class="stat-node-label">💰 Coins</span>
+                <span class="stat-node-label">🪙 Coins</span>
                 <span class="stat-node-value live-render-coins">0</span>
             </div>
             <div class="stat-card-node">
                 <span class="stat-node-label">⚡ Power</span>
-                <span class="stat-node-value" id="liveRenderPower">0%</span>
-            </div>
-            <div class="stat-card-node">
-                <span class="stat-node-label">💵 Balance</span>
-                <span class="stat-node-value" id="liveRenderBalance">$0.00</span>
+                <span class="stat-node-value" id="liveRenderPower">100%</span>
             </div>
             <div class="stat-card-node">
                 <span class="stat-node-label">🔑 Key Node</span>
@@ -837,13 +667,17 @@
                 </div>
 
                 <div class="mining-click-shell" id="foxMiningCoreTarget">
+                    <div class="ring ring1"></div>
+                    <div class="ring ring2"></div>
+                    <div class="ring ring3"></div>
+                    <div class="ring ring4"></div>
                     <div class="fox-layer-wrapper">
-                        <img src="fox.png" class="premium-fox-avatar-asset" alt="Cyber Fox Core Asset" onerror="handleImageError(this)">
+                        <img src="fox.png" class="premium-fox-avatar-asset" alt="Cyber Fox Asset" onerror="handleImageError(this)">
                     </div>
                 </div>
 
                 <div class="click-action-descriptor">
-                    <span>🔥</span> Tap the fox and earn coins <span>🪙</span>
+                    🔥 Rapid Tap Enabled ⚡
                 </div>
             </div>
 
@@ -853,83 +687,58 @@
                     <div class="selection-toggle-pill" id="togglePremiumWheel">💎 Premium Wheel</div>
                 </div>
 
+                <div class="premium-balance-badge" id="premiumBalanceContainer">
+                    💎 Premium Balance: $<span id="liveRenderPremiumDollar">0.00</span>
+                </div>
+
                 <div class="matrix-title-banner" id="wheelMatrixTitle">Standard Coin Matrix</div>
-                <div class="matrix-subtitle-banner" id="wheelMatrixSubtitle">Win up to 2,500 coins or find a Mystery Box inside.</div>
+                <div class="matrix-subtitle-banner" id="wheelMatrixSubtitle">Win up to 2,500 coins inside standard configuration.</div>
 
                 <div class="physical-wheel-chassis">
                     <div class="wheel-outer-rim-glow"></div>
                     <div class="wheel-top-pointer-pin"></div>
                     <div class="wheel-center-hub-cap">
-                        <img src="fox.png" class="mini-hub-fox-img" alt="Hub Vector" onerror="handleImageError(this)">
+                        <img src="fox.png" class="mini-hub-fox-img" alt="Hub" onerror="handleImageError(this)">
                     </div>
-                    <div class="wheel-core-canvas" id="mechanicalWheelCanvas"></div>
+                    <div class="wheel-core-canvas" id="mechanicalWheelCanvas">
+                        <div class="wheel-label r1" id="wl1">150</div>
+                        <div class="wheel-label r2" id="wl2">1200</div>
+                        <div class="wheel-label r3" id="wl3">800</div>
+                        <div class="wheel-label r4" id="wl4">300</div>
+                        <div class="wheel-label r5" id="wl5">50</div>
+                        <div class="wheel-label r6" id="wl6">2500</div>
+                        <div class="wheel-label r7" id="wl7">1000</div>
+                        <div class="wheel-label r8" id="wl8">500</div>
+                    </div>
                 </div>
 
                 <div class="wheel-meta-status-row">
-                    Available Spins: <span id="renderAvailableSpinsText">0</span>
+                    Spins Left: <span id="renderAvailableSpinsText">0</span>
                 </div>
 
                 <button class="macro-launch-btn" id="executeWheelSpinTrigger">Launch Spin</button>
             </div>
 
             <div class="viewport-stage" id="stage-tasks">
-                <div class="section-header-wrap">
-                    <h2 class="section-primary-headline">Complete Daily Procedures</h2>
-                    <p class="section-secondary-subline">Execute standard node tasks to authorize data validation ledger rewards.</p>
-                </div>
-
                 <div class="tasks-vertical-stack">
                     <div class="task-row-container">
                         <div class="task-left-meta">
-                            <div class="task-social-icon-frame">
-                                <svg viewBox="0 0 24 24" fill="#0088cc"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.48 2.75-2.7.01-.03.01-.14-.05-.2-.06-.06-.16-.04-.23-.03-.1.02-1.69 1.07-4.77 3.15-.45.3-.86.45-1.22.44-.4-.01-1.17-.23-1.74-.41-.7-.23-1.25-.35-1.2-.74.03-.21.31-.42.86-.64 3.37-1.47 5.62-2.44 6.74-2.91 3.22-1.33 3.89-1.56 4.33-1.57.1 0 .32.02.46.14.12.1.15.24.16.33 0 .06.01.13 0 .19z"/></svg>
-                            </div>
                             <div class="task-text-details">
-                                <span class="task-core-title">Join our TG Channel</span>
+                                <span class="task-core-title">Join Telegram Core</span>
                                 <span class="task-bounty-payout">🪙 +1,000</span>
                             </div>
                         </div>
-                        <button class="task-execution-action-btn" data-bounty="1000" data-link="https://t.me/example_channel" data-id="task_tg">JOIN</button>
+                        <button class="task-execution-action-btn" data-bounty="1000" data-link="https://t.me" data-id="t1">JOIN</button>
                     </div>
-
                     <div class="task-row-container">
                         <div class="task-left-meta">
-                            <div class="task-social-icon-frame">
-                                <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            </div>
                             <div class="task-text-details">
-                                <span class="task-core-title">Follow Cyber Fox on X</span>
+                                <span class="task-core-title">Follow Platform X</span>
                                 <span class="task-bounty-payout">🪙 +2,000</span>
                             </div>
                         </div>
-                        <button class="task-execution-action-btn" data-bounty="2000" data-link="https://x.com/example_profile" data-id="task_x">FOLLOW</button>
+                        <button class="task-execution-action-btn" data-bounty="2000" data-link="https://x.com" data-id="t2">FOLLOW</button>
                     </div>
-                </div>
-            </div>
-
-            <div class="viewport-stage" id="stage-wallet">
-                <div class="wallet-portal-card">
-                    <div class="wallet-large-icon-banner">
-                        <svg viewBox="0 0 24 24"><path d="M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2-.9-2 2v2c0 1.1.89 2 2 2h9v4z"/></svg>
-                    </div>
-                    <h2 class="portal-main-headline">Withdrawal Control Portal</h2>
-                    <p class="portal-threshold-alert">Minimum Threshold: <span>$10.00 USD</span></p>
-
-                    <div class="portal-input-field-group">
-                        <label class="portal-input-label">Select Chain Protocol</label>
-                        <select class="portal-dropdown-selector" id="payoutMethod">
-                            <option value="TON">TON Network / Telegram Wallet</option>
-                            <option value="BSC">Binance Smart Chain (BSC BEP-20)</option>
-                            <option value="RedotPay">RedotPay Card Address</option>
-                        </select>
-                    </div>
-
-                    <div class="portal-input-field-group">
-                        <label class="portal-input-label">Destination Wallet Address</label>
-                        <input type="text" class="portal-text-input-node" id="walletAddressInput" placeholder="Enter your valid cryptographic address">
-                    </div>
-
-                    <button class="macro-launch-btn" id="requestPayoutTriggerBtn" style="margin-top:10px;">Request Payout</button>
                 </div>
             </div>
 
@@ -945,12 +754,8 @@
                 <span>Spin</span>
             </div>
             <div class="dock-action-item" onclick="activateTargetTab('tasks', this)">
-                <svg class="dock-vector-icon-shell" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <svg class="dock-vector-icon-shell" viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                 <span>Tasks</span>
-            </div>
-            <div class="dock-action-item" onclick="activateTargetTab('wallet', this)">
-                <svg class="dock-vector-icon-shell" viewBox="0 0 24 24"><path d="M21 18c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V6c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v4h-9c-1.11 0-2-.9-2 2v2c0 1.1.89 2 2 2h9v4z"/></svg>
-                <span>Wallet</span>
             </div>
         </div>
 
@@ -959,419 +764,252 @@
     <div class="modal-blur-overlay" id="systemGlobalModalOverlay">
         <div class="modal-dialog-box">
             <h3 class="modal-dialog-title" id="modalViewTitle">Notification</h3>
-            <p class="modal-dialog-body" id="modalViewMessage">Standard execution feedback details structural text node.</p>
+            <p class="modal-dialog-body" id="modalViewMessage">Status Message</p>
             <button class="modal-confirm-trigger-btn" id="modalViewDismissAction">OK</button>
         </div>
     </div>
 
     <script>
-        // TOKEN ECONOMICS: 1,000,000 Coins = $1 USD 
-        const COIN_TO_USD_RATIO = 1000000;
-
-        // Persistent State Machine Layer (LocalStorage Core)
+        // State Configuration (LocalStorage Sync Enabled)
         let appState = {
-            coins: 25495,
+            coins: 5230,
             power: 100,
-            balance: 0.0254, 
-            keys: 5,
-            availableSpins: 43,
+            keys: 3,
+            premiumDollar: 0.00, // Dynamic isolated calculation parameters
+            availableSpins: 15,
             isPremiumMode: false,
             walletConnected: false,
-            walletAddress: "",
             completedTasks: []
         };
 
-        // Initialize State from Storage if exists
-        function loadStateFromStorage() {
-            const savedState = localStorage.getItem('cyberfox_v3_state');
-            if (savedState) {
-                try {
-                    const parsed = JSON.parse(savedState);
-                    appState = { ...appState, ...parsed };
-                    appState.isPremiumMode = false; // Reset temporary UI toggle on reload
-                } catch(e) {
-                    console.error("State recovery failed, using defaults", e);
-                }
-            }
-        }
+        // Arrays Definitions
+        const sectorRewardsNormal = [150, 1200, 800, 300, 50, 2500, 1000, 500];
+        const premiumDollarRewards = [0.01, 0.05, 0.10, 0.25, 0.50, 1.00, 2.00, 5.00];
 
-        function saveStateToStorage() {
-            localStorage.setItem('cyberfox_v3_state', JSON.stringify(appState));
-        }
-
-        // DOM Cache Registry
-        const clickMiningZone = document.getElementById('foxMiningCoreTarget');
-        const wheelCanvas = document.getElementById('mechanicalWheelCanvas');
-        const wheelBtn = document.getElementById('executeWheelSpinTrigger');
-        const textSpinsLeft = document.getElementById('renderAvailableSpinsText');
-        const textKeysNode = document.getElementById('liveRenderKeys');
-        const textPowerNode = document.getElementById('liveRenderPower');
-        const textBalanceNode = document.getElementById('liveRenderBalance');
-        
-        const modalOverlay = document.getElementById('systemGlobalModalOverlay');
-        const modalTitle = document.getElementById('modalViewTitle');
-        const modalMsg = document.getElementById('modalViewMessage');
-        const modalDismiss = document.getElementById('modalViewDismissAction');
-
-        const walletBtn = document.getElementById('walletTrigger');
-        const walletText = document.getElementById('walletPillText');
-
-        // Engine Control Variables
-        let runtimeWheelSpinningState = false;
-        let isProcessingWheelPayout = false; 
-        let selectedPayoutOutcome = 0; 
-        let systemModalQueue = [];
-        let isSystemModalActive = false;
-        let powerRegenIntervalId = null;
-        let wheelTimeoutFallbackId = null;
-
-        // Anti-Cheat Bot Parameters
+        // OPTIMIZED RAPID RE-TUNING SYSTEM PARAMETERS
+        const CRYPTO_TAP_COOLDOWN_MS = 80; // Fast tap sequence tracking latency allowance
         let lastLoggedTapTimestamp = 0;
-        const CRYPTO_TAP_COOLDOWN_MS = 200; // Raised from 120ms to prevent high frequency macros
         let dynamicClickStrikesCounter = 0;
         let strikeWindowResetTimestamp = Date.now();
 
-        function syncCoinRewardsState(amountToAdd) {
-            appState.coins += amountToAdd;
-            appState.balance = appState.coins / COIN_TO_USD_RATIO;
-            runDomStateSynchronization();
-            saveStateToStorage();
-        }
+        let runtimeWheelSpinningState = false;
+        let selectedPayoutOutcome = 0;
 
-        function runDomStateSynchronization() {
-            document.querySelectorAll('.live-render-coins').forEach(node => {
-                if (node) node.textContent = Math.floor(appState.coins).toLocaleString();
-            });
-            if (textKeysNode) textKeysNode.textContent = appState.keys;
-            if (textPowerNode) textPowerNode.textContent = Math.floor(appState.power) + "%";
-            if (textBalanceNode) textBalanceNode.textContent = "$" + appState.balance.toFixed(4);
-            if (textSpinsLeft) textSpinsLeft.textContent = appState.availableSpins;
-            
-            // Sync Wallet UI State
-            if (walletBtn) {
-                walletBtn.classList.toggle('connected', appState.walletConnected);
-                if (walletText) walletText.textContent = appState.walletConnected ? "Connected" : "Connect";
+        // DOM Elements Elements Cache
+        const clickMiningZone = document.getElementById('foxMiningCoreTarget');
+        const wheelCanvas = document.getElementById('mechanicalWheelCanvas');
+        const wheelBtn = document.getElementById('executeWheelSpinTrigger');
+        const pBalanceBadge = document.getElementById('premiumBalanceContainer');
+
+        function loadState() {
+            const saved = localStorage.getItem('cyberfox_v3_state_premium');
+            if (saved) {
+                try { appState = { ...appState, ...JSON.parse(saved) }; appState.isPremiumMode = false; } catch(e){}
             }
         }
+        function saveState() { localStorage.setItem('cyberfox_v3_state_premium', JSON.stringify(appState)); }
 
-        function handleImageError(imgElement) {
-            if (!imgElement) return;
-            imgElement.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23ff6a00'><circle cx='50' cy='50' r='45' fill='%231c1d24' stroke='%23ff6a00' stroke-width='2'/><path d='M50 25 L75 55 L25 55 Z'/></svg>";
+        function syncCoinRewardsState(amount) {
+            appState.coins += amount;
+            renderSystemHUD();
+            saveState();
         }
 
-        function activateTargetTab(targetStageID, navigationElement) {
-            if (runtimeWheelSpinningState) return; 
-            
-            document.querySelectorAll('.viewport-stage').forEach(stage => {
-                if (stage) stage.classList.remove('active');
-            });
-            document.querySelectorAll('.dock-action-item').forEach(item => {
-                if (item) item.classList.remove('active');
-            });
-            
-            const activeStage = document.getElementById(`stage-${targetStageID}`);
-            if (activeStage) activeStage.classList.add('active');
-            if (navigationElement) navigationElement.classList.add('active');
-
-            if (targetStageID === 'wallet' && appState.walletConnected) {
-                const addrInput = document.getElementById('walletAddressInput');
-                if (addrInput) addrInput.value = appState.walletAddress || "";
-            }
+        function renderSystemHUD() {
+            document.querySelectorAll('.live-render-coins').forEach(el => el.textContent = Math.floor(appState.coins).toLocaleString());
+            document.getElementById('liveRenderPower').textContent = Math.floor(appState.power) + "%";
+            document.getElementById('liveRenderKeys').textContent = appState.keys;
+            document.getElementById('renderAvailableSpinsText').textContent = appState.availableSpins;
+            document.getElementById('liveRenderPremiumDollar').textContent = appState.premiumDollar.toFixed(2);
+            document.getElementById('walletTrigger').classList.toggle('connected', appState.walletConnected);
+            document.getElementById('walletPillText').textContent = appState.walletConnected ? "Connected" : "Connect";
         }
 
-        // Overlay Modal System
-        function triggerSystemModal(headline, message) {
-            systemModalQueue.push({ headline, message });
-            processNextModalInQueue();
-        }
-
-        function processNextModalInQueue() {
-            if (isSystemModalActive || systemModalQueue.length === 0) return;
-            
-            isSystemModalActive = true;
-            const currentModal = systemModalQueue.shift();
-            
-            if (modalTitle) modalTitle.textContent = currentModal.headline;
-            if (modalMsg) modalMsg.textContent = currentModal.message;
-            if (modalOverlay) modalOverlay.style.display = 'flex';
-        }
-
-        function closeModal() {
-            if (modalOverlay) modalOverlay.style.display = 'none';
-            setTimeout(() => {
-                isSystemModalActive = false;
-                processNextModalInQueue();
-            }, 200);
-        }
-
-        if (modalDismiss) modalDismiss.addEventListener('click', closeModal);
-
-        // Simulated Secure Web3 Binding Logic
-        if (walletBtn) {
-            walletBtn.addEventListener('click', () => {
-                if (!appState.walletConnected) {
-                    triggerSystemModal("Connecting Wallet", "Initializing handshake pipeline with TON Connect Proxy...");
-                    setTimeout(() => {
-                        appState.walletConnected = true;
-                        appState.walletAddress = "EQD9...z8K4_FoxSecureNode";
-                        saveStateToStorage();
-                        runDomStateSynchronization();
-                        triggerSystemModal("Wallet Bound", "TON Core identity verified successfully.");
-                    }, 1200);
-                } else {
-                    appState.walletConnected = false;
-                    appState.walletAddress = "";
-                    saveStateToStorage();
-                    runDomStateSynchronization();
-                    triggerSystemModal("Disconnected", "Web3 interface link unmapped.");
-                }
-            });
-        }
-
-        // Power Regen System
-        function startPowerRegenEngine() {
-            if (powerRegenIntervalId !== null) return;
-            powerRegenIntervalId = setInterval(() => {
-                if (document.hidden) return;
-                if (appState.power < 100) {
-                    appState.power = parseFloat(Math.min(100, appState.power + 1).toFixed(1));
-                    runDomStateSynchronization();
-                    saveStateToStorage();
-                } else {
-                    clearInterval(powerRegenIntervalId);
-                    powerRegenIntervalId = null;
-                }
-            }, 4000);
-        }
-
-        // Anti-Bot Core Protected Click Processor
-        function processActiveTapMiningEvent(event) {
-            if (!clickMiningZone) return;
-            const boundingBoxMetrics = clickMiningZone.getBoundingClientRect();
-            const calculatedOffsetX = event.clientX - boundingBoxMetrics.left;
-            const calculatedOffsetY = event.clientY - boundingBoxMetrics.top;
-
-            const now = Date.now();
-            
-            // Auto-clicker Rate Monitor window check
-            if (now - strikeWindowResetTimestamp > 1000) {
-                dynamicClickStrikesCounter = 0;
-                strikeWindowResetTimestamp = now;
-            }
-            dynamicClickStrikesCounter++;
-
-            if (dynamicClickStrikesCounter > 5) {
-                triggerSystemModal("Macro Detected", "High frequency transaction pattern rejected by anti-bot firewall framework.");
-                return;
-            }
-
-            if (now - lastLoggedTapTimestamp < CRYPTO_TAP_COOLDOWN_MS) return;
-            lastLoggedTapTimestamp = now;
-
-            if (appState.power >= 0.2) {
-                syncCoinRewardsState(1);
-                appState.power = parseFloat(Math.max(0, appState.power - 0.2).toFixed(1));
-                runDomStateSynchronization();
-                startPowerRegenEngine();
-
-                const floatText = document.createElement('div');
-                floatText.className = 'floating-click-node';
-                floatText.textContent = '+1';
-                floatText.style.left = `${calculatedOffsetX}px`;
-                floatText.style.top = `${calculatedOffsetY}px`;
-                
-                clickMiningZone.appendChild(floatText);
-                const activeFloaterNodes = clickMiningZone.querySelectorAll('.floating-click-node');
-                if (activeFloaterNodes.length > 5) activeFloaterNodes[0].remove();
-
-                setTimeout(() => floatText.remove(), 600);
-            } else {
-                triggerSystemModal("Power Level Critical", "Energy reserves exhausted. Core recovery initialized.");
-            }
-        }
-
+        // Tapping Mechanics with Improved Anti-Cheat Tuning
         if (clickMiningZone) {
             clickMiningZone.addEventListener('pointerdown', (e) => {
-                processActiveTapMiningEvent(e);
+                const now = Date.now();
+                if (now - strikeWindowResetTimestamp > 1000) {
+                    dynamicClickStrikesCounter = 0;
+                    strikeWindowResetTimestamp = now;
+                }
+                dynamicClickStrikesCounter++;
+
+                // Anti-Cheat Firewall Trigger Level Restructured to > 20
+                if (dynamicClickStrikesCounter > 20) {
+                    triggerModal("Macro Detected", "High frequency transaction pattern rejected by anti-bot firewall framework.");
+                    return;
+                }
+                if (now - lastLoggedTapTimestamp < CRYPTO_TAP_COOLDOWN_MS) return;
+                lastLoggedTapTimestamp = now;
+
+                if (appState.power >= 0.2) {
+                    syncCoinRewardsState(1);
+                    appState.power = parseFloat(Math.max(0, appState.power - 0.2).toFixed(1));
+                    renderSystemHUD();
+                    spawnFloatText(e);
+                } else {
+                    triggerModal("Power Exhausted", "Energy reserve matrix depleted.");
+                }
             });
         }
 
-        // Fixed Math Wheel Matrix Engine 
+        function spawnFloatText(e) {
+            const box = clickMiningZone.getBoundingClientRect();
+            const x = e.clientX - box.left;
+            const y = e.clientY - box.top;
+            const txt = document.createElement('div');
+            txt.className = 'floating-click-node';
+            txt.textContent = '+1';
+            txt.style.left = `${x}px`;
+            txt.style.top = `${y}px`;
+            clickMiningZone.appendChild(txt);
+            setTimeout(() => txt.remove(), 500);
+        }
+
+        // Dynamic Slices Swapping Logic (Normal vs Premium)
         const toggleNormalWheel = document.getElementById('toggleNormalWheel');
         const togglePremiumWheel = document.getElementById('togglePremiumWheel');
-        const wheelMatrixTitle = document.getElementById('wheelMatrixTitle');
-        const wheelMatrixSubtitle = document.getElementById('wheelMatrixSubtitle');
 
-        const sectorRewardsNormal = [150, 1200, 800, 300, 50, 2500, 1000, 500];
-        const sectorRewardsPremium = [5000, 25000, 10000, 5000, 1000, 50000, 20000, 15000];
+        function updateWheelLabelsUI() {
+            const isPrem = appState.isPremiumMode;
+            const dataset = isPrem ? premiumDollarRewards : sectorRewardsNormal;
+            const prefix = isPrem ? "$" : "";
+            
+            for(let i=1; i<=8; i++) {
+                document.getElementById(`wl${i}`).textContent = prefix + dataset[i-1];
+            }
+        }
 
         if (toggleNormalWheel) {
-            toggleNormalWheel.addEventListener('click', function() {
+            toggleNormalWheel.addEventListener('click', () => {
                 if (runtimeWheelSpinningState) return;
                 appState.isPremiumMode = false;
-                document.querySelectorAll('.selection-toggle-pill').forEach(el => el.classList.remove('active'));
-                this.classList.add('active');
-                if (wheelMatrixTitle) wheelMatrixTitle.textContent = "Standard Coin Matrix";
-                if (wheelMatrixSubtitle) wheelMatrixSubtitle.textContent = "Win up to 2,500 coins inside standard configuration.";
+                toggleNormalWheel.classList.add('active');
+                togglePremiumWheel.classList.remove('active');
+                pBalanceBadge.style.display = "none";
+                document.getElementById('wheelMatrixTitle').textContent = "Standard Coin Matrix";
+                document.getElementById('wheelMatrixSubtitle').textContent = "Win up to 2,500 coins inside standard configuration.";
+                updateWheelLabelsUI();
             });
         }
 
         if (togglePremiumWheel) {
-            togglePremiumWheel.addEventListener('click', function() {
+            togglePremiumWheel.addEventListener('click', () => {
                 if (runtimeWheelSpinningState) return;
                 appState.isPremiumMode = true;
-                document.querySelectorAll('.selection-toggle-pill').forEach(el => el.classList.remove('active'));
-                this.classList.add('active');
-                if (wheelMatrixTitle) wheelMatrixTitle.textContent = "💎 Premium Diamond Matrix";
-                if (wheelMatrixSubtitle) wheelMatrixSubtitle.textContent = "Costs 1 Key node. Higher rewards up to 50,000 coins enabled.";
+                togglePremiumWheel.classList.add('active');
+                toggleNormalWheel.classList.remove('active');
+                pBalanceBadge.style.display = "block"; // Only render on Premium View Context
+                document.getElementById('wheelMatrixTitle').textContent = "💎 Premium Dollar Matrix";
+                document.getElementById('wheelMatrixSubtitle').textContent = "Costs 1 Key node. Earn guaranteed high tier Dollar values.";
+                updateWheelLabelsUI();
             });
         }
 
+        // Mechanical Fixed Multi-Slice Formula Spin Execution Engine
         if (wheelBtn) {
             wheelBtn.addEventListener('click', () => {
-                if (runtimeWheelSpinningState || !wheelCanvas) return;
+                if (runtimeWheelSpinningState) return;
 
                 if (appState.isPremiumMode && appState.keys < 1) {
-                    triggerSystemModal("Keys Depleted", "Premium wheel routine execution requires 1 functional Key parameter validation.");
+                    triggerModal("Keys Depleted", "Premium routine initialization requires 1 structural key parameter validation.");
                     return;
                 }
 
                 if (appState.availableSpins > 0) {
                     runtimeWheelSpinningState = true;
-                    isProcessingWheelPayout = false; 
-                    wheelBtn.disabled = true; 
+                    wheelBtn.disabled = true;
                     appState.availableSpins -= 1;
                     
-                    if (appState.isPremiumMode) {
-                        appState.keys -= 1;
-                    }
-
-                    runDomStateSynchronization();
+                    if (appState.isPremiumMode) appState.keys -= 1;
+                    renderSystemHUD();
 
                     wheelCanvas.style.transition = "";
                     wheelCanvas.style.transform = "rotate(0deg)";
-                    wheelCanvas.offsetHeight; // Force reflow
+                    wheelCanvas.offsetHeight; // Force reflow redraw
 
                     wheelCanvas.style.transition = "transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)";
+                    const targetIndex = Math.floor(Math.random() * 8);
                     
-                    const randomSlicesResultIndex = Math.floor(Math.random() * 8); 
-                    
-                    // FIXED MATHEMATICAL FORMULA FOR CONIC GRADIENT ALIGNMENT
-                    // Conic draws clockwise, rotation spins counter-clockwise. Offset to target center of slice.
-                    const standardTargetBaseDegrees = 360 - (randomSlicesResultIndex * 45) + 22.5;
-                    const totalInertialSpinsRotationsDegrees = 2880; 
-                    const totalFinalCalculatedDegrees = totalInertialSpinsRotationsDegrees + standardTargetBaseDegrees;
+                    // Fixed mathematical matrix computation
+                    const baseDeg = 360 - (targetIndex * 45) + 22.5;
+                    const finalDeg = 2880 + baseDeg;
 
-                    selectedPayoutOutcome = appState.isPremiumMode ? sectorRewardsPremium[randomSlicesResultIndex] : sectorRewardsNormal[randomSlicesResultIndex];
-                    wheelCanvas.style.transform = `rotate(${totalFinalCalculatedDegrees}deg)`;
+                    wheelCanvas.style.transform = `rotate(${finalDeg}deg)`;
 
-                    if (wheelTimeoutFallbackId) clearTimeout(wheelTimeoutFallbackId);
-                    wheelTimeoutFallbackId = setTimeout(() => {
-                        if (runtimeWheelSpinningState) {
-                            finalizeWheelAllocation();
+                    setTimeout(() => {
+                        runtimeWheelSpinningState = false;
+                        wheelBtn.disabled = false;
+
+                        if (appState.isPremiumMode) {
+                            const wonDollar = premiumDollarRewards[targetIndex];
+                            appState.premiumDollar += wonDollar;
+                            triggerModal("🎰 Premium Drop", `Allocated +$${wonDollar.toFixed(2)} USD successfully to secure vault.`);
+                        } else {
+                            const wonCoins = sectorRewardsNormal[targetIndex];
+                            appState.coins += wonCoins;
+                            triggerModal("🎰 Standard Secured", `Distributed +${wonCoins} $FOX tokens onto identity balance ledger.`);
                         }
-                    }, 5500);
-
+                        saveState();
+                        renderSystemHUD();
+                    }, 5200);
                 } else {
-                    triggerSystemModal("Rejected", "No spins remaining.");
+                    triggerModal("Rejected", "Available spin counts exhausted.");
                 }
             });
         }
 
-        if (wheelCanvas) {
-            wheelCanvas.addEventListener('transitionend', (e) => {
-                if (e.target !== wheelCanvas || e.propertyName !== "transform") return; 
-                if (!runtimeWheelSpinningState || isProcessingWheelPayout) return; 
-                finalizeWheelAllocation();
-            });
+        // Global Layout Navigation Modules
+        function activateTargetTab(id, el) {
+            if (runtimeWheelSpinningState) return;
+            document.querySelectorAll('.viewport-stage').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.dock-action-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(`stage-${id}`).classList.add('active');
+            el.classList.add('active');
         }
 
-        function finalizeWheelAllocation() {
-            if (wheelTimeoutFallbackId) clearTimeout(wheelTimeoutFallbackId);
-            isProcessingWheelPayout = true; 
-            runtimeWheelSpinningState = false;
-            if (wheelBtn) wheelBtn.disabled = false;
+        // Modal Utility Elements
+        const overlay = document.getElementById('systemGlobalModalOverlay');
+        function triggerModal(title, msg) {
+            document.getElementById('modalViewTitle').textContent = title;
+            document.getElementById('modalViewMessage').textContent = msg;
+            overlay.style.display = 'flex';
+        }
+        document.getElementById('modalViewDismissAction').addEventListener('click', () => overlay.style.display = 'none');
 
-            syncCoinRewardsState(selectedPayoutOutcome);
-            triggerSystemModal("🎰 Allocation Secured", `Distributed +${selectedPayoutOutcome.toLocaleString()} $FOX tokens onto identity balance ledger.`);
+        // Static Image Safety Fallback Engine
+        function handleImageError(img) {
+            img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2315161c' stroke='%23ff6a00' stroke-width='3'/></svg>";
         }
 
-        // Production Grade Task Flow Handler
-        document.querySelectorAll('.task-execution-action-btn').forEach(btn => {
-            const taskId = btn.getAttribute('data-id');
-            
-            // Check state cache if already done previously
-            window.addEventListener('DOMContentLoaded', () => {
-                if (appState.completedTasks.includes(taskId)) {
-                    btn.textContent = "CLAIMED";
-                    btn.classList.add('claimed');
-                    btn.disabled = true;
-                }
-            });
-
-            btn.addEventListener('click', function() {
-                if (this.classList.contains('claimed')) return;
-                
-                const targetVerificationLink = this.getAttribute('data-link');
-                const bountyValue = parseInt(this.getAttribute('data-bounty'), 10);
-                
-                // Open social platform window natively
-                window.open(targetVerificationLink, '_blank');
-                
-                this.disabled = true;
-                this.textContent = "VERIFYING...";
-                
-                // Timeout simulated handshake loop
-                setTimeout(() => {
-                    appState.completedTasks.push(taskId);
-                    syncCoinRewardsState(bountyValue);
-                    this.textContent = "CLAIMED";
-                    this.classList.add('claimed'); 
-                    triggerSystemModal("Verification Validated", `Social graph procedure cryptographically confirmed. Allocated +${bountyValue.toLocaleString()} $FOX.`);
-                }, 6000); // 6 Second latency loop to enforce realism metrics
-            });
+        // Wallet Simulation Handshake Binding Block
+        document.getElementById('walletTrigger').addEventListener('click', () => {
+            if (!appState.walletConnected) {
+                appState.walletConnected = true;
+                triggerModal("Handshake Confirmed", "TON Secure Node pipeline integrated successfully.");
+            } else {
+                appState.walletConnected = false;
+                triggerModal("Disconnected", "Web3 interface linkage dropped.");
+            }
+            renderSystemHUD();
+            saveState();
         });
 
-        // Withdrawal Control Pipeline Action Engine
-        const payoutBtn = document.getElementById('requestPayoutTriggerBtn');
-        if (payoutBtn) {
-            payoutBtn.addEventListener('click', () => {
-                const enteredCryptoAddress = document.getElementById('walletAddressInput').value.trim();
-                const selectedMethod = document.getElementById('payoutMethod').value;
+        // Power Energy Auto Recharge Loop Thread
+        setInterval(() => {
+            if (appState.power < 100) {
+                appState.power = Math.min(100, appState.power + 1);
+                renderSystemHUD();
+                saveState();
+            }
+        }, 3000);
 
-                if (!enteredCryptoAddress || enteredCryptoAddress.length < 8) {
-                    triggerSystemModal("Address Error", "The submitted target endpoint destination is invalid or structurally malformed.");
-                    return;
-                }
-
-                if (appState.balance < 10.00) {
-                    triggerSystemModal("Minimum Cap Unmet", `Current net balance framework ($${appState.balance.toFixed(4)}) fails to satisfy the required stated threshold limitation layer ($10.00 USD).`);
-                    return;
-                }
-
-                // If check passes, process state allocation shift
-                triggerSystemModal("Transaction Queued", `Successfully posted validation packet via ${selectedMethod} to node supervisor array. Processing entry ledger block.`);
-                appState.coins = 0;
-                appState.balance = 0.00;
-                document.getElementById('walletAddressInput').value = "";
-                runDomStateSynchronization();
-                saveStateToStorage();
-            });
-        }
-
-        const notifBell = document.getElementById('notificationBellTrigger');
-        if (notifBell) {
-            notifBell.addEventListener('click', () => {
-                triggerSystemModal('Ecosystem Metrics', 'Cluster diagnostics returning green. Grid storage loops persistence verified.');
-            });
-        }
-
-        // Orchestrator Initializer Core Engine
         window.addEventListener('DOMContentLoaded', () => {
-            loadStateFromStorage();
-            runDomStateSynchronization();
-            startPowerRegenEngine();
+            loadState();
+            updateWheelLabelsUI();
+            renderSystemHUD();
         });
     </script>
 </body>
-    </html>
+                        </html>
