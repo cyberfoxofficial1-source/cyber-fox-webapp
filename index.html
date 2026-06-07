@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Fox V3 - Tactical Premium Upgrade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Fox V3 - Fixed Ecosystem</title>
     <style>
         :root {
             --bg-main: #0a0b0e;
@@ -27,14 +27,22 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
+        /* স্ক্রিন ডান-বাম বা উপর-নিচ নড়া (Scrolling/Pinch) সম্পূর্ণ লক করার জন্য */
+        html, body {
             background-color: #000000;
             color: var(--text-pure);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            touch-action: none;
+            overscroll-behavior: none;
+        }
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
         }
 
         .app-container {
@@ -125,7 +133,7 @@
             font-weight: 700;
         }
 
-        /* --- HUD DASHBOARD (DOLLAR REMOVED) --- */
+        /* --- HUD DASHBOARD --- */
         .stats-dashboard-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -164,6 +172,7 @@
             width: 100%;
             overflow-y: auto;
             padding: 15px 20px 100px 20px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .viewport-stage {
@@ -183,7 +192,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- VIEW 1: HOME STAGE (4 GLOW RINGS & ZOOM FIX) --- */
+        /* --- VIEW 1: HOME STAGE (4 GLOW RINGS & FIXED ZOOM) --- */
         .balance-hero-panel {
             text-align: center;
             margin: 15px 0;
@@ -204,17 +213,16 @@
             font-weight: 700;
         }
 
-        /* PREMIUM GLOW RINGS WRAPPER */
         .mining-click-shell {
-            width: 320px;
-            height: 320px;
+            width: 300px;
+            height: 300px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             margin: 35px 0 45px 0;
             cursor: pointer;
-            touch-action: manipulation;
+            touch-action: none; /* ট্যাপ করার সময় স্ক্রিন মুভমেন্ট ব্লক করবে */
         }
 
         .ring {
@@ -225,46 +233,14 @@
             pointer-events: none;
         }
 
-        .ring1 {
-            width: 100%;
-            height: 100%;
-            animation: ring1 4s linear infinite;
-        }
+        .ring1 { width: 100%; height: 100%; animation: ring1 4s linear infinite; }
+        .ring2 { width: 108%; height: 108%; border-style: dashed; border-color: rgba(255, 106, 0, 0.6); animation: ring2 6s linear infinite reverse; }
+        .ring3 { width: 116%; height: 116%; opacity: .5; animation: ring1 8s linear infinite; }
+        .ring4 { width: 124%; height: 124%; opacity: .25; border-style: double; animation: ring2 10s linear infinite reverse; }
 
-        .ring2 {
-            width: 108%;
-            height: 108%;
-            border-style: dashed;
-            border-color: rgba(255, 106, 0, 0.6);
-            animation: ring2 6s linear infinite reverse;
-        }
+        @keyframes ring1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes ring2 { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 
-        .ring3 {
-            width: 116%;
-            height: 116%;
-            opacity: .5;
-            animation: ring1 8s linear infinite;
-        }
-
-        .ring4 {
-            width: 124%;
-            height: 124%;
-            opacity: .25;
-            border-style: double;
-            animation: ring2 10s linear infinite reverse;
-        }
-
-        @keyframes ring1 {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes ring2 {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
-        }
-
-        /* ZOOMED & BOUNDED AVATAR LAYER */
         .fox-layer-wrapper {
             width: 78%;
             height: 78%;
@@ -287,7 +263,7 @@
         }
 
         .mining-click-shell:active .premium-fox-avatar-asset {
-            transform: scale(0.94);
+            transform: scale(0.95);
         }
 
         .floating-click-node {
@@ -315,7 +291,7 @@
             font-weight: 600;
         }
 
-        /* --- VIEW 2: SPIN WHEEL CORE --- */
+        /* --- VIEW 2: SPIN WHEEL (PERFECT ALIGNMENT) --- */
         .wheel-selection-header {
             width: 100%;
             background: var(--bg-card);
@@ -325,7 +301,6 @@
             display: flex;
             gap: 4px;
             margin-bottom: 15px;
-            position: relative;
         }
 
         .selection-toggle-pill {
@@ -344,7 +319,6 @@
             color: var(--text-pure);
         }
 
-        /* TOP CORNER PREMIUM BALANCE */
         .premium-balance-badge {
             font-size: 0.82rem;
             font-weight: 700;
@@ -352,22 +326,11 @@
             text-align: right;
             width: 100%;
             margin-bottom: 12px;
-            padding-right: 5px;
             display: none;
         }
 
-        .matrix-title-banner {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .matrix-subtitle-banner {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            text-align: center;
-        }
+        .matrix-title-banner { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+        .matrix-subtitle-banner { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 25px; text-align: center; }
 
         .physical-wheel-chassis {
             position: relative;
@@ -386,25 +349,27 @@
             border-radius: 50%;
             border: 6px solid #1c1d24;
             box-shadow: 0 0 20px rgba(255,106,0,0.15);
-            z-index: 1;
+            z-index: 5;
         }
 
+        /* চাকার ইন্ডিকেটর বা কাঁটা একদম টপে (0 Degree বা 12টা বাজার পজিশনে) */
         .wheel-top-pointer-pin {
             position: absolute;
-            top: -10px;
+            top: -8px;
+            left: calc(50% - 12px);
             width: 0;
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-top: 20px solid #ef4444;
+            border-top: 22px solid #ef4444;
             z-index: 40;
         }
 
-        /* ADVANCED TEXT SEGMENTED CANVAS */
         .wheel-core-canvas {
             width: 94%;
             height: 94%;
             border-radius: 50%;
+            /* স্লাইস কালারগুলোর বিন্যাস */
             background: conic-gradient(
                 #ff5500 0deg 45deg,   
                 #21232b 45deg 90deg,  
@@ -419,10 +384,9 @@
             position: relative;
             z-index: 10;
             will-change: transform;
-            overflow: hidden;
         }
 
-        /* WHEEL LABELS PLACEMENT ENGINE */
+        /* প্রতিটি রিওয়ার্ড টেক্সট স্লাইসের ঠিক মাঝখানে বসানোর পজিশন */
         .wheel-label {
             position: absolute;
             width: 50%;
@@ -430,25 +394,25 @@
             top: calc(50% - 15px);
             left: 50%;
             transform-origin: left center;
-            padding-left: 60px;
-            font-size: 0.85rem;
+            padding-left: 55px;
+            font-size: 0.8rem;
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             display: flex;
             align-items: center;
             z-index: 20;
         }
 
-        /* Slices rotational alignments (Rotated by index * 45deg + 22.5deg offset center) */
-        .r1 { transform: rotate(22.5deg); }
-        .r2 { transform: rotate(67.5deg); }
-        .r3 { transform: rotate(112.5deg); }
-        .r4 { transform: rotate(157.5deg); }
-        .r5 { transform: rotate(202.5deg); }
-        .r6 { transform: rotate(247.5deg); }
-        .r7 { transform: rotate(292.5deg); }
-        .r8 { transform: rotate(337.5deg); }
+        /* কাঁটা যেহেতু উপরে (0 deg), রিওয়ার্ডগুলো দেখতে ঘড়ির কাঁটার উল্টো দিকে সাজানো হয়েছে */
+        .r1 { transform: rotate(-22.5deg); }
+        .r2 { transform: rotate(-67.5deg); }
+        .r3 { transform: rotate(-112.5deg); }
+        .r4 { transform: rotate(-157.5deg); }
+        .r5 { transform: rotate(-202.5deg); }
+        .r6 { transform: rotate(-247.5deg); }
+        .r7 { transform: rotate(-292.5deg); }
+        .r8 { transform: rotate(-337.5deg); }
 
         .wheel-center-hub-cap {
             position: absolute;
@@ -463,18 +427,8 @@
             align-items: center;
         }
 
-        .mini-hub-fox-img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
-
-        .wheel-meta-status-row {
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-gold);
-        }
+        .mini-hub-fox-img { width: 70%; height: 70%; object-fit: contain; }
+        .wheel-meta-status-row { margin-bottom: 15px; font-size: 0.9rem; font-weight: 600; color: var(--text-gold); }
 
         .macro-launch-btn {
             width: 100%;
@@ -489,13 +443,9 @@
             cursor: pointer;
         }
 
-        .macro-launch-btn:disabled {
-            background: #22242c;
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
+        .macro-launch-btn:disabled { background: #22242c; color: var(--text-muted); cursor: not-allowed; }
 
-        /* --- VIEW 3: TASKS --- */
+        /* --- VIEW 3: TASKS (ALL 4 TASKS ADDED & WORKING) --- */
         .tasks-vertical-stack {
             width: 100%;
             display: flex;
@@ -514,38 +464,37 @@
             width: 100%;
         }
 
-        .task-left-meta {
+        .task-left-meta { display: flex; align-items: center; gap: 12px; }
+        .task-text-details { display: flex; flex-direction: column; }
+        .task-core-title { font-size: 0.95rem; font-weight: 700; }
+        .task-bounty-payout { font-size: 0.82rem; color: var(--text-gold); font-weight: 600; margin-top: 2px; }
+
+        .task-btn-group {
             display: flex;
-            align-items: center;
-            gap: 12px;
+            gap: 6px;
         }
 
-        .task-text-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .task-bounty-payout {
-            font-size: 0.82rem;
-            color: var(--text-gold);
-            font-weight: 600;
-        }
-
-        .task-execution-action-btn {
-            background: linear-gradient(135deg, #ff6a00 0%, #ff8500 100%);
-            border: none;
-            padding: 8px 18px;
+        .task-action-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 14px;
             border-radius: 20px;
             color: white;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
         }
 
-        .task-execution-action-btn.claimed {
+        .task-action-btn.verify {
+            background: linear-gradient(135deg, #ff6a00 0%, #ff8500 100%);
+            border: none;
+        }
+
+        .task-action-btn.claimed {
             background: #22242b !important;
             color: rgba(255,255,255,0.2) !important;
             cursor: not-allowed;
+            border: none;
         }
 
         /* --- GLOBAL NAVIGATION --- */
@@ -575,15 +524,8 @@
             flex: 1;
         }
 
-        .dock-action-item.active {
-            color: var(--accent-orange);
-        }
-
-        .dock-vector-icon-shell {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-        }
+        .dock-action-item.active { color: var(--accent-orange); }
+        .dock-vector-icon-shell { width: 22px; height: 22px; fill: currentColor; }
 
         /* --- MODAL DIALOGS --- */
         .modal-blur-overlay {
@@ -609,6 +551,9 @@
             text-align: center;
         }
 
+        .modal-dialog-title { font-size: 1.2rem; margin-bottom: 8px; }
+        .modal-dialog-body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+
         .modal-confirm-trigger-btn {
             background: #ffffff;
             color: #000000;
@@ -626,6 +571,7 @@
 
     <div class="app-container">
         
+        <!-- HEADER -->
         <div class="app-header">
             <div class="identity-block">
                 <div class="mini-avatar-shell">
@@ -643,6 +589,7 @@
             </div>
         </div>
 
+        <!-- HUD INDEX -->
         <div class="stats-dashboard-grid">
             <div class="stat-card-node">
                 <span class="stat-node-label">🪙 Coins</span>
@@ -653,13 +600,15 @@
                 <span class="stat-node-value" id="liveRenderPower">100%</span>
             </div>
             <div class="stat-card-node">
-                <span class="stat-node-label">🔑 Key Node</span>
-                <span class="stat-node-value" id="liveRenderKeys">0</span>
+                <span class="stat-node-label">🔑 Keys</span>
+                <span class="stat-node-value" id="liveRenderKeys">3</span>
             </div>
         </div>
 
+        <!-- VIEWPORT -->
         <div class="app-main-viewport">
 
+            <!-- HOME VIEW: 4 LAYER RINGS & SCREEN LCOKED AVATAR -->
             <div class="viewport-stage active" id="stage-home">
                 <div class="balance-hero-panel">
                     <div class="hero-crypto-amount live-render-coins">0</div>
@@ -681,6 +630,7 @@
                 </div>
             </div>
 
+            <!-- SPIN VIEW: FIXED TEXT SLICES & DOLLAR ISOLATION -->
             <div class="viewport-stage" id="stage-spin">
                 <div class="wheel-selection-header">
                     <div class="selection-toggle-pill active" id="toggleNormalWheel">Normal Wheel</div>
@@ -700,6 +650,8 @@
                     <div class="wheel-center-hub-cap">
                         <img src="fox.png" class="mini-hub-fox-img" alt="Hub" onerror="handleImageError(this)">
                     </div>
+                    
+                    <!-- PERFECTLY MAPPED CANVAS -->
                     <div class="wheel-core-canvas" id="mechanicalWheelCanvas">
                         <div class="wheel-label r1" id="wl1">150</div>
                         <div class="wheel-label r2" id="wl2">1200</div>
@@ -713,37 +665,78 @@
                 </div>
 
                 <div class="wheel-meta-status-row">
-                    Spins Left: <span id="renderAvailableSpinsText">0</span>
+                    Spins Left: <span id="renderAvailableSpinsText">15</span>
                 </div>
 
                 <button class="macro-launch-btn" id="executeWheelSpinTrigger">Launch Spin</button>
             </div>
 
+            <!-- TASKS VIEW: ALL 4 WORKING TASKS -->
             <div class="viewport-stage" id="stage-tasks">
                 <div class="tasks-vertical-stack">
-                    <div class="task-row-container">
+                    
+                    <!-- Task 1 -->
+                    <div class="task-row-container" id="task-box-t1">
                         <div class="task-left-meta">
                             <div class="task-text-details">
-                                <span class="task-core-title">Join Telegram Core</span>
+                                <span class="task-core-title">Join Telegram Channel</span>
                                 <span class="task-bounty-payout">🪙 +1,000</span>
                             </div>
                         </div>
-                        <button class="task-execution-action-btn" data-bounty="1000" data-link="https://t.me" data-id="t1">JOIN</button>
+                        <div class="task-btn-group">
+                            <button class="task-action-btn start" onclick="startTask('t1', 'https://t.me')">Link</button>
+                            <button class="task-action-btn verify" onclick="verifyTask('t1', 1000)">Verify</button>
+                        </div>
                     </div>
-                    <div class="task-row-container">
+
+                    <!-- Task 2 -->
+                    <div class="task-row-container" id="task-box-t2">
                         <div class="task-left-meta">
                             <div class="task-text-details">
-                                <span class="task-core-title">Follow Platform X</span>
+                                <span class="task-core-title">Follow Platform X (Twitter)</span>
                                 <span class="task-bounty-payout">🪙 +2,000</span>
                             </div>
                         </div>
-                        <button class="task-execution-action-btn" data-bounty="2000" data-link="https://x.com" data-id="t2">FOLLOW</button>
+                        <div class="task-btn-group">
+                            <button class="task-action-btn start" onclick="startTask('t2', 'https://x.com')">Link</button>
+                            <button class="task-action-btn verify" onclick="verifyTask('t2', 2000)">Verify</button>
+                        </div>
                     </div>
+
+                    <!-- Task 3 -->
+                    <div class="task-row-container" id="task-box-t3">
+                        <div class="task-left-meta">
+                            <div class="task-text-details">
+                                <span class="task-core-title">Subscribe YouTube Channel</span>
+                                <span class="task-bounty-payout">🪙 +1,500</span>
+                            </div>
+                        </div>
+                        <div class="task-btn-group">
+                            <button class="task-action-btn start" onclick="startTask('t3', 'https://youtube.com')">Link</button>
+                            <button class="task-action-btn verify" onclick="verifyTask('t3', 1500)">Verify</button>
+                        </div>
+                    </div>
+
+                    <!-- Task 4 -->
+                    <div class="task-row-container" id="task-box-t4">
+                        <div class="task-left-meta">
+                            <div class="task-text-details">
+                                <span class="task-core-title">Like Facebook Official Page</span>
+                                <span class="task-bounty-payout">🪙 +1,200</span>
+                            </div>
+                        </div>
+                        <div class="task-btn-group">
+                            <button class="task-action-btn start" onclick="startTask('t4', 'https://facebook.com')">Link</button>
+                            <button class="task-action-btn verify" onclick="verifyTask('t4', 1200)">Verify</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         </div>
 
+        <!-- NAVIGATION DOCK -->
         <div class="global-dock-nav">
             <div class="dock-action-item active" onclick="activateTargetTab('home', this)">
                 <svg class="dock-vector-icon-shell" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -761,6 +754,7 @@
 
     </div>
 
+    <!-- NOTIFICATION SYSTEM -->
     <div class="modal-blur-overlay" id="systemGlobalModalOverlay">
         <div class="modal-dialog-box">
             <h3 class="modal-dialog-title" id="modalViewTitle">Notification</h3>
@@ -770,50 +764,45 @@
     </div>
 
     <script>
-        // State Configuration (LocalStorage Sync Enabled)
+        // State Configuration
         let appState = {
             coins: 5230,
             power: 100,
             keys: 3,
-            premiumDollar: 0.00, // Dynamic isolated calculation parameters
+            premiumDollar: 0.00,
             availableSpins: 15,
             isPremiumMode: false,
             walletConnected: false,
             completedTasks: []
         };
 
-        // Arrays Definitions
+        // 0 index = 150, 1 index = 1200... (চাকার ডিজাইনের সিকোয়েন্স অনুযায়ী সাজানো)
         const sectorRewardsNormal = [150, 1200, 800, 300, 50, 2500, 1000, 500];
         const premiumDollarRewards = [0.01, 0.05, 0.10, 0.25, 0.50, 1.00, 2.00, 5.00];
 
-        // OPTIMIZED RAPID RE-TUNING SYSTEM PARAMETERS
-        const CRYPTO_TAP_COOLDOWN_MS = 80; // Fast tap sequence tracking latency allowance
+        const CRYPTO_TAP_COOLDOWN_MS = 80; 
         let lastLoggedTapTimestamp = 0;
         let dynamicClickStrikesCounter = 0;
         let strikeWindowResetTimestamp = Date.now();
 
         let runtimeWheelSpinningState = false;
-        let selectedPayoutOutcome = 0;
 
-        // DOM Elements Elements Cache
+        // Elements Cache
         const clickMiningZone = document.getElementById('foxMiningCoreTarget');
         const wheelCanvas = document.getElementById('mechanicalWheelCanvas');
         const wheelBtn = document.getElementById('executeWheelSpinTrigger');
         const pBalanceBadge = document.getElementById('premiumBalanceContainer');
 
         function loadState() {
-            const saved = localStorage.getItem('cyberfox_v3_state_premium');
+            const saved = localStorage.getItem('cyberfox_v3_state_final');
             if (saved) {
-                try { appState = { ...appState, ...JSON.parse(saved) }; appState.isPremiumMode = false; } catch(e){}
+                try { 
+                    appState = { ...appState, ...JSON.parse(saved) }; 
+                    appState.isPremiumMode = false; 
+                } catch(e){}
             }
         }
-        function saveState() { localStorage.setItem('cyberfox_v3_state_premium', JSON.stringify(appState)); }
-
-        function syncCoinRewardsState(amount) {
-            appState.coins += amount;
-            renderSystemHUD();
-            saveState();
-        }
+        function saveState() { localStorage.setItem('cyberfox_v3_state_final', JSON.stringify(appState)); }
 
         function renderSystemHUD() {
             document.querySelectorAll('.live-render-coins').forEach(el => el.textContent = Math.floor(appState.coins).toLocaleString());
@@ -823,11 +812,21 @@
             document.getElementById('liveRenderPremiumDollar').textContent = appState.premiumDollar.toFixed(2);
             document.getElementById('walletTrigger').classList.toggle('connected', appState.walletConnected);
             document.getElementById('walletPillText').textContent = appState.walletConnected ? "Connected" : "Connect";
+            
+            // রেন্ডার করার সময় টাস্কগুলোর অবস্থা চেক করা
+            appState.completedTasks.forEach(id => {
+                const box = document.getElementById(`task-box-${id}`);
+                if (box) {
+                    const btnGroup = box.querySelector('.task-btn-group');
+                    btnGroup.innerHTML = `<button class="task-action-btn claimed" disabled>Claimed</button>`;
+                }
+            });
         }
 
-        // Tapping Mechanics with Improved Anti-Cheat Tuning
+        // Tapping Engine (Fixed Anti-Bot + No Screen Movement)
         if (clickMiningZone) {
             clickMiningZone.addEventListener('pointerdown', (e) => {
+                e.preventDefault(); // জুম এবং ব্রাউজার স্ক্রিন মুভমেন্ট টোটাল অফ করবে
                 const now = Date.now();
                 if (now - strikeWindowResetTimestamp > 1000) {
                     dynamicClickStrikesCounter = 0;
@@ -835,7 +834,6 @@
                 }
                 dynamicClickStrikesCounter++;
 
-                // Anti-Cheat Firewall Trigger Level Restructured to > 20
                 if (dynamicClickStrikesCounter > 20) {
                     triggerModal("Macro Detected", "High frequency transaction pattern rejected by anti-bot firewall framework.");
                     return;
@@ -844,10 +842,11 @@
                 lastLoggedTapTimestamp = now;
 
                 if (appState.power >= 0.2) {
-                    syncCoinRewardsState(1);
+                    appState.coins += 1;
                     appState.power = parseFloat(Math.max(0, appState.power - 0.2).toFixed(1));
                     renderSystemHUD();
                     spawnFloatText(e);
+                    saveState();
                 } else {
                     triggerModal("Power Exhausted", "Energy reserve matrix depleted.");
                 }
@@ -867,7 +866,7 @@
             setTimeout(() => txt.remove(), 500);
         }
 
-        // Dynamic Slices Swapping Logic (Normal vs Premium)
+        // Switch Wheel Modes
         const toggleNormalWheel = document.getElementById('toggleNormalWheel');
         const togglePremiumWheel = document.getElementById('togglePremiumWheel');
 
@@ -875,7 +874,6 @@
             const isPrem = appState.isPremiumMode;
             const dataset = isPrem ? premiumDollarRewards : sectorRewardsNormal;
             const prefix = isPrem ? "$" : "";
-            
             for(let i=1; i<=8; i++) {
                 document.getElementById(`wl${i}`).textContent = prefix + dataset[i-1];
             }
@@ -900,20 +898,20 @@
                 appState.isPremiumMode = true;
                 togglePremiumWheel.classList.add('active');
                 toggleNormalWheel.classList.remove('active');
-                pBalanceBadge.style.display = "block"; // Only render on Premium View Context
+                pBalanceBadge.style.display = "block";
                 document.getElementById('wheelMatrixTitle').textContent = "💎 Premium Dollar Matrix";
                 document.getElementById('wheelMatrixSubtitle').textContent = "Costs 1 Key node. Earn guaranteed high tier Dollar values.";
                 updateWheelLabelsUI();
             });
         }
 
-        // Mechanical Fixed Multi-Slice Formula Spin Execution Engine
+        // 100% PERFECT ROTATION SPIN WHEEL lOGIC
         if (wheelBtn) {
             wheelBtn.addEventListener('click', () => {
                 if (runtimeWheelSpinningState) return;
 
                 if (appState.isPremiumMode && appState.keys < 1) {
-                    triggerModal("Keys Depleted", "Premium routine initialization requires 1 structural key parameter validation.");
+                    triggerModal("Keys Depleted", "Premium routine initialization requires 1 structural key.");
                     return;
                 }
 
@@ -925,18 +923,25 @@
                     if (appState.isPremiumMode) appState.keys -= 1;
                     renderSystemHUD();
 
-                    wheelCanvas.style.transition = "";
-                    wheelCanvas.style.transform = "rotate(0deg)";
-                    wheelCanvas.offsetHeight; // Force reflow redraw
-
-                    wheelCanvas.style.transition = "transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)";
+                    // র্যান্ডমলি একটি ইনডেক্স সিলেক্ট করা (0 থেকে 7)
                     const targetIndex = Math.floor(Math.random() * 8);
                     
-                    // Fixed mathematical matrix computation
-                    const baseDeg = 360 - (targetIndex * 45) + 22.5;
-                    const finalDeg = 2880 + baseDeg;
+                    /* 
+                       ম্যাথমেটিক্যাল ক্যালকুলেশন ফিক্সড:
+                       প্রতিটি স্লাইস হচ্ছে ৪৫ ডিগ্রি (360 / 8)।
+                       যেহেতু রিওয়ার্ডগুলো ঘড়ির উল্টো দিকে সাজানো (0, 45, 90...), 
+                       তাই চাকা সোজা দিকে ঘুরলে (targetIndex * 45) ডিগ্রি কোণ কাঁটার নিচে এসে থামবে।
+                    */
+                    const degreeOffset = targetIndex * 45;
+                    const fullRotations = 5 * 360; // চাকা ৫ বার পুরো ঘুরবে স্পিডের জন্য
+                    const finalDegree = fullRotations + degreeOffset;
 
-                    wheelCanvas.style.transform = `rotate(${finalDeg}deg)`;
+                    wheelCanvas.style.transition = "none";
+                    wheelCanvas.style.transform = `rotate(0deg)`;
+                    wheelCanvas.offsetHeight; // রিফ্লো ট্রিগার
+
+                    wheelCanvas.style.transition = "transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)";
+                    wheelCanvas.style.transform = `rotate(${finalDegree}deg)`;
 
                     setTimeout(() => {
                         runtimeWheelSpinningState = false;
@@ -945,19 +950,41 @@
                         if (appState.isPremiumMode) {
                             const wonDollar = premiumDollarRewards[targetIndex];
                             appState.premiumDollar += wonDollar;
-                            triggerModal("🎰 Premium Drop", `Allocated +$${wonDollar.toFixed(2)} USD successfully to secure vault.`);
+                            triggerModal("🎰 Premium Drop", `Allocated +$${wonDollar.toFixed(2)} USD successfully.`);
                         } else {
                             const wonCoins = sectorRewardsNormal[targetIndex];
                             appState.coins += wonCoins;
-                            triggerModal("🎰 Standard Secured", `Distributed +${wonCoins} $FOX tokens onto identity balance ledger.`);
+                            triggerModal("🎰 Standard Secured", `Distributed +${wonCoins} $FOX tokens.`);
                         }
                         saveState();
                         renderSystemHUD();
-                    }, 5200);
+                    }, 4200);
                 } else {
                     triggerModal("Rejected", "Available spin counts exhausted.");
                 }
             });
+        }
+
+        // TASKS MANAGEMENT ENGINE (ALL 4 TASKS INTEGRATED)
+        let localTaskTracker = {};
+
+        function startTask(id, url) {
+            localTaskTracker[id] = true;
+            window.open(url, '_blank');
+        }
+
+        function verifyTask(id, reward) {
+            if (localTaskTracker[id]) {
+                if (!appState.completedTasks.includes(id)) {
+                    appState.completedTasks.push(id);
+                    appState.coins += reward;
+                    triggerModal("Task Verified", `Success! You earned +${reward} coins.`);
+                    saveState();
+                    renderSystemHUD();
+                }
+            } else {
+                triggerModal("Verification Failed", "Please click 'Link' to perform the task action first.");
+            }
         }
 
         // Global Layout Navigation Modules
@@ -969,7 +996,7 @@
             el.classList.add('active');
         }
 
-        // Modal Utility Elements
+        // Modal Utility
         const overlay = document.getElementById('systemGlobalModalOverlay');
         function triggerModal(title, msg) {
             document.getElementById('modalViewTitle').textContent = title;
@@ -978,25 +1005,19 @@
         }
         document.getElementById('modalViewDismissAction').addEventListener('click', () => overlay.style.display = 'none');
 
-        // Static Image Safety Fallback Engine
         function handleImageError(img) {
             img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2315161c' stroke='%23ff6a00' stroke-width='3'/></svg>";
         }
 
-        // Wallet Simulation Handshake Binding Block
+        // Wallet Binding
         document.getElementById('walletTrigger').addEventListener('click', () => {
-            if (!appState.walletConnected) {
-                appState.walletConnected = true;
-                triggerModal("Handshake Confirmed", "TON Secure Node pipeline integrated successfully.");
-            } else {
-                appState.walletConnected = false;
-                triggerModal("Disconnected", "Web3 interface linkage dropped.");
-            }
+            appState.walletConnected = !appState.walletConnected;
+            triggerModal(appState.walletConnected ? "Handshake Confirmed" : "Disconnected", appState.walletConnected ? "TON Secure Node integrated." : "Web3 linkage dropped.");
             renderSystemHUD();
             saveState();
         });
 
-        // Power Energy Auto Recharge Loop Thread
+        // Power Recharge Loop
         setInterval(() => {
             if (appState.power < 100) {
                 appState.power = Math.min(100, appState.power + 1);
@@ -1012,4 +1033,4 @@
         });
     </script>
 </body>
-                        </html>
+</html>
