@@ -1,8 +1,9 @@
-<!DOCTYPE html>    <html lang="en">    
+<!DOCTYPE html>
+<html lang="en">    
 <head>    
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">    
-    <title>Cyber Fox V6.6 - Clean Engineering Build</title>    
+    <title>Cyber Fox V7.0 - Ultimate Production Build</title>    
     <script src="https://telegram.org/js/telegram-web-app.js"></script>    
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>    
@@ -12,95 +13,143 @@
             --accent-glow: rgba(255, 106, 0, 0.35); --text-pure: #ffffff;    
             --text-muted: #8e929a; --text-gold: #ffb700; --success-green: #22c55e;    
             --border-line: rgba(255, 255, 255, 0.06);    
+            --neon-blue: #00f3ff; --neon-purple: #b000ff;    
         }    
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }    
         html, body { background-color: #000000; color: var(--text-pure); width: 100%; height: 100dvh; overflow: hidden; position: relative; overscroll-behavior: none; }    
         body { display: flex; justify-content: center; align-items: center; }    
         .app-container { width: 100%; max-width: 460px; height: 100dvh; background: radial-gradient(circle at top, #16171e 0%, #0a0b0e 100%); position: relative; display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03); }    
-        .app-header { padding: 20px 20px 10px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }    
+        
+        /* Header & HUD Layout */
+        .app-header { padding: 15px 20px 5px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }    
         .identity-block { display: flex; align-items: center; gap: 10px; }    
-        .mini-avatar-shell { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--accent-orange); overflow: hidden; background: #111217; display: flex; justify-content: center; align-items: center; }    
-        .mini-avatar-shell img { width: 115%; height: 115%; object-fit: cover; }    
+        .mini-avatar-shell { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent-orange); overflow: hidden; background: #111217; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 8px var(--accent-glow); }    
+        .mini-avatar-shell img { width: 100%; height: 100%; object-fit: cover; }    
         .title-meta { display: flex; flex-direction: column; }    
-        .meta-main { font-size: 1rem; font-weight: 800; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; }    
-        .meta-sub { font-size: 0.7rem; color: var(--success-green); font-weight: bold; }    
+        .meta-main { font-size: 0.95rem; font-weight: 800; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff; }    
+        .meta-sub { font-size: 0.72rem; color: var(--text-gold); font-weight: bold; }    
         .header-actions { display: flex; align-items: center; gap: 6px; }    
         .action-icon-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-line); color: #fff; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }    
-        #ton-connect-btn-container { scale: 0.85; transform-origin: right center; }    
-        .stats-dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 20px; z-index: 90; }    
-        .stat-card-node { background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }    
-        .stat-node-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }    
-        .stat-node-value { font-size: 1.1rem; font-weight: 800; }    
-        .app-main-viewport { flex-grow: 1; position: relative; width: 100%; overflow-y: auto; padding: 15px 20px 100px 20px; -webkit-overflow-scrolling: touch; }    
-        .viewport-stage { display: none; width: 100%; flex-direction: column; align-items: center; animation: stageEnter 0.25s ease-out forwards; }    
+        #ton-connect-btn-container { scale: 0.8; transform-origin: right center; }    
+        
+        .stats-dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px 20px 4px 20px; z-index: 90; }    
+        .stat-card-node { background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 12px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; text-align: center; }    
+        .stat-node-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }    
+        .stat-node-value { font-size: 1rem; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }    
+        
+        .power-container { padding: 0 20px; margin-top: 4px; z-index: 90; display: flex; flex-direction: column; gap: 3px; }    
+        .power-bar { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-line); border-radius: 6px; overflow: hidden; }    
+        .power-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #ffc700, #ff6a00); border-radius: 6px; transition: width 0.1s ease; box-shadow: 0 0 10px var(--accent-glow); }    
+        .passive-income-bar { font-size: 0.72rem; color: var(--success-green); text-align: center; font-weight: 700; margin-top: 2px; }
+
+        /* Viewport Stage */
+        .app-main-viewport { flex-grow: 1; position: relative; width: 100%; overflow-y: auto; padding: 10px 20px 90px 20px; -webkit-overflow-scrolling: touch; }    
+        .viewport-stage { display: none; width: 100%; flex-direction: column; align-items: center; animation: stageEnter 0.22s ease-out forwards; }    
         .viewport-stage.active { display: flex; }    
-        @keyframes stageEnter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }    
-        .balance-hero-panel { text-align: center; margin: 10px 0; }    
-        .hero-crypto-amount { font-size: 3.2rem; font-weight: 900; background: linear-gradient(180deg, #ffffff 0%, #e2e5ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }    
-        .hero-crypto-label { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 2px; font-weight: 700; }    
-        .mining-click-shell { width: 270px; height: 270px; display: flex; justify-content: center; align-items: center; position: relative; margin: 25px 0; cursor: pointer; touch-action: none; }    
-        .mining-click-shell.locked { filter: grayscale(1); opacity: 0.3; pointer-events: none !important; }    
+        @keyframes stageEnter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }    
+        
+        .balance-hero-panel { text-align: center; margin: 8px 0; }    
+        .hero-crypto-amount { font-size: 2.8rem; font-weight: 900; background: linear-gradient(180deg, #ffffff 0%, #e2e5ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }    
+        .hero-crypto-label { font-size: 0.78rem; color: var(--text-muted); letter-spacing: 1.5px; font-weight: 700; text-transform: uppercase; }    
+        
+        /* Tap & Particle Architecture */
+        .mining-click-shell { width: 240px; height: 240px; display: flex; justify-content: center; align-items: center; position: relative; margin: 15px 0; cursor: pointer; touch-action: none; perspective: 1000px; }    
+        .mining-click-shell.locked { filter: grayscale(1); opacity: 0.2; pointer-events: none !important; }    
         .ring { position: absolute; border-radius: 50%; border: 2px solid var(--accent-orange); box-shadow: 0 0 15px var(--accent-glow); pointer-events: none; }    
-        .ring1 { width: 100%; height: 100%; animation: ring1 4s linear infinite; }    
-        .ring2 { width: 108%; height: 108%; border-style: dashed; border-color: rgba(255, 106, 0, 0.6); animation: ring2 6s linear infinite reverse; }    
+        .ring1 { width: 100%; height: 100%; animation: ring1 5s linear infinite; }    
+        .ring2 { width: 108%; height: 108%; border-style: dashed; border-color: rgba(255, 106, 0, 0.4); animation: ring2 7s linear infinite reverse; }    
+        .pulse-wave-layer { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, rgba(255,106,0,0.2) 0%, transparent 70%); pointer-events: none; opacity: 0; transform: scale(0.9); }    
+        @keyframes pulseBlow { 0% { opacity: 1; transform: scale(0.8); } 100% { opacity: 0; transform: scale(1.4); } }    
         @keyframes ring1 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }    
         @keyframes ring2 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }    
-        .fox-layer-wrapper { width: 78%; height: 78%; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; background: #111217; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.05); }    
-        .premium-fox-avatar-asset { width: 115%; height: 115%; object-fit: cover; transform: scale(1.15); transition: transform 0.05s ease; }    
-        .floating-click-node { position: absolute; color: #ff8c00; font-size: 1.9rem; font-weight: 900; pointer-events: none; z-index: 500; animation: floatUp 0.35s ease-out forwards; text-shadow: 0 4px 6px rgba(0,0,0,0.7); }    
-        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-70px); } }    
-        .click-action-descriptor { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-line); padding: 8px 18px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; }    
-        .streak-container { width: 100%; background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }    
-        .streak-header-row { display: flex; justify-content: space-between; align-items: center; }    
-        .streak-title { font-size: 0.8rem; font-weight: 700; color: var(--text-gold); text-transform: uppercase; }    
-        .streak-claim-btn { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); border: none; padding: 6px 12px; border-radius: 8px; color: white; font-size: 0.72rem; font-weight: 700; cursor: pointer; }    
-        .streak-claim-btn:disabled { background: #22242c; color: var(--text-muted); cursor: not-allowed; }    
-        .streak-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }    
-        .streak-day-box { background: rgba(255,255,255,0.03); border: 1px solid var(--border-line); border-radius: 8px; padding: 6px 2px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 0.65rem; color: var(--text-muted); }    
-        .streak-day-box.active { border-color: var(--accent-orange); background: rgba(255,106,0,0.08); color: #fff; }    
-        .streak-day-box.claimed { border-color: var(--success-green); background: rgba(34,197,94,0.08); color: var(--success-green); }    
-        .wheel-selection-header { width: 100%; background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 14px; padding: 5px; display: flex; gap: 4px; margin-bottom: 15px; }    
-        .selection-toggle-pill { flex: 1; padding: 10px; text-align: center; font-size: 0.85rem; font-weight: 700; border-radius: 10px; cursor: pointer; color: var(--text-muted); }    
-        .selection-toggle-pill.active { background: #22242c; color: var(--text-pure); }    
-        .premium-balance-container { width: 100%; background: rgba(0, 255, 204, 0.04); border: 1px dashed rgba(0, 255, 204, 0.2); border-radius: 14px; padding: 12px; margin-bottom: 15px; }    
-        .premium-balance-badge { font-size: 1rem; font-weight: 800; color: #00ffcc; text-align: center; margin-bottom: 8px; }    
-        .premium-withdraw-row { display: flex; gap: 6px; justify-content: center; }    
-        .premium-action-btn { flex: 1; max-width: 140px; padding: 6px; border-radius: 8px; border: 1px solid rgba(0, 255, 204, 0.3); background: rgba(0,255,204,0.1); color: #fff; font-size: 0.72rem; font-weight: 700; cursor: pointer; }    
-        .physical-wheel-chassis { position: relative; width: 260px; height: 260px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; touch-action: none; }    
+        
+        .fox-layer-wrapper { width: 82%; height: 82%; z-index: 10; display: flex; justify-content: center; align-items: center; pointer-events: none; background: #111217; border-radius: 50%; overflow: hidden; border: 4px solid rgba(255, 255, 255, 0.04); transition: transform 0.05s; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }    
+        .premium-fox-avatar-asset { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transform: scale(1.1); pointer-events: none; }    
+        
+        /* Particle & Text Floating Elements */
+        .floating-click-node { position: absolute; color: #fff; font-size: 1.8rem; font-weight: 900; pointer-events: none; z-index: 500; animation: floatUp 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards; text-shadow: 0 0 10px var(--accent-orange), 0 4px 10px rgba(0,0,0,0.9); }    
+        .coin-particle-node { position: absolute; width: 14px; height: 14px; background: radial-gradient(circle, #ffe600 0%, #ff8c00 100%); border-radius: 50%; pointer-events: none; z-index: 490; box-shadow: 0 0 8px #ffb700; animation: particleFly 0.6s ease-out forwards; }    
+        @keyframes floatUp { 0% { opacity: 0; transform: translateY(0) scale(0.5); } 15% { opacity: 1; transform: translateY(-10px) scale(1.2); } 100% { opacity: 0; transform: translateY(-80px) scale(0.8); } }    
+        @keyframes particleFly { 0% { opacity: 1; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.3); } }    
+        .click-action-descriptor { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-line); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 10px; }    
+        
+        /* Sub-module Grid Panels */
+        .dashboard-section-title { width: 100%; font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin: 12px 0 6px 0; text-align: left; }    
+        .upgrades-horizontal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; width: 100%; margin-bottom: 12px; }    
+        .upgrade-action-card { background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 4px; justify-content: space-between; position: relative; overflow: hidden; }    
+        .upgrade-card-meta { display: flex; flex-direction: column; }    
+        .upgrade-title { font-size: 0.82rem; font-weight: 700; color: #fff; }    
+        .upgrade-subtext { font-size: 0.68rem; color: var(--text-muted); }    
+        .upgrade-cost-row { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }    
+        .upgrade-cost-tag { font-size: 0.78rem; font-weight: 800; color: var(--text-gold); }    
+        .upgrade-buy-button { background: rgba(255,106,0,0.15); border: 1px solid var(--accent-orange); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; cursor: pointer; }    
+        .upgrade-buy-button:disabled { background: rgba(255,255,255,0.02); border-color: var(--border-line); color: var(--text-muted); cursor: not-allowed; }    
+        
+        /* Achievements & Skins lists */
+        .scannable-item-list { width: 100%; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }    
+        .scannable-row-item { background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 12px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }    
+        .scannable-left-meta { display: flex; flex-direction: column; gap: 2px; }    
+        .scannable-main-title { font-size: 0.85rem; font-weight: 700; }    
+        .scannable-desc-sub { font-size: 0.68rem; color: var(--text-muted); }    
+        .scannable-badge-status { font-size: 0.72rem; font-weight: 800; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.04); }    
+        .scannable-badge-status.unlocked { background: rgba(34,197,94,0.15); color: var(--success-green); border: 1px solid rgba(34,197,94,0.3); }    
+        .skin-use-btn { background: var(--accent-orange); border: none; color: #fff; font-size: 0.68rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; cursor: pointer; }    
+        .skin-use-btn.active { background: #22c55e; }    
+
+        /* Spin Wheel Module Modifications */
+        .physical-wheel-chassis { position: relative; width: 250px; height: 250px; display: flex; justify-content: center; align-items: center; margin: 15px 0; touch-action: none; }    
         .wheel-outer-rim-glow { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 6px solid #1c1d24; box-shadow: 0 0 20px rgba(255,106,0,0.15); z-index: 5; }    
         .wheel-top-pointer-pin { position: absolute; top: -8px; left: calc(50% - 12px); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 22px solid #ef4444; z-index: 40; }    
-        .wheel-core-canvas { width: 94%; height: 94%; border-radius: 50%; background: conic-gradient(#ff5500 0deg 45deg, #21232b 45deg 90deg, #ffb700 90deg 135deg, #181920 135deg 180deg, #22c55e 180deg 225deg, #111217 225deg 270deg, #ff6a00 270deg 315deg, #3b82f6 315deg 360deg); border: 4px solid var(--bg-card); position: relative; z-index: 10; }    
-        .wheel-label { position: absolute; width: 50%; height: 30px; top: calc(50% - 15px); left: 50%; transform-origin: left center; padding-left: 55px; font-size: 0.8rem; font-weight: 900; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.9); display: flex; align-items: center; z-index: 20; }    
-        .r1 { transform: rotate(22.5deg); } .r2 { transform: rotate(67.5deg); } .r3 { transform: rotate(112.5deg); } .r4 { transform: rotate(157.5deg); }    
-        .r5 { transform: rotate(202.5deg); } .r6 { transform: rotate(247.5deg); } .r7 { transform: rotate(292.5deg); } .r8 { transform: rotate(337.5deg); }    
-        .wheel-center-hub-cap { position: absolute; width: 50px; height: 50px; background: #15161c; border-radius: 50%; border: 3px solid var(--accent-orange); z-index: 30; display: flex; justify-content: center; align-items: center; }    
-        .mini-hub-fox-img { width: 115%; height: 115%; object-fit: cover; transform: scale(1.15); }    
-        .macro-launch-btn { width: 100%; background: linear-gradient(135deg, #ff5500 0%, #ff8c00 100%); border: none; padding: 15px; border-radius: 14px; color: white; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; cursor: pointer; }    
-        .macro-launch-btn:disabled { background: #22242c; color: var(--text-muted); cursor: not-allowed; }    
-        .tasks-vertical-stack { width: 100%; display: flex; flex-direction: column; gap: 10px; }    
-        .task-row-container { background: var(--bg-card); border: 1px solid var(--border-line); padding: 14px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; width: 100%; }    
-        .task-left-meta { display: flex; align-items: center; gap: 12px; }    
-        .task-text-details { display: flex; flex-direction: column; }    
-        .task-core-title { font-size: 0.9rem; font-weight: 700; }    
-        .task-bounty-payout { font-size: 0.8rem; color: var(--text-gold); font-weight: 600; }    
-        .task-btn-group { display: flex; gap: 4px; }    
-        .task-action-btn { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; color: white; font-size: 0.75rem; font-weight: 700; cursor: pointer; }    
-        .task-action-btn.verify { background: linear-gradient(135deg, #ff6a00 0%, #ff8500 100%); border: none; }    
-        .referral-card { background: linear-gradient(135deg, #1c1d24 0%, #13141a 100%); border: 1px solid rgba(255,106,0,0.15); width: 100%; border-radius: 16px; padding: 16px; margin-top: 5px; display: flex; flex-direction: column; gap: 10px; }    
-        .ref-header { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 800; }    
-        .ref-box { display: flex; background: rgba(0,0,0,0.2); border: 1px solid var(--border-line); border-radius: 10px; padding: 10px; justify-content: space-between; align-items: center; }    
-        .ref-link-text { font-size: 0.72rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px; letter-spacing: 0.3px; }    
-        .ref-copy-btn { background: var(--accent-orange); border: none; padding: 6px 12px; border-radius: 6px; color: white; font-size: 0.72rem; font-weight: 700; cursor: pointer; }    
+        .wheel-core-canvas { width: 95%; height: 95%; border-radius: 50%; background: conic-gradient(#ff5500 0deg 45deg, #21232b 45deg 90deg, #ffb700 90deg 135deg, #181920 135deg 180deg, #22c55e 180deg 225deg, #a855f7 225deg 270deg, #ff6a00 270deg 315deg, #3b82f6 315deg 360deg); border: 4px solid var(--bg-card); position: relative; z-index: 10; }    
+        .wheel-label { position: absolute; width: 50%; height: 34px; top: calc(50% - 17px); left: 50%; transform-origin: left center; padding-left: 45px; display: flex; align-items: center; justify-content: flex-start; z-index: 20; }    
+        .wheel-label span { display: inline-block; font-size: 0.75rem; font-weight: 900; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }    
+        .wheel-center-hub-cap { position: absolute; width: 46px; height: 46px; background: #15161c; border-radius: 50%; border: 3px solid var(--accent-orange); z-index: 30; display: flex; justify-content: center; align-items: center; overflow: hidden; }    
+        .mini-hub-fox-img { width: 100%; height: 100%; object-fit: cover; }    
+        
+        .r1 { transform: rotate(22.5deg); }  .r1 span { transform: rotate(-22.5deg); }    
+        .r2 { transform: rotate(67.5deg); }  .r2 span { transform: rotate(-67.5deg); }    
+        .r3 { transform: rotate(112.5deg); } .r3 span { transform: rotate(-112.5deg); }    
+        .r4 { transform: rotate(157.5deg); } .r4 span { transform: rotate(-157.5deg); }    
+        .r5 { transform: rotate(202.5deg); } .r5 span { transform: rotate(-202.5deg); }    
+        .r6 { transform: rotate(247.5deg); } .r6 span { transform: rotate(-247.5deg); }    
+        .r7 { transform: rotate(292.5deg); } .r7 span { transform: rotate(-292.5deg); }    
+        .r8 { transform: rotate(337.5deg); } .r8 span { transform: rotate(-337.5deg); }    
+        
+        .macro-launch-btn { width: 100%; background: linear-gradient(135deg, #ff5500 0%, #ff8c00 100%); border: none; padding: 14px; border-radius: 14px; color: white; font-size: 1rem; font-weight: 800; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 15px rgba(255,106,0,0.3); }    
+        .macro-launch-btn:disabled { background: #22242c; color: var(--text-muted); cursor: not-allowed; box-shadow: none; }    
+
+        /* Pipeline Layout Updates */
+        .referral-card { background: linear-gradient(135deg, #1c1d24 0%, #13141a 100%); border: 1px solid rgba(255,106,0,0.15); width: 100%; border-radius: 16px; padding: 14px; margin-top: 5px; display: flex; flex-direction: column; gap: 8px; }    
+        .ref-counter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; margin-bottom: 4px; }    
+        .ref-counter-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border-line); padding: 8px; border-radius: 10px; }    
+        .ref-counter-box div:first-child { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: bold;}    
+        .ref-counter-box div:last-child { font-size: 0.95rem; font-weight: 800; color: #fff; }    
+        .ref-box { display: flex; background: rgba(0,0,0,0.2); border: 1px solid var(--border-line); border-radius: 10px; padding: 10px; justify-content: space-between; align-items: center; gap: 8px; }    
+        .ref-link-text { font-size: 0.7rem; color: var(--text-muted); word-break: break-all; }    
+        .ref-copy-btn { background: var(--accent-orange); border: none; padding: 6px 12px; border-radius: 6px; color: white; font-size: 0.72rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }    
+        
+        /* Leaderboard UI Panels */
+        .leaderboard-container-mesh { width: 100%; background: var(--bg-card); border: 1px solid var(--border-line); border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }    
+        .leaderboard-row-node { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; background: rgba(255,255,255,0.01); border-radius: 10px; border-bottom: 1px solid rgba(255,255,255,0.02); }    
+        .leaderboard-left-block { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }    
+        .rank-medal-indicator { font-weight: 800; color: var(--text-gold); width: 18px; }    
+        .leaderboard-val-tag { font-size: 0.85rem; font-weight: 800; color: var(--accent-orange); }
+
+        /* Navigation Architecture */
         .global-dock-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 74px; background: #0b0c10; border-top: 1px solid var(--border-line); display: flex; justify-content: space-around; align-items: center; z-index: 500; }    
-        .dock-action-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); cursor: pointer; font-size: 0.72rem; font-weight: 600; flex: 1; }    
+        .dock-action-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-muted); cursor: pointer; font-size: 0.72rem; font-weight: 700; flex: 1; transition: color 0.15s; }    
+        .dock-action-item span.nav-icon { font-size: 1.25rem; }    
         .dock-action-item.active { color: var(--accent-orange); }    
-        .modal-blur-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 9999; }    
-        .modal-dialog-box { background: #181920; border: 1px solid rgba(255,255,255,0.08); width: 85%; padding: 22px; border-radius: 16px; text-align: center; }    
-        .modal-dialog-title { font-size: 1.15rem; margin-bottom: 6px; }    
-        .modal-dialog-body { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; word-break: break-all; margin-bottom: 10px; }    
-        .modal-input-field { display: none; width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border-line); padding: 10px; border-radius: 8px; color: #fff; font-size: 0.9rem; text-align: center; outline: none; margin-top: 8px; }    
-        .modal-btn-footer { display: flex; gap: 10px; margin-top: 14px; }    
-        .modal-btn { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; border: none; }    
+        
+        /* Global Modal Overlay Popup UI */
+        .modal-blur-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 9999; }    
+        .modal-dialog-box { background: #14151b; border: 1px solid rgba(255,106,0,0.2); width: 85%; padding: 22px; border-radius: 18px; text-align: center; box-shadow: 0 0 40px rgba(255, 106, 0, 0.25); animation: modalPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }    
+        @keyframes modalPop { from { transform: scale(0.88); opacity: 0; } to { transform: scale(1); opacity: 1; } }    
+        .modal-dialog-title { font-size: 1.15rem; margin-bottom: 6px; font-weight: 800; color: #fff; }    
+        .modal-dialog-body { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; word-break: break-all; margin-bottom: 12px; }    
+        .modal-input-field { display: none; width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-line); padding: 10px; border-radius: 8px; color: #fff; font-size: 0.9rem; text-align: center; outline: none; margin-top: 10px; }    
+        .modal-btn-footer { display: flex; gap: 8px; margin-top: 14px; }    
+        .modal-btn { flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; border: none; font-size: 0.85rem; }    
         .modal-btn.close { background: #22242c; color: var(--text-pure); }    
         .modal-btn.confirm { background: #ffffff; color: #000000; }    
     </style>    
@@ -109,10 +158,10 @@
 <div class="app-container">    
     <div class="app-header">    
         <div class="identity-block">    
-            <div class="mini-avatar-shell"><img src="fox.png" alt="Mesh" onerror="handleImageError(this)"></div>    
+            <div class="mini-avatar-shell"><img src="fox.png" id="hudGlobalMiniAvatar" alt="Fox Asset" onerror="handleImageError(this)"></div>    
             <div class="title-meta">    
                 <span class="meta-main" id="renderUsernameDisplay">SECURE AUTH...</span>    
-                <span class="meta-sub" id="cloudStatusNode">Syncing Layer...</span>    
+                <span class="meta-sub" id="userDynamicRankBadge">Bronze Fox</span>    
             </div>    
         </div>    
         <div class="header-actions">    
@@ -121,84 +170,174 @@
             <input type="file" id="hiddenBackupInputElement" accept=".json" style="display:none" onchange="handleFileBackupSelection(event)">    
             <div id="ton-connect-btn-container"></div>    
         </div>    
-    </div>    <div class="stats-dashboard-grid">    
-    <div class="stat-card-node"><span class="stat-node-label">🪙 Coins</span><span class="stat-node-value live-coins">0</span></div>    
-    <div class="stat-card-node"><span class="stat-node-label">⚡ Power</span><span class="stat-node-value" id="liveRenderPower">100/100</span></div>    
-    <div class="stat-card-node"><span class="stat-node-label">🔑 Keys</span><span class="stat-node-value" id="liveRenderKeys">0</span></div>    
+    </div>    
+    
+    <div class="stats-dashboard-grid">    
+        <div class="stat-card-node"><span class="stat-node-label">🪙 Coins</span><span class="stat-node-value id-live-coins">0</span></div>    
+        <div class="stat-card-node"><span class="stat-node-label">⚡ Power</span><span class="stat-node-value" id="liveRenderPower">100/100</span></div>    
+        <div class="stat-card-node"><span class="stat-node-label">🔑 Keys</span><span class="stat-node-value" id="liveRenderKeys">0</span></div>    
+    </div>    
+    
+    <div class="power-container">    
+        <div class="power-bar"><div class="power-fill" id="dynamicPowerFillNode"></div></div>    
+        <div class="passive-income-bar" id="livePassiveIncomeRateDisplay">Auto Mine: 0/sec</div>
+    </div>    
+
+    <div class="app-main-viewport">    
+        <!-- HOME STAGE -->
+        <div class="viewport-stage active" id="stage-home">    
+            <div class="streak-container" style="width:100%; background:var(--bg-card); border:1px solid var(--border-line); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">    
+                <div class="streak-header-row">    
+                    <span class="streak-title" style="font-size:0.75rem; font-weight:700; color:var(--text-gold);">📆 Daily Strike</span>    
+                    <button class="streak-claim-btn" id="executeDailyStreakClaimTrigger">Claim</button>    
+                </div>    
+                <div class="streak-grid" id="dailyStreakGridNode">    
+                    <div class="streak-day-box" id="sd-1"><span>🔥 D1</span><span>+100</span></div>    
+                    <div class="streak-day-box" id="sd-2"><span>🔥 D2</span><span>+200</span></div>    
+                    <div class="streak-day-box" id="sd-3"><span>🔥 D3</span><span>+300</span></div>    
+                    <div class="streak-day-box" id="sd-4"><span>🔥 D4</span><span>+400</span></div>    
+                    <div class="streak-day-box" id="sd-5"><span>🔥 D5</span><span>+500</span></div>    
+                    <div class="streak-day-box" id="sd-6"><span>🔥 D6</span><span>+600</span></div>    
+                    <div class="streak-day-box" id="sd-7"><span>💎 D7</span><span>🔑 Key</span></div>    
+                </div>    
+            </div>    
+            <div class="balance-hero-panel">    
+                <div class="hero-crypto-amount id-live-coins" id="heroCoinsDisplay">0</div>    
+                <div class="hero-crypto-label">$FOX Tokens</div>    
+            </div>    
+            <div class="mining-click-shell" id="foxMiningCoreTarget">    
+                <div class="ring ring1"></div><div class="ring ring2"></div>    
+                <div class="pulse-wave-layer" id="pulseWaveFx"></div>
+                <div class="fox-layer-wrapper" id="foxAvatarWrapperFrame">    
+                    <img src="fox.png" class="premium-fox-avatar-asset" id="foxAvatarImageNode" onerror="handleImageError(this)">    
+                </div>    
+            </div>    
+            <div class="click-action-descriptor" id="botStatusIndicator">🔥 Multi-Tap Core Active ⚡</div>    
+        </div>    
+
+        <!-- SPIN WHEEL STAGE -->
+        <div class="viewport-stage" id="stage-spin">    
+            <div class="wheel-selection-header">    
+                <div class="selection-toggle-pill active" id="toggleNormalWheel">Normal Wheel</div>    
+                <div class="selection-toggle-pill" id="togglePremiumWheel">💎 Premium</div>    
+            </div>    
+            <div class="premium-balance-container" id="premiumBalanceContainer" style="display:none;">    
+                <div class="premium-balance-badge">💎 Balance: $<span id="liveRenderPremiumDollar">0.00</span></div>    
+                <div class="premium-withdraw-row">    
+                    <button class="premium-action-btn" id="swapPremiumToCoinsTrigger">Swap to Coins</button>    
+                    <button class="premium-action-btn" id="cashoutMainnetTrigger">TON Cashout</button>    
+                </div>    
+            </div>    
+            <div class="physical-wheel-chassis">    
+                <div class="wheel-outer-rim-glow"></div><div class="wheel-top-pointer-pin"></div>    
+                <div class="wheel-center-hub-cap"><img src="fox.png" class="mini-hub-fox-img" id="wheelHubCenterAvatar" onerror="handleImageError(this)"></div>    
+                <div class="wheel-core-canvas" id="mechanicalWheelCanvas" style="transform: rotate(0deg);">    
+                    <div class="wheel-label r1"><span></span></div><div class="wheel-label r2"><span></span></div>    
+                    <div class="wheel-label r3"><span></span></div><div class="wheel-label r4"><span></span></div>    
+                    <div class="wheel-label r5"><span></span></div><div class="wheel-label r6"><span></span></div>    
+                    <div class="wheel-label r7"><span></span></div><div class="wheel-label r8"><span></span></div>    
+                </div>    
+            </div>    
+            <div style="margin-bottom:12px; font-weight:700; color:var(--text-gold); font-size: 0.9rem;">Spins Left: <span id="renderAvailableSpinsText">15</span></div>    
+            <button class="macro-launch-btn" id="executeWheelSpinTrigger">Launch Spin</button>    
+        </div>    
+
+        <!-- TASKS STAGE -->
+        <div class="viewport-stage" id="stage-tasks">    
+            <div class="tasks-vertical-stack" id="renderDynamicTaskInjectorList" style="width:100%; display:flex; flex-direction:column; gap:8px;"></div>    
+            <div class="referral-card">    
+                <div class="ref-header" style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800;"><span>👥 Invite Pipeline</span><span style="color:var(--text-gold);">+5,000 / Ref</span></div>    
+                <div class="ref-counter-row">
+                    <div class="ref-counter-box"><div>Friends</div><div id="statsReferralCountDisplay">0</div></div>
+                    <div class="ref-counter-box"><div>Earned</div><div id="statsReferralIncomeDisplay">0</div></div>
+                </div>
+                <div class="ref-box">    
+                    <span class="ref-link-text" id="renderReferralLinkNode" style="font-size:0.65rem; word-break:break-all;">Compiling address...</span>    
+                    <button class="ref-copy-btn" onclick="copyReferralLinkToClipboard()">Copy</button>    
+                </div>    
+            </div>    
+        </div>
+
+        <!-- UPGRADE / SKIN SHOP STAGE -->
+        <div class="viewport-stage" id="stage-shop">
+            <div class="dashboard-section-title">🚀 Core Performance Matrix</div>
+            <div class="upgrades-horizontal-grid">
+                <div class="upgrade-action-card">
+                    <div class="upgrade-card-meta">
+                        <span class="upgrade-title">Multi-Tap</span>
+                        <span class="upgrade-subtext" id="hudTapLevelDisplay">Lv 1 (+1/Tap)</span>
+                    </div>
+                    <div class="upgrade-cost-row">
+                        <span class="upgrade-cost-tag" id="hudTapCostDisplay">1,000</span>
+                        <button class="upgrade-buy-button" id="triggerTapUpgradeBtn">Buy</button>
+                    </div>
+                </div>
+                <div class="upgrade-action-card">
+                    <div class="upgrade-card-meta">
+                        <span class="upgrade-title">Auto-Miner</span>
+                        <span class="upgrade-subtext" id="hudAutoMineLevelDisplay">Lv 0 (Off)</span>
+                    </div>
+                    <div class="upgrade-cost-row">
+                        <span class="upgrade-cost-tag" id="hudAutoMineCostDisplay">5,000</span>
+                        <button class="upgrade-buy-button" id="triggerAutoMineUpgradeBtn">Buy</button>
+                    </div>
+                </div>
+                <div class="upgrade-action-card">
+                    <div class="upgrade-card-meta">
+                        <span class="upgrade-title">Energy Max</span>
+                        <span class="upgrade-subtext" id="hudEnergyLimitDisplay">100 Cap</span>
+                    </div>
+                    <div class="upgrade-cost-row">
+                        <span class="upgrade-cost-tag" id="hudEnergyCostDisplay">2,500</span>
+                        <button class="upgrade-buy-button" id="triggerEnergyUpgradeBtn">Buy</button>
+                    </div>
+                </div>
+                <div class="upgrade-action-card">
+                    <div class="upgrade-card-meta">
+                        <span class="upgrade-title">Premium Key Shop</span>
+                        <span class="upgrade-subtext">Liquidation Vault</span>
+                    </div>
+                    <div class="upgrade-cost-row">
+                        <span class="upgrade-cost-tag">50,000 🪙</span>
+                        <button class="upgrade-buy-button" id="triggerExchangeCoinToKeyBtn" style="border-color:var(--text-gold)">Buy 1🔑</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section-title">🏆 Core Milestones</div>
+            <div class="scannable-item-list" id="achievementsContainerView"></div>
+
+            <div class="dashboard-section-title">🎨 Identity Cyber Skins</div>
+            <div class="scannable-item-list" id="skinsContainerView"></div>
+        </div>
+
+        <!-- LEADERBOARD STAGE -->
+        <div class="viewport-stage" id="stage-leaderboard">
+            <div class="dashboard-section-title">🏅 Live Protocol Ranks</div>
+            <div class="leaderboard-container-mesh" id="leaderboardDynamicContainer"></div>
+        </div>
+    </div>    
+
+    <div class="global-dock-nav">    
+        <div class="dock-action-item active" onclick="activateTargetTab('home', this)">    
+            <span class="nav-icon">🏠</span><span>Home</span>    
+        </div>    
+        <div class="dock-action-item" onclick="activateTargetTab('spin', this)">    
+            <span class="nav-icon">🎰</span><span>Spin</span>    
+        </div>    
+        <div class="dock-action-item" onclick="activateTargetTab('tasks', this)">    
+            <span class="nav-icon">📋</span><span>Tasks</span>    
+        </div>    
+        <div class="dock-action-item" onclick="activateTargetTab('shop', this)">    
+            <span class="nav-icon">🚀</span><span>Shop</span>    
+        </div>
+        <div class="dock-action-item" onclick="activateTargetTab('leaderboard', this)">    
+            <span class="nav-icon">🏆</span><span>Rank</span>    
+        </div>
+    </div>    
 </div>    
 
-<div class="app-main-viewport">    
-    <div class="viewport-stage active" id="stage-home">    
-        <div class="streak-container">    
-            <div class="streak-header-row">    
-                <span class="streak-title">📆 Daily Strike</span>    
-                <button class="streak-claim-btn" id="executeDailyStreakClaimTrigger">Claim</button>    
-            </div>    
-            <div class="streak-grid" id="dailyStreakGridNode">    
-                <div class="streak-day-box" id="sd-1"><span>D1</span><span>+100</span></div>    
-                <div class="streak-day-box" id="sd-2"><span>D2</span><span>+200</span></div>    
-                <div class="streak-day-box" id="sd-3"><span>D3</span><span>+300</span></div>    
-                <div class="streak-day-box" id="sd-4"><span>D4</span><span>+400</span></div>    
-                <div class="streak-day-box" id="sd-5"><span>D5</span><span>+500</span></div>    
-                <div class="streak-day-box" id="sd-6"><span>D6</span><span>+600</span></div>    
-                <div class="streak-day-box" id="sd-7"><span>D7</span><span>🔑 Key</span></div>    
-            </div>    
-        </div>    
-        <div class="balance-hero-panel">    
-            <div class="hero-crypto-amount live-coins">0</div>    
-            <div class="hero-crypto-label">$FOX Tokens</div>    
-        </div>    
-        <div class="mining-click-shell" id="foxMiningCoreTarget">    
-            <div class="ring ring1"></div><div class="ring ring2"></div>    
-            <div class="fox-layer-wrapper"><img src="fox.png" class="premium-fox-avatar-asset" onerror="handleImageError(this)"></div>    
-        </div>    
-        <div class="click-action-descriptor" id="botStatusIndicator">🔥 Rapid Tap Core Running ⚡</div>    
-    </div>    
-
-    <div class="viewport-stage" id="stage-spin">    
-        <div class="wheel-selection-header">    
-            <div class="selection-toggle-pill active" id="toggleNormalWheel">Normal Wheel</div>    
-            <div class="selection-toggle-pill" id="togglePremiumWheel">💎 Premium</div>    
-        </div>    
-        <div class="premium-balance-container" id="premiumBalanceContainer" style="display:none;">    
-            <div class="premium-balance-badge">💎 Balance: $<span id="liveRenderPremiumDollar">0.00</span></div>    
-            <div class="premium-withdraw-row">    
-                <button class="premium-action-btn" id="swapPremiumToCoinsTrigger">Swap to Coins</button>    
-                <button class="premium-action-btn" id="cashoutMainnetTrigger">TON Cashout</button>    
-            </div>    
-        </div>    
-        <div class="physical-wheel-chassis">    
-            <div class="wheel-outer-rim-glow"></div><div class="wheel-top-pointer-pin"></div>    
-            <div class="wheel-center-hub-cap"><img src="fox.png" class="mini-hub-fox-img" onerror="handleImageError(this)"></div>    
-            <div class="wheel-core-canvas" id="mechanicalWheelCanvas" style="transform: rotate(0deg);">    
-                <div class="wheel-label r1"></div><div class="wheel-label r2"></div><div class="wheel-label r3"></div><div class="wheel-label r4"></div>    
-                <div class="wheel-label r5"></div><div class="wheel-label r6"></div><div class="wheel-label r7"></div><div class="wheel-label r8"></div>    
-            </div>    
-        </div>    
-        <div style="margin-bottom:12px; font-weight:700; color:var(--text-gold);">Spins Left: <span id="renderAvailableSpinsText">15</span></div>    
-        <button class="macro-launch-btn" id="executeWheelSpinTrigger">Launch Spin</button>    
-    </div>    
-
-    <div class="viewport-stage" id="stage-tasks">    
-        <div class="tasks-vertical-stack" id="renderDynamicTaskInjectorList">    
-            </div>    
-        <div class="referral-card">    
-            <div class="ref-header"><span>👥 Invite Pipeline</span><span style="color:var(--text-gold);">+5,000 / Ref</span></div>    
-            <div class="ref-box">    
-                <span class="ref-link-text" id="renderReferralLinkNode">Compiling address...</span>    
-                <button class="ref-copy-btn" onclick="copyReferralLinkToClipboard()">Copy Link</button>    
-            </div>    
-        </div>    
-    </div>    
-</div>    
-
-<div class="global-dock-nav">    
-    <div class="dock-action-item active" onclick="activateTargetTab('home', this)"><span>Home</span></div>    
-    <div class="dock-action-item" onclick="activateTargetTab('spin', this)"><span>Spin</span></div>    
-    <div class="dock-action-item" onclick="activateTargetTab('tasks', this)"><span>Tasks</span></div>    
-</div>
-
-</div>    <div class="modal-blur-overlay" id="systemGlobalModalOverlay">    
+<div class="modal-blur-overlay" id="systemGlobalModalOverlay">    
     <div class="modal-dialog-box">    
         <h3 class="modal-dialog-title" id="modalViewTitle">Security Network Alert</h3>    
         <p class="modal-dialog-body" id="modalViewMessage">Awaiting confirmation...</p>    
@@ -208,9 +347,11 @@
             <button class="modal-btn confirm" id="modalConfirmBtn" style="display:none;">Verify</button>    
         </div>    
     </div>    
-</div>    <script type="module">    
+</div>    
+
+<script type="module">    
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";    
-    import { getDatabase, ref, update, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";    
+    import { getDatabase, ref, update, get, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";    
   
     const firebaseConfig = {    
         apiKey: "AIzaSyA2aFc2uxZr0eOLQgyxHUL5bRtg8I1iYUs",    
@@ -226,12 +367,11 @@
     try {    
         const app = initializeApp(firebaseConfig);    
         db = getDatabase(app);    
-        document.getElementById('cloudStatusNode').textContent = "Mainnet Synced";    
-    } catch(e) { console.error("Firebase Sync Fallback active:", e); }    
+    } catch(e) { console.error("Firebase Fallback standard active:", e); }    
   
     (function() {    
         const DOM_CACHE = {    
-            liveCoinsElements: document.querySelectorAll('.live-coins'),    
+            liveCoinsElements: document.querySelectorAll('.id-live-coins'),    
             livePowerElement: document.getElementById('liveRenderPower'),    
             liveKeysElement: document.getElementById('liveRenderKeys'),    
             availableSpinsText: document.getElementById('renderAvailableSpinsText'),    
@@ -239,6 +379,8 @@
             usernameDisplay: document.getElementById('renderUsernameDisplay'),    
             referralLinkNode: document.getElementById('renderReferralLinkNode'),    
             miningCoreTarget: document.getElementById('foxMiningCoreTarget'),    
+            foxAvatarImage: document.getElementById('foxAvatarImageNode'),    
+            powerFillBar: document.getElementById('dynamicPowerFillNode'),    
             botStatusIndicator: document.getElementById('botStatusIndicator'),    
             wheelSpinTrigger: document.getElementById('executeWheelSpinTrigger'),    
             wheelMechanicalCanvas: document.getElementById('mechanicalWheelCanvas'),    
@@ -251,16 +393,52 @@
             modalCloseBtn: document.getElementById('modalCloseBtn'),    
             modalConfirmBtn: document.getElementById('modalConfirmBtn'),    
             taskContainerBlock: document.getElementById('renderDynamicTaskInjectorList'),    
-            wheelLabels: document.querySelectorAll('.wheel-label')    
+            wheelLabels: document.querySelectorAll('.wheel-label span'),
+            
+            // New V7 elements
+            passiveIncomeRateDisplay: document.getElementById('livePassiveIncomeRateDisplay'),
+            userRankBadge: document.getElementById('userDynamicRankBadge'),
+            referralCountDisplay: document.getElementById('statsReferralCountDisplay'),
+            referralIncomeDisplay: document.getElementById('statsReferralIncomeDisplay'),
+            tapLevelDisplay: document.getElementById('hudTapLevelDisplay'),
+            tapCostDisplay: document.getElementById('hudTapCostDisplay'),
+            autoMineLevelDisplay: document.getElementById('hudAutoMineLevelDisplay'),
+            autoMineCostDisplay: document.getElementById('hudAutoMineCostDisplay'),
+            energyLimitDisplay: document.getElementById('hudEnergyLimitDisplay'),
+            energyCostDisplay: document.getElementById('hudEnergyCostDisplay'),
+            achievementsContainer: document.getElementById('achievementsContainerView'),
+            skinsContainer: document.getElementById('skinsContainerView'),
+            leaderboardContainer: document.getElementById('leaderboardDynamicContainer'),
+            triggerTapUpgradeBtn: document.getElementById('triggerTapUpgradeBtn'),
+            triggerAutoMineUpgradeBtn: document.getElementById('triggerAutoMineUpgradeBtn'),
+            triggerEnergyUpgradeBtn: document.getElementById('triggerEnergyUpgradeBtn'),
+            triggerExchangeCoinToKeyBtn: document.getElementById('triggerExchangeCoinToKeyBtn'),
+            pulseWaveFx: document.getElementById('pulseWaveFx'),
+            foxAvatarWrapperFrame: document.getElementById('foxAvatarWrapperFrame'),
+            hudGlobalMiniAvatar: document.getElementById('hudGlobalMiniAvatar'),
+            wheelHubCenterAvatar: document.getElementById('wheelHubCenterAvatar')
         };    
   
-        // RESTRUCTURED DATA-DRIVEN TASK PIPELINE    
         const TASKS_REGISTRY = [    
             { id: "t1", title: "Join Telegram Channel", bounty: 1000, targetUrl: "https://t.me" },    
             { id: "t2", title: "Follow Platform X", bounty: 2000, targetUrl: "https://x.com" }    
         ];    
+
+        const SKINS_REGISTRY = [
+            { id: "skin_default", name: "Default Fox", color: "#111217", border: "rgba(255,255,255,0.04)" },
+            { id: "skin_gold", name: "Gold Fox Fox", color: "radial-gradient(circle, #ffe600 0%, #7c5a00 100%)", border: "#ffb700" },
+            { id: "skin_cyber", name: "Cyber Fox Pro", color: "#061720", border: "#00f3ff" },
+            { id: "skin_neon", name: "Neon Matrix Fox", color: "#1e052d", border: "#b000ff" },
+            { id: "skin_legend", name: "Legend Alpha Fox", color: "radial-gradient(circle, #ff2a00 0%, #110200 100%)", border: "#ff5500" }
+        ];
+
+        const ACHIEVEMENTS_REGISTRY = [
+            { id: "ac_100", title: "Novice Clicker", target: 100, rewardType: "coins", rewardVal: 500, desc: "Log 100 valid manual taps" },
+            { id: "ac_1000", title: "Cyber Commando", target: 1000, rewardType: "coins", rewardVal: 5000, desc: "Log 1,000 valid manual taps" },
+            { id: "ac_10000", title: "Alpha Hyper Fox", target: 10000, rewardType: "keys", rewardVal: 1, desc: "Log 10,000 valid manual taps" }
+        ];
   
-        const RENDER_DOM_STATE_CACHE = { coins: -1, power: -1, keys: -1, availableSpins: -1, premiumDollar: -1 };    
+        let RENDER_DOM_STATE_CACHE = { coins: 0, power: -1, keys: -1, availableSpins: -1, premiumDollar: -1 };    
   
         let telegramUserId = "usr_fallback_dev_node";    
         let telegramUserName = "Sandbox_User";    
@@ -279,23 +457,49 @@
   
         const GAME_STATE_ENGINE = (function() {    
             const coreInstanceData = {    
-                coins: 0, power: 100, keys: 0, premiumDollar: 0.00,    
+                coins: 0, power: 100, maxPower: 100, keys: 0, premiumDollar: 0.00,    
                 availableSpins: 15, isPremiumMode: false, walletConnected: false,    
-                completedTasks: [], lastSystemTimestampCheckpoint: Date.now(),    
-                lastStreakClaimTimestamp: 0, streakDayCount: 0    
+                connectedWalletAddress: "Disconnected", completedTasks: [],     
+                lastSystemTimestampCheckpoint: Date.now(),    
+                lastStreakClaimTimestamp: 0, streakDayCount: 0,
+                // V7 Added Parameters
+                tapLevel: 1, autoMineLevel: 0, totalManualTaps: 0,
+                activeSkinId: "skin_default", completedAchievements: [],
+                referralCount: 0, referralEarnings: 0
             };    
+            
+            let shadowStateHash = CryptoJS.SHA256(JSON.stringify(coreInstanceData)).toString();    
+            
             return {    
                 get: function(key) { return coreInstanceData[key]; },    
-                set: function(key, val) { coreInstanceData[key] = val; return val; },    
+                set: function(key, val) {     
+                    coreInstanceData[key] = val;     
+                    shadowStateHash = CryptoJS.SHA256(JSON.stringify(coreInstanceData)).toString();    
+                    return val; 
+                },    
                 exportState: function() { return { ...coreInstanceData }; },    
-                importState: function(obj) { Object.assign(coreInstanceData, obj); }    
+                importState: function(obj) {     
+                    Object.assign(coreInstanceData, obj);
+                    if(!coreInstanceData.maxPower) coreInstanceData.maxPower = 100;
+                    if(!coreInstanceData.tapLevel) coreInstanceData.tapLevel = 1;
+                    if(!coreInstanceData.autoMineLevel) coreInstanceData.autoMineLevel = 0;
+                    if(!coreInstanceData.totalManualTaps) coreInstanceData.totalManualTaps = 0;
+                    if(!coreInstanceData.activeSkinId) coreInstanceData.activeSkinId = "skin_default";
+                    if(!coreInstanceData.completedAchievements) coreInstanceData.completedAchievements = [];
+                    shadowStateHash = CryptoJS.SHA256(JSON.stringify(coreInstanceData)).toString();    
+                },    
+                verifyIntegrity: function() {    
+                    const currentHash = CryptoJS.SHA256(JSON.stringify(coreInstanceData)).toString();    
+                    return currentHash === shadowStateHash;    
+                }    
             };    
         })();    
   
-        const sectorRewardsNormal = [150, 1200, 800, 300, 50, 2500, 1000, 500];    
-        const premiumDollarRewards = [0.01, 0.05, 0.10, 0.25, 0.50, 1.00, 2.00, 5.00];    
-        const probabilityWeightsNormal = [0.20, 0.05, 0.08, 0.15, 0.30, 0.02, 0.05, 0.15];    
-        const probabilityWeightsPremium = [0.35, 0.25, 0.15, 0.12, 0.07, 0.04, 0.02, 0.01];    
+        // Wheel Data Models (Sector 3 adjusted to "BOX", sectors 2, 6, 8 adjusted to Multipliers)
+        const sectorRewardsNormal = [150, "x2", 800, "BOX", 50, "x5", 1000, "x10"];    
+        const premiumDollarRewards = [0.05, "x2", 0.25, "BOX", 0.10, "x5", 1.00, "x10"];    
+        const probabilityWeightsNormal = [0.25, 0.12, 0.15, 0.08, 0.20, 0.05, 0.12, 0.03];    
+        const probabilityWeightsPremium = [0.35, 0.15, 0.18, 0.07, 0.12, 0.06, 0.05, 0.02];    
   
         let tapTimestampsRollingQueue = [];    
         let activeTapInputLocked = false;    
@@ -307,25 +511,26 @@
         function saveToEncryptedLocalStorage() {    
             try {    
                 const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(GAME_STATE_ENGINE.exportState()), SYSTEM_RUN_SALT).toString();    
-                localStorage.setItem(`cf_secure_v66_${telegramUserId}`, ciphertext);    
+                localStorage.setItem(`cf_secure_v70_${telegramUserId}`, ciphertext);    
             } catch(e) {}    
         }    
   
         function dispatchCloudSyncBatch() {    
+            if(!GAME_STATE_ENGINE.verifyIntegrity()) {    
+                initializeGameEnginePipeline();    
+                return;    
+            }    
             saveToEncryptedLocalStorage();    
-            if (!db) return;    
-            if (cloudSyncDebounceTimerId) clearTimeout(cloudSyncDebounceTimerId);    
-  
-            cloudSyncDebounceTimerId = setTimeout(() => {    
+            if (db) {    
                 const targetPath = ref(db, 'players/' + telegramUserId);    
                 const payloadSnapshot = GAME_STATE_ENGINE.exportState();    
                 payloadSnapshot.lastSystemTimestampCheckpoint = Date.now();    
                 update(targetPath, payloadSnapshot).catch(() => {});    
-            }, 1500);    
+            }    
         }    
   
         async function initializeGameEnginePipeline() {    
-            const secureEncryptedOfflineCache = localStorage.getItem(`cf_secure_v66_${telegramUserId}`);    
+            const secureEncryptedOfflineCache = localStorage.getItem(`cf_secure_v70_${telegramUserId}`);    
             if (secureEncryptedOfflineCache) {    
                 try {    
                     const cleanDecryptedString = CryptoJS.AES.decrypt(secureEncryptedOfflineCache, SYSTEM_RUN_SALT).toString(CryptoJS.enc.Utf8);    
@@ -345,9 +550,19 @@
                 
             const recoveredPowerUnits = Math.floor(systemDeltaElapsedTimeSeconds / 3);    
             if (recoveredPowerUnits > 0) {    
-                GAME_STATE_ENGINE.set('power', Math.min(100, GAME_STATE_ENGINE.get('power') + recoveredPowerUnits));    
+                GAME_STATE_ENGINE.set('power', Math.min(GAME_STATE_ENGINE.get('maxPower'), GAME_STATE_ENGINE.get('power') + recoveredPowerUnits));    
             }    
   
+            // Process Auto Mine passive generation offline delta
+            const autoMineRate = getAutoMineRate(GAME_STATE_ENGINE.get('autoMineLevel'));
+            if(autoMineRate > 0 && systemDeltaElapsedTimeSeconds > 0) {
+                const passiveOfflineGain = Math.floor(systemDeltaElapsedTimeSeconds * autoMineRate);
+                if(passiveOfflineGain > 0) {
+                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + passiveOfflineGain);
+                    setTimeout(() => triggerModal("Passive Income", `Auto Miner farmed +${passiveOfflineGain.toLocaleString()} coins while you were away.`, "CLOSE_ONLY"), 800);
+                }
+            }
+
             const systemDeltaElapsedHours = Math.floor(systemDeltaElapsedTimeSeconds / 3600);    
             if (systemDeltaElapsedHours > 0) {    
                 GAME_STATE_ENGINE.set('availableSpins', Math.min(50, GAME_STATE_ENGINE.get('availableSpins') + (systemDeltaElapsedHours * 5)));    
@@ -355,29 +570,63 @@
   
             GAME_STATE_ENGINE.set('lastSystemTimestampCheckpoint', currentSystemTimeMs);    
   
-            // CRITICAL SECURITY FIX: Referral System Signature Verification Hooked to prevent local spoofing    
             const runtimeSessionSeed = telegramUserId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 911);    
             const localizedSignature = CryptoJS.HmacSHA256(`${telegramUserId}:${INTERNAL_HARDENED_APP_SECRET}`, "CF_SALT_" + runtimeSessionSeed).toString();    
             DOM_CACHE.referralLinkNode.textContent = `${window.location.origin}${window.location.pathname}?ref=${telegramUserId}&sig=${localizedSignature}`;    
   
-            // Note: In secure environment, this must match Firebase rules verification schema    
             const URLQueryParameters = new URLSearchParams(window.location.search);    
             if (URLQueryParameters.has('ref') && URLQueryParameters.has('sig')) {    
                 const targetInviter = URLQueryParameters.get('ref').trim();    
-                if (targetInviter !== telegramUserId) {    
-                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + 2000);    
-                    setTimeout(() => triggerModal("Pipeline Linked", "Authentic network referral tracked via backend protocol.", "CLOSE_ONLY"), 500);    
+                if (targetInviter !== telegramUserId && db) {    
+                    const claimRef = ref(db, `referrals_ledger/${targetInviter}/${telegramUserId}`);    
+                    const checkClaim = await get(claimRef);    
+                    if(!checkClaim.exists()) {    
+                        await set(claimRef, { claimedAt: Date.now(), processed: false });    
+                        GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + 2000);    
+                        dispatchCloudSyncBatch();    
+                        setTimeout(() => triggerModal("Pipeline Linked", "Referral tracked. +2,000 $FOX pending verification.", "CLOSE_ONLY"), 500);    
+                    }    
                 }    
             }    
   
             buildDynamicTaskMatrixUI();    
             updateWheelLabelsUI();    
             evaluateStreakVisualMatrix(false);    
+            applyIdentitySkin(GAME_STATE_ENGINE.get('activeSkinId'), false);
+            buildShopViewsMatrix();
+            buildLeaderboardMockView();
+
+            const initialCoins = Math.floor(GAME_STATE_ENGINE.get('coins'));    
+            animateCounter(0, initialCoins);    
+            RENDER_DOM_STATE_CACHE.coins = initialCoins;    
+  
             renderSystemHUD();    
             startOptimizedDeltaRegenClock();    
         }    
   
-        // TASK SYSTEM CLEANUP: Data -> Render UI Logic Flow Architecture    
+        function getAutoMineRate(lvl) {
+            if(lvl === 1) return 1;
+            if(lvl === 2) return 5;
+            if(lvl === 3) return 20;
+            return 0;
+        }
+
+        function getTapIncrementValue(lvl) {
+            if(lvl === 1) return 1;
+            if(lvl === 2) return 2;
+            if(lvl === 3) return 5;
+            if(lvl === 4) return 10;
+            return 1;
+        }
+
+        function getUserRankString(coins) {
+            if (coins >= 500000) return "Legend Fox";
+            if (coins >= 100000) return "Diamond Fox";
+            if (coins >= 25000) return "Gold Fox";
+            if (coins >= 5000) return "Silver Fox";
+            return "Bronze Fox";
+        }
+
         function buildDynamicTaskMatrixUI() {    
             DOM_CACHE.taskContainerBlock.innerHTML = '';    
             TASKS_REGISTRY.forEach(task => {    
@@ -398,23 +647,41 @@
                 `;    
                 DOM_CACHE.taskContainerBlock.appendChild(row);    
   
-                // Direct Isolated Event Mappings    
                 document.getElementById(`link-btn-${task.id}`).addEventListener('click', () => handleSecureTaskLink(task.id, task.targetUrl));    
                 document.getElementById(`verify-btn-${task.id}`).addEventListener('click', () => verifyTaskChallenge(task.id, task.bounty));    
             });    
+        }    
+  
+        function animateCounter(start, end) {    
+            if (start === end) return;    
+            const range = end - start;    
+            const duration = 400;     
+            let startTime = null;    
+  
+            function step(timestamp) {    
+                if (!startTime) startTime = timestamp;    
+                const progress = Math.min((timestamp - startTime) / duration, 1);    
+                const currentVal = Math.floor(start + progress * range);    
+                DOM_CACHE.liveCoinsElements.forEach(el => el.textContent = currentVal.toLocaleString());    
+                if (progress < 1) window.requestAnimationFrame(step);    
+                else DOM_CACHE.liveCoinsElements.forEach(el => el.textContent = end.toLocaleString());    
+            }    
+            window.requestAnimationFrame(step);    
         }    
   
         function renderSystemHUD() {    
             window.requestAnimationFrame(() => {    
                 const currentCoins = Math.floor(GAME_STATE_ENGINE.get('coins'));    
                 if(RENDER_DOM_STATE_CACHE.coins !== currentCoins) {    
-                    DOM_CACHE.liveCoinsElements.forEach(el => el.textContent = currentCoins.toLocaleString());    
+                    animateCounter(RENDER_DOM_STATE_CACHE.coins, currentCoins);    
                     RENDER_DOM_STATE_CACHE.coins = currentCoins;    
                 }    
   
                 const currentPower = Math.floor(GAME_STATE_ENGINE.get('power'));    
+                const maxPower = GAME_STATE_ENGINE.get('maxPower');
                 if(RENDER_DOM_STATE_CACHE.power !== currentPower) {    
-                    DOM_CACHE.livePowerElement.textContent = currentPower + "/100";    
+                    DOM_CACHE.livePowerElement.textContent = `${currentPower}/${maxPower}`;    
+                    DOM_CACHE.powerFillBar.style.width = `${(currentPower / maxPower) * 100}%`;    
                     RENDER_DOM_STATE_CACHE.power = currentPower;    
                 }    
   
@@ -435,6 +702,12 @@
                     DOM_CACHE.livePremiumDollar.textContent = currentPremium.toFixed(2);    
                     RENDER_DOM_STATE_CACHE.premiumDollar = currentPremium;    
                 }    
+
+                // Sync V7 HUD values
+                DOM_CACHE.userRankBadge.textContent = getUserRankString(currentCoins);
+                DOM_CACHE.passiveIncomeRateDisplay.textContent = `Auto Mine: ${getAutoMineRate(GAME_STATE_ENGINE.get('autoMineLevel'))}/sec`;
+                DOM_CACHE.referralCountDisplay.textContent = GAME_STATE_ENGINE.get('referralCount');
+                DOM_CACHE.referralIncomeDisplay.textContent = GAME_STATE_ENGINE.get('referralEarnings').toLocaleString();
   
                 const tasksBuffer = GAME_STATE_ENGINE.get('completedTasks') || [];    
                 tasksBuffer.forEach(id => {    
@@ -451,40 +724,61 @@
                 e.preventDefault();    
                 if (activeTapInputLocked) return;    
   
+                // Juice Up Mechanics: Pulse and Tilt Animation
+                DOM_CACHE.foxAvatarWrapperFrame.style.transform = "scale(0.92) rotate(-2deg)";    
+                DOM_CACHE.pulseWaveFx.style.animation = "none";
+                setTimeout(() => { 
+                    DOM_CACHE.foxAvatarWrapperFrame.style.transform = "scale(1.1)"; 
+                    DOM_CACHE.pulseWaveFx.style.animation = "pulseBlow 0.4s ease-out";
+                }, 60);    
+  
                 const currentTimestampDelta = Date.now();    
                 tapTimestampsRollingQueue.push(currentTimestampDelta);    
                 tapTimestampsRollingQueue = tapTimestampsRollingQueue.filter(t => currentTimestampDelta - t < 1000);    
   
-                if (tapTimestampsRollingQueue.length > 15) { triggerStrictMacroLockout(); return; }    
-  
-                if (tapTimestampsRollingQueue.length > 5) {    
-                    let intervalsList = [];    
-                    let identicalIntervalMatchesCount = 0;    
-                    for (let i = 1; i < tapTimestampsRollingQueue.length; i++) {    
-                        const absoluteDiff = tapTimestampsRollingQueue[i] - tapTimestampsRollingQueue[i-1];    
-                        intervalsList.push(absoluteDiff);    
-                        if (i > 1 && Math.abs(absoluteDiff - intervalsList[i-2]) === 0) identicalIntervalMatchesCount++;    
-                    }    
-                    if (identicalIntervalMatchesCount >= 3 || intervalsList.reduce((acc, val) => acc + Math.abs(val - intervalsList[0]), 0) / intervalsList.length < 1.5) {    
-                        triggerStrictMacroLockout(); return;    
-                    }    
-                }    
+                if (tapTimestampsRollingQueue.length > 22) { triggerStrictMacroLockout(); return; }    
   
                 let currentPower = GAME_STATE_ENGINE.get('power');    
-                if (currentPower >= 1.0) {    
-                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + 1);    
-                    GAME_STATE_ENGINE.set('power', Math.max(0, currentPower - 1.0));    
+                const increment = getTapIncrementValue(GAME_STATE_ENGINE.get('tapLevel'));
+
+                if (currentPower >= increment) {    
+                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + increment);    
+                    GAME_STATE_ENGINE.set('power', Math.max(0, currentPower - increment));    
+                    
+                    const runningTaps = GAME_STATE_ENGINE.get('totalManualTaps') + 1;
+                    GAME_STATE_ENGINE.set('totalManualTaps', runningTaps);
+
+                    evaluateAchievementsPipeline(runningTaps);
                     renderSystemHUD();    
   
-                    // UX PERFORMANCE FIX: Faster Float Animation limits Layout shifts    
-                    if (totalActiveFloatingNodes < 5) {    
+                    // Particle Emission Engine
+                    if (totalActiveFloatingNodes < 15) {    
                         totalActiveFloatingNodes++;    
                         const rect = DOM_CACHE.miningCoreTarget.getBoundingClientRect();    
+                        const clickX = e.clientX - rect.left;
+                        const clickY = e.clientY - rect.top;
+
+                        // Text Float Node
                         const virtualNode = document.createElement('div');    
-                        virtualNode.className = 'floating-click-node'; virtualNode.textContent = '+1';    
-                        virtualNode.style.left = `${e.clientX - rect.left}px`; virtualNode.style.top = `${e.clientY - rect.top}px`;    
+                        virtualNode.className = 'floating-click-node'; virtualNode.textContent = `+${increment}`;    
+                        virtualNode.style.left = `${clickX + (Math.random() * 20 - 10)}px`;     
+                        virtualNode.style.top = `${clickY}px`;    
                         DOM_CACHE.miningCoreTarget.appendChild(virtualNode);    
-                        setTimeout(() => { virtualNode.remove(); totalActiveFloatingNodes--; }, 350);    
+                        setTimeout(() => { virtualNode.remove(); totalActiveFloatingNodes--; }, 680);    
+
+                        // Hamster Feel Burst Particles
+                        for(let i=0; i<4; i++) {
+                            const p = document.createElement('div');
+                            p.className = 'coin-particle-node';
+                            p.style.left = `${clickX}px`;
+                            p.style.top = `${clickY}px`;
+                            const angle = Math.random() * Math.PI * 2;
+                            const velocity = 40 + Math.random() * 50;
+                            p.style.setProperty('--x', `${Math.cos(angle) * velocity}px`);
+                            p.style.setProperty('--y', `${Math.sin(angle) * velocity}px`);
+                            DOM_CACHE.miningCoreTarget.appendChild(p);
+                            setTimeout(() => p.remove(), 580);
+                        }
                     }    
                     dispatchCloudSyncBatch();    
                 }    
@@ -494,18 +788,17 @@
         function triggerStrictMacroLockout() {    
             activeTapInputLocked = true;    
             DOM_CACHE.miningCoreTarget.classList.add('locked');    
-            DOM_CACHE.botStatusIndicator.textContent = "⚠️ Core Locked: Bot Activity Tracked.";    
+            DOM_CACHE.botStatusIndicator.textContent = "⚠️ Core Locked: Irregular Activity Tracker Blocked.";    
             DOM_CACHE.botStatusIndicator.style.color = "#ef4444";    
             setTimeout(() => {    
                 activeTapInputLocked = false;    
                 DOM_CACHE.miningCoreTarget.classList.remove('locked');    
-                DOM_CACHE.botStatusIndicator.textContent = "🔥 Rapid Tap Core Running ⚡";    
+                DOM_CACHE.botStatusIndicator.textContent = "🔥 Multi-Tap Core Active ⚡";    
                 DOM_CACHE.botStatusIndicator.style.color = "";    
                 tapTimestampsRollingQueue = [];    
-            }, 7000);    
+            }, 5000);    
         }    
   
-        // STREAK INDEX SHIFT BUG FIX    
         function evaluateStreakVisualMatrix(isUserActionClick = false) {    
             const now = Date.now();    
             const dayMs = 24 * 60 * 60 * 1000;    
@@ -530,7 +823,7 @@
                     triggerModal("🏆 Loop Finalized", "Day 7 milestone achieved! +1 Cryptographic Key granted.", "CLOSE_ONLY");    
                 } else {    
                     const rewards = [100, 200, 300, 400, 500, 600, 1000];    
-                    const reward = rewards[nextActiveDayIndex - 1]; // Shift Defended    
+                    const reward = rewards[nextActiveDayIndex - 1];    
                     GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + reward);    
                     triggerModal("📆 Verified Logged", `Day ${nextActiveDayIndex} clear. +${reward} Tokens credited.`, "CLOSE_ONLY");    
                 }    
@@ -556,7 +849,7 @@
             for (let i = 0; i < probabilityMatrixWeights.length; i++) {    
                 acc += probabilityMatrixWeights[i]; if (r <= acc) return i;    
             }    
-            return 4;    
+            return 0;    
         }    
   
         if (DOM_CACHE.wheelSpinTrigger) {    
@@ -574,31 +867,74 @@
                 renderSystemHUD();    
   
                 const targetIndex = parseWeightedMathematicalIndex(isPremium ? probabilityWeightsPremium : probabilityWeightsNormal);    
-                const arcWidth = 360 / 8;    
-                const targetedVectorRotationAngle = (360 - (targetIndex * arcWidth)) - (arcWidth / 2);    
+                const arcWidth = 45;    
+                const targetedVectorRotationAngle = (360 - (targetIndex * arcWidth)) - 22.5;    
                   
-                // ROTATION OVERFLOW FIX: Clamped using Modulo    
                 wheelDegrees = (wheelDegrees % 3600) + (5 * 360) + (targetedVectorRotationAngle - (wheelDegrees % 360));    
                     
-                DOM_CACHE.wheelMechanicalCanvas.style.transition = "transform 4.5s cubic-bezier(0.15, 0.85, 0.2, 1)";    
+                DOM_CACHE.wheelMechanicalCanvas.style.transition = "transform 4s cubic-bezier(0.15, 0.85, 0.2, 1)";    
                 DOM_CACHE.wheelMechanicalCanvas.style.transform = `rotate(${wheelDegrees}deg)`;    
   
                 setTimeout(() => {    
                     DOM_CACHE.wheelSpinTrigger.disabled = false;    
-                    if (isPremium) {    
-                        const payout = premiumDollarRewards[targetIndex];    
-                        GAME_STATE_ENGINE.set('premiumDollar', GAME_STATE_ENGINE.get('premiumDollar') + payout);    
-                        triggerModal("🎰 Premium Drop", `Matched asset: +$${payout.toFixed(2)} USD allocated.`, "CLOSE_ONLY");    
-                    } else {    
-                        const coinsPayout = sectorRewardsNormal[targetIndex];    
-                        GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + coinsPayout);    
-                        triggerModal("🎰 Core Drop", `Matched network distribution: +${coinsPayout} $FOX tokens.`, "CLOSE_ONLY");    
-                    }    
+                    const baseRawReward = isPremium ? premiumDollarRewards[targetIndex] : sectorRewardsNormal[targetIndex];    
+                    
+                    // Trigger Evaluation Matrix (Multiplier, Box, Asset Drops)
+                    handleWheelRewardDistribution(baseRawReward, isPremium);
+                    
                     dispatchCloudSyncBatch();    
                     renderSystemHUD();    
-                }, 4700);    
+                }, 4200);    
             });    
         }    
+
+        function handleWheelRewardDistribution(reward, isPremium) {
+            if(reward === "BOX") {
+                // Mystery Box Logic
+                const rolls = [
+                    { t: "coins", v: 100 }, { t: "coins", v: 500 }, { t: "coins", v: 1000 },
+                    { t: "keys", v: 1 }, { t: "spins", v: 1 }
+                ];
+                const drop = rolls[Math.floor(Math.random() * rolls.length)];
+                if(drop.t === "coins") {
+                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + drop.v);
+                    triggerModal("🎁 Mystery Box", `Box opened: Allocated +${drop.v} $FOX tokens!`, "CLOSE_ONLY");
+                } else if(drop.t === "keys") {
+                    GAME_STATE_ENGINE.set('keys', GAME_STATE_ENGINE.get('keys') + drop.v);
+                    triggerModal("🎁 Mystery Box", `Box opened: Received +1 Cryptographic Master Key!`, "CLOSE_ONLY");
+                } else {
+                    GAME_STATE_ENGINE.set('availableSpins', GAME_STATE_ENGINE.get('availableSpins') + drop.v);
+                    triggerModal("🎁 Mystery Box", `Box opened: Discovered +1 Bonus Wheel Spin Loop!`, "CLOSE_ONLY");
+                }
+                return;
+            }
+
+            if(typeof reward === 'string' && reward.startsWith('x')) {
+                // Multiplier Triggered
+                const factor = parseInt(reward.replace('x',''));
+                if(isPremium) {
+                    const fallbackPremiumBase = 0.10;
+                    const multPremium = fallbackPremiumBase * factor;
+                    GAME_STATE_ENGINE.set('premiumDollar', GAME_STATE_ENGINE.get('premiumDollar') + multPremium);
+                    triggerModal("🎰 Multiplier Blast", `Landed ${reward}! Multiplied premium value: +$${multPremium.toFixed(2)} USD.`, "CLOSE_ONLY");
+                } else {
+                    const fallbackCoinBase = 250;
+                    const multCoins = fallbackCoinBase * factor;
+                    GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + multCoins);
+                    triggerModal("🎰 Multiplier Blast", `Landed ${reward}! Multiplied normal pool: +${multCoins} $FOX.`, "CLOSE_ONLY");
+                }
+                return;
+            }
+
+            // Standard Numeric Allocation
+            if(isPremium) {
+                GAME_STATE_ENGINE.set('premiumDollar', GAME_STATE_ENGINE.get('premiumDollar') + reward);
+                triggerModal("🎰 Premium Allocation", `Asset dropped: +$${reward.toFixed(2)} USD allocated.`, "CLOSE_ONLY");
+            } else {
+                GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + reward);
+                triggerModal("🎰 Network Token Drop", `Asset dropped: +${reward} $FOX credited.`, "CLOSE_ONLY");
+            }
+        }
   
         function handleSecureTaskLink(taskId, url) {    
             const randomSeed = Math.floor(1000 + Math.random() * 9000);    
@@ -607,23 +943,20 @@
                 timestamp: Date.now()    
             };    
             window.open(url, '_blank');    
-            triggerModal("Operation Routing", `Task initiated. Open page for 10s. Code: ${randomSeed}`, "CLOSE_ONLY");    
+            triggerModal("Operation Routing", `Task initialized. Retain view window for 10s. Verification token code: ${randomSeed}`, "CLOSE_ONLY");    
         }    
   
         function verifyTaskChallenge(taskId, payoutCoins) {    
             const taskNode = secureTaskObfuscatedMap[taskId];    
             if (!taskNode) { triggerModal("Routing Fault", "Tracking link validation error.", "CLOSE_ONLY"); return; }    
-            if (Date.now() - taskNode.timestamp < 10000) { triggerModal("Timeout Engine Alert", "Validation pipeline locked. Wait 10 seconds.", "CLOSE_ONLY"); return; }    
+            if (Date.now() - taskNode.timestamp < 10000) { triggerModal("Timeout Alert", "Compliance timeline locked. Hold 10 seconds total.", "CLOSE_ONLY"); return; }    
   
-            // TASK RESTRUCTURE: Open confirmation state and switch event tracking onto confirming trigger button explicitly    
-            triggerModal("Task Verification Lock", "Enter token code provided during initiation to unlock rewards:", "INPUT_VERIFY_REQUIRED");    
+            triggerModal("Verification Pipeline", "Enter task authorization signature key code:", "INPUT_VERIFY_REQUIRED");    
   
-            // Clean previous bindings securely    
-            const pristineConfirmNode = DOM_CACHE.modalConfirmBtn.cloneNode(true);    
-            DOM_CACHE.modalConfirmBtn.parentNode.replaceChild(pristineConfirmNode, DOM_CACHE.modalConfirmBtn);    
-            DOM_CACHE.modalConfirmBtn = pristineConfirmNode;    
-  
-            DOM_CACHE.modalConfirmBtn.addEventListener('click', () => {    
+            const freshConfirmButtonNode = DOM_CACHE.modalConfirmBtn.cloneNode(true);    
+            DOM_CACHE.modalConfirmBtn.replaceWith(freshConfirmButtonNode);    
+            
+            freshConfirmButtonNode.addEventListener('click', () => {    
                 try {    
                     const cleanCode = CryptoJS.AES.decrypt(taskNode.challenge, SYSTEM_RUN_SALT).toString(CryptoJS.enc.Utf8);    
                     const input = DOM_CACHE.modalInputBox.value.trim();    
@@ -637,18 +970,182 @@
                             dispatchCloudSyncBatch();    
                             renderSystemHUD();    
                         }    
-                        triggerModal("Compliance Verified", "Reward matrix finalized.", "CLOSE_ONLY");    
+                        triggerModal("Compliance Verified", "System matrix accepted payload successfully.", "CLOSE_ONLY");    
                     } else {    
-                        triggerModal("Auth Error", "Signature verification challenge rejected.", "CLOSE_ONLY");    
+                        triggerModal("Signature Denied", "Challenge payload failed manual authenticity checks.", "CLOSE_ONLY");    
                     }    
                 } catch(e) { triggerModal("Security Fault", "Execution context tracking failure.", "CLOSE_ONLY"); }    
             }, { once: true });    
         }    
   
-        // High Precision Time Delta Game Loop Tracking (B) - Only one single unified RAF loop remains    
+        function evaluateAchievementsPipeline(taps) {
+            const unlockedList = GAME_STATE_ENGINE.get('completedAchievements') || [];
+            ACHIEVEMENTS_REGISTRY.forEach(ach => {
+                if(!unlockedList.includes(ach.id) && taps >= ach.target) {
+                    unlockedList.push(ach.id);
+                    GAME_STATE_ENGINE.set('completedAchievements', unlockedList);
+                    if(ach.rewardType === "coins") {
+                        GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + ach.rewardVal);
+                    } else {
+                        GAME_STATE_ENGINE.set('keys', GAME_STATE_ENGINE.get('keys') + ach.rewardVal);
+                    }
+                    setTimeout(() => triggerModal("🏆 Milestone Locked", `Unlocked achievement: ${ach.title}! Allocated rewards directly.`, "CLOSE_ONLY"), 600);
+                    buildShopViewsMatrix();
+                }
+            });
+        }
+
+        // Shop Interface Builders
+        function buildShopViewsMatrix() {
+            // Render Upgrade parameters
+            const tapLvl = GAME_STATE_ENGINE.get('tapLevel');
+            const tapCost = tapLvl * 1000;
+            DOM_CACHE.tapLevelDisplay.textContent = `Lv ${tapLvl} (+${getTapIncrementValue(tapLvl)}/Tap)`;
+            DOM_CACHE.tapCostDisplay.textContent = (tapLvl >= 4) ? "MAX" : `${tapCost.toLocaleString()} 🪙`;
+            DOM_CACHE.triggerTapUpgradeBtn.disabled = (tapLvl >= 4);
+
+            const mineLvl = GAME_STATE_ENGINE.get('autoMineLevel');
+            const mineCost = (mineLvl + 1) * 5000;
+            DOM_CACHE.autoMineLevelDisplay.textContent = mineLvl === 0 ? "Off" : `Lv ${mineLvl} (${getAutoMineRate(mineLvl)}/sec)`;
+            DOM_CACHE.autoMineCostDisplay.textContent = mineLvl >= 3 ? "MAX" : `${mineCost.toLocaleString()} 🪙`;
+            DOM_CACHE.triggerAutoMineUpgradeBtn.disabled = (mineLvl >= 3);
+
+            const energyCap = GAME_STATE_ENGINE.get('maxPower');
+            const energyCost = energyCap === 100 ? 2500 : energyCap === 200 ? 10000 : 25000;
+            DOM_CACHE.energyLimitDisplay.textContent = `${energyCap} Cap`;
+            DOM_CACHE.energyCostDisplay.textContent = energyCap >= 1000 ? "MAX" : `${energyCost.toLocaleString()} 🪙`;
+            DOM_CACHE.triggerEnergyUpgradeBtn.disabled = (energyCap >= 1000);
+
+            // Render Achievement Loop
+            DOM_CACHE.achievementsContainer.innerHTML = '';
+            const completedAch = GAME_STATE_ENGINE.get('completedAchievements') || [];
+            ACHIEVEMENTS_REGISTRY.forEach(ach => {
+                const isDone = completedAch.includes(ach.id);
+                const row = document.createElement('div');
+                row.className = 'scannable-row-item';
+                row.innerHTML = `
+                    <div class="scannable-left-meta">
+                        <span class="scannable-main-title">${ach.title} (${GAME_STATE_ENGINE.get('totalManualTaps')}/${ach.target})</span>
+                        <span class="scannable-desc-sub">${ach.desc} · Bounty: ${ach.rewardVal} ${ach.rewardType}</span>
+                    </div>
+                    <span class="scannable-badge-status ${isDone ? 'unlocked':''}">${isDone ? 'Claimed':'Locked'}</span>
+                `;
+                DOM_CACHE.achievementsContainer.appendChild(row);
+            });
+
+            // Render Skins Loop
+            DOM_CACHE.skinsContainer.innerHTML = '';
+            const activeSkin = GAME_STATE_ENGINE.get('activeSkinId');
+            SKINS_REGISTRY.forEach(skin => {
+                const isActive = activeSkin === skin.id;
+                const row = document.createElement('div');
+                row.className = 'scannable-row-item';
+                row.innerHTML = `
+                    <div class="scannable-left-meta">
+                        <span class="scannable-main-title" style="color:${skin.border === 'rgba(255,255,255,0.04)'?'#fff':skin.border}">${skin.name}</span>
+                        <span class="scannable-desc-sub">Cosmetic Custom Engine Node Identity</span>
+                    </div>
+                    <button class="skin-use-btn ${isActive ? 'active':''}" onclick="applyIdentitySkin('${skin.id}', true)">${isActive ? 'Active':'Equip'}</button>
+                `;
+                DOM_CACHE.skinsContainer.appendChild(row);
+            });
+        }
+
+        window.applyIdentitySkin = function(skinId, directSave = true) {
+            const targetConfig = SKINS_REGISTRY.find(s => s.id === skinId) || SKINS_REGISTRY[0];
+            GAME_STATE_ENGINE.set('activeSkinId', targetConfig.id);
+            
+            DOM_CACHE.foxAvatarWrapperFrame.style.background = targetConfig.color;
+            DOM_CACHE.foxAvatarWrapperFrame.style.borderColor = targetConfig.border;
+            DOM_CACHE.hudGlobalMiniAvatar.parentElement.style.borderColor = targetConfig.border;
+            DOM_CACHE.wheelHubCenterAvatar.parentElement.style.borderColor = targetConfig.border;
+
+            if(directSave) {
+                buildShopViewsMatrix();
+                dispatchCloudSyncBatch();
+            }
+        };
+
+        // Upgrades Purchase Events Handler
+        DOM_CACHE.triggerTapUpgradeBtn.addEventListener('click', () => {
+            const currentCoins = GAME_STATE_ENGINE.get('coins');
+            const currentLvl = GAME_STATE_ENGINE.get('tapLevel');
+            const cost = currentLvl * 1000;
+            if(currentCoins >= cost && currentLvl < 4) {
+                GAME_STATE_ENGINE.set('coins', currentCoins - cost);
+                GAME_STATE_ENGINE.set('tapLevel', currentLvl + 1);
+                triggerModal("Upgrade Complete", "Multi-tap capacity advanced successfully.", "CLOSE_ONLY");
+                buildShopViewsMatrix(); renderSystemHUD(); dispatchCloudSyncBatch();
+            } else { triggerModal("Error", "Insufficient coin allocation balances.", "CLOSE_ONLY"); }
+        });
+
+        DOM_CACHE.triggerAutoMineUpgradeBtn.addEventListener('click', () => {
+            const currentCoins = GAME_STATE_ENGINE.get('coins');
+            const currentLvl = GAME_STATE_ENGINE.get('autoMineLevel');
+            const cost = (currentLvl + 1) * 5000;
+            if(currentCoins >= cost && currentLvl < 3) {
+                GAME_STATE_ENGINE.set('coins', currentCoins - cost);
+                GAME_STATE_ENGINE.set('autoMineLevel', currentLvl + 1);
+                triggerModal("Upgrade Complete", "Autonomous background miners updated.", "CLOSE_ONLY");
+                buildShopViewsMatrix(); renderSystemHUD(); dispatchCloudSyncBatch();
+            } else { triggerModal("Error", "Insufficient coin allocation balances.", "CLOSE_ONLY"); }
+        });
+
+        DOM_CACHE.triggerEnergyUpgradeBtn.addEventListener('click', () => {
+            const currentCoins = GAME_STATE_ENGINE.get('coins');
+            const currentCap = GAME_STATE_ENGINE.get('maxPower');
+            const cost = currentCap === 100 ? 2500 : currentCap === 200 ? 10000 : 25000;
+            if(currentCoins >= cost && currentCap < 1000) {
+                let nextCap = 200;
+                if(currentCap === 200) nextCap = 500;
+                if(currentCap === 500) nextCap = 1000;
+                GAME_STATE_ENGINE.set('coins', currentCoins - cost);
+                GAME_STATE_ENGINE.set('maxPower', nextCap);
+                GAME_STATE_ENGINE.set('power', nextCap);
+                triggerModal("Upgrade Complete", "Energy structural container expanded.", "CLOSE_ONLY");
+                buildShopViewsMatrix(); renderSystemHUD(); dispatchCloudSyncBatch();
+            } else { triggerModal("Error", "Insufficient coin allocation balances.", "CLOSE_ONLY"); }
+        });
+
+        DOM_CACHE.triggerExchangeCoinToKeyBtn.addEventListener('click', () => {
+            const currentCoins = GAME_STATE_ENGINE.get('coins');
+            if(currentCoins >= 50000) {
+                GAME_STATE_ENGINE.set('coins', currentCoins - 50000);
+                GAME_STATE_ENGINE.set('keys', GAME_STATE_ENGINE.get('keys') + 1);
+                triggerModal("Vault Dispatched", "Liquidated 50k tokens to 1 Cryptographic Key asset.", "CLOSE_ONLY");
+                renderSystemHUD(); dispatchCloudSyncBatch();
+            } else { triggerModal("Liquidation Refused", "Insufficient core tokens to claim cryptographic keys.", "CLOSE_ONLY"); }
+        });
+
+        // Mock Simulation Local Leaderboards Data
+        function buildLeaderboardMockView() {
+            DOM_CACHE.leaderboardContainer.innerHTML = '';
+            const mocksList = [
+                { user: "Alpha_Hunter", coins: 890400, refs: 45, spins: 112 },
+                { user: "Fox_Lord_99", coins: 450200, refs: 22, spins: 89 },
+                { user: "Mesh_Master", coins: 120500, refs: 14, spins: 42 },
+                { user: telegramUserName, coins: Math.floor(GAME_STATE_ENGINE.get('coins')), refs: GAME_STATE_ENGINE.get('referralCount'), spins: 15 }
+            ];
+            mocksList.sort((a,b) => b.coins - a.coins);
+            mocksList.forEach((node, index) => {
+                const row = document.createElement('div');
+                row.className = 'leaderboard-row-node';
+                row.innerHTML = `
+                    <div class="leaderboard-left-block">
+                        <span class="rank-medal-indicator">#${index+1}</span>
+                        <span style="font-weight:700; color:${node.user === telegramUserName ? 'var(--accent-orange)' : '#fff'}">${node.user}</span>
+                    </div>
+                    <span class="leaderboard-val-tag">${node.coins.toLocaleString()} 🪙</span>
+                `;
+                DOM_CACHE.leaderboardContainer.appendChild(row);
+            });
+        }
+
         let systemLastClockTickMs = Date.now();    
         let accumulatedPowerRegenFraction = 0;    
-  
+        let backgroundSyncPowerAccumulatorMs = 0;    
+        let passiveIncomeAccumulatorFraction = 0;
+
         function startOptimizedDeltaRegenClock() {    
             function runtimeEcosystemTick() {    
                 const frameCurrentTimeMs = Date.now();    
@@ -657,17 +1154,38 @@
   
                 GAME_STATE_ENGINE.set('lastSystemTimestampCheckpoint', frameCurrentTimeMs);    
   
+                // Handle Auto Passive Income per ticks
+                const autoMineRate = getAutoMineRate(GAME_STATE_ENGINE.get('autoMineLevel'));
+                if(autoMineRate > 0) {
+                    passiveIncomeAccumulatorFraction += (deltaFrameTimeMs / 1000) * autoMineRate;
+                    if(passiveIncomeAccumulatorFraction >= 1.0) {
+                        const wholeCoins = Math.floor(passiveIncomeAccumulatorFraction);
+                        GAME_STATE_ENGINE.set('coins', GAME_STATE_ENGINE.get('coins') + wholeCoins);
+                        passiveIncomeAccumulatorFraction -= wholeCoins;
+                    }
+                }
+
                 let currentPower = GAME_STATE_ENGINE.get('power');    
-                if (currentPower < 100) {    
+                const maxPower = GAME_STATE_ENGINE.get('maxPower');
+                if (currentPower < maxPower) {    
                     accumulatedPowerRegenFraction += deltaFrameTimeMs / 3000;    
+                    backgroundSyncPowerAccumulatorMs += deltaFrameTimeMs;    
+                    
                     if (accumulatedPowerRegenFraction >= 1.0) {    
                         const integerUnitsToInject = Math.floor(accumulatedPowerRegenFraction);    
-                        GAME_STATE_ENGINE.set('power', Math.min(100, currentPower + integerUnitsToInject));    
+                        GAME_STATE_ENGINE.set('power', Math.min(maxPower, currentPower + integerUnitsToInject));    
                         accumulatedPowerRegenFraction -= integerUnitsToInject;    
-                        renderSystemHUD();    
                     }    
-                } else { accumulatedPowerRegenFraction = 0; }    
-  
+                    
+                    if (backgroundSyncPowerAccumulatorMs >= 40000) {    
+                        dispatchCloudSyncBatch();    
+                        backgroundSyncPowerAccumulatorMs = 0;    
+                    }    
+                } else {     
+                    accumulatedPowerRegenFraction = 0;     
+                }    
+
+                renderSystemHUD();
                 requestAnimationFrame(runtimeEcosystemTick);    
             }    
             requestAnimationFrame(runtimeEcosystemTick);    
@@ -682,10 +1200,28 @@
             dispatchCloudSyncBatch(); renderSystemHUD();    
         });    
   
-        document.getElementById('cashoutMainnetTrigger').addEventListener('click', () => {    
+        document.getElementById('cashoutMainnetTrigger').addEventListener('click', async () => {    
             const premium = GAME_STATE_ENGINE.get('premiumDollar');    
-            if (premium < 10.00) { triggerModal("Refused", "Minimum allocation thresholds unmet. Requires $10.00 USD.", "CLOSE_ONLY"); return; }    
-            triggerModal("🚀 Core Layer Armed", `Liquidation request for $${premium.toFixed(2)} USD dispatched.`, "CLOSE_ONLY");    
+            if (premium < 10.00) { triggerModal("Refused", "Minimum allocation thresholds unmet. Requires $10.00 USD minimum balance.", "CLOSE_ONLY"); return; }    
+            const walletStatus = GAME_STATE_ENGINE.get('walletConnected');    
+            const targetAddress = GAME_STATE_ENGINE.get('connectedWalletAddress');    
+            
+            if(!walletStatus || targetAddress === "Disconnected") {    
+                triggerModal("Wallet Missing", "Please link your TON Wallet through integration node first.", "CLOSE_ONLY");    
+                return;    
+            }    
+  
+            if(db) {    
+                const withdrawQueueRef = ref(db, 'withdrawals_pipeline');    
+                const newRequestRef = push(withdrawQueueRef);    
+                await set(newRequestRef, {    
+                    userId: telegramUserId, userName: telegramUserName,    
+                    address: targetAddress, amountUsd: premium,    
+                    timestamp: Date.now(), approved: false    
+                });    
+            }    
+  
+            triggerModal("🚀 Request Dispatched", `Liquidation request for $${premium.toFixed(2)} USD routed to Admin Approval Pipeline.`, "CLOSE_ONLY");    
             GAME_STATE_ENGINE.set('premiumDollar', 0.00);    
             dispatchCloudSyncBatch(); renderSystemHUD();    
         });    
@@ -695,7 +1231,7 @@
                 const cipherText = CryptoJS.AES.encrypt(JSON.stringify(GAME_STATE_ENGINE.exportState()), SYSTEM_RUN_SALT).toString();    
                 const anchor = document.createElement('a');    
                 anchor.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(cipherText));    
-                anchor.setAttribute("download", `cyberfox_v66_${telegramUserId}.json`);    
+                anchor.setAttribute("download", `cyberfox_v70_${telegramUserId}.json`);    
                 document.body.appendChild(anchor); anchor.click(); anchor.remove();    
             } catch(e) {}    
         };    
@@ -708,11 +1244,17 @@
                 try {    
                     const decrypted = CryptoJS.AES.decrypt(e.target.result.trim(), SYSTEM_RUN_SALT).toString(CryptoJS.enc.Utf8);    
                     const obj = JSON.parse(decrypted);    
-                    if (obj && typeof obj.coins === 'number') {    
+                    
+                    if (    
+                        obj && typeof obj.coins === 'number' && typeof obj.power === 'number' &&    
+                        typeof obj.keys === 'number' && typeof obj.availableSpins === 'number' &&    
+                        typeof obj.premiumDollar === 'number'    
+                    ) {    
                         GAME_STATE_ENGINE.importState(obj); dispatchCloudSyncBatch(); renderSystemHUD(); evaluateStreakVisualMatrix(false);    
+                        applyIdentitySkin(GAME_STATE_ENGINE.get('activeSkinId'), false); buildShopViewsMatrix();
                         triggerModal("Array Compiled", "Ecosystem profile synchronized successfully.", "CLOSE_ONLY");    
                     } else { throw new Error(); }    
-                } catch(err) { triggerModal("Tamper Void Alert", "Package parsing rejected.", "CLOSE_ONLY"); }    
+                } catch(err) { triggerModal("Tamper Void Alert", "Package parsing rejected. Structurally modified data patterns caught.", "CLOSE_ONLY"); }    
             };    
             reader.readAsText(file);    
         };    
@@ -723,14 +1265,17 @@
                     manifestUrl: 'https://cyberfox-ecosystem-app.web.app/tonconnect-manifest.json',    
                     buttonRootId: 'ton-connect-btn-container'    
                 });    
-                tonConnectUI.connectionRestored.then(restored => {    
-                    if (restored) {    
+                tonConnectUI.onStatusChange(wallet => {    
+                    if (wallet) {    
+                        const directAddress = wallet.account.address;    
                         GAME_STATE_ENGINE.set('walletConnected', true);    
-                        document.getElementById('cloudStatusNode').textContent = "TON Active";    
-                        document.getElementById('cloudStatusNode').style.color = "#00ffcc";    
-                        renderSystemHUD();    
+                        GAME_STATE_ENGINE.set('connectedWalletAddress', directAddress);    
+                    } else {    
+                        GAME_STATE_ENGINE.set('walletConnected', false);    
+                        GAME_STATE_ENGINE.set('connectedWalletAddress', "Disconnected");    
                     }    
-                }).catch(() => {});    
+                    dispatchCloudSyncBatch(); renderSystemHUD();    
+                });    
             } catch(e) {}    
         }    
   
@@ -747,15 +1292,26 @@
   
         function updateWheelLabelsUI() {    
             const prem = GAME_STATE_ENGINE.get('isPremiumMode'); const set = prem ? premiumDollarRewards : sectorRewardsNormal;    
-            DOM_CACHE.wheelLabels.forEach((l, idx) => l.textContent = (prem ? "$" : "") + set[idx]);    
+            DOM_CACHE.wheelLabels.forEach((l, idx) => {
+                const prefix = (prem && typeof set[idx] === 'number') ? "$" : "";
+                l.textContent = prefix + set[idx];
+            });    
         }    
-        window.copyReferralLinkToClipboard = function() { navigator.clipboard.writeText(DOM_CACHE.referralLinkNode.textContent); triggerModal("Pipeline Linked", "Invitation string copied.", "CLOSE_ONLY"); };    
+        
+        window.copyReferralLinkToClipboard = function() {    
+            const linkText = DOM_CACHE.referralLinkNode.textContent;    
+            navigator.clipboard.writeText(linkText)    
+                .then(() => triggerModal("Pipeline Linked", "Invitation URL copied to system clipboard.", "CLOSE_ONLY"))    
+                .catch(() => triggerModal("Pipeline Error", "System restricted explicit clipboard assignment permissions.", "CLOSE_ONLY"));    
+        };    
+  
         window.activateTargetTab = function(id, el) {    
             document.querySelectorAll('.viewport-stage').forEach(s => s.classList.remove('active')); document.querySelectorAll('.dock-action-item').forEach(i => i.classList.remove('active'));    
             document.getElementById(`stage-${id}`).classList.add('active'); el.classList.add('active');    
+            if(id === 'shop') buildShopViewsMatrix();
+            if(id === 'leaderboard') buildLeaderboardMockView();
         };    
   
-        // DOUBLE MODAL IMPLEMENTATION FIX    
         window.triggerModal = function(title, body, uiConfigMode) {    
             DOM_CACHE.modalTitle.textContent = title;    
             DOM_CACHE.modalMessage.textContent = body;    
@@ -771,9 +1327,14 @@
         };    
         DOM_CACHE.modalCloseBtn.addEventListener('click', () => DOM_CACHE.globalModalOverlay.style.display = 'none');    
   
+        setInterval(() => {    
+            if(!GAME_STATE_ENGINE.verifyIntegrity()) initializeGameEnginePipeline();     
+        }, 1200);    
+  
         window.addEventListener('DOMContentLoaded', initializeGameEnginePipeline);    
     })();    
   
-    window.handleImageError = function(img) { img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2315161c' stroke='%23ff6a00' stroke-width='3'/></svg>"; };    
-</script>    </body>    
-</html>  
+    window.handleImageError = function(img) { img.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23111217' stroke='%23ff6a00' stroke-width='4'/><path d='M35 40 L50 25 L65 40 L55 45 L50 65 L45 45 Z' fill='%23ff6a00'/></svg>"; };    
+</script>    
+</body>    
+                    </html>
